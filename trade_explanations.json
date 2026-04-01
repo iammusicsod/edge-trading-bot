@@ -1,0 +1,12 @@
+[
+  {
+    "time": "April 01, 2026  04:31:24 PM",
+    "pair": "GRT-USD",
+    "side": "BUY",
+    "price": 0.0245,
+    "usd": 90.0,
+    "explanation": "Entered LONG GRT: RSI 29 oversold, OBV rising \u2014 buying volume, Price above 200 EMA ($0.02). ADX 27. SL $0.02 TP $0.03.",
+    "stop_loss": 0.024200000000000003,
+    "take_profit": 0.025099999999999997
+  }
+]

@@ -57,6 +57,23 @@
     <div id="bttc-monthly" style="display:none"></div>
   </div>
 </div>
+
+<div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px">
+  <div class="p-label">Trade Journal</div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:14px">Click any trade to see full details, signals, and reasoning</div>
+  <div id="tjList" style="margin-bottom:14px"></div>
+  <div id="tjDetail" style="display:none;background:#0c0c0e;border:1px solid var(--border);border-radius:12px;padding:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div style="display:flex;gap:8px">
+        <button onclick="tjNav(-1)" style="padding:5px 12px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px">← Prev</button>
+        <button onclick="tjNav(1)" style="padding:5px 12px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px">Next →</button>
+      </div>
+      <span id="tjNavLabel" style="font-size:11px;color:var(--muted);font-family:JetBrains Mono,monospace"></span>
+      <button onclick="document.getElementById('tjDetail').style.display='none'" style="padding:5px 12px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px">✕ Close</button>
+    </div>
+    <div id="tjDetailContent"></div>
+  </div>
+</div>
 <div class="history-panel"><div class="p-label">Trade History</div><div id="th"><div class="empty">No trades yet<span>60-90 day paper test in progress</span></div></div></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
@@ -282,6 +299,122 @@ window.btRun=async function(){
 };
 
 btRender();
+})();
+</script>
+
+<script>
+(function(){
+var tjTrades = [];
+var tjIdx = 0;
+
+function tjRender(trades){
+  tjTrades = trades;
+  var el = document.getElementById('tjList');
+  if(!trades||!trades.length){
+    el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">No trades yet — bot is watching the market</div>';
+    return;
+  }
+  var html = '<div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+  html += '<div style="display:grid;grid-template-columns:140px 60px 80px 100px 100px 1fr;gap:10px;padding:8px 14px;background:#131316;font-size:9px;letter-spacing:1px;color:var(--muted)"><span>TIME</span><span>PAIR</span><span>SIDE</span><span>PRICE</span><span>SIZE</span><span>EXPLANATION</span></div>';
+  var recent = [...trades].reverse().slice(0,15);
+  for(var i=0;i<recent.length;i++){
+    var t=recent[i];
+    var isBuy=t.side==='BUY';
+    var origIdx = trades.length - 1 - i;
+    html += '<div onclick="tjShowDetail('+origIdx+')" style="display:grid;grid-template-columns:140px 60px 80px 100px 100px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--border);cursor:pointer;font-size:11px;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,0.02)'" onmouseout="this.style.background='transparent'">';
+    html += '<span style="font-family:JetBrains Mono,monospace;font-size:10px;color:var(--muted)">'+(t.time||'—')+'</span>';
+    html += '<span style="font-weight:600">'+(t.pair||'—')+'</span>';
+    html += '<span style="font-size:9px;padding:2px 8px;border-radius:5px;font-weight:700;background:'+(isBuy?'rgba(0,230,118,0.1)':'rgba(255,82,82,0.1)')+';color:'+(isBuy?'var(--green)':'var(--red)')+'">'+t.side+'</span>';
+    html += '<span style="font-family:JetBrains Mono,monospace">$'+(parseFloat(t.price||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4}))+'</span>';
+    html += '<span style="font-family:JetBrains Mono,monospace">$'+(parseFloat(t.usd||0).toFixed(2))+'</span>';
+    html += '<span style="color:var(--muted);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+(t.explanation||'—')+'</span>';
+    html += '</div>';
+  }
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+window.tjShowDetail = function(idx){
+  tjIdx = idx;
+  var trades = tjTrades;
+  var t = trades[idx];
+  if(!t) return;
+  document.getElementById('tjDetail').style.display='block';
+  document.getElementById('tjNavLabel').textContent = (idx+1)+' of '+trades.length;
+  var isBuy = t.side==='BUY';
+  var pnlHtml = t.pnl !== undefined ? '<div style="font-size:22px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(t.pnl>=0?'var(--green)':'var(--red)')+';">'+(t.pnl>=0?'+ ':'- ')+'$'+Math.abs(t.pnl).toFixed(2)+'</div>' : '<div style="font-size:13px;color:var(--muted)">Trade still open</div>';
+  var html = '';
+  html += '<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">';
+  html += '<div style="font-size:22px;font-weight:600">'+(t.pair||'—')+'</div>';
+  html += '<div style="font-size:11px;padding:4px 12px;border-radius:6px;font-weight:700;background:'+(isBuy?'rgba(0,230,118,0.1)':'rgba(255,82,82,0.1)')+';color:'+(isBuy?'var(--green)':'var(--red)')+'">'+t.side+'</div>';
+  html += '<div style="font-size:11px;color:var(--muted);font-family:JetBrains Mono,monospace">'+(t.time||'—')+'</div>';
+  html += '</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px">';
+  function statCard(label,val,color){return '<div style="background:#131316;border:1px solid var(--border);border-radius:10px;padding:12px"><div style="font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:6px">'+label+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(color||'var(--text)')+'">'+val+'</div></div>';}
+  html += statCard('ENTRY PRICE','$'+parseFloat(t.price||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6}));
+  html += statCard('POSITION SIZE','$'+parseFloat(t.usd||0).toFixed(2));
+  html += statCard('STOP LOSS',t.stop_loss?'$'+parseFloat(t.stop_loss).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6}):'—','var(--red)');
+  html += statCard('TAKE PROFIT',t.take_profit?'$'+parseFloat(t.take_profit).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6}):'—','var(--green)');
+  html += '</div>';
+  html += '<div style="background:#131316;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px">';
+  html += '<div style="font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:10px">WHY THE BOT ENTERED</div>';
+  html += '<div style="font-size:13px;color:#e8e8ec;line-height:1.7">'+(t.explanation||'No explanation recorded')+'</div>';
+  html += '</div>';
+  if(t.exit_price||t.pnl!==undefined){
+    html += '<div style="background:#131316;border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px">';
+    html += '<div style="font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:10px">OUTCOME</div>';
+    html += pnlHtml;
+    if(t.exit_price) html += '<div style="font-size:12px;color:var(--muted);margin-top:6px;font-family:JetBrains Mono,monospace">Exit price: $'+parseFloat(t.exit_price).toFixed(6)+'</div>';
+    html += '</div>';
+  } else {
+    html += '<div style="background:rgba(255,171,64,0.06);border:1px solid rgba(255,171,64,0.2);border-radius:10px;padding:14px;margin-bottom:14px">';
+    html += '<div style="font-size:10px;color:var(--amber);letter-spacing:1px;margin-bottom:6px">TRADE STATUS</div>';
+    html += '<div style="font-size:13px;color:var(--amber)">Position currently open — waiting for stop loss, take profit, or trailing stop to trigger</div>';
+    html += '</div>';
+  }
+  html += '<div style="background:#131316;border:1px solid var(--border);border-radius:10px;padding:14px">';
+  html += '<div style="font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:10px">PAPER TRADE</div>';
+  html += '<div style="font-size:12px;color:var(--muted)">This is a simulated trade. No real money was used. The bot is in its 60-90 day paper test period.</div>';
+  html += '</div>';
+  document.getElementById('tjDetailContent').innerHTML = html;
+  document.getElementById('tjDetail').scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+
+window.tjNav = function(dir){
+  var newIdx = tjIdx + dir;
+  if(newIdx >= 0 && newIdx < tjTrades.length) tjShowDetail(newIdx);
+};
+
+async function tjLoad(){
+  try{
+    var r = await fetch('http://localhost:8080/state');
+    if(!r.ok) return;
+    var state = await r.json();
+    var trades = state.trade_history || [];
+    tjRender(trades);
+  } catch(e){}
+  try{
+    var r2 = await fetch('http://localhost:8080/explanations');
+    if(!r2.ok) return;
+    var exps = await r2.json();
+    if(exps && exps.length && tjTrades.length){
+      for(var i=0;i<tjTrades.length;i++){
+        var t = tjTrades[i];
+        for(var j=0;j<exps.length;j++){
+          if(exps[j].pair===t.pair && exps[j].side===t.side){
+            t.stop_loss = exps[j].stop_loss;
+            t.take_profit = exps[j].take_profit;
+            t.explanation = exps[j].explanation || t.explanation;
+            break;
+          }
+        }
+      }
+    }
+  } catch(e){}
+}
+
+tjLoad();
+setInterval(tjLoad, 30000);
 })();
 </script>
 </body></html>

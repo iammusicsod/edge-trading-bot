@@ -8099,3 +8099,102 @@
 [April 01, 2026  04:16:22 PM]  ════════════════════════════════════════════════════════════
 [April 01, 2026  04:16:22 PM]    ✅ Next scan at 04:31 PM.
 
+[April 01, 2026  04:31:22 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:31:22 PM]    SCAN — 04:31 PM
+[April 01, 2026  04:31:22 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:31:23 PM]    F&G: 8/100 Extreme Fear | DOM: 56.2% | Fund: 0.0000%
+[April 01, 2026  04:31:23 PM]  
+[April 01, 2026  04:31:23 PM]    ✅ EXTREME FEAR — favorable conditions
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    BTC
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    BTC @ $68,435.47
+[April 01, 2026  04:31:23 PM]    RSI: 46 neutral
+[April 01, 2026  04:31:23 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:23 PM]    OBV: bullish ✅
+[April 01, 2026  04:31:23 PM]    200 EMA: $68,308.53 — above ✅
+[April 01, 2026  04:31:23 PM]    ADX: 41 ✅ trending
+[April 01, 2026  04:31:23 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:31:23 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    ETH
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    ETH @ $2,156.12
+[April 01, 2026  04:31:23 PM]    RSI: 63 neutral
+[April 01, 2026  04:31:23 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:23 PM]    OBV: bullish ✅
+[April 01, 2026  04:31:23 PM]    200 EMA: $2,080.69 — above ✅
+[April 01, 2026  04:31:23 PM]    ADX: 39 ✅ trending
+[April 01, 2026  04:31:23 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:31:23 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    SOL
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    SOL @ $82.60
+[April 01, 2026  04:31:23 PM]    RSI: 41 neutral
+[April 01, 2026  04:31:23 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:23 PM]    OBV: bullish ✅
+[April 01, 2026  04:31:23 PM]    200 EMA: $85.43 — below ✅
+[April 01, 2026  04:31:23 PM]    ADX: 4 ⚠️ ranging — will skip
+[April 01, 2026  04:31:23 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  04:31:23 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    LINK
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    LINK @ $9.02
+[April 01, 2026  04:31:23 PM]    RSI: 46 neutral
+[April 01, 2026  04:31:23 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:23 PM]    OBV: bullish ✅
+[April 01, 2026  04:31:23 PM]    200 EMA: $8.86 — above ✅
+[April 01, 2026  04:31:23 PM]    ADX: 10 ⚠️ ranging — will skip
+[April 01, 2026  04:31:23 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:31:23 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:23 PM]    GRT
+[April 01, 2026  04:31:23 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:24 PM]    GRT @ $0.02
+[April 01, 2026  04:31:24 PM]    RSI: 29 oversold ✅
+[April 01, 2026  04:31:24 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:24 PM]    OBV: bullish ✅
+[April 01, 2026  04:31:24 PM]    200 EMA: $0.02 — above ✅
+[April 01, 2026  04:31:24 PM]    ADX: 27 ✅ trending
+[April 01, 2026  04:31:24 PM]    Signals: 3 buy / 1 sell (need 3+)
+[April 01, 2026  04:31:24 PM]    ATR exits: SL $0.02 | TP $0.03
+[April 01, 2026  04:31:24 PM]    → BUY ✅ 85% | Entered LONG GRT: RSI 29 oversold, OBV rising — buying volume, Price above 200 EMA ($0.02). ADX 27. SL $0.02 TP $0.03.
+[April 01, 2026  04:31:24 PM]    ⚡ Fear boost → 95%
+[April 01, 2026  04:31:24 PM]    💰 PAPER TRADE — Buying $90.00 of GRT-USD @ $0.02
+[April 01, 2026  04:31:24 PM]       SL: $0.02 | TP: $0.03 | ATR: $0.0002
+[April 01, 2026  04:31:24 PM]    📝 Entered LONG GRT: RSI 29 oversold, OBV rising — buying volume, Price above 200 EMA ($0.02). ADX 27. SL $0.02 TP $0.03.
+[April 01, 2026  04:31:24 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:24 PM]    AVAX
+[April 01, 2026  04:31:24 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:24 PM]    AVAX @ $9.19
+[April 01, 2026  04:31:24 PM]    RSI: 37 neutral
+[April 01, 2026  04:31:24 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:24 PM]    OBV: bullish ✅
+[April 01, 2026  04:31:24 PM]    200 EMA: $9.10 — above ✅
+[April 01, 2026  04:31:24 PM]    ADX: 16 ⚠️ ranging — will skip
+[April 01, 2026  04:31:24 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:31:24 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:31:24 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:24 PM]    UNI
+[April 01, 2026  04:31:24 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:31:24 PM]    UNI @ $3.63
+[April 01, 2026  04:31:24 PM]    RSI: 52 neutral
+[April 01, 2026  04:31:24 PM]    MACD: bearish ✅
+[April 01, 2026  04:31:24 PM]    OBV: neutral 
+[April 01, 2026  04:31:24 PM]    200 EMA: $3.53 — above ✅
+[April 01, 2026  04:31:24 PM]    ADX: 7 ⚠️ ranging — will skip
+[April 01, 2026  04:31:24 PM]    Signals: 1 buy / 1 sell (need 3+)
+[April 01, 2026  04:31:24 PM]    → Waiting: 1B/1S — need 3+
+[April 01, 2026  04:31:24 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:31:24 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  04:31:24 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:31:24 PM]    Capital: $1,410.00 (▼6.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  04:31:24 PM]    Trades: 1 | W/L: 0/0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  04:31:24 PM]    F&G: 8/100 Extreme Fear | DOM: 56.2% | Fund: 0.0000%
+[April 01, 2026  04:31:24 PM]    Session filter: OFF (24/7)
+[April 01, 2026  04:31:24 PM]    • GRT-USD $90.00 @ $0.02 | SL $0.02 | TP $0.03
+[April 01, 2026  04:31:24 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:31:24 PM]    ✅ Next scan at 04:46 PM.
+
