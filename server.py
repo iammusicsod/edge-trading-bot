@@ -42,6 +42,8 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write('\n'.join(lines).encode())
 
 if __name__ == '__main__':
-    server = HTTPServer(('localhost', 8080), Handler)
+    import os
+    port = int(os.environ.get('PORT', 8080))
+    server = HTTPServer(('0.0.0.0', port), Handler)
     print('Dashboard ready — open http://localhost:8080 in your browser')
     server.serve_forever()
