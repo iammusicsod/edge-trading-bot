@@ -7911,3 +7911,191 @@
 
 [April 01, 2026  03:46:17 PM]    Live. Next scan 04:01 PM. Ctrl+C to stop.
 
+[April 01, 2026  04:01:17 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:01:17 PM]    SCAN — 04:01 PM
+[April 01, 2026  04:01:17 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:01:18 PM]    F&G: 8/100 Extreme Fear | DOM: 56.2% | Fund: 0.0000%
+[April 01, 2026  04:01:18 PM]  
+[April 01, 2026  04:01:18 PM]    ✅ EXTREME FEAR — favorable conditions
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    BTC
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    BTC @ $68,182.25
+[April 01, 2026  04:01:18 PM]    RSI: 41 neutral
+[April 01, 2026  04:01:18 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:18 PM]    OBV: bullish ✅
+[April 01, 2026  04:01:18 PM]    200 EMA: $68,306.01 — below ✅
+[April 01, 2026  04:01:18 PM]    ADX: 60 ✅ trending
+[April 01, 2026  04:01:18 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  04:01:18 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    ETH
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    ETH @ $2,143.87
+[April 01, 2026  04:01:18 PM]    RSI: 58 neutral
+[April 01, 2026  04:01:18 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:18 PM]    OBV: bullish ✅
+[April 01, 2026  04:01:18 PM]    200 EMA: $2,080.57 — above ✅
+[April 01, 2026  04:01:18 PM]    ADX: 30 ✅ trending
+[April 01, 2026  04:01:18 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:01:18 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    SOL
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    SOL @ $82.53
+[April 01, 2026  04:01:18 PM]    RSI: 41 neutral
+[April 01, 2026  04:01:18 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:18 PM]    OBV: bullish ✅
+[April 01, 2026  04:01:18 PM]    200 EMA: $85.43 — below ✅
+[April 01, 2026  04:01:18 PM]    ADX: 4 ⚠️ ranging — will skip
+[April 01, 2026  04:01:18 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  04:01:18 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:18 PM]    LINK
+[April 01, 2026  04:01:18 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    LINK @ $8.97
+[April 01, 2026  04:01:19 PM]    RSI: 40 neutral
+[April 01, 2026  04:01:19 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:19 PM]    OBV: bullish ✅
+[April 01, 2026  04:01:19 PM]    200 EMA: $8.86 — above ✅
+[April 01, 2026  04:01:19 PM]    ADX: 7 ⚠️ ranging — will skip
+[April 01, 2026  04:01:19 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:01:19 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:01:19 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    GRT
+[April 01, 2026  04:01:19 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    GRT @ $0.02
+[April 01, 2026  04:01:19 PM]    RSI: 29 oversold ✅
+[April 01, 2026  04:01:19 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:19 PM]    OBV: bullish ✅
+[April 01, 2026  04:01:19 PM]    200 EMA: $0.02 — above ✅
+[April 01, 2026  04:01:19 PM]    ADX: 27 ✅ trending
+[April 01, 2026  04:01:19 PM]    Signals: 3 buy / 1 sell (need 3+)
+[April 01, 2026  04:01:19 PM]    ⛔ BTC below 200 EMA — no altcoin longs
+[April 01, 2026  04:01:19 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    AVAX
+[April 01, 2026  04:01:19 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    AVAX @ $9.13
+[April 01, 2026  04:01:19 PM]    RSI: 29 oversold ✅
+[April 01, 2026  04:01:19 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:19 PM]    OBV: bullish ✅
+[April 01, 2026  04:01:19 PM]    200 EMA: $9.10 — above ✅
+[April 01, 2026  04:01:19 PM]    ADX: 25 ✅ trending
+[April 01, 2026  04:01:19 PM]    Signals: 3 buy / 1 sell (need 3+)
+[April 01, 2026  04:01:19 PM]    ⛔ BTC below 200 EMA — no altcoin longs
+[April 01, 2026  04:01:19 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    UNI
+[April 01, 2026  04:01:19 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:01:19 PM]    UNI @ $3.62
+[April 01, 2026  04:01:19 PM]    RSI: 47 neutral
+[April 01, 2026  04:01:19 PM]    MACD: bearish ✅
+[April 01, 2026  04:01:19 PM]    OBV: bearish ✅
+[April 01, 2026  04:01:19 PM]    200 EMA: $3.53 — above ✅
+[April 01, 2026  04:01:19 PM]    ADX: 2 ⚠️ ranging — will skip
+[April 01, 2026  04:01:19 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  04:01:19 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  04:01:19 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:01:19 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  04:01:19 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:01:19 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  04:01:19 PM]    Trades: 0 | W/L: 0/0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  04:01:19 PM]    F&G: 8/100 Extreme Fear | DOM: 56.2% | Fund: 0.0000%
+[April 01, 2026  04:01:19 PM]    Session filter: OFF (24/7)
+[April 01, 2026  04:01:19 PM]    Holding: Cash — waiting for signal
+[April 01, 2026  04:01:19 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:01:19 PM]    ✅ Next scan at 04:16 PM.
+
+[April 01, 2026  04:16:19 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:16:19 PM]    SCAN — 04:16 PM
+[April 01, 2026  04:16:19 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:16:20 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  04:16:20 PM]  
+[April 01, 2026  04:16:20 PM]    ✅ EXTREME FEAR — favorable conditions
+[April 01, 2026  04:16:20 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:20 PM]    BTC
+[April 01, 2026  04:16:20 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    BTC @ $68,284.99
+[April 01, 2026  04:16:21 PM]    RSI: 43 neutral
+[April 01, 2026  04:16:21 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:21 PM]    OBV: bullish ✅
+[April 01, 2026  04:16:21 PM]    200 EMA: $68,307.03 — at 
+[April 01, 2026  04:16:21 PM]    ADX: 52 ✅ trending
+[April 01, 2026  04:16:21 PM]    Signals: 1 buy / 1 sell (need 3+)
+[April 01, 2026  04:16:21 PM]    → Waiting: 1B/1S — need 3+
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    ETH
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    ETH @ $2,150.81
+[April 01, 2026  04:16:21 PM]    RSI: 61 neutral
+[April 01, 2026  04:16:21 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:21 PM]    OBV: bullish ✅
+[April 01, 2026  04:16:21 PM]    200 EMA: $2,080.64 — above ✅
+[April 01, 2026  04:16:21 PM]    ADX: 36 ✅ trending
+[April 01, 2026  04:16:21 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:16:21 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    SOL
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    SOL @ $82.63
+[April 01, 2026  04:16:21 PM]    RSI: 42 neutral
+[April 01, 2026  04:16:21 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:21 PM]    OBV: bullish ✅
+[April 01, 2026  04:16:21 PM]    200 EMA: $85.43 — below ✅
+[April 01, 2026  04:16:21 PM]    ADX: 4 ⚠️ ranging — will skip
+[April 01, 2026  04:16:21 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  04:16:21 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    LINK
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    LINK @ $9.01
+[April 01, 2026  04:16:21 PM]    RSI: 45 neutral
+[April 01, 2026  04:16:21 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:21 PM]    OBV: bullish ✅
+[April 01, 2026  04:16:21 PM]    200 EMA: $8.86 — above ✅
+[April 01, 2026  04:16:21 PM]    ADX: 7 ⚠️ ranging — will skip
+[April 01, 2026  04:16:21 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  04:16:21 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    GRT
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    GRT @ $0.02
+[April 01, 2026  04:16:21 PM]    RSI: 29 oversold ✅
+[April 01, 2026  04:16:21 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:21 PM]    OBV: bullish ✅
+[April 01, 2026  04:16:21 PM]    200 EMA: $0.02 — above ✅
+[April 01, 2026  04:16:21 PM]    ADX: 27 ✅ trending
+[April 01, 2026  04:16:21 PM]    Signals: 3 buy / 1 sell (need 3+)
+[April 01, 2026  04:16:21 PM]    ⛔ BTC below 200 EMA — no altcoin longs
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:21 PM]    AVAX
+[April 01, 2026  04:16:21 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:22 PM]    AVAX @ $9.17
+[April 01, 2026  04:16:22 PM]    RSI: 35 oversold ✅
+[April 01, 2026  04:16:22 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:22 PM]    OBV: bullish ✅
+[April 01, 2026  04:16:22 PM]    200 EMA: $9.10 — above ✅
+[April 01, 2026  04:16:22 PM]    ADX: 23 ⚠️ ranging — will skip
+[April 01, 2026  04:16:22 PM]    Signals: 3 buy / 1 sell (need 3+)
+[April 01, 2026  04:16:22 PM]    ⛔ ADX 23 < 25 — ranging market
+[April 01, 2026  04:16:22 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:22 PM]    UNI
+[April 01, 2026  04:16:22 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  04:16:22 PM]    UNI @ $3.63
+[April 01, 2026  04:16:22 PM]    RSI: 52 neutral
+[April 01, 2026  04:16:22 PM]    MACD: bearish ✅
+[April 01, 2026  04:16:22 PM]    OBV: bearish ✅
+[April 01, 2026  04:16:22 PM]    200 EMA: $3.53 — above ✅
+[April 01, 2026  04:16:22 PM]    ADX: 4 ⚠️ ranging — will skip
+[April 01, 2026  04:16:22 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  04:16:22 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  04:16:22 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:16:22 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  04:16:22 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:16:22 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  04:16:22 PM]    Trades: 0 | W/L: 0/0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  04:16:22 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  04:16:22 PM]    Session filter: OFF (24/7)
+[April 01, 2026  04:16:22 PM]    Holding: Cash — waiting for signal
+[April 01, 2026  04:16:22 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  04:16:22 PM]    ✅ Next scan at 04:31 PM.
+
