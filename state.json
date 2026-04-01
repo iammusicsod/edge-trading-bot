@@ -1,0 +1,17 @@
+{
+  "capital": 1500.0,
+  "open_trades": {},
+  "trade_history": [],
+  "daily_pnl": 0.0,
+  "total_pnl": 0.0,
+  "last_reset": "2026-04-01",
+  "stats": {
+    "wins": 0,
+    "losses": 0,
+    "total_trades": 0
+  },
+  "last_fg": 8,
+  "last_fg_label": "Extreme Fear",
+  "last_dominance": 56.248189438817306,
+  "last_funding": 0.0
+}
