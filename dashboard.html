@@ -74,7 +74,7 @@
     <div id="tjDetailContent"></div>
   </div>
 </div>
-<div class="history-panel"><div class="p-label">Trade History</div><div id="th"><div class="empty">No trades yet<span>60-90 day paper test in progress</span></div></div></div>
+<div id="openPositionsPanel" style="display:none;background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px"><div class="p-label">Open Positions — Live Unrealized P&L</div><div id="openPositionsContent"></div></div><div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px"><div class="p-label">Performance Calendar</div><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px"><button onclick="calPrev()" style="padding:5px 14px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px">← Prev</button><span id="calTitle" style="font-size:13px;font-weight:500;font-family:JetBrains Mono,monospace"></span><button onclick="calNext()" style="padding:5px 14px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px">Next →</button></div><div id="calGrid" style="margin-bottom:12px"></div><div id="calSummary" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px"></div></div><div class="history-panel"><div class="p-label">Trade History</div><div id="th"><div class="empty">No trades yet<span>60-90 day paper test in progress</span></div></div></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
@@ -415,6 +415,106 @@ async function tjLoad(){
 
 tjLoad();
 setInterval(tjLoad, 30000);
+})();
+</script>
+
+<script>
+(function(){
+async function updateOpenPositions(state){
+  var panel=document.getElementById('openPositionsPanel');
+  if(!state||!state.open_trades||Object.keys(state.open_trades).length===0){panel.style.display='none';return;}
+  panel.style.display='block';
+  var trades=state.open_trades,pairs=Object.keys(trades),cols=Math.min(pairs.length,3);
+  var html='<div style="display:grid;grid-template-columns:repeat('+cols+',1fr);gap:12px">';
+  for(var i=0;i<pairs.length;i++){
+    var pair=pairs[i],pos=trades[pair],coin=pair.split('-')[0],livePrice=0;
+    try{var r=await fetch('https://api.exchange.coinbase.com/products/'+pair+'/ticker');var d=await r.json();livePrice=parseFloat(d.price||0);}catch(e){}
+    var entry=parseFloat(pos.entry_price||0),usd=parseFloat(pos.usd_invested||0),sl=parseFloat(pos.stop_loss||0),tp=parseFloat(pos.take_profit||0);
+    var upnl=livePrice>0?(livePrice-entry)/entry*usd:0,pct=livePrice>0?(livePrice-entry)/entry*100:0,isPos=upnl>=0;
+    var distSL=sl>0?(livePrice-sl)/livePrice*100:0,distTP=tp>0?(tp-livePrice)/livePrice*100:0;
+    var prog=(sl>0&&tp>0&&livePrice>0)?Math.max(0,Math.min(100,(livePrice-sl)/(tp-sl)*100)):50;
+    html+='<div style="background:#0c0c0e;border:1px solid '+(isPos?'rgba(0,230,118,0.2)':'rgba(255,82,82,0.2)')+';border-radius:12px;padding:16px">';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:16px;font-weight:600">'+coin+'</div>';
+    html+='<div style="font-size:18px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)')+'">'+( isPos?'+ ':'- ')+'$'+Math.abs(upnl).toFixed(2)+'</div></div>';
+    html+='<div style="font-size:11px;color:var(--muted);margin-bottom:2px">Live price</div>';
+    html+='<div style="font-size:15px;font-weight:600;font-family:JetBrains Mono,monospace;margin-bottom:10px">$'+livePrice.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:4})+'</div>';
+    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;font-size:11px">';
+    html+='<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px">Entry</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+entry.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+    html+='<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px">Change</div><div style="font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)')+'">'+( pct>=0?'+':'')+pct.toFixed(2)+'%</div></div>';
+    html+='<div style="background:rgba(255,82,82,0.06);border:1px solid rgba(255,82,82,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);margin-bottom:2px">Stop loss</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div><div style="color:var(--muted);font-size:9px">'+distSL.toFixed(1)+'% away</div></div>';
+    html+='<div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--green);margin-bottom:2px">Target</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+tp.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div><div style="color:var(--muted);font-size:9px">'+distTP.toFixed(1)+'% away</div></div>';
+    html+='</div>';
+    html+='<div><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:2px"><span>SL</span><span>TP</span></div>';
+    html+='<div style="height:5px;background:rgba(255,255,255,0.05);border-radius:3px"><div style="height:100%;width:'+prog+'%;background:'+(isPos?'var(--green)':'var(--amber)')+';border-radius:3px;transition:width .5s"></div></div>';
+    html+='<div style="font-size:9px;color:var(--muted);text-align:center;margin-top:2px">'+prog.toFixed(0)+'% to target</div></div>';
+    html+='<div style="font-size:10px;color:var(--muted);margin-top:8px">$'+usd.toFixed(2)+' | '+( pos.entry_time||"—")+'</div>';
+    html+='</div>';
+  }
+  html+='</div>';
+  document.getElementById('openPositionsContent').innerHTML=html;
+}
+
+var calYear=new Date().getFullYear(),calMonth=new Date().getMonth(),calData={};
+var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var WDAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function calBuild(history){
+  calData={};
+  if(!history)return;
+  for(var i=0;i<history.length;i++){
+    var t=history[i];
+    if(!t.time||t.side==='BUY')continue;
+    var d=new Date(t.time);if(isNaN(d.getTime()))continue;
+    var pnl=parseFloat(t.pnl||0);
+    var key=d.getFullYear()+'-'+(d.getMonth()+1).toString().padStart(2,'0')+'-'+d.getDate().toString().padStart(2,'0');
+    if(!calData[key])calData[key]={pnl:0,trades:0};
+    calData[key].pnl+=pnl;calData[key].trades++;
+  }
+}
+
+function calRender(){
+  document.getElementById('calTitle').textContent=MONTHS[calMonth]+' '+calYear;
+  var first=new Date(calYear,calMonth,1).getDay(),days=new Date(calYear,calMonth+1,0).getDate();
+  var today=new Date(),html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px">';
+  for(var d=0;d<7;d++)html+='<div style="text-align:center;font-size:9px;color:var(--muted);padding:3px;font-family:JetBrains Mono,monospace">'+WDAYS[d]+'</div>';
+  html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
+  for(var e=0;e<first;e++)html+='<div></div>';
+  var mPnl=0,wins=0,losses=0,tDays=0;
+  for(var day=1;day<=days;day++){
+    var key=calYear+'-'+(calMonth+1).toString().padStart(2,'0')+'-'+day.toString().padStart(2,'0');
+    var data=calData[key];
+    var isToday=(today.getDate()===day&&today.getMonth()===calMonth&&today.getFullYear()===calYear);
+    if(data){
+      mPnl+=data.pnl;tDays++;var g=data.pnl>=0;if(g)wins++;else losses++;
+      html+='<div style="background:'+(g?'rgba(0,230,118,0.1)':'rgba(255,82,82,0.1)')+';border:1px solid '+(g?'rgba(0,230,118,0.25)':'rgba(255,82,82,0.25)')+';border-radius:6px;padding:4px 2px;text-align:center" title="'+data.trades+' trades">';
+      html+='<div style="font-size:11px;font-weight:600;color:'+(g?'var(--green)':'var(--red)')+'">'+day+'</div>';
+      html+='<div style="font-size:9px;color:'+(g?'var(--green)':'var(--red)')+';">'+(data.pnl>=0?'+':'')+data.pnl.toFixed(0)+'</div></div>';
+    } else {
+      html+='<div style="background:var(--s2);border:1px solid '+(isToday?'var(--amber)':'var(--border)')+';border-radius:6px;padding:4px 2px;text-align:center">';
+      html+='<div style="font-size:11px;color:'+(isToday?'var(--amber)':'var(--muted)')+'">'+day+'</div></div>';
+    }
+  }
+  html+='</div>';
+  document.getElementById('calGrid').innerHTML=html;
+  function sc(l,v,c){return '<div style="background:#0c0c0e;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px">'+l+'</div><div style="font-size:15px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';}
+  document.getElementById('calSummary').innerHTML=sc('MONTH P&L',(mPnl>=0?'+ ':'- ')+'$'+Math.abs(mPnl).toFixed(2),mPnl>=0?'var(--green)':'var(--red)')+sc('WIN DAYS',wins,'var(--green)')+sc('LOSS DAYS',losses,'var(--red)')+sc('TRADE DAYS',tDays,'var(--text)');
+}
+
+window.calPrev=function(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}calRender();};
+window.calNext=function(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}calRender();};
+calRender();
+
+var _orig=window.refresh;
+if(_orig){
+  window.refresh=async function(){
+    await _orig();
+    try{
+      var r=await fetch('http://localhost:8080/state');
+      if(r.ok){var s=await r.json();await updateOpenPositions(s);calBuild(s.trade_history||[]);calRender();}
+    }catch(e){}
+  };
+  window.refresh();
+}
 })();
 </script>
 </body></html>
