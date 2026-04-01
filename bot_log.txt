@@ -5478,3 +5478,1789 @@
 [April 01, 2026  10:41:40 AM]  ════════════════════════════════════════════════════════════
 [April 01, 2026  10:41:40 AM]    ✅ Scan complete. Next scan at 10:56 AM.
 
+[April 01, 2026  10:56:40 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:56:40 AM]    NEW SCAN — 10:56 AM
+[April 01, 2026  10:56:40 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:56:40 AM]    Bot waking up to check the markets...
+[April 01, 2026  10:56:40 AM]  
+[April 01, 2026  10:56:40 AM]    Fetching market intelligence...
+[April 01, 2026  10:56:41 AM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  10:56:41 AM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  10:56:41 AM]    BTC Dominance:      56.3% (Altcoins bleeding)
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  10:56:41 AM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Analyzing BTC...
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Current BTC price: $68,884.01
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    1. RSI is 66 — OVERBOUGHT. May pull back.
+[April 01, 2026  10:56:41 AM]    2. Momentum is FLAT (1.7%)
+[April 01, 2026  10:56:41 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:41 AM]    4. Volume normal (1.5x average)
+[April 01, 2026  10:56:41 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Analyzing ETH...
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Current ETH price: $2,134.84
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    1. RSI is 66 — OVERBOUGHT. May pull back.
+[April 01, 2026  10:56:41 AM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  10:56:41 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:41 AM]    4. Volume normal (1.4x average)
+[April 01, 2026  10:56:41 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Analyzing SOL...
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Current SOL price: $83.56
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    1. RSI is 59 — Neutral territory.
+[April 01, 2026  10:56:41 AM]    2. Momentum is FLAT (1.1%)
+[April 01, 2026  10:56:41 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:41 AM]    4. Volume normal (1.1x average)
+[April 01, 2026  10:56:41 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Analyzing LINK...
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Current LINK price: $9.00
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    1. RSI is 72 — OVERBOUGHT. May pull back.
+[April 01, 2026  10:56:41 AM]    2. Momentum is BULLISH — price climbed 2.7% recently
+[April 01, 2026  10:56:41 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:41 AM]    4. Volume normal (0.9x average)
+[April 01, 2026  10:56:41 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Analyzing GRT...
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Current GRT price: $0.02
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    1. RSI is 65 — Neutral territory.
+[April 01, 2026  10:56:41 AM]    2. Momentum is BULLISH — price climbed 2.5% recently
+[April 01, 2026  10:56:41 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:41 AM]    4. Volume normal (0.7x average)
+[April 01, 2026  10:56:41 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:41 AM]  
+[April 01, 2026  10:56:41 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:41 AM]    Analyzing AVAX...
+[April 01, 2026  10:56:41 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Current AVAX price: $9.20
+[April 01, 2026  10:56:42 AM]  
+[April 01, 2026  10:56:42 AM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  10:56:42 AM]    2. Momentum is BULLISH — price climbed 3.5% recently
+[April 01, 2026  10:56:42 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:42 AM]    4. Volume normal (0.3x average)
+[April 01, 2026  10:56:42 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:42 AM]  
+[April 01, 2026  10:56:42 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Analyzing UNI...
+[April 01, 2026  10:56:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Current UNI price: $3.62
+[April 01, 2026  10:56:42 AM]  
+[April 01, 2026  10:56:42 AM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  10:56:42 AM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  10:56:42 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  10:56:42 AM]    4. Volume normal (0.3x average)
+[April 01, 2026  10:56:42 AM]    5. Market regime: low volatility
+[April 01, 2026  10:56:42 AM]  
+[April 01, 2026  10:56:42 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  10:56:42 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:56:42 AM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  10:56:42 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:56:42 AM]    Time:              April 01, 2026  10:56:42 AM
+[April 01, 2026  10:56:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Starting capital:  $  1,500.00
+[April 01, 2026  10:56:42 AM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  10:56:42 AM]    Total profit/loss: $     +0.00
+[April 01, 2026  10:56:42 AM]    Today's P/L:       $     +0.00
+[April 01, 2026  10:56:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Total trades:      0
+[April 01, 2026  10:56:42 AM]    Winning trades:    0
+[April 01, 2026  10:56:42 AM]    Losing trades:     0
+[April 01, 2026  10:56:42 AM]    Win rate:          0.0%
+[April 01, 2026  10:56:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  10:56:42 AM]    BTC Dominance:     56.3%
+[April 01, 2026  10:56:42 AM]    Funding Rate:      0.0000%
+[April 01, 2026  10:56:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:56:42 AM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  10:56:42 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:56:42 AM]    ✅ Scan complete. Next scan at 11:11 AM.
+
+[April 01, 2026  11:11:42 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:11:42 AM]    NEW SCAN — 11:11 AM
+[April 01, 2026  11:11:42 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:11:42 AM]    Bot waking up to check the markets...
+[April 01, 2026  11:11:42 AM]  
+[April 01, 2026  11:11:42 AM]    Fetching market intelligence...
+[April 01, 2026  11:11:42 AM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  11:11:42 AM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  11:11:42 AM]    BTC Dominance:      56.3% (Altcoins bleeding)
+[April 01, 2026  11:11:42 AM]  
+[April 01, 2026  11:11:42 AM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  11:11:42 AM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  11:11:42 AM]  
+[April 01, 2026  11:11:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:42 AM]    Analyzing BTC...
+[April 01, 2026  11:11:42 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current BTC price: $68,731.69
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 65 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:11:43 AM]    2. Momentum is FLAT (1.7%)
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.2x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Analyzing ETH...
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current ETH price: $2,126.90
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 65 — Neutral territory.
+[April 01, 2026  11:11:43 AM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.3x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Analyzing SOL...
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current SOL price: $83.26
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 57 — Neutral territory.
+[April 01, 2026  11:11:43 AM]    2. Momentum is FLAT (0.8%)
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.3x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Analyzing LINK...
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current LINK price: $8.97
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:11:43 AM]    2. Momentum is BULLISH — price climbed 2.4% recently
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.1x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Analyzing GRT...
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current GRT price: $0.02
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 63 — Neutral territory.
+[April 01, 2026  11:11:43 AM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.0x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Analyzing AVAX...
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current AVAX price: $9.19
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 67 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:11:43 AM]    2. Momentum is BULLISH — price climbed 3.5% recently
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.0x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Analyzing UNI...
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Current UNI price: $3.61
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    1. RSI is 65 — Neutral territory.
+[April 01, 2026  11:11:43 AM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  11:11:43 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:11:43 AM]    4. Volume normal (0.2x average)
+[April 01, 2026  11:11:43 AM]    5. Market regime: low volatility
+[April 01, 2026  11:11:43 AM]  
+[April 01, 2026  11:11:43 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:11:43 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:11:43 AM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  11:11:43 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:11:43 AM]    Time:              April 01, 2026  11:11:43 AM
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Starting capital:  $  1,500.00
+[April 01, 2026  11:11:43 AM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  11:11:43 AM]    Total profit/loss: $     +0.00
+[April 01, 2026  11:11:43 AM]    Today's P/L:       $     +0.00
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Total trades:      0
+[April 01, 2026  11:11:43 AM]    Winning trades:    0
+[April 01, 2026  11:11:43 AM]    Losing trades:     0
+[April 01, 2026  11:11:43 AM]    Win rate:          0.0%
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  11:11:43 AM]    BTC Dominance:     56.3%
+[April 01, 2026  11:11:43 AM]    Funding Rate:      0.0000%
+[April 01, 2026  11:11:43 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:11:43 AM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  11:11:43 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:11:43 AM]    ✅ Scan complete. Next scan at 11:26 AM.
+
+[April 01, 2026  11:26:44 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:26:44 AM]    NEW SCAN — 11:26 AM
+[April 01, 2026  11:26:44 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:26:44 AM]    Bot waking up to check the markets...
+[April 01, 2026  11:26:44 AM]  
+[April 01, 2026  11:26:44 AM]    Fetching market intelligence...
+[April 01, 2026  11:26:44 AM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  11:26:44 AM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  11:26:44 AM]    BTC Dominance:      56.3% (Altcoins bleeding)
+[April 01, 2026  11:26:44 AM]  
+[April 01, 2026  11:26:44 AM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  11:26:44 AM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  11:26:44 AM]  
+[April 01, 2026  11:26:44 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:44 AM]    Analyzing BTC...
+[April 01, 2026  11:26:44 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:44 AM]    Current BTC price: $68,825.77
+[April 01, 2026  11:26:44 AM]  
+[April 01, 2026  11:26:44 AM]    1. RSI is 67 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:26:44 AM]    2. Momentum is FLAT (1.8%)
+[April 01, 2026  11:26:44 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:44 AM]    4. Volume normal (0.4x average)
+[April 01, 2026  11:26:44 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:44 AM]  
+[April 01, 2026  11:26:44 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:44 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:44 AM]    Analyzing ETH...
+[April 01, 2026  11:26:44 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Current ETH price: $2,133.67
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:26:45 AM]    2. Momentum is BULLISH — price climbed 2.3% recently
+[April 01, 2026  11:26:45 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:45 AM]    4. Volume normal (0.7x average)
+[April 01, 2026  11:26:45 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Analyzing SOL...
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Current SOL price: $84.11
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    1. RSI is 65 — Neutral territory.
+[April 01, 2026  11:26:45 AM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  11:26:45 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:45 AM]    4. Volume normal (1.4x average)
+[April 01, 2026  11:26:45 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Analyzing LINK...
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Current LINK price: $9.01
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    1. RSI is 73 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:26:45 AM]    2. Momentum is BULLISH — price climbed 2.9% recently
+[April 01, 2026  11:26:45 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:45 AM]    4. Volume normal (0.4x average)
+[April 01, 2026  11:26:45 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Analyzing GRT...
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Current GRT price: $0.02
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    1. RSI is 63 — Neutral territory.
+[April 01, 2026  11:26:45 AM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  11:26:45 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:45 AM]    4. Volume normal (0.2x average)
+[April 01, 2026  11:26:45 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Analyzing AVAX...
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Current AVAX price: $9.22
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    1. RSI is 69 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:26:45 AM]    2. Momentum is BULLISH — price climbed 3.8% recently
+[April 01, 2026  11:26:45 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:45 AM]    4. Volume normal (0.4x average)
+[April 01, 2026  11:26:45 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Analyzing UNI...
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Current UNI price: $3.63
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    1. RSI is 70 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:26:45 AM]    2. Momentum is BULLISH — price climbed 2.4% recently
+[April 01, 2026  11:26:45 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:26:45 AM]    4. Volume normal (0.7x average)
+[April 01, 2026  11:26:45 AM]    5. Market regime: low volatility
+[April 01, 2026  11:26:45 AM]  
+[April 01, 2026  11:26:45 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:26:45 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:26:45 AM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  11:26:45 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:26:45 AM]    Time:              April 01, 2026  11:26:45 AM
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Starting capital:  $  1,500.00
+[April 01, 2026  11:26:45 AM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  11:26:45 AM]    Total profit/loss: $     +0.00
+[April 01, 2026  11:26:45 AM]    Today's P/L:       $     +0.00
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Total trades:      0
+[April 01, 2026  11:26:45 AM]    Winning trades:    0
+[April 01, 2026  11:26:45 AM]    Losing trades:     0
+[April 01, 2026  11:26:45 AM]    Win rate:          0.0%
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  11:26:45 AM]    BTC Dominance:     56.3%
+[April 01, 2026  11:26:45 AM]    Funding Rate:      0.0000%
+[April 01, 2026  11:26:45 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:26:45 AM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  11:26:45 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:26:45 AM]    ✅ Scan complete. Next scan at 11:41 AM.
+
+[April 01, 2026  11:41:45 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:41:45 AM]    NEW SCAN — 11:41 AM
+[April 01, 2026  11:41:45 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:41:45 AM]    Bot waking up to check the markets...
+[April 01, 2026  11:41:45 AM]  
+[April 01, 2026  11:41:45 AM]    Fetching market intelligence...
+[April 01, 2026  11:41:46 AM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  11:41:46 AM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  11:41:46 AM]    BTC Dominance:      56.3% (Altcoins bleeding)
+[April 01, 2026  11:41:46 AM]  
+[April 01, 2026  11:41:46 AM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  11:41:47 AM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing BTC...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Current BTC price: $68,906.67
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:41:47 AM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  11:41:47 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:41:47 AM]    4. Volume normal (0.8x average)
+[April 01, 2026  11:41:47 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing ETH...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Current ETH price: $2,149.00
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    1. RSI is 72 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:41:47 AM]    2. Momentum is BULLISH — price climbed 3.0% recently
+[April 01, 2026  11:41:47 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:41:47 AM]    4. Volume normal (1.3x average)
+[April 01, 2026  11:41:47 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing SOL...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Current SOL price: $85.03
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    1. RSI is 70 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:41:47 AM]    2. Momentum is BULLISH — price climbed 3.0% recently
+[April 01, 2026  11:41:47 AM]    3. Price ABOVE upper Bollinger Band — statistically expensive
+[April 01, 2026  11:41:47 AM]    4. Volume 2.5x above average — strong interest
+[April 01, 2026  11:41:47 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing LINK...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Current LINK price: $9.06
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    1. RSI is 75 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:41:47 AM]    2. Momentum is BULLISH — price climbed 3.4% recently
+[April 01, 2026  11:41:47 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:41:47 AM]    4. Volume normal (0.7x average)
+[April 01, 2026  11:41:47 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing GRT...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Current GRT price: $0.02
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    1. RSI is 63 — Neutral territory.
+[April 01, 2026  11:41:47 AM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  11:41:47 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:41:47 AM]    4. Volume normal (0.2x average)
+[April 01, 2026  11:41:47 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing AVAX...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Current AVAX price: $9.24
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    1. RSI is 70 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:41:47 AM]    2. Momentum is BULLISH — price climbed 4.1% recently
+[April 01, 2026  11:41:47 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:41:47 AM]    4. Volume normal (0.8x average)
+[April 01, 2026  11:41:47 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:47 AM]  
+[April 01, 2026  11:41:47 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:47 AM]    Analyzing UNI...
+[April 01, 2026  11:41:47 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:48 AM]    Current UNI price: $3.64
+[April 01, 2026  11:41:48 AM]  
+[April 01, 2026  11:41:48 AM]    1. RSI is 72 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:41:48 AM]    2. Momentum is BULLISH — price climbed 2.8% recently
+[April 01, 2026  11:41:48 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:41:48 AM]    4. Volume normal (1.0x average)
+[April 01, 2026  11:41:48 AM]    5. Market regime: low volatility
+[April 01, 2026  11:41:48 AM]  
+[April 01, 2026  11:41:48 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:41:48 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:41:48 AM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  11:41:48 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:41:48 AM]    Time:              April 01, 2026  11:41:48 AM
+[April 01, 2026  11:41:48 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:48 AM]    Starting capital:  $  1,500.00
+[April 01, 2026  11:41:48 AM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  11:41:48 AM]    Total profit/loss: $     +0.00
+[April 01, 2026  11:41:48 AM]    Today's P/L:       $     +0.00
+[April 01, 2026  11:41:48 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:48 AM]    Total trades:      0
+[April 01, 2026  11:41:48 AM]    Winning trades:    0
+[April 01, 2026  11:41:48 AM]    Losing trades:     0
+[April 01, 2026  11:41:48 AM]    Win rate:          0.0%
+[April 01, 2026  11:41:48 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:48 AM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  11:41:48 AM]    BTC Dominance:     56.3%
+[April 01, 2026  11:41:48 AM]    Funding Rate:      0.0000%
+[April 01, 2026  11:41:48 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:41:48 AM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  11:41:48 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:41:48 AM]    ✅ Scan complete. Next scan at 11:56 AM.
+
+[April 01, 2026  11:56:48 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:56:48 AM]    NEW SCAN — 11:56 AM
+[April 01, 2026  11:56:48 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:56:48 AM]    Bot waking up to check the markets...
+[April 01, 2026  11:56:48 AM]  
+[April 01, 2026  11:56:48 AM]    Fetching market intelligence...
+[April 01, 2026  11:56:48 AM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  11:56:48 AM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  11:56:48 AM]    BTC Dominance:      56.3% (Altcoins bleeding)
+[April 01, 2026  11:56:48 AM]  
+[April 01, 2026  11:56:48 AM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  11:56:48 AM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  11:56:48 AM]  
+[April 01, 2026  11:56:48 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:48 AM]    Analyzing BTC...
+[April 01, 2026  11:56:48 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current BTC price: $68,821.35
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 67 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:56:49 AM]    2. Momentum is FLAT (1.8%)
+[April 01, 2026  11:56:49 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:56:49 AM]    4. Volume normal (1.0x average)
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Analyzing ETH...
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current ETH price: $2,144.81
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 71 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:56:49 AM]    2. Momentum is BULLISH — price climbed 2.8% recently
+[April 01, 2026  11:56:49 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:56:49 AM]    4. Volume 1.9x above average — strong interest
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Analyzing SOL...
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current SOL price: $84.92
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 69 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:56:49 AM]    2. Momentum is BULLISH — price climbed 2.8% recently
+[April 01, 2026  11:56:49 AM]    3. Price ABOVE upper Bollinger Band — statistically expensive
+[April 01, 2026  11:56:49 AM]    4. Volume 3.4x above average — strong interest
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Analyzing LINK...
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current LINK price: $9.04
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 74 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:56:49 AM]    2. Momentum is BULLISH — price climbed 3.3% recently
+[April 01, 2026  11:56:49 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:56:49 AM]    4. Volume normal (1.0x average)
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Analyzing GRT...
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current GRT price: $0.02
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 63 — Neutral territory.
+[April 01, 2026  11:56:49 AM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  11:56:49 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:56:49 AM]    4. Volume normal (0.2x average)
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Analyzing AVAX...
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current AVAX price: $9.23
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 70 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:56:49 AM]    2. Momentum is BULLISH — price climbed 3.9% recently
+[April 01, 2026  11:56:49 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:56:49 AM]    4. Volume normal (1.0x average)
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Analyzing UNI...
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Current UNI price: $3.64
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    1. RSI is 71 — OVERBOUGHT. May pull back.
+[April 01, 2026  11:56:49 AM]    2. Momentum is BULLISH — price climbed 2.7% recently
+[April 01, 2026  11:56:49 AM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  11:56:49 AM]    4. Volume 1.7x above average — strong interest
+[April 01, 2026  11:56:49 AM]    5. Market regime: low volatility
+[April 01, 2026  11:56:49 AM]  
+[April 01, 2026  11:56:49 AM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  11:56:49 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:56:49 AM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  11:56:49 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:56:49 AM]    Time:              April 01, 2026  11:56:49 AM
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Starting capital:  $  1,500.00
+[April 01, 2026  11:56:49 AM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  11:56:49 AM]    Total profit/loss: $     +0.00
+[April 01, 2026  11:56:49 AM]    Today's P/L:       $     +0.00
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Total trades:      0
+[April 01, 2026  11:56:49 AM]    Winning trades:    0
+[April 01, 2026  11:56:49 AM]    Losing trades:     0
+[April 01, 2026  11:56:49 AM]    Win rate:          0.0%
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  11:56:49 AM]    BTC Dominance:     56.3%
+[April 01, 2026  11:56:49 AM]    Funding Rate:      0.0000%
+[April 01, 2026  11:56:49 AM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  11:56:49 AM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  11:56:49 AM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  11:56:49 AM]    ✅ Scan complete. Next scan at 12:11 PM.
+
+[April 01, 2026  12:11:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:11:50 PM]    NEW SCAN — 12:11 PM
+[April 01, 2026  12:11:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:11:50 PM]    Bot waking up to check the markets...
+[April 01, 2026  12:11:50 PM]  
+[April 01, 2026  12:11:50 PM]    Fetching market intelligence...
+[April 01, 2026  12:11:50 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  12:11:50 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  12:11:50 PM]    BTC Dominance:      56.2% (Altcoins bleeding)
+[April 01, 2026  12:11:50 PM]  
+[April 01, 2026  12:11:50 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  12:11:50 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  12:11:50 PM]  
+[April 01, 2026  12:11:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:50 PM]    Analyzing BTC...
+[April 01, 2026  12:11:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:50 PM]    Current BTC price: $68,800.16
+[April 01, 2026  12:11:50 PM]  
+[April 01, 2026  12:11:50 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  12:11:50 PM]    2. Momentum is FLAT (1.0%)
+[April 01, 2026  12:11:50 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:11:50 PM]    4. Volume normal (0.4x average)
+[April 01, 2026  12:11:50 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:50 PM]  
+[April 01, 2026  12:11:50 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:11:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:50 PM]    Analyzing ETH...
+[April 01, 2026  12:11:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Current ETH price: $2,155.31
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    1. RSI is 70 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:11:51 PM]    2. Momentum is BULLISH — price climbed 2.6% recently
+[April 01, 2026  12:11:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:11:51 PM]    4. Volume normal (0.8x average)
+[April 01, 2026  12:11:51 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Analyzing SOL...
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Current SOL price: $85.94
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    1. RSI is 70 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:11:51 PM]    2. Momentum is BULLISH — price climbed 3.1% recently
+[April 01, 2026  12:11:51 PM]    3. Price ABOVE upper Bollinger Band — statistically expensive
+[April 01, 2026  12:11:51 PM]    4. Volume normal (1.2x average)
+[April 01, 2026  12:11:51 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    DECISION: SELLING 🔴  (80% confidence)
+[April 01, 2026  12:11:51 PM]       • Price at upper Bollinger Band
+[April 01, 2026  12:11:51 PM]       • RSI showing overbought
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Analyzing LINK...
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Current LINK price: $9.07
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    1. RSI is 73 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:11:51 PM]    2. Momentum is BULLISH — price climbed 2.9% recently
+[April 01, 2026  12:11:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:11:51 PM]    4. Volume normal (0.5x average)
+[April 01, 2026  12:11:51 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Analyzing GRT...
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Current GRT price: $0.02
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  12:11:51 PM]    2. Momentum is FLAT (1.6%)
+[April 01, 2026  12:11:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:11:51 PM]    4. Volume normal (0.1x average)
+[April 01, 2026  12:11:51 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Analyzing AVAX...
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Current AVAX price: $9.27
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    1. RSI is 69 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:11:51 PM]    2. Momentum is BULLISH — price climbed 3.6% recently
+[April 01, 2026  12:11:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:11:51 PM]    4. Volume normal (0.1x average)
+[April 01, 2026  12:11:51 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Analyzing UNI...
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Current UNI price: $3.64
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:11:51 PM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  12:11:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:11:51 PM]    4. Volume normal (0.7x average)
+[April 01, 2026  12:11:51 PM]    5. Market regime: low volatility
+[April 01, 2026  12:11:51 PM]  
+[April 01, 2026  12:11:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:11:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:11:51 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  12:11:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:11:51 PM]    Time:              April 01, 2026  12:11:51 PM
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  12:11:51 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  12:11:51 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  12:11:51 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Total trades:      0
+[April 01, 2026  12:11:51 PM]    Winning trades:    0
+[April 01, 2026  12:11:51 PM]    Losing trades:     0
+[April 01, 2026  12:11:51 PM]    Win rate:          0.0%
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  12:11:51 PM]    BTC Dominance:     56.2%
+[April 01, 2026  12:11:51 PM]    Funding Rate:      0.0000%
+[April 01, 2026  12:11:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:11:51 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  12:11:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:11:51 PM]    ✅ Scan complete. Next scan at 12:26 PM.
+
+[April 01, 2026  12:26:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:26:51 PM]    NEW SCAN — 12:26 PM
+[April 01, 2026  12:26:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:26:51 PM]    Bot waking up to check the markets...
+[April 01, 2026  12:26:51 PM]  
+[April 01, 2026  12:26:51 PM]    Fetching market intelligence...
+[April 01, 2026  12:26:53 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  12:26:53 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  12:26:53 PM]    BTC Dominance:      56.2% (Altcoins bleeding)
+[April 01, 2026  12:26:53 PM]  
+[April 01, 2026  12:26:53 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  12:26:53 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  12:26:53 PM]  
+[April 01, 2026  12:26:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:53 PM]    Analyzing BTC...
+[April 01, 2026  12:26:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:53 PM]    Current BTC price: $68,490.99
+[April 01, 2026  12:26:53 PM]  
+[April 01, 2026  12:26:53 PM]    1. RSI is 56 — Neutral territory.
+[April 01, 2026  12:26:53 PM]    2. Momentum is FLAT (0.6%)
+[April 01, 2026  12:26:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:53 PM]    4. Volume normal (0.6x average)
+[April 01, 2026  12:26:53 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:53 PM]  
+[April 01, 2026  12:26:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:53 PM]    Analyzing ETH...
+[April 01, 2026  12:26:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:53 PM]    Current ETH price: $2,142.70
+[April 01, 2026  12:26:53 PM]  
+[April 01, 2026  12:26:53 PM]    1. RSI is 66 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:26:53 PM]    2. Momentum is FLAT (2.0%)
+[April 01, 2026  12:26:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:53 PM]    4. Volume normal (1.4x average)
+[April 01, 2026  12:26:53 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:53 PM]  
+[April 01, 2026  12:26:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:53 PM]    Analyzing SOL...
+[April 01, 2026  12:26:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Current SOL price: $84.73
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  12:26:54 PM]    2. Momentum is FLAT (1.6%)
+[April 01, 2026  12:26:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:54 PM]    4. Volume 1.9x above average — strong interest
+[April 01, 2026  12:26:54 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Analyzing LINK...
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Current LINK price: $9.03
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    1. RSI is 69 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:26:54 PM]    2. Momentum is BULLISH — price climbed 2.4% recently
+[April 01, 2026  12:26:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:54 PM]    4. Volume normal (1.0x average)
+[April 01, 2026  12:26:54 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Analyzing GRT...
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Current GRT price: $0.02
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  12:26:54 PM]    2. Momentum is FLAT (1.6%)
+[April 01, 2026  12:26:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:54 PM]    4. Volume normal (0.1x average)
+[April 01, 2026  12:26:54 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Analyzing AVAX...
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Current AVAX price: $9.24
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    1. RSI is 67 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:26:54 PM]    2. Momentum is BULLISH — price climbed 3.2% recently
+[April 01, 2026  12:26:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:54 PM]    4. Volume normal (0.2x average)
+[April 01, 2026  12:26:54 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Analyzing UNI...
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Current UNI price: $3.64
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    1. RSI is 67 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:26:54 PM]    2. Momentum is BULLISH — price climbed 2.0% recently
+[April 01, 2026  12:26:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:26:54 PM]    4. Volume normal (0.9x average)
+[April 01, 2026  12:26:54 PM]    5. Market regime: low volatility
+[April 01, 2026  12:26:54 PM]  
+[April 01, 2026  12:26:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:26:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:26:54 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  12:26:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:26:54 PM]    Time:              April 01, 2026  12:26:54 PM
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  12:26:54 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  12:26:54 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  12:26:54 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Total trades:      0
+[April 01, 2026  12:26:54 PM]    Winning trades:    0
+[April 01, 2026  12:26:54 PM]    Losing trades:     0
+[April 01, 2026  12:26:54 PM]    Win rate:          0.0%
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  12:26:54 PM]    BTC Dominance:     56.2%
+[April 01, 2026  12:26:54 PM]    Funding Rate:      0.0000%
+[April 01, 2026  12:26:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:26:54 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  12:26:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:26:54 PM]    ✅ Scan complete. Next scan at 12:41 PM.
+
+[April 01, 2026  12:41:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:41:54 PM]    NEW SCAN — 12:41 PM
+[April 01, 2026  12:41:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:41:54 PM]    Bot waking up to check the markets...
+[April 01, 2026  12:41:54 PM]  
+[April 01, 2026  12:41:54 PM]    Fetching market intelligence...
+[April 01, 2026  12:41:55 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  12:41:55 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  12:41:55 PM]    BTC Dominance:      56.2% (Altcoins bleeding)
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  12:41:55 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Analyzing BTC...
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Current BTC price: $68,421.58
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    1. RSI is 55 — Neutral territory.
+[April 01, 2026  12:41:55 PM]    2. Momentum is FLAT (0.5%)
+[April 01, 2026  12:41:55 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:41:55 PM]    4. Volume normal (1.0x average)
+[April 01, 2026  12:41:55 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Analyzing ETH...
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Current ETH price: $2,140.69
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    1. RSI is 65 — Neutral territory.
+[April 01, 2026  12:41:55 PM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  12:41:55 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:41:55 PM]    4. Volume 1.9x above average — strong interest
+[April 01, 2026  12:41:55 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Analyzing SOL...
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Current SOL price: $84.99
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    1. RSI is 64 — Neutral territory.
+[April 01, 2026  12:41:55 PM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  12:41:55 PM]    3. Price ABOVE upper Bollinger Band — statistically expensive
+[April 01, 2026  12:41:55 PM]    4. Volume 2.6x above average — strong interest
+[April 01, 2026  12:41:55 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:55 PM]  
+[April 01, 2026  12:41:55 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:55 PM]    Analyzing LINK...
+[April 01, 2026  12:41:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Current LINK price: $9.02
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:41:56 PM]    2. Momentum is BULLISH — price climbed 2.3% recently
+[April 01, 2026  12:41:56 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:41:56 PM]    4. Volume 1.7x above average — strong interest
+[April 01, 2026  12:41:56 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Analyzing GRT...
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Current GRT price: $0.02
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    1. RSI is 56 — Neutral territory.
+[April 01, 2026  12:41:56 PM]    2. Momentum is FLAT (0.8%)
+[April 01, 2026  12:41:56 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:41:56 PM]    4. Volume normal (0.3x average)
+[April 01, 2026  12:41:56 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Analyzing AVAX...
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Current AVAX price: $9.23
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    1. RSI is 67 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:41:56 PM]    2. Momentum is BULLISH — price climbed 3.1% recently
+[April 01, 2026  12:41:56 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:41:56 PM]    4. Volume normal (0.4x average)
+[April 01, 2026  12:41:56 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Analyzing UNI...
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Current UNI price: $3.64
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    1. RSI is 68 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:41:56 PM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  12:41:56 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:41:56 PM]    4. Volume normal (1.5x average)
+[April 01, 2026  12:41:56 PM]    5. Market regime: low volatility
+[April 01, 2026  12:41:56 PM]  
+[April 01, 2026  12:41:56 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:41:56 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:41:56 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  12:41:56 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:41:56 PM]    Time:              April 01, 2026  12:41:56 PM
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  12:41:56 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  12:41:56 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  12:41:56 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Total trades:      0
+[April 01, 2026  12:41:56 PM]    Winning trades:    0
+[April 01, 2026  12:41:56 PM]    Losing trades:     0
+[April 01, 2026  12:41:56 PM]    Win rate:          0.0%
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  12:41:56 PM]    BTC Dominance:     56.2%
+[April 01, 2026  12:41:56 PM]    Funding Rate:      0.0000%
+[April 01, 2026  12:41:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:41:56 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  12:41:56 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:41:56 PM]    ✅ Scan complete. Next scan at 12:56 PM.
+
+[April 01, 2026  12:56:56 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:56:56 PM]    NEW SCAN — 12:56 PM
+[April 01, 2026  12:56:56 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:56:56 PM]    Bot waking up to check the markets...
+[April 01, 2026  12:56:56 PM]  
+[April 01, 2026  12:56:56 PM]    Fetching market intelligence...
+[April 01, 2026  12:56:57 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  12:56:57 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  12:56:57 PM]    BTC Dominance:      56.2% (Altcoins bleeding)
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  12:56:57 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Analyzing BTC...
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Current BTC price: $68,303.00
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    1. RSI is 53 — Neutral territory.
+[April 01, 2026  12:56:57 PM]    2. Momentum is FLAT (0.3%)
+[April 01, 2026  12:56:57 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:57 PM]    4. Volume normal (1.4x average)
+[April 01, 2026  12:56:57 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Analyzing ETH...
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Current ETH price: $2,136.92
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    1. RSI is 63 — Neutral territory.
+[April 01, 2026  12:56:57 PM]    2. Momentum is FLAT (1.7%)
+[April 01, 2026  12:56:57 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:57 PM]    4. Volume 2.1x above average — strong interest
+[April 01, 2026  12:56:57 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Analyzing SOL...
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Current SOL price: $84.52
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    1. RSI is 59 — Neutral territory.
+[April 01, 2026  12:56:57 PM]    2. Momentum is FLAT (1.4%)
+[April 01, 2026  12:56:57 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:57 PM]    4. Volume 3.0x above average — strong interest
+[April 01, 2026  12:56:57 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:57 PM]  
+[April 01, 2026  12:56:57 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:57 PM]    Analyzing LINK...
+[April 01, 2026  12:56:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Current LINK price: $9.00
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    1. RSI is 66 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:56:58 PM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  12:56:58 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:58 PM]    4. Volume 2.2x above average — strong interest
+[April 01, 2026  12:56:58 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Analyzing GRT...
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Current GRT price: $0.02
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    1. RSI is 53 — Neutral territory.
+[April 01, 2026  12:56:58 PM]    2. Momentum is FLAT (0.4%)
+[April 01, 2026  12:56:58 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:58 PM]    4. Volume normal (0.4x average)
+[April 01, 2026  12:56:58 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Analyzing AVAX...
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Current AVAX price: $9.19
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    1. RSI is 64 — Neutral territory.
+[April 01, 2026  12:56:58 PM]    2. Momentum is BULLISH — price climbed 2.7% recently
+[April 01, 2026  12:56:58 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:58 PM]    4. Volume normal (0.6x average)
+[April 01, 2026  12:56:58 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Analyzing UNI...
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Current UNI price: $3.63
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    1. RSI is 66 — OVERBOUGHT. May pull back.
+[April 01, 2026  12:56:58 PM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  12:56:58 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  12:56:58 PM]    4. Volume 1.7x above average — strong interest
+[April 01, 2026  12:56:58 PM]    5. Market regime: low volatility
+[April 01, 2026  12:56:58 PM]  
+[April 01, 2026  12:56:58 PM]    DECISION: SELLING 🔴  (80% confidence)
+[April 01, 2026  12:56:58 PM]       • High volume confirming move
+[April 01, 2026  12:56:58 PM]       • RSI showing overbought
+[April 01, 2026  12:56:58 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:56:58 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  12:56:58 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:56:58 PM]    Time:              April 01, 2026  12:56:58 PM
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  12:56:58 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  12:56:58 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  12:56:58 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Total trades:      0
+[April 01, 2026  12:56:58 PM]    Winning trades:    0
+[April 01, 2026  12:56:58 PM]    Losing trades:     0
+[April 01, 2026  12:56:58 PM]    Win rate:          0.0%
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  12:56:58 PM]    BTC Dominance:     56.2%
+[April 01, 2026  12:56:58 PM]    Funding Rate:      0.0000%
+[April 01, 2026  12:56:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  12:56:58 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  12:56:58 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  12:56:58 PM]    ✅ Scan complete. Next scan at 01:11 PM.
+
+[April 01, 2026  01:11:58 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:11:58 PM]    NEW SCAN — 01:11 PM
+[April 01, 2026  01:11:58 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:11:58 PM]    Bot waking up to check the markets...
+[April 01, 2026  01:11:58 PM]  
+[April 01, 2026  01:11:58 PM]    Fetching market intelligence...
+[April 01, 2026  01:11:59 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  01:11:59 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  01:11:59 PM]    BTC Dominance:      56.1% (Altcoins bleeding)
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  01:11:59 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Analyzing BTC...
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Current BTC price: $68,123.49
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    1. RSI is 48 — Neutral territory.
+[April 01, 2026  01:11:59 PM]    2. Momentum is FLAT (-0.2%)
+[April 01, 2026  01:11:59 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:11:59 PM]    4. Volume normal (0.6x average)
+[April 01, 2026  01:11:59 PM]    5. Market regime: low volatility
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Analyzing ETH...
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Current ETH price: $2,133.19
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    1. RSI is 59 — Neutral territory.
+[April 01, 2026  01:11:59 PM]    2. Momentum is FLAT (1.1%)
+[April 01, 2026  01:11:59 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:11:59 PM]    4. Volume normal (0.6x average)
+[April 01, 2026  01:11:59 PM]    5. Market regime: low volatility
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Analyzing SOL...
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Current SOL price: $84.06
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    1. RSI is 53 — Neutral territory.
+[April 01, 2026  01:11:59 PM]    2. Momentum is FLAT (0.5%)
+[April 01, 2026  01:11:59 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:11:59 PM]    4. Volume normal (0.2x average)
+[April 01, 2026  01:11:59 PM]    5. Market regime: low volatility
+[April 01, 2026  01:11:59 PM]  
+[April 01, 2026  01:11:59 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:11:59 PM]    Analyzing LINK...
+[April 01, 2026  01:11:59 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Current LINK price: $9.01
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    1. RSI is 65 — OVERBOUGHT. May pull back.
+[April 01, 2026  01:12:00 PM]    2. Momentum is FLAT (2.0%)
+[April 01, 2026  01:12:00 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:12:00 PM]    4. Volume normal (0.3x average)
+[April 01, 2026  01:12:00 PM]    5. Market regime: low volatility
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Analyzing GRT...
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Current GRT price: $0.02
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    1. RSI is 50 — Neutral territory.
+[April 01, 2026  01:12:00 PM]    2. Momentum is FLAT (0.0%)
+[April 01, 2026  01:12:00 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:12:00 PM]    4. Volume normal (0.0x average)
+[April 01, 2026  01:12:00 PM]    5. Market regime: low volatility
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Analyzing AVAX...
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Current AVAX price: $9.16
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  01:12:00 PM]    2. Momentum is BULLISH — price climbed 2.2% recently
+[April 01, 2026  01:12:00 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:12:00 PM]    4. Volume normal (0.4x average)
+[April 01, 2026  01:12:00 PM]    5. Market regime: low volatility
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Analyzing UNI...
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Current UNI price: $3.63
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    1. RSI is 62 — Neutral territory.
+[April 01, 2026  01:12:00 PM]    2. Momentum is FLAT (1.3%)
+[April 01, 2026  01:12:00 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:12:00 PM]    4. Volume normal (0.2x average)
+[April 01, 2026  01:12:00 PM]    5. Market regime: low volatility
+[April 01, 2026  01:12:00 PM]  
+[April 01, 2026  01:12:00 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:12:00 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:12:00 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  01:12:00 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:12:00 PM]    Time:              April 01, 2026  01:12:00 PM
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  01:12:00 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  01:12:00 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  01:12:00 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Total trades:      0
+[April 01, 2026  01:12:00 PM]    Winning trades:    0
+[April 01, 2026  01:12:00 PM]    Losing trades:     0
+[April 01, 2026  01:12:00 PM]    Win rate:          0.0%
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  01:12:00 PM]    BTC Dominance:     56.1%
+[April 01, 2026  01:12:00 PM]    Funding Rate:      0.0000%
+[April 01, 2026  01:12:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:12:00 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  01:12:00 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:12:00 PM]    ✅ Scan complete. Next scan at 01:27 PM.
+
+[April 01, 2026  01:27:00 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:27:00 PM]    NEW SCAN — 01:27 PM
+[April 01, 2026  01:27:00 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:27:00 PM]    Bot waking up to check the markets...
+[April 01, 2026  01:27:00 PM]  
+[April 01, 2026  01:27:00 PM]    Fetching market intelligence...
+[April 01, 2026  01:27:01 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  01:27:01 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  01:27:01 PM]    BTC Dominance:      56.1% (Altcoins bleeding)
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  01:27:01 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Analyzing BTC...
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Current BTC price: $68,108.55
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    1. RSI is 48 — Neutral territory.
+[April 01, 2026  01:27:01 PM]    2. Momentum is FLAT (-0.2%)
+[April 01, 2026  01:27:01 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:01 PM]    4. Volume normal (1.0x average)
+[April 01, 2026  01:27:01 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Analyzing ETH...
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Current ETH price: $2,128.00
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    1. RSI is 57 — Neutral territory.
+[April 01, 2026  01:27:01 PM]    2. Momentum is FLAT (0.9%)
+[April 01, 2026  01:27:01 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:01 PM]    4. Volume normal (1.2x average)
+[April 01, 2026  01:27:01 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Analyzing SOL...
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Current SOL price: $83.93
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    1. RSI is 52 — Neutral territory.
+[April 01, 2026  01:27:01 PM]    2. Momentum is FLAT (0.3%)
+[April 01, 2026  01:27:01 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:01 PM]    4. Volume normal (0.6x average)
+[April 01, 2026  01:27:01 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:01 PM]  
+[April 01, 2026  01:27:01 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:01 PM]    Analyzing LINK...
+[April 01, 2026  01:27:01 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Current LINK price: $8.98
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    1. RSI is 63 — Neutral territory.
+[April 01, 2026  01:27:02 PM]    2. Momentum is FLAT (1.7%)
+[April 01, 2026  01:27:02 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:02 PM]    4. Volume normal (1.1x average)
+[April 01, 2026  01:27:02 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Analyzing GRT...
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Current GRT price: $0.02
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    1. RSI is 50 — Neutral territory.
+[April 01, 2026  01:27:02 PM]    2. Momentum is FLAT (0.0%)
+[April 01, 2026  01:27:02 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:02 PM]    4. Volume normal (0.0x average)
+[April 01, 2026  01:27:02 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Analyzing AVAX...
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Current AVAX price: $9.15
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  01:27:02 PM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  01:27:02 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:02 PM]    4. Volume normal (0.8x average)
+[April 01, 2026  01:27:02 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Analyzing UNI...
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Current UNI price: $3.62
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    1. RSI is 60 — Neutral territory.
+[April 01, 2026  01:27:02 PM]    2. Momentum is FLAT (1.2%)
+[April 01, 2026  01:27:02 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:27:02 PM]    4. Volume normal (0.5x average)
+[April 01, 2026  01:27:02 PM]    5. Market regime: low volatility
+[April 01, 2026  01:27:02 PM]  
+[April 01, 2026  01:27:02 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:27:02 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:27:02 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  01:27:02 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:27:02 PM]    Time:              April 01, 2026  01:27:02 PM
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  01:27:02 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  01:27:02 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  01:27:02 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Total trades:      0
+[April 01, 2026  01:27:02 PM]    Winning trades:    0
+[April 01, 2026  01:27:02 PM]    Losing trades:     0
+[April 01, 2026  01:27:02 PM]    Win rate:          0.0%
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  01:27:02 PM]    BTC Dominance:     56.1%
+[April 01, 2026  01:27:02 PM]    Funding Rate:      0.0000%
+[April 01, 2026  01:27:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:27:02 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  01:27:02 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:27:02 PM]    ✅ Scan complete. Next scan at 01:42 PM.
+
+[April 01, 2026  01:33:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:50 PM]    EDGE TRADING BOT v3 — STARTING UP
+[April 01, 2026  01:33:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:50 PM]    Mode:          PRACTICE MODE
+[April 01, 2026  01:33:50 PM]    Capital:       $1,500.00
+[April 01, 2026  01:33:50 PM]    Pairs:         BTC-USD, ETH-USD, SOL-USD, LINK-USD, GRT-USD, AVAX-USD, UNI-USD
+[April 01, 2026  01:33:50 PM]    Scans every:   15 minutes
+[April 01, 2026  01:33:50 PM]    Alpha sources: Fear & Greed + Funding Rates + BTC Dominance
+[April 01, 2026  01:33:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:50 PM]  
+[April 01, 2026  01:33:50 PM]    Connecting to Coinbase...
+[April 01, 2026  01:33:50 PM]    ✅ Connected
+[April 01, 2026  01:33:50 PM]    ✅ Running first scan now...
+
+[April 01, 2026  01:33:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:50 PM]    NEW SCAN — 01:33 PM
+[April 01, 2026  01:33:50 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:50 PM]    Bot waking up to check the markets...
+[April 01, 2026  01:33:50 PM]  
+[April 01, 2026  01:33:50 PM]    Fetching market intelligence...
+[April 01, 2026  01:33:50 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  01:33:50 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  01:33:50 PM]    BTC Dominance:      56.1% (Altcoins bleeding)
+[April 01, 2026  01:33:50 PM]  
+[April 01, 2026  01:33:50 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  01:33:50 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  01:33:50 PM]  
+[April 01, 2026  01:33:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:50 PM]    Analyzing BTC...
+[April 01, 2026  01:33:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current BTC price: $68,112.31
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 48 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is FLAT (-0.2%)
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (1.2x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Analyzing ETH...
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current ETH price: $2,127.69
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 57 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is FLAT (0.9%)
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (1.4x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Analyzing SOL...
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current SOL price: $83.92
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 52 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is FLAT (0.3%)
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (0.7x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Analyzing LINK...
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current LINK price: $8.98
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 62 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is FLAT (1.6%)
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (1.3x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Analyzing GRT...
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current GRT price: $0.02
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 50 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is FLAT (0.0%)
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (0.0x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Analyzing AVAX...
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current AVAX price: $9.14
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 60 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is BULLISH — price climbed 2.0% recently
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (0.9x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Analyzing UNI...
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Current UNI price: $3.61
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    1. RSI is 57 — Neutral territory.
+[April 01, 2026  01:33:51 PM]    2. Momentum is FLAT (0.9%)
+[April 01, 2026  01:33:51 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:33:51 PM]    4. Volume normal (0.9x average)
+[April 01, 2026  01:33:51 PM]    5. Market regime: low volatility
+[April 01, 2026  01:33:51 PM]  
+[April 01, 2026  01:33:51 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:33:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:51 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  01:33:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:51 PM]    Time:              April 01, 2026  01:33:51 PM
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  01:33:51 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  01:33:51 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  01:33:51 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Total trades:      0
+[April 01, 2026  01:33:51 PM]    Winning trades:    0
+[April 01, 2026  01:33:51 PM]    Losing trades:     0
+[April 01, 2026  01:33:51 PM]    Win rate:          0.0%
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  01:33:51 PM]    BTC Dominance:     56.1%
+[April 01, 2026  01:33:51 PM]    Funding Rate:      0.0000%
+[April 01, 2026  01:33:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:33:51 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  01:33:51 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:33:51 PM]    ✅ Scan complete. Next scan at 01:48 PM.
+
+[April 01, 2026  01:33:51 PM]    Bot is live. Next scan at 01:48 PM. Press Ctrl+C to stop.
+
+[April 01, 2026  01:42:02 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:42:02 PM]    NEW SCAN — 01:42 PM
+[April 01, 2026  01:42:02 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:42:02 PM]    Bot waking up to check the markets...
+[April 01, 2026  01:42:02 PM]  
+[April 01, 2026  01:42:02 PM]    Fetching market intelligence...
+[April 01, 2026  01:42:03 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  01:42:03 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  01:42:03 PM]    BTC Dominance:      56.1% (Altcoins bleeding)
+[April 01, 2026  01:42:03 PM]  
+[April 01, 2026  01:42:03 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  01:42:03 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  01:42:03 PM]  
+[April 01, 2026  01:42:03 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:03 PM]    Analyzing BTC...
+[April 01, 2026  01:42:03 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current BTC price: $68,259.48
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 50 — Neutral territory.
+[April 01, 2026  01:42:04 PM]    2. Momentum is FLAT (0.0%)
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume normal (1.4x average)
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Analyzing ETH...
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current ETH price: $2,132.74
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 59 — Neutral territory.
+[April 01, 2026  01:42:04 PM]    2. Momentum is FLAT (1.1%)
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume 1.6x above average — strong interest
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Analyzing SOL...
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current SOL price: $84.34
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 55 — Neutral territory.
+[April 01, 2026  01:42:04 PM]    2. Momentum is FLAT (0.8%)
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume normal (0.9x average)
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Analyzing LINK...
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current LINK price: $9.01
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 65 — OVERBOUGHT. May pull back.
+[April 01, 2026  01:42:04 PM]    2. Momentum is FLAT (1.9%)
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume 1.5x above average — strong interest
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: SELLING 🔴  (80% confidence)
+[April 01, 2026  01:42:04 PM]       • High volume confirming move
+[April 01, 2026  01:42:04 PM]       • RSI showing overbought
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Analyzing GRT...
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current GRT price: $0.02
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 50 — Neutral territory.
+[April 01, 2026  01:42:04 PM]    2. Momentum is FLAT (0.0%)
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume normal (0.0x average)
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Analyzing AVAX...
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current AVAX price: $9.17
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 62 — Neutral territory.
+[April 01, 2026  01:42:04 PM]    2. Momentum is BULLISH — price climbed 2.3% recently
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume normal (1.1x average)
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Analyzing UNI...
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Current UNI price: $3.62
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    1. RSI is 60 — Neutral territory.
+[April 01, 2026  01:42:04 PM]    2. Momentum is FLAT (1.1%)
+[April 01, 2026  01:42:04 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:42:04 PM]    4. Volume normal (0.9x average)
+[April 01, 2026  01:42:04 PM]    5. Market regime: low volatility
+[April 01, 2026  01:42:04 PM]  
+[April 01, 2026  01:42:04 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:42:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:42:04 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  01:42:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:42:04 PM]    Time:              April 01, 2026  01:42:04 PM
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  01:42:04 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  01:42:04 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  01:42:04 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Total trades:      0
+[April 01, 2026  01:42:04 PM]    Winning trades:    0
+[April 01, 2026  01:42:04 PM]    Losing trades:     0
+[April 01, 2026  01:42:04 PM]    Win rate:          0.0%
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  01:42:04 PM]    BTC Dominance:     56.1%
+[April 01, 2026  01:42:04 PM]    Funding Rate:      0.0000%
+[April 01, 2026  01:42:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:42:04 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  01:42:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:42:04 PM]    ✅ Scan complete. Next scan at 01:57 PM.
+
+[April 01, 2026  01:48:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:48:52 PM]    NEW SCAN — 01:48 PM
+[April 01, 2026  01:48:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:48:52 PM]    Bot waking up to check the markets...
+[April 01, 2026  01:48:52 PM]  
+[April 01, 2026  01:48:52 PM]    Fetching market intelligence...
+[April 01, 2026  01:48:53 PM]    Fear & Greed Index: 8/100 — Extreme Fear
+[April 01, 2026  01:48:53 PM]    BTC Funding Rate:   0.0000% (Neutral)
+[April 01, 2026  01:48:53 PM]    BTC Dominance:      56.1% (Altcoins bleeding)
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    ✅ EXTREME FEAR — confidence boosted on BUY signals
+[April 01, 2026  01:48:53 PM]    ⚠️  HIGH BTC DOMINANCE — altcoins under pressure
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Analyzing BTC...
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Current BTC price: $68,176.02
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    1. RSI is 49 — Neutral territory.
+[April 01, 2026  01:48:53 PM]    2. Momentum is FLAT (-0.1%)
+[April 01, 2026  01:48:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:53 PM]    4. Volume 1.6x above average — strong interest
+[April 01, 2026  01:48:53 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Analyzing ETH...
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Current ETH price: $2,130.00
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    1. RSI is 58 — Neutral territory.
+[April 01, 2026  01:48:53 PM]    2. Momentum is FLAT (1.0%)
+[April 01, 2026  01:48:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:53 PM]    4. Volume 1.8x above average — strong interest
+[April 01, 2026  01:48:53 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Analyzing SOL...
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Current SOL price: $83.80
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    1. RSI is 51 — Neutral territory.
+[April 01, 2026  01:48:53 PM]    2. Momentum is FLAT (0.1%)
+[April 01, 2026  01:48:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:53 PM]    4. Volume normal (1.0x average)
+[April 01, 2026  01:48:53 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Analyzing LINK...
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Current LINK price: $8.98
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    1. RSI is 62 — Neutral territory.
+[April 01, 2026  01:48:53 PM]    2. Momentum is FLAT (1.6%)
+[April 01, 2026  01:48:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:53 PM]    4. Volume 1.7x above average — strong interest
+[April 01, 2026  01:48:53 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Analyzing GRT...
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Current GRT price: $0.02
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    1. RSI is 50 — Neutral territory.
+[April 01, 2026  01:48:53 PM]    2. Momentum is FLAT (0.0%)
+[April 01, 2026  01:48:53 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:53 PM]    4. Volume normal (0.0x average)
+[April 01, 2026  01:48:53 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:53 PM]  
+[April 01, 2026  01:48:53 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:53 PM]    Analyzing AVAX...
+[April 01, 2026  01:48:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Current AVAX price: $9.15
+[April 01, 2026  01:48:54 PM]  
+[April 01, 2026  01:48:54 PM]    1. RSI is 61 — Neutral territory.
+[April 01, 2026  01:48:54 PM]    2. Momentum is BULLISH — price climbed 2.1% recently
+[April 01, 2026  01:48:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:54 PM]    4. Volume normal (1.2x average)
+[April 01, 2026  01:48:54 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:54 PM]  
+[April 01, 2026  01:48:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Analyzing UNI...
+[April 01, 2026  01:48:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Current UNI price: $3.61
+[April 01, 2026  01:48:54 PM]  
+[April 01, 2026  01:48:54 PM]    1. RSI is 57 — Neutral territory.
+[April 01, 2026  01:48:54 PM]    2. Momentum is FLAT (0.8%)
+[April 01, 2026  01:48:54 PM]    3. Price inside normal Bollinger Band range
+[April 01, 2026  01:48:54 PM]    4. Volume normal (1.1x average)
+[April 01, 2026  01:48:54 PM]    5. Market regime: low volatility
+[April 01, 2026  01:48:54 PM]  
+[April 01, 2026  01:48:54 PM]    DECISION: Sitting this one out. Not enough signals agree.
+[April 01, 2026  01:48:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:48:54 PM]    PORTFOLIO SUMMARY  [PRACTICE (Paper Trade)]
+[April 01, 2026  01:48:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:48:54 PM]    Time:              April 01, 2026  01:48:54 PM
+[April 01, 2026  01:48:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Starting capital:  $  1,500.00
+[April 01, 2026  01:48:54 PM]    Current capital:   $  1,500.00  (▲ 0.0% overall)
+[April 01, 2026  01:48:54 PM]    Total profit/loss: $     +0.00
+[April 01, 2026  01:48:54 PM]    Today's P/L:       $     +0.00
+[April 01, 2026  01:48:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Total trades:      0
+[April 01, 2026  01:48:54 PM]    Winning trades:    0
+[April 01, 2026  01:48:54 PM]    Losing trades:     0
+[April 01, 2026  01:48:54 PM]    Win rate:          0.0%
+[April 01, 2026  01:48:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Fear & Greed:      8/100 — Extreme Fear
+[April 01, 2026  01:48:54 PM]    BTC Dominance:     56.1%
+[April 01, 2026  01:48:54 PM]    Funding Rate:      0.0000%
+[April 01, 2026  01:48:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:48:54 PM]    Currently holding: Nothing — all cash, waiting for the right signal
+[April 01, 2026  01:48:54 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:48:54 PM]    ✅ Scan complete. Next scan at 02:03 PM.
+
+[April 01, 2026  01:52:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:38 PM]    EDGE BOT v4
+[April 01, 2026  01:52:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:38 PM]    Mode: PAPER (60-90 day test)
+[April 01, 2026  01:52:38 PM]    Capital: $1,500.00 | Pairs: BTC-USD, ETH-USD, SOL-USD, LINK-USD, GRT-USD, AVAX-USD, UNI-USD
+[April 01, 2026  01:52:38 PM]    Entry: 3+ tech + 1+ smart money | Min conf: 72%
+[April 01, 2026  01:52:38 PM]    Risk: 1%/trade | Daily stop: 3%
+[April 01, 2026  01:52:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:38 PM]  
+[April 01, 2026  01:52:38 PM]    ✅ Connected to Coinbase | Running first scan...
+
+[April 01, 2026  01:52:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:38 PM]    SCAN — 01:52 PM
+[April 01, 2026  01:52:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:39 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  01:52:39 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  01:52:39 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:39 PM]    BTC
+[April 01, 2026  01:52:39 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:39 PM]    BTC @ $68,115.32
+[April 01, 2026  01:52:39 PM]    RSI 48 Neutral | Mom flat -0.2%
+[April 01, 2026  01:52:39 PM]    OBV BEAR ✅ | ADX 10 ⚠️ range | 1H: sideways
+[April 01, 2026  01:52:39 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  01:52:39 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:39 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:39 PM]    ETH
+[April 01, 2026  01:52:39 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:40 PM]    ETH @ $2,127.80
+[April 01, 2026  01:52:40 PM]    RSI 57 Neutral | Mom flat +0.9%
+[April 01, 2026  01:52:40 PM]    OBV BEAR ✅ | ADX 49 ✅ | 1H: uptrend
+[April 01, 2026  01:52:40 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  01:52:40 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:40 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:40 PM]    SOL
+[April 01, 2026  01:52:40 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:40 PM]    SOL @ $83.72
+[April 01, 2026  01:52:40 PM]    RSI 50 Neutral | Mom flat +0.0%
+[April 01, 2026  01:52:40 PM]    OBV BEAR ✅ | ADX 29 ✅ | 1H: uptrend
+[April 01, 2026  01:52:40 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  01:52:40 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:40 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:40 PM]    LINK
+[April 01, 2026  01:52:40 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:40 PM]    LINK @ $8.97
+[April 01, 2026  01:52:40 PM]    RSI 61 Neutral | Mom flat +1.5%
+[April 01, 2026  01:52:40 PM]    OBV BEAR ✅ | ADX 57 ✅ | 1H: uptrend
+[April 01, 2026  01:52:40 PM]    Tech: 1B/1S | Smart $: 1B/0S
+[April 01, 2026  01:52:40 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:40 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:40 PM]    GRT
+[April 01, 2026  01:52:40 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:41 PM]    GRT @ $0.02
+[April 01, 2026  01:52:41 PM]    RSI 50 Neutral | Mom flat +0.0%
+[April 01, 2026  01:52:41 PM]    OBV BULL ✅ | ADX 13 ⚠️ range | 1H: sideways
+[April 01, 2026  01:52:41 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  01:52:41 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:41 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:41 PM]    AVAX
+[April 01, 2026  01:52:41 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:41 PM]    AVAX @ $9.13
+[April 01, 2026  01:52:41 PM]    RSI 59 Neutral | Mom flat +1.9%
+[April 01, 2026  01:52:41 PM]    OBV BULL ✅ | ADX 40 ✅ | 1H: uptrend
+[April 01, 2026  01:52:41 PM]    Tech: 2B/0S | Smart $: 0B/0S
+[April 01, 2026  01:52:41 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:41 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:41 PM]    UNI
+[April 01, 2026  01:52:41 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  01:52:41 PM]    UNI @ $3.60
+[April 01, 2026  01:52:41 PM]    RSI 55 Neutral | Mom flat +0.7%
+[April 01, 2026  01:52:41 PM]    OBV BULL ✅ | ADX 36 ✅ | 1H: uptrend
+[April 01, 2026  01:52:41 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  01:52:41 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  01:52:41 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:41 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  01:52:41 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:41 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  01:52:41 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  01:52:41 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  01:52:41 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  01:52:41 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  01:52:41 PM]    ✅ Next scan at 02:07 PM.
+
+[April 01, 2026  01:52:41 PM]    Live. Next scan 02:07 PM. Ctrl+C to stop.
+
