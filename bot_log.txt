@@ -7264,3 +7264,650 @@
 
 [April 01, 2026  01:52:41 PM]    Live. Next scan 02:07 PM. Ctrl+C to stop.
 
+[April 01, 2026  02:07:42 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:07:42 PM]    SCAN — 02:07 PM
+[April 01, 2026  02:07:42 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:07:42 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  02:07:42 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  02:07:42 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:42 PM]    BTC
+[April 01, 2026  02:07:42 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:43 PM]    BTC @ $68,187.69
+[April 01, 2026  02:07:43 PM]    RSI 47 Neutral | Mom flat -0.3%
+[April 01, 2026  02:07:43 PM]    OBV BEAR ✅ | ADX 22 ⚠️ range | 1H: sideways
+[April 01, 2026  02:07:43 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:07:43 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:43 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:43 PM]    ETH
+[April 01, 2026  02:07:43 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:43 PM]    ETH @ $2,132.96
+[April 01, 2026  02:07:43 PM]    RSI 55 Neutral | Mom flat +0.6%
+[April 01, 2026  02:07:43 PM]    OBV neutral | ADX 39 ✅ | 1H: uptrend
+[April 01, 2026  02:07:43 PM]    Tech: 0B/0S | Smart $: 1B/0S
+[April 01, 2026  02:07:43 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:43 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:43 PM]    SOL
+[April 01, 2026  02:07:43 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:43 PM]    SOL @ $83.99
+[April 01, 2026  02:07:43 PM]    RSI 49 Neutral | Mom flat -0.1%
+[April 01, 2026  02:07:43 PM]    OBV BEAR ✅ | ADX 21 ⚠️ range | 1H: uptrend
+[April 01, 2026  02:07:43 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:07:43 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:43 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:43 PM]    LINK
+[April 01, 2026  02:07:43 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:44 PM]    LINK @ $8.98
+[April 01, 2026  02:07:44 PM]    RSI 57 Neutral | Mom flat +0.8%
+[April 01, 2026  02:07:44 PM]    OBV BEAR ✅ | ADX 49 ✅ | 1H: uptrend
+[April 01, 2026  02:07:44 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:07:44 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:44 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:44 PM]    GRT
+[April 01, 2026  02:07:44 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:44 PM]    GRT @ $0.02
+[April 01, 2026  02:07:44 PM]    RSI 50 Neutral | Mom flat +0.0%
+[April 01, 2026  02:07:44 PM]    OBV BULL ✅ | ADX 13 ⚠️ range | 1H: sideways
+[April 01, 2026  02:07:44 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:07:44 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:44 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:44 PM]    AVAX
+[April 01, 2026  02:07:44 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:44 PM]    AVAX @ $9.14
+[April 01, 2026  02:07:44 PM]    RSI 53 Neutral | Mom flat +0.6%
+[April 01, 2026  02:07:44 PM]    OBV BULL ✅ | ADX 31 ✅ | 1H: uptrend
+[April 01, 2026  02:07:44 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:07:44 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:44 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:44 PM]    UNI
+[April 01, 2026  02:07:44 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:07:45 PM]    UNI @ $3.61
+[April 01, 2026  02:07:45 PM]    RSI 52 Neutral | Mom flat +0.3%
+[April 01, 2026  02:07:45 PM]    OBV BULL ✅ | ADX 28 ✅ | 1H: uptrend
+[April 01, 2026  02:07:45 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  02:07:45 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:07:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:07:45 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  02:07:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:07:45 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  02:07:45 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  02:07:45 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  02:07:45 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  02:07:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:07:45 PM]    ✅ Next scan at 02:22 PM.
+
+[April 01, 2026  02:22:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:22:45 PM]    SCAN — 02:22 PM
+[April 01, 2026  02:22:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:22:46 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  02:22:46 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  02:22:46 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:46 PM]    BTC
+[April 01, 2026  02:22:46 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:46 PM]    BTC @ $68,071.84
+[April 01, 2026  02:22:46 PM]    RSI 45 Neutral | Mom flat -0.5%
+[April 01, 2026  02:22:46 PM]    OBV BEAR ✅ | ADX 22 ⚠️ range | 1H: sideways
+[April 01, 2026  02:22:46 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:22:46 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:46 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:46 PM]    ETH
+[April 01, 2026  02:22:46 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:47 PM]    ETH @ $2,129.12
+[April 01, 2026  02:22:47 PM]    RSI 53 Neutral | Mom flat +0.4%
+[April 01, 2026  02:22:47 PM]    OBV neutral | ADX 39 ✅ | 1H: uptrend
+[April 01, 2026  02:22:47 PM]    Tech: 0B/0S | Smart $: 1B/0S
+[April 01, 2026  02:22:47 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:47 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:47 PM]    SOL
+[April 01, 2026  02:22:47 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:47 PM]    SOL @ $83.94
+[April 01, 2026  02:22:47 PM]    RSI 49 Neutral | Mom flat -0.1%
+[April 01, 2026  02:22:47 PM]    OBV BEAR ✅ | ADX 21 ⚠️ range | 1H: uptrend
+[April 01, 2026  02:22:47 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:22:47 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:47 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:47 PM]    LINK
+[April 01, 2026  02:22:47 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:47 PM]    LINK @ $8.97
+[April 01, 2026  02:22:47 PM]    RSI 56 Neutral | Mom flat +0.7%
+[April 01, 2026  02:22:47 PM]    OBV BEAR ✅ | ADX 49 ✅ | 1H: uptrend
+[April 01, 2026  02:22:47 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:22:47 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:47 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:47 PM]    GRT
+[April 01, 2026  02:22:47 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:48 PM]    GRT @ $0.02
+[April 01, 2026  02:22:48 PM]    RSI 38 Neutral | Mom flat -1.6%
+[April 01, 2026  02:22:48 PM]    OBV BULL ✅ | ADX 7 ⚠️ range | 1H: sideways
+[April 01, 2026  02:22:48 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:22:48 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:48 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:48 PM]    AVAX
+[April 01, 2026  02:22:48 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:48 PM]    AVAX @ $9.13
+[April 01, 2026  02:22:48 PM]    RSI 53 Neutral | Mom flat +0.4%
+[April 01, 2026  02:22:48 PM]    OBV BULL ✅ | ADX 31 ✅ | 1H: uptrend
+[April 01, 2026  02:22:48 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:22:48 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:48 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:48 PM]    UNI
+[April 01, 2026  02:22:48 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:22:48 PM]    UNI @ $3.60
+[April 01, 2026  02:22:48 PM]    RSI 52 Neutral | Mom flat +0.2%
+[April 01, 2026  02:22:48 PM]    OBV BULL ✅ | ADX 28 ✅ | 1H: uptrend
+[April 01, 2026  02:22:48 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  02:22:48 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:22:48 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:22:48 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  02:22:48 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:22:48 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  02:22:48 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  02:22:48 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  02:22:48 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  02:22:48 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:22:48 PM]    ✅ Next scan at 02:37 PM.
+
+[April 01, 2026  02:37:49 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:37:49 PM]    SCAN — 02:37 PM
+[April 01, 2026  02:37:49 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:37:49 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  02:37:49 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  02:37:49 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:49 PM]    BTC
+[April 01, 2026  02:37:49 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:50 PM]    BTC @ $68,089.74
+[April 01, 2026  02:37:50 PM]    RSI 46 Neutral | Mom flat -0.5%
+[April 01, 2026  02:37:50 PM]    OBV BEAR ✅ | ADX 22 ⚠️ range | 1H: sideways
+[April 01, 2026  02:37:50 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:37:50 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:50 PM]    ETH
+[April 01, 2026  02:37:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:50 PM]    ETH @ $2,137.63
+[April 01, 2026  02:37:50 PM]    RSI 56 Neutral | Mom flat +0.8%
+[April 01, 2026  02:37:50 PM]    OBV neutral | ADX 41 ✅ | 1H: uptrend
+[April 01, 2026  02:37:50 PM]    Tech: 0B/0S | Smart $: 1B/0S
+[April 01, 2026  02:37:50 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:50 PM]    SOL
+[April 01, 2026  02:37:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:50 PM]    SOL @ $84.24
+[April 01, 2026  02:37:50 PM]    RSI 51 Neutral | Mom flat +0.2%
+[April 01, 2026  02:37:50 PM]    OBV BEAR ✅ | ADX 21 ⚠️ range | 1H: uptrend
+[April 01, 2026  02:37:50 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:37:50 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:50 PM]    LINK
+[April 01, 2026  02:37:50 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:51 PM]    LINK @ $9.00
+[April 01, 2026  02:37:51 PM]    RSI 58 Neutral | Mom flat +1.0%
+[April 01, 2026  02:37:51 PM]    OBV BEAR ✅ | ADX 49 ✅ | 1H: uptrend
+[April 01, 2026  02:37:51 PM]    Tech: 1B/1S | Smart $: 1B/0S
+[April 01, 2026  02:37:51 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:51 PM]    GRT
+[April 01, 2026  02:37:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:51 PM]    GRT @ $0.02
+[April 01, 2026  02:37:51 PM]    RSI 38 Neutral | Mom flat -1.6%
+[April 01, 2026  02:37:51 PM]    OBV BULL ✅ | ADX 0 ⚠️ range | 1H: sideways
+[April 01, 2026  02:37:51 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:37:51 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:51 PM]    AVAX
+[April 01, 2026  02:37:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:51 PM]    AVAX @ $9.17
+[April 01, 2026  02:37:51 PM]    RSI 55 Neutral | Mom flat +0.9%
+[April 01, 2026  02:37:51 PM]    OBV BULL ✅ | ADX 31 ✅ | 1H: uptrend
+[April 01, 2026  02:37:51 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:37:51 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:51 PM]    UNI
+[April 01, 2026  02:37:51 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:37:52 PM]    UNI @ $3.62
+[April 01, 2026  02:37:52 PM]    RSI 54 Neutral | Mom flat +0.5%
+[April 01, 2026  02:37:52 PM]    OBV BULL ✅ | ADX 28 ✅ | 1H: uptrend
+[April 01, 2026  02:37:52 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  02:37:52 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:37:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:37:52 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  02:37:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:37:52 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  02:37:52 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  02:37:52 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  02:37:52 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  02:37:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:37:52 PM]    ✅ Next scan at 02:52 PM.
+
+[April 01, 2026  02:52:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:52:52 PM]    SCAN — 02:52 PM
+[April 01, 2026  02:52:52 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:52:53 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  02:52:53 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  02:52:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:53 PM]    BTC
+[April 01, 2026  02:52:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:53 PM]    BTC @ $68,119.54
+[April 01, 2026  02:52:53 PM]    RSI 46 Neutral | Mom flat -0.4%
+[April 01, 2026  02:52:53 PM]    OBV BEAR ✅ | ADX 22 ⚠️ range | 1H: sideways
+[April 01, 2026  02:52:53 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:52:53 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:53 PM]    ETH
+[April 01, 2026  02:52:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:53 PM]    ETH @ $2,140.39
+[April 01, 2026  02:52:53 PM]    RSI 57 Neutral | Mom flat +0.9%
+[April 01, 2026  02:52:53 PM]    OBV neutral | ADX 43 ✅ | 1H: uptrend
+[April 01, 2026  02:52:53 PM]    Tech: 0B/0S | Smart $: 1B/0S
+[April 01, 2026  02:52:53 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:53 PM]    SOL
+[April 01, 2026  02:52:53 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:54 PM]    SOL @ $83.66
+[April 01, 2026  02:52:54 PM]    RSI 47 Neutral | Mom flat -0.5%
+[April 01, 2026  02:52:54 PM]    OBV BEAR ✅ | ADX 21 ⚠️ range | 1H: uptrend
+[April 01, 2026  02:52:54 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  02:52:54 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:54 PM]    LINK
+[April 01, 2026  02:52:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:54 PM]    LINK @ $9.00
+[April 01, 2026  02:52:54 PM]    RSI 58 Neutral | Mom flat +1.0%
+[April 01, 2026  02:52:54 PM]    OBV BEAR ✅ | ADX 49 ✅ | 1H: uptrend
+[April 01, 2026  02:52:54 PM]    Tech: 1B/1S | Smart $: 1B/0S
+[April 01, 2026  02:52:54 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:54 PM]    GRT
+[April 01, 2026  02:52:54 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:55 PM]    GRT @ $0.02
+[April 01, 2026  02:52:55 PM]    RSI 38 Neutral | Mom flat -1.6%
+[April 01, 2026  02:52:55 PM]    OBV BULL ✅ | ADX 0 ⚠️ range | 1H: sideways
+[April 01, 2026  02:52:55 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:52:55 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:55 PM]    AVAX
+[April 01, 2026  02:52:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:55 PM]    AVAX @ $9.16
+[April 01, 2026  02:52:55 PM]    RSI 54 Neutral | Mom flat +0.8%
+[April 01, 2026  02:52:55 PM]    OBV BULL ✅ | ADX 31 ✅ | 1H: uptrend
+[April 01, 2026  02:52:55 PM]    Tech: 1B/0S | Smart $: 0B/0S
+[April 01, 2026  02:52:55 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:55 PM]    UNI
+[April 01, 2026  02:52:55 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  02:52:55 PM]    UNI @ $3.61
+[April 01, 2026  02:52:55 PM]    RSI 54 Neutral | Mom flat +0.4%
+[April 01, 2026  02:52:55 PM]    OBV BULL ✅ | ADX 28 ✅ | 1H: uptrend
+[April 01, 2026  02:52:55 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  02:52:55 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  02:52:55 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:52:55 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  02:52:55 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:52:55 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  02:52:55 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  02:52:55 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  02:52:55 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  02:52:55 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  02:52:55 PM]    ✅ Next scan at 03:07 PM.
+
+[April 01, 2026  03:07:55 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:07:55 PM]    SCAN — 03:07 PM
+[April 01, 2026  03:07:55 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:07:56 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  03:07:56 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  03:07:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:56 PM]    BTC
+[April 01, 2026  03:07:56 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:57 PM]    BTC @ $68,121.73
+[April 01, 2026  03:07:57 PM]    RSI 34 OVERSOLD ✅ | Mom flat -1.4%
+[April 01, 2026  03:07:57 PM]    OBV BEAR ✅ | ADX 52 ✅ | 1H: sideways
+[April 01, 2026  03:07:57 PM]    Tech: 1B/1S | Smart $: 1B/0S
+[April 01, 2026  03:07:57 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:57 PM]    ETH
+[April 01, 2026  03:07:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:57 PM]    ETH @ $2,135.42
+[April 01, 2026  03:07:57 PM]    RSI 44 Neutral | Mom flat -0.7%
+[April 01, 2026  03:07:57 PM]    OBV BULL ✅ | ADX 30 ✅ | 1H: uptrend
+[April 01, 2026  03:07:57 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  03:07:57 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:57 PM]    SOL
+[April 01, 2026  03:07:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:57 PM]    SOL @ $83.38
+[April 01, 2026  03:07:57 PM]    RSI 42 Neutral | Mom flat -1.3%
+[April 01, 2026  03:07:57 PM]    OBV BEAR ✅ | ADX 5 ⚠️ range | 1H: sideways
+[April 01, 2026  03:07:57 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  03:07:57 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:57 PM]    LINK
+[April 01, 2026  03:07:57 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:58 PM]    LINK @ $8.99
+[April 01, 2026  03:07:58 PM]    RSI 38 Neutral | Mom flat -1.1%
+[April 01, 2026  03:07:58 PM]    OBV BEAR ✅ | ADX 31 ✅ | 1H: uptrend
+[April 01, 2026  03:07:58 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  03:07:58 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:58 PM]    GRT
+[April 01, 2026  03:07:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:58 PM]    GRT @ $0.02
+[April 01, 2026  03:07:58 PM]    RSI 23 OVERSOLD ✅ | Mom BEAR ✅ -2.8%
+[April 01, 2026  03:07:58 PM]    OBV BULL ✅ | ADX 27 ✅ | 1H: sideways
+[April 01, 2026  03:07:58 PM]    Tech: 2B/1S | Smart $: 0B/1S
+[April 01, 2026  03:07:58 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:58 PM]    AVAX
+[April 01, 2026  03:07:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:58 PM]    AVAX @ $9.12
+[April 01, 2026  03:07:58 PM]    RSI 27 OVERSOLD ✅ | Mom BEAR ✅ -2.8%
+[April 01, 2026  03:07:58 PM]    OBV BULL ✅ | ADX 9 ⚠️ range | 1H: sideways
+[April 01, 2026  03:07:58 PM]    Tech: 2B/1S | Smart $: 0B/0S
+[April 01, 2026  03:07:58 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:58 PM]    UNI
+[April 01, 2026  03:07:58 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:07:59 PM]    UNI @ $3.60
+[April 01, 2026  03:07:59 PM]    RSI 36 Neutral | Mom flat -1.4%
+[April 01, 2026  03:07:59 PM]    OBV BULL ✅ | ADX 9 ⚠️ range | 1H: uptrend
+[April 01, 2026  03:07:59 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  03:07:59 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:07:59 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:07:59 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  03:07:59 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:07:59 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  03:07:59 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  03:07:59 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:07:59 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  03:07:59 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:07:59 PM]    ✅ Next scan at 03:22 PM.
+
+[April 01, 2026  03:22:59 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:22:59 PM]    SCAN — 03:22 PM
+[April 01, 2026  03:22:59 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:23:00 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  03:23:00 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  03:23:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:00 PM]    BTC
+[April 01, 2026  03:23:00 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:02 PM]    BTC @ $68,060.30
+[April 01, 2026  03:23:02 PM]    RSI 34 OVERSOLD ✅ | Mom flat -1.5%
+[April 01, 2026  03:23:02 PM]    OBV BEAR ✅ | ADX 52 ✅ | 1H: sideways
+[April 01, 2026  03:23:02 PM]    Tech: 1B/1S | Smart $: 1B/0S
+[April 01, 2026  03:23:02 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:02 PM]    ETH
+[April 01, 2026  03:23:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:02 PM]    ETH @ $2,136.89
+[April 01, 2026  03:23:02 PM]    RSI 44 Neutral | Mom flat -0.6%
+[April 01, 2026  03:23:02 PM]    OBV BULL ✅ | ADX 30 ✅ | 1H: uptrend
+[April 01, 2026  03:23:02 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  03:23:02 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:02 PM]    SOL
+[April 01, 2026  03:23:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:02 PM]    SOL @ $82.90
+[April 01, 2026  03:23:02 PM]    RSI 39 Neutral | Mom flat -1.9%
+[April 01, 2026  03:23:02 PM]    OBV BEAR ✅ | ADX 1 ⚠️ range | 1H: sideways
+[April 01, 2026  03:23:02 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  03:23:02 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:02 PM]    LINK
+[April 01, 2026  03:23:02 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:03 PM]    LINK @ $8.98
+[April 01, 2026  03:23:03 PM]    RSI 37 Neutral | Mom flat -1.3%
+[April 01, 2026  03:23:03 PM]    OBV BEAR ✅ | ADX 31 ✅ | 1H: uptrend
+[April 01, 2026  03:23:03 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  03:23:03 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:03 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:03 PM]    GRT
+[April 01, 2026  03:23:03 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:03 PM]    GRT @ $0.02
+[April 01, 2026  03:23:03 PM]    RSI 23 OVERSOLD ✅ | Mom BEAR ✅ -2.8%
+[April 01, 2026  03:23:03 PM]    OBV BULL ✅ | ADX 27 ✅ | 1H: sideways
+[April 01, 2026  03:23:03 PM]    Tech: 2B/1S | Smart $: 0B/0S
+[April 01, 2026  03:23:03 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:03 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:03 PM]    AVAX
+[April 01, 2026  03:23:03 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:04 PM]    AVAX @ $9.13
+[April 01, 2026  03:23:04 PM]    RSI 27 OVERSOLD ✅ | Mom BEAR ✅ -2.7%
+[April 01, 2026  03:23:04 PM]    OBV BULL ✅ | ADX 11 ⚠️ range | 1H: uptrend
+[April 01, 2026  03:23:04 PM]    Tech: 2B/1S | Smart $: 0B/0S
+[April 01, 2026  03:23:04 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:04 PM]    UNI
+[April 01, 2026  03:23:04 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:23:04 PM]    UNI @ $3.60
+[April 01, 2026  03:23:04 PM]    RSI 35 Neutral | Mom flat -1.5%
+[April 01, 2026  03:23:04 PM]    OBV BULL ✅ | ADX 9 ⚠️ range | 1H: uptrend
+[April 01, 2026  03:23:04 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  03:23:04 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:23:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:23:04 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  03:23:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:23:04 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  03:23:04 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  03:23:04 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:23:04 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  03:23:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:23:04 PM]    ✅ Next scan at 03:38 PM.
+
+[April 01, 2026  03:38:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:38:04 PM]    SCAN — 03:38 PM
+[April 01, 2026  03:38:04 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:38:05 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000% | Flow: No data
+[April 01, 2026  03:38:05 PM]    ✅ EXTREME FEAR — boosting BUY confidence
+[April 01, 2026  03:38:05 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:05 PM]    BTC
+[April 01, 2026  03:38:05 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:05 PM]    BTC @ $68,105.54
+[April 01, 2026  03:38:05 PM]    RSI 34 OVERSOLD ✅ | Mom flat -1.4%
+[April 01, 2026  03:38:05 PM]    OBV BEAR ✅ | ADX 53 ✅ | 1H: sideways
+[April 01, 2026  03:38:05 PM]    Tech: 1B/1S | Smart $: 1B/0S
+[April 01, 2026  03:38:05 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:05 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:05 PM]    ETH
+[April 01, 2026  03:38:05 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:06 PM]    ETH @ $2,137.55
+[April 01, 2026  03:38:06 PM]    RSI 44 Neutral | Mom flat -0.6%
+[April 01, 2026  03:38:06 PM]    OBV BULL ✅ | ADX 30 ✅ | 1H: uptrend
+[April 01, 2026  03:38:06 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  03:38:06 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:06 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:06 PM]    SOL
+[April 01, 2026  03:38:06 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:06 PM]    SOL @ $82.56
+[April 01, 2026  03:38:06 PM]    RSI 37 Neutral | Mom BEAR ✅ -2.3%
+[April 01, 2026  03:38:06 PM]    OBV BEAR ✅ | ADX 5 ⚠️ range | 1H: sideways
+[April 01, 2026  03:38:06 PM]    Tech: 0B/2S | Smart $: 1B/0S
+[April 01, 2026  03:38:06 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:06 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:06 PM]    LINK
+[April 01, 2026  03:38:06 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:06 PM]    LINK @ $8.97
+[April 01, 2026  03:38:06 PM]    RSI 37 Neutral | Mom flat -1.3%
+[April 01, 2026  03:38:06 PM]    OBV BEAR ✅ | ADX 27 ✅ | 1H: uptrend
+[April 01, 2026  03:38:06 PM]    Tech: 0B/1S | Smart $: 1B/0S
+[April 01, 2026  03:38:06 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:06 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:06 PM]    GRT
+[April 01, 2026  03:38:06 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:07 PM]    GRT @ $0.02
+[April 01, 2026  03:38:07 PM]    RSI 23 OVERSOLD ✅ | Mom BEAR ✅ -2.8%
+[April 01, 2026  03:38:07 PM]    OBV BULL ✅ | ADX 27 ✅ | 1H: sideways
+[April 01, 2026  03:38:07 PM]    Tech: 2B/1S | Smart $: 0B/0S
+[April 01, 2026  03:38:07 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:07 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:07 PM]    AVAX
+[April 01, 2026  03:38:07 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:07 PM]    AVAX @ $9.11
+[April 01, 2026  03:38:07 PM]    RSI 26 OVERSOLD ✅ | Mom BEAR ✅ -2.9%
+[April 01, 2026  03:38:07 PM]    OBV BULL ✅ | ADX 14 ⚠️ range | 1H: sideways
+[April 01, 2026  03:38:07 PM]    Tech: 2B/1S | Smart $: 0B/0S
+[April 01, 2026  03:38:07 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:07 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:07 PM]    UNI
+[April 01, 2026  03:38:07 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:38:07 PM]    UNI @ $3.60
+[April 01, 2026  03:38:07 PM]    RSI 36 Neutral | Mom flat -1.4%
+[April 01, 2026  03:38:07 PM]    OBV BULL ✅ | ADX 7 ⚠️ range | 1H: uptrend
+[April 01, 2026  03:38:07 PM]    Tech: 1B/0S | Smart $: 1B/0S
+[April 01, 2026  03:38:07 PM]    → Waiting: need 3+ tech AND 1+ smart money
+[April 01, 2026  03:38:07 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:38:07 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  03:38:07 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:38:07 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  03:38:07 PM]    Trades: 0 | Wins: 0 | Losses: 0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  03:38:07 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:38:07 PM]    Holding: Nothing — waiting for signal
+[April 01, 2026  03:38:07 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:38:07 PM]    ✅ Next scan at 03:53 PM.
+
+[April 01, 2026  03:42:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:42:38 PM]    EDGE BOT v5
+[April 01, 2026  03:42:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:42:38 PM]    Mode: PAPER TRADE
+[April 01, 2026  03:42:38 PM]    Signals: RSI + MACD + OBV + 200 EMA (need 3 of 4)
+[April 01, 2026  03:42:38 PM]    Filters: ADX >= 25 | BTC 200 EMA | Session: OFF
+[April 01, 2026  03:42:38 PM]    Exits: ATR x1.5 SL | ATR x3.0 TP | 3% trail
+[April 01, 2026  03:42:38 PM]    Risk: 1%/trade | Daily limit: 2.5% | Max 3 positions
+[April 01, 2026  03:42:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:42:38 PM]  
+[April 01, 2026  03:42:38 PM]    ✅ Connected | Running first scan...
+
+[April 01, 2026  03:42:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:42:38 PM]    SCAN — 03:42 PM
+[April 01, 2026  03:42:38 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:42:38 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:42:38 PM]  
+[April 01, 2026  03:42:38 PM]    ✅ EXTREME FEAR — favorable conditions
+[April 01, 2026  03:42:38 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:42:38 PM]    BTC
+[April 01, 2026  03:42:38 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:45:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:45:45 PM]    EDGE BOT v5
+[April 01, 2026  03:45:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:45:45 PM]    Mode: PAPER TRADE
+[April 01, 2026  03:45:45 PM]    Signals: RSI + MACD + OBV + 200 EMA (need 3 of 4)
+[April 01, 2026  03:45:45 PM]    Filters: ADX >= 25 | BTC 200 EMA | Session: OFF
+[April 01, 2026  03:45:45 PM]    Exits: ATR x1.5 SL | ATR x3.0 TP | 3% trail
+[April 01, 2026  03:45:45 PM]    Risk: 1%/trade | Daily limit: 2.5% | Max 3 positions
+[April 01, 2026  03:45:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:45:45 PM]  
+[April 01, 2026  03:45:45 PM]    ✅ Connected | Running first scan...
+
+[April 01, 2026  03:45:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:45:45 PM]    SCAN — 03:45 PM
+[April 01, 2026  03:45:45 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:45:46 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:45:46 PM]  
+[April 01, 2026  03:45:46 PM]    ✅ EXTREME FEAR — favorable conditions
+[April 01, 2026  03:45:46 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:45:46 PM]    BTC
+[April 01, 2026  03:45:46 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:15 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:15 PM]    EDGE BOT v5
+[April 01, 2026  03:46:15 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:15 PM]    Mode: PAPER TRADE
+[April 01, 2026  03:46:15 PM]    Signals: RSI + MACD + OBV + 200 EMA (need 3 of 4)
+[April 01, 2026  03:46:15 PM]    Filters: ADX >= 25 | BTC 200 EMA | Session: OFF
+[April 01, 2026  03:46:15 PM]    Exits: ATR x1.5 SL | ATR x3.0 TP | 3% trail
+[April 01, 2026  03:46:15 PM]    Risk: 1%/trade | Daily limit: 2.5% | Max 3 positions
+[April 01, 2026  03:46:15 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:15 PM]  
+[April 01, 2026  03:46:15 PM]    ✅ Connected | Running first scan...
+
+[April 01, 2026  03:46:15 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:15 PM]    SCAN — 03:46 PM
+[April 01, 2026  03:46:15 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:16 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:46:16 PM]  
+[April 01, 2026  03:46:16 PM]    ✅ EXTREME FEAR — favorable conditions
+[April 01, 2026  03:46:16 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:16 PM]    BTC
+[April 01, 2026  03:46:16 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:16 PM]    BTC @ $68,154.03
+[April 01, 2026  03:46:16 PM]    RSI: 35 oversold ✅
+[April 01, 2026  03:46:16 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:16 PM]    OBV: bullish ✅
+[April 01, 2026  03:46:16 PM]    200 EMA: $68,316.05 — below ✅
+[April 01, 2026  03:46:16 PM]    ADX: 53 ✅ trending
+[April 01, 2026  03:46:16 PM]    Signals: 2 buy / 2 sell (need 3+)
+[April 01, 2026  03:46:16 PM]    → Waiting: 2B/2S — need 3+
+[April 01, 2026  03:46:16 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:16 PM]    ETH
+[April 01, 2026  03:46:16 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:16 PM]    ETH @ $2,140.78
+[April 01, 2026  03:46:16 PM]    RSI: 46 neutral
+[April 01, 2026  03:46:16 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:16 PM]    OBV: bullish ✅
+[April 01, 2026  03:46:16 PM]    200 EMA: $2,080.33 — above ✅
+[April 01, 2026  03:46:16 PM]    ADX: 30 ✅ trending
+[April 01, 2026  03:46:16 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  03:46:16 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  03:46:16 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:16 PM]    SOL
+[April 01, 2026  03:46:16 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    SOL @ $82.50
+[April 01, 2026  03:46:17 PM]    RSI: 37 neutral
+[April 01, 2026  03:46:17 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:17 PM]    OBV: bullish ✅
+[April 01, 2026  03:46:17 PM]    200 EMA: $85.46 — below ✅
+[April 01, 2026  03:46:17 PM]    ADX: 7 ⚠️ ranging — will skip
+[April 01, 2026  03:46:17 PM]    Signals: 1 buy / 2 sell (need 3+)
+[April 01, 2026  03:46:17 PM]    → Waiting: 1B/2S — need 3+
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    LINK
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    LINK @ $8.97
+[April 01, 2026  03:46:17 PM]    RSI: 37 neutral
+[April 01, 2026  03:46:17 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:17 PM]    OBV: bullish ✅
+[April 01, 2026  03:46:17 PM]    200 EMA: $8.86 — above ✅
+[April 01, 2026  03:46:17 PM]    ADX: 26 ✅ trending
+[April 01, 2026  03:46:17 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  03:46:17 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    GRT
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    GRT @ $0.02
+[April 01, 2026  03:46:17 PM]    RSI: 23 oversold ✅
+[April 01, 2026  03:46:17 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:17 PM]    OBV: bullish ✅
+[April 01, 2026  03:46:17 PM]    200 EMA: $0.02 — at 
+[April 01, 2026  03:46:17 PM]    ADX: 27 ✅ trending
+[April 01, 2026  03:46:17 PM]    Signals: 2 buy / 1 sell (need 3+)
+[April 01, 2026  03:46:17 PM]    → Waiting: 2B/1S — need 3+
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    AVAX
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    AVAX @ $9.13
+[April 01, 2026  03:46:17 PM]    RSI: 27 oversold ✅
+[April 01, 2026  03:46:17 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:17 PM]    OBV: bullish ✅
+[April 01, 2026  03:46:17 PM]    200 EMA: $9.10 — above ✅
+[April 01, 2026  03:46:17 PM]    ADX: 14 ⚠️ ranging — will skip
+[April 01, 2026  03:46:17 PM]    Signals: 3 buy / 1 sell (need 3+)
+[April 01, 2026  03:46:17 PM]    ⛔ ADX 14 < 25 — ranging market
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    UNI
+[April 01, 2026  03:46:17 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  03:46:17 PM]    UNI @ $3.62
+[April 01, 2026  03:46:17 PM]    RSI: 39 neutral
+[April 01, 2026  03:46:17 PM]    MACD: bearish ✅
+[April 01, 2026  03:46:17 PM]    OBV: neutral 
+[April 01, 2026  03:46:17 PM]    200 EMA: $3.53 — above ✅
+[April 01, 2026  03:46:17 PM]    ADX: 7 ⚠️ ranging — will skip
+[April 01, 2026  03:46:17 PM]    Signals: 1 buy / 1 sell (need 3+)
+[April 01, 2026  03:46:17 PM]    → Waiting: 1B/1S — need 3+
+[April 01, 2026  03:46:17 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:17 PM]    PORTFOLIO — PAPER TRADE
+[April 01, 2026  03:46:17 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:17 PM]    Capital: $1,500.00 (▲0.0%) | P/L: $+0.00 | Today: $+0.00
+[April 01, 2026  03:46:17 PM]    Trades: 0 | W/L: 0/0 | WR: 0.0% | Drawdown: 0.0%
+[April 01, 2026  03:46:17 PM]    F&G: 8/100 Extreme Fear | DOM: 56.1% | Fund: 0.0000%
+[April 01, 2026  03:46:17 PM]    Session filter: OFF (24/7)
+[April 01, 2026  03:46:17 PM]    Holding: Cash — waiting for signal
+[April 01, 2026  03:46:17 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  03:46:17 PM]    ✅ Next scan at 04:01 PM.
+
+[April 01, 2026  03:46:17 PM]    Live. Next scan 04:01 PM. Ctrl+C to stop.
+
