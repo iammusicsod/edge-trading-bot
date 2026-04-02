@@ -1,71 +1,65 @@
-#!/usr/bin/env python3
-import json, os
+import http.server, json, os
 from pathlib import Path
-from http.server import HTTPServer, BaseHTTPRequestHandler
 
 BOT_DIR = Path(__file__).parent
+PORT = 8080
 
-class Handler(BaseHTTPRequestHandler):
+class Handler(http.server.BaseHTTPRequestHandler):
     def log_message(self, format, *args): pass
-    def do_GET(self):
-        if self.path == '/summary':
-            try:
-                import json
-                from pathlib import Path
-                f = Path(__file__).parent / 'market_summary.json'
-                data = json.load(open(f)) if f.exists() else {"summary": "Bot is warming up — first summary will appear after the next scan.", "time": ""}
-                self._respond(200, json.dumps(data))
-            except Exception as e:
-                self._respond(200, '{"summary":"Generating summary...","time":""}')
-            return
-        if self.path == '/' or self.path == '/index.html':
-            self.serve('dashboard.html', 'text/html')
-        elif self.path == '/state':
-            self.serve_state()
-        elif self.path == '/log':
-            self.serve_log()
-        elif self.path == '/health':
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/plain')
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            self.wfile.write(b'OK')
-        else:
-            self.send_response(404)
-            self.end_headers()
 
-    def serve(self, name, ctype):
-        p = BOT_DIR / name
-        if p.exists():
-            self.send_response(200)
-            self.send_header('Content-Type', ctype)
-            self.send_header('Access-Control-Allow-Origin', '*')
-            self.end_headers()
-            self.wfile.write(p.read_bytes())
-        else:
-            self.send_response(404)
-            self.end_headers()
-
-    def serve_state(self):
-        p = BOT_DIR / 'state.json'
-        data = p.read_text() if p.exists() else '{}'
+    def send_json(self, data):
+        body = json.dumps(data).encode()
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Length', len(body))
         self.end_headers()
-        self.wfile.write(data.encode())
+        self.wfile.write(body)
 
-    def serve_log(self):
-        p = BOT_DIR / 'bot_log.txt'
-        lines = p.read_text().splitlines()[-80:] if p.exists() else ['No log yet.']
+    def send_text(self, text):
+        body = text.encode()
         self.send_response(200)
         self.send_header('Content-Type', 'text/plain')
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Length', len(body))
         self.end_headers()
-        self.wfile.write('\n'.join(lines).encode())
+        self.wfile.write(body)
+
+    def send_html(self, path):
+        body = open(path, 'rb').read()
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/html')
+        self.send_header('Content-Length', len(body))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def send_404(self):
+        self.send_response(404)
+        self.end_headers()
+
+    def do_GET(self):
+        try:
+            if self.path == '/' or self.path == '/index.html':
+                self.send_html(BOT_DIR / 'dashboard.html')
+            elif self.path == '/state':
+                f = BOT_DIR / 'state.json'
+                self.send_json(json.loads(f.read_text()) if f.exists() else {})
+            elif self.path == '/log':
+                f = BOT_DIR / 'bot_log.txt'
+                self.send_text(f.read_text() if f.exists() else '')
+            elif self.path == '/explanations':
+                f = BOT_DIR / 'trade_explanations.json'
+                self.send_json(json.loads(f.read_text()) if f.exists() else [])
+            elif self.path == '/summary':
+                f = BOT_DIR / 'summary.json'
+                self.send_json(json.loads(f.read_text()) if f.exists() else {"summary": "Waiting for first scan...", "time": ""})
+            else:
+                self.send_404()
+        except Exception as e:
+            self.send_response(500)
+            self.end_headers()
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    server = HTTPServer(('0.0.0.0', port), Handler)
-    print(f'Dashboard server running on port {port}')
+    server = http.server.HTTPServer(('', PORT), Handler)
+    print(f'Dashboard server running on port {PORT}')
     server.serve_forever()

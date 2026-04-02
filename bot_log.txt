@@ -9721,3 +9721,83 @@
 
 [April 01, 2026  09:44:06 PM]    Live. Next scan 10:44 PM. Ctrl+C to stop.
 
+[April 01, 2026  10:44:10 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:44:10 PM]    SCAN — 10:44 PM
+[April 01, 2026  10:44:10 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:44:11 PM]    Fear & Greed: 12/100 — Extreme Fear | BTC Dom: 56.1% | Funding: 0.0000%
+[April 01, 2026  10:44:11 PM]  
+[April 01, 2026  10:44:11 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:11 PM]    BTC
+[April 01, 2026  10:44:11 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    No candles BTC-USD: ('Connection aborted.', TimeoutError(60, 'Operation timed out'))
+[April 01, 2026  10:44:29 PM]    No data
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    ETH
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    Price:   $2,052.0300
+[April 01, 2026  10:44:29 PM]    RSI:     34.3  ✅ oversold — signal firing
+[April 01, 2026  10:44:29 PM]    200 EMA: $2,079.1321  ⚠️  price below — skip
+[April 01, 2026  10:44:29 PM]    ADX:     16.9  ⚠️  ranging — skip
+[April 01, 2026  10:44:29 PM]    Vol 24h: $369.9M  ✅ sufficient liquidity
+[April 01, 2026  10:44:29 PM]    ATR:     $25.484286 | SL: $2,001.0614 | TP: $2,153.9671
+[April 01, 2026  10:44:29 PM]    → Waiting: Price below 200 EMA $2,079.1321 | ADX 17 ranging (need > 25)
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    SOL
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    Price:   $78.9000
+[April 01, 2026  10:44:29 PM]    RSI:     32.1  ✅ oversold — signal firing
+[April 01, 2026  10:44:29 PM]    200 EMA: $85.0238  ⚠️  price below — skip
+[April 01, 2026  10:44:29 PM]    ADX:     26.4  ✅ trending — ok to trade
+[April 01, 2026  10:44:29 PM]    Vol 24h: $161.8M  ✅ sufficient liquidity
+[April 01, 2026  10:44:29 PM]    ATR:     $1.318571 | SL: $76.2629 | TP: $84.1743
+[April 01, 2026  10:44:29 PM]    → Waiting: Price below 200 EMA $85.0238
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    LINK
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    Price:   $8.5410
+[April 01, 2026  10:44:29 PM]    RSI:     27.5  ✅ oversold — signal firing
+[April 01, 2026  10:44:29 PM]    200 EMA: $8.8504  ⚠️  price below — skip
+[April 01, 2026  10:44:29 PM]    ADX:     44.1  ✅ trending — ok to trade
+[April 01, 2026  10:44:29 PM]    Vol 24h: $13.5M  ✅ sufficient liquidity
+[April 01, 2026  10:44:29 PM]    ATR:     $0.104286 | SL: $8.3324 | TP: $8.9581
+[April 01, 2026  10:44:29 PM]    → Waiting: Price below 200 EMA $8.8504
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:29 PM]    XRP
+[April 01, 2026  10:44:29 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:30 PM]    Price:   $1.3080
+[April 01, 2026  10:44:30 PM]    RSI:     30.9  ✅ oversold — signal firing
+[April 01, 2026  10:44:30 PM]    200 EMA: $1.3569  ⚠️  price below — skip
+[April 01, 2026  10:44:30 PM]    ADX:     38.9  ✅ trending — ok to trade
+[April 01, 2026  10:44:30 PM]    Vol 24h: $88.7M  ✅ sufficient liquidity
+[April 01, 2026  10:44:30 PM]    ATR:     $0.011850 | SL: $1.2843 | TP: $1.3554
+[April 01, 2026  10:44:30 PM]    → Waiting: Price below 200 EMA $1.3569
+[April 01, 2026  10:44:30 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:30 PM]    AVAX
+[April 01, 2026  10:44:30 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:30 PM]    Price:   $8.7400
+[April 01, 2026  10:44:30 PM]    RSI:     25.0  ✅ oversold — signal firing
+[April 01, 2026  10:44:30 PM]    200 EMA: $9.0822  ⚠️  price below — skip
+[April 01, 2026  10:44:30 PM]    ADX:     42.9  ✅ trending — ok to trade
+[April 01, 2026  10:44:30 PM]    Vol 24h: $6.9M  ✅ sufficient liquidity
+[April 01, 2026  10:44:30 PM]    ATR:     $0.095000 | SL: $8.5500 | TP: $9.1200
+[April 01, 2026  10:44:30 PM]    → Waiting: Price below 200 EMA $9.0822
+[April 01, 2026  10:44:30 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:30 PM]    ADA
+[April 01, 2026  10:44:30 PM]  ────────────────────────────────────────────────────────────
+[April 01, 2026  10:44:30 PM]    Price:   $0.2383
+[April 01, 2026  10:44:30 PM]    RSI:     32.7  ✅ oversold — signal firing
+[April 01, 2026  10:44:30 PM]    200 EMA: $0.2515  ⚠️  price below — skip
+[April 01, 2026  10:44:30 PM]    ADX:     33.3  ✅ trending — ok to trade
+[April 01, 2026  10:44:30 PM]    Vol 24h: $15.1M  ✅ sufficient liquidity
+[April 01, 2026  10:44:30 PM]    ATR:     $0.003036 | SL: $0.2322 | TP: $0.2504
+[April 01, 2026  10:44:30 PM]    → Waiting: Price below 200 EMA $0.2515
+[April 01, 2026  10:44:30 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:44:30 PM]    PORTFOLIO — PAPER
+[April 01, 2026  10:44:30 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:44:30 PM]    Capital: $1,498.71 (▼0.1%) | P/L: $-1.29 | Today: $-1.29
+[April 01, 2026  10:44:30 PM]    Trades: 2 | Wins: 0 | Losses: 1 | Breakevens: 0 | WR: 0.0%
+[April 01, 2026  10:44:30 PM]    Drawdown: 0.1%
+[April 01, 2026  10:44:30 PM]    Holding cash — waiting for clean setup
+[April 01, 2026  10:44:30 PM]  ════════════════════════════════════════════════════════════
+[April 01, 2026  10:44:31 PM]    ✅ Next scan at 11:44 PM.
+
