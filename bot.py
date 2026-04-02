@@ -61,6 +61,102 @@ def get_funding_rate():
     if d: return float(d.get("lastFundingRate",d.get("fundingRate",0)))*100
     return 0.0
 
+
+def generate_market_summary(state, scan_results, fg, fgl, dominance):
+    """Call Claude API to generate plain English market summary"""
+    import urllib.request, json
+
+    fg_val = state.get("last_fg", fg)
+    cap = state.get("capital", 1500)
+    open_trades = state.get("open_trades", {})
+    st = state.get("stats", {})
+
+    # Build context for Claude
+    coin_lines = []
+    closest = []
+    waiting = []
+    for pair, data in scan_results.items():
+        coin = pair.split("-")[0]
+        rsi = data.get("rsi", 50)
+        above_ema = data.get("above_ema", False)
+        trending = data.get("adx", 0) >= 25
+        oversold = rsi < 35
+        sig = data.get("signal", "HOLD")
+        conditions_met = sum([oversold, above_ema, trending])
+        if sig == "BUY":
+            closest.append(f"{coin} — ALL 3 SIGNALS FIRING — BUY triggered")
+        elif conditions_met == 2:
+            missing = []
+            if not oversold: missing.append(f"RSI {rsi:.0f} needs to drop to 35")
+            if not above_ema: missing.append("price needs to rise above 200 EMA")
+            if not trending: missing.append(f"ADX {data.get('adx',0):.0f} needs to reach 25")
+            closest.append(f"{coin} — 2 of 3 conditions met, missing: {', '.join(missing)}")
+        elif conditions_met == 1:
+            waiting.append(f"{coin} — only 1 condition met, RSI {rsi:.0f}, {'above' if above_ema else 'below'} 200 EMA, ADX {data.get('adx',0):.0f}")
+        else:
+            waiting.append(f"{coin} — no conditions met, RSI {rsi:.0f}, {'above' if above_ema else 'below'} 200 EMA, ADX {data.get('adx',0):.0f}")
+
+    open_summary = ""
+    if open_trades:
+        for pair, pos in open_trades.items():
+            coin = pair.split("-")[0]
+            open_summary = f"Currently holding {coin} at ${pos.get('entry_price', 0):.4f}."
+    else:
+        open_summary = "No open positions — holding cash."
+
+    prompt = f"""You are a sharp, direct trading analyst giving a quick market update for a crypto bot. Write exactly like this example — conversational, clear, no jargon, like explaining to a smart friend:
+
+"Right now the market is in a weird spot — Extreme Fear (12/100), BTC hovering right around its 200 EMA, and most coins showing neutral RSI in the 40-50 range. None of them are oversold enough to trigger RSI below 35 while also being above their 200 EMA with ADX trending. The bot is doing exactly what it should — being patient and waiting for a clean setup. ETH is the closest — it has the 200 EMA and ADX conditions met. It just needs RSI to drop to 35."
+
+Now write a similar update using this current data:
+
+Fear & Greed: {fg_val}/100 — {fgl}
+BTC Dominance: {dominance:.1f}%
+Capital: ${cap:.2f}
+{open_summary}
+
+Coin status:
+{chr(10).join(closest) if closest else "No coins close to triggering"}
+{chr(10).join(waiting)}
+
+Rules:
+- 2-4 sentences max
+- Mention Fear & Greed naturally
+- Call out the closest coin by name and exactly what it needs
+- End with what to watch for
+- Sound like a real person, not a robot
+- No bullet points, just flowing text
+"""
+
+    try:
+        payload = json.dumps({
+            "model": "claude-sonnet-4-20250514",
+            "max_tokens": 300,
+            "messages": [{"role": "user", "content": prompt}]
+        }).encode()
+
+        req = urllib.request.Request(
+            "https://api.anthropic.com/v1/messages",
+            data=payload,
+            headers={
+                "content-type": "application/json",
+                "anthropic-version": "2023-06-01"
+            }
+        )
+        with urllib.request.urlopen(req, timeout=15) as r:
+            resp = json.loads(r.read())
+            summary = resp["content"][0]["text"].strip()
+            # Save to file
+            import pathlib
+            summary_file = pathlib.Path(__file__).parent / "market_summary.json"
+            json.dump({"summary": summary, "time": now_str()}, open(summary_file, "w"))
+            log(f"  📝 Market summary updated")
+            return summary
+    except Exception as e:
+        log(f"  Summary error: {e}")
+        return None
+
+
 def get_candles(client,pair):
     try:
         end=int(time.time());start=end-3600*CONFIG["candle_count"]
@@ -259,6 +355,27 @@ def scan(client,state):
             log(f"  • {p2} ${pos['usd_invested']:.2f} @ ${pos['entry_price']:,.4f} | SL ${pos.get('stop_loss',0):,.4f} | TP ${pos.get('take_profit',0):,.4f} | {be_s}")
     else: log("  Holding cash — waiting for clean setup")
     div("═")
+    # Generate market summary
+    scan_results_for_summary = {}
+    for pair in CONFIG["pairs"]:
+        if pair in state.get("open_trades", {}):
+            continue
+        try:
+            candles = get_candles(client, pair)
+            if candles and len(candles) >= 210:
+                closes = [float(c.close) for c in candles]
+                highs = [float(c.high) for c in candles]
+                lows = [float(c.low) for c in candles]
+                volumes = [float(c.volume) for c in candles]
+                sig = analyze(pair, closes, highs, lows, volumes)
+                scan_results_for_summary[pair] = {
+                    "rsi": sig["indicators"].get("rsi", 50),
+                    "above_ema": sig["indicators"].get("above_ema", False),
+                    "adx": sig["indicators"].get("adx", 0),
+                    "signal": sig["direction"]
+                }
+        except: pass
+    generate_market_summary(state, scan_results_for_summary, state.get("last_fg", 50), state.get("last_fg_label", "Neutral"), state.get("last_dominance", 50))
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
     log(f"  ✅ Next scan at {nxt}.\n");save_state(state)
 

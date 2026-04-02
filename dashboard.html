@@ -210,6 +210,17 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
   <!-- COINS -->
   <div class="coins-grid" id="coinsGrid"></div>
 
+  <!-- MARKET SUMMARY -->
+  <div class="panel" id="summaryPanel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="p-label" style="margin-bottom:0">Market Summary</div>
+      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="summaryTime"></div>
+    </div>
+    <div id="summaryText" style="font-size:15px;line-height:1.85;color:#c8c8dc;font-weight:300;letter-spacing:0.01em">
+      Loading market summary...
+    </div>
+  </div>
+
   <!-- REASONING -->
   <div class="panel">
     <div class="p-label">Live Bot Reasoning — RSI + 200 EMA + ADX</div>
@@ -765,12 +776,34 @@ async function refresh() {
   await fetchLog();
 }
 
+// ── MARKET SUMMARY ───────────────────────────────────────────────────────────
+async function fetchSummary() {
+  try {
+    const r = await fetch('/summary');
+    if (!r.ok) return;
+    const d = await r.json();
+    const el = document.getElementById('summaryText');
+    const tel = document.getElementById('summaryTime');
+    if (el && d.summary) {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 0.5s';
+      setTimeout(() => {
+        el.textContent = d.summary;
+        el.style.opacity = '1';
+      }, 300);
+    }
+    if (tel && d.time) tel.textContent = 'Updated ' + d.time;
+  } catch(e) {}
+}
+
 // Init
 buildCoins();
 buildReasoning();
 renderCalendar();
 refresh();
 setInterval(refresh, 15000);
+fetchSummary();
+setInterval(fetchSummary, 60000);
 </script>
 </body>
 </html>

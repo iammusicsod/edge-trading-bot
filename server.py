@@ -8,6 +8,16 @@ BOT_DIR = Path(__file__).parent
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, format, *args): pass
     def do_GET(self):
+        if self.path == '/summary':
+            try:
+                import json
+                from pathlib import Path
+                f = Path(__file__).parent / 'market_summary.json'
+                data = json.load(open(f)) if f.exists() else {"summary": "Bot is warming up — first summary will appear after the next scan.", "time": ""}
+                self._respond(200, json.dumps(data))
+            except Exception as e:
+                self._respond(200, '{"summary":"Generating summary...","time":""}')
+            return
         if self.path == '/' or self.path == '/index.html':
             self.serve('dashboard.html', 'text/html')
         elif self.path == '/state':
