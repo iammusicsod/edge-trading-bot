@@ -380,54 +380,59 @@ def scan(client,state):
 
     # Generate plain English market summary
     try:
-        signals = []
-        closest = []
         all_below_ema = True
+        closest = []
         for pair in CONFIG["pairs"]:
-            if pair in _scan_signals:
-                s = _scan_signals[pair]
-                missing = []
-                met = 0
-                if s.get("oversold"): met += 1
-                else: missing.append(f"RSI {s.get('rsi',0):.0f} not oversold")
-                if s.get("above_ema"): met += 1; all_below_ema = False
-                else: missing.append("below 200 EMA")
-                if s.get("trending"): met += 1
-                else: missing.append(f"ADX {s.get('adx',0):.0f} ranging")
-                if s.get("vol_ok", True): met += 1
-                else: missing.append("low volume")
-                coin = pair.split("-")[0]
-                if met >= 3: closest.append((coin, met, missing))
-                elif met == 2: closest.append((coin, met, missing))
+            if pair not in _scan_signals:
+                continue
+            s = _scan_signals[pair]
+            oversold  = s.get("rsi", 50) < CONFIG["rsi_oversold"]
+            above_ema = s.get("above_ema", False)
+            trending  = s.get("adx", 0) >= CONFIG["adx_threshold"]
+            vol_ok    = s.get("vol_ok", True)
+            if above_ema:
+                all_below_ema = False
+            met = sum([oversold, above_ema, trending, vol_ok])
+            missing = []
+            if not oversold:  missing.append(f"RSI {s.get('rsi',50):.0f} not oversold yet (need < {CONFIG['rsi_oversold']})")
+            if not above_ema: missing.append(f"price below 200 EMA")
+            if not trending:  missing.append(f"ADX {s.get('adx',0):.0f} ranging (need > {CONFIG['adx_threshold']})")
+            coin = pair.split("-")[0]
+            all_3 = oversold and above_ema and trending and vol_ok
+            closest.append((coin, met, missing, all_3))
 
         closest.sort(key=lambda x: -x[1])
-        lines = []
-        fg = state.get("last_fg", 50)
+        fg  = state.get("last_fg", 50)
         fgl = state.get("last_fg_label", "Neutral")
-        lines.append(f"Market sentiment: Fear & Greed {fg}/100 — {fgl}.")
+        lines = [f"Market sentiment: Fear & Greed {fg}/100 — {fgl}."]
 
-        if all_below_ema:
-            lines.append("Every coin is currently below its 200 EMA — the market is in a broad downtrend. The bot is sitting in cash and waiting for recovery.")
-        
-        if closest:
-            top = closest[0]
-            if top[1] >= 3:
-                lines.append(f"{top[0]} has all 3 signals firing — watching for entry next scan.")
-            elif top[1] == 2:
-                missing_str = " and ".join(top[2][:1])
-                lines.append(f"{top[0]} is the closest to a signal with 2 of 3 conditions met. Still waiting on: {missing_str}.")
-            if len(closest) > 1:
-                others = [c[0] for c in closest[1:3]]
-                lines.append(f"Other coins to watch: {', '.join(others)}.")
+        ready = [c for c in closest if c[3]]
+        if ready:
+            for c in ready:
+                lines.append(f"{c[0]} has all 3 signals firing — RSI oversold, price above 200 EMA, ADX trending. Bot will enter on next scan if conditions hold.")
+        elif all_below_ema:
+            lines.append("Every coin is below its 200 EMA right now — the entire market is in a downtrend. RSI and ADX may look good but the bot correctly stays in cash until price recovers above the 200 EMA.")
+            two_of_three = [c for c in closest if c[1] >= 3]
+            if two_of_three:
+                top = two_of_three[0]
+                lines.append(f"Closest to a signal: {top[0]} — only missing {top[2][0] if top[2] else 'one condition'}.")
+        else:
+            two = [c for c in closest if c[1] >= 3 and not c[3]]
+            if two:
+                top = two[0]
+                lines.append(f"{top[0]} is the closest with {top[1]-1} of 3 signals met. Still waiting on: {', '.join(top[2])}.")
+            others = [c[0] for c in closest[1:3] if not c[3]]
+            if others:
+                lines.append(f"Also watching: {', '.join(others)}.")
 
-        lines.append("No trades taken this scan. Bot is being patient — all 3 signals must agree before any entry.")
-        summary = " ".join(lines)
+        if not ready:
+            lines.append("No trades taken this scan. Bot is being patient — all 3 signals must agree before any entry.")
 
-        import json
+        import json as _json
         sf = Path(__file__).parent / "summary.json"
-        json.dump({"time": now_str(), "summary": summary, "signals": _scan_signals}, open(sf, "w"), indent=2, default=str)
+        _json.dump({"time": now_str(), "summary": " ".join(lines), "signals": _scan_signals}, open(sf, "w"), indent=2, default=str)
     except Exception as se:
-        log(f"  Summary: {se}")
+        log(f"  Summary error: {se}")
 
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
     log(f"  ✅ Next scan at {nxt}.\n");save_state(state)
