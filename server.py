@@ -62,6 +62,18 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     self.send_json(rows)
                 else:
                     self.send_json([])
+            elif self.path == '/shadowlong':
+                import csv
+                f = BOT_DIR / 'shadow_longs.csv'
+                if f.exists():
+                    rows = []
+                    with open(f, newline='') as cf:
+                        reader = csv.DictReader(cf)
+                        for row in reader:
+                            rows.append(dict(row))
+                    self.send_json(rows)
+                else:
+                    self.send_json([])
             elif self.path == '/summary':
                 f = BOT_DIR / 'summary.json'
                 self.send_json(json.loads(f.read_text()) if f.exists() else {"summary": "Waiting for first scan...", "time": ""})

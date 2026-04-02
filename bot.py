@@ -499,6 +499,139 @@ def scan(client,state):
     except Exception as se:
         log(f"  Shadow logger error: {se}")
 
+
+    # ── SHADOW LONG LOGGER — DOGE & DOT AUDIT ──────────────────────────────
+    # Tracks virtual long signals on DOGE and DOT without placing real trades
+    # Same logic as live bot — RSI < 35, Price > 200 EMA, ADX > 25
+    try:
+        SHADOW_LONG_PAIRS = ["DOGE-USD", "DOT-USD"]
+        shadow_long_file = Path(__file__).parent / "shadow_longs.csv"
+        shadow_long_state_file = Path(__file__).parent / "shadow_long_state.json"
+
+        shadow_long_state = {}
+        if shadow_long_state_file.exists():
+            try: shadow_long_state = json.load(open(shadow_long_state_file))
+            except: shadow_long_state = {}
+
+        # Fetch candles and analyze for shadow long pairs
+        for pair in SHADOW_LONG_PAIRS:
+            coin = pair.split("-")[0]
+            try:
+                candles = get_candles(client, pair)
+                if not candles or len(candles) < 210:
+                    continue
+                closes  = [float(c.close)  for c in candles]
+                highs   = [float(c.high)   for c in candles]
+                lows    = [float(c.low)    for c in candles]
+                volumes = [float(c.volume) for c in candles]
+
+                px    = closes[-1]
+                rv    = calc_rsi(closes)
+                e200  = calc_ema(closes, CONFIG["ema_period"])
+                adxv  = calc_adx(highs, lows, closes)
+                atrv  = calc_atr(highs, lows, closes)
+                vol24 = calc_volume_24h(closes, volumes)
+                above = px > e200 * 1.001
+                trending = adxv >= CONFIG["adx_threshold"]
+                oversold = rv < CONFIG["rsi_oversold"]
+                vol_ok = vol24 >= CONFIG["min_volume_24h"]
+
+                # Check open shadow long positions
+                if pair in shadow_long_state and shadow_long_state[pair].get("outcome") == "OPEN":
+                    pos = shadow_long_state[pair]
+                    s_entry  = pos["entry_price"]
+                    s_sl     = pos["stop_price"]
+                    s_tp     = pos["target_price"]
+                    s_atr    = pos["atr"]
+                    s_high   = pos.get("highest_price", px)
+
+                    if px > s_high:
+                        pos["highest_price"] = px
+                        shadow_long_state[pair] = pos
+
+                    # Breakeven
+                    be_trigger = s_entry + s_atr * 2.0
+                    if not pos.get("at_breakeven") and px >= be_trigger:
+                        pos["at_breakeven"] = True
+                        pos["stop_price"] = s_entry
+                        shadow_long_state[pair] = pos
+                        log(f"  📊 SHADOW LONG {coin}: Breakeven triggered at ${px:,.4f}")
+
+                    # Trailing after breakeven
+                    if pos.get("at_breakeven"):
+                        trail = pos.get("highest_price", px) - s_atr * 1.5
+                        if trail > pos["stop_price"]:
+                            pos["stop_price"] = trail
+                            shadow_long_state[pair] = pos
+
+                    # Check exits
+                    outcome = None
+                    if px <= pos["stop_price"]:
+                        outcome = "STOP LOSS"
+                    elif px >= s_tp:
+                        outcome = "TAKE PROFIT"
+
+                    if outcome:
+                        pnl_pct = (px - s_entry) / s_entry * 100
+                        pos["outcome"] = outcome
+                        pos["exit_price"] = px
+                        pos["exit_time"] = now_str()
+                        pos["pnl_pct"] = round(pnl_pct, 2)
+                        shadow_long_state[pair] = pos
+                        log(f"  📊 SHADOW LONG {coin}: {outcome} @ ${px:,.4f} | P&L: {pnl_pct:+.2f}%")
+
+                        import csv
+                        file_exists = shadow_long_file.exists()
+                        with open(shadow_long_file, "a", newline="") as f:
+                            writer = csv.writer(f)
+                            if not file_exists:
+                                writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
+                            writer.writerow([
+                                pos["entry_time"], pair,
+                                pos["entry_price"], pos["original_stop"],
+                                pos["target_price"], px, now_str(),
+                                outcome, round(pnl_pct, 2),
+                                f"RSI {pos.get('rsi',0):.0f} | ADX {pos.get('adx',0):.0f} at entry"
+                            ])
+
+                # Check for new shadow long signal
+                elif oversold and above and trending and vol_ok:
+                    sl = round(px - atrv * CONFIG["atr_sl_mult"], 6)
+                    tp = round(px + atrv * CONFIG["atr_tp_mult"], 6)
+                    log(f"  📊 SHADOW LONG signal — {coin} @ ${px:,.4f} | RSI {rv:.0f} | ADX {adxv:.0f}")
+                    log(f"     Virtual SL: ${sl:,.6f} | Virtual TP: ${tp:,.6f}")
+                    shadow_long_state[pair] = {
+                        "entry_price": px, "entry_time": now_str(),
+                        "stop_price": sl, "original_stop": sl,
+                        "target_price": tp, "atr": atrv,
+                        "highest_price": px, "at_breakeven": False,
+                        "outcome": "OPEN", "rsi": rv, "adx": adxv
+                    }
+                    import csv
+                    file_exists = shadow_long_file.exists()
+                    with open(shadow_long_file, "a", newline="") as f:
+                        writer = csv.writer(f)
+                        if not file_exists:
+                            writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
+                        writer.writerow([
+                            now_str(), pair, px, sl, tp, "", "", "OPEN", "",
+                            f"RSI {rv:.0f} oversold | ADX {adxv:.0f} trending | Vol ${vol24/1e6:.1f}M"
+                        ])
+                else:
+                    missing = []
+                    if not oversold:  missing.append(f"RSI {rv:.0f}")
+                    if not above:     missing.append("below 200 EMA")
+                    if not trending:  missing.append(f"ADX {adxv:.0f}")
+                    if not vol_ok:    missing.append(f"Vol ${vol24/1e6:.1f}M low")
+                    log(f"  📊 SHADOW {coin}: Waiting — {' | '.join(missing)}")
+
+            except Exception as pe:
+                log(f"  Shadow long {coin} error: {pe}")
+
+        json.dump(shadow_long_state, open(shadow_long_state_file, "w"), indent=2, default=str)
+    except Exception as sle:
+        log(f"  Shadow long logger error: {sle}")
+
     # Generate plain English market summary
     try:
         all_below_ema = True
