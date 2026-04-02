@@ -120,6 +120,98 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
   <div class="ac"><div class="ac-l">BTC Dominance</div><div class="ac-v" id="aDom">—%</div><div class="ac-s">Market share</div></div>
   <div class="ac"><div class="ac-l">Funding Rate</div><div class="ac-v" id="aFund">—%</div><div class="ac-s">BTC perpetual</div></div>
 </div>
+
+<div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px">
+  <div style="font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:14px">System Status — What the Bot Is Running Right Now</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+
+    <div style="background:#0a0a0c;border:1px solid rgba(0,230,118,0.2);border-radius:12px;padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite"></div>
+        <div style="font-size:10px;font-weight:600;color:var(--green);letter-spacing:2px;font-family:'JetBrains Mono',monospace">LIVE LONGS</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Real paper trades — 1% risk each</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">BTC</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ETH</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">SOL</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">LINK</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">XRP</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">AVAX</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ADA</span>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI &lt; 35 + 200 EMA + ADX &gt; 25</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR | Target: 4x ATR</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Trailing: 1.5x ATR after breakeven</div>
+      </div>
+    </div>
+
+    <div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:12px;padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div>
+        <div style="font-size:10px;font-weight:600;color:var(--red);letter-spacing:2px;font-family:'JetBrains Mono',monospace">SHADOW SHORTS</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Virtual only — zero real money — 90 day data collection</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">BTC</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">ETH</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">SOL</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LINK</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">XRP</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">AVAX</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">ADA</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">DOGE</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">DOT</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">SUI</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LTC</span>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI &gt; 65 + below 200 EMA + ADX &gt; 25</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Builds short strategy data for 90 day review</div>
+      </div>
+    </div>
+
+    <div style="background:#0a0a0c;border:1px solid rgba(255,171,64,0.2);border-radius:12px;padding:14px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite"></div>
+        <div style="font-size:10px;font-weight:600;color:var(--amber);letter-spacing:2px;font-family:'JetBrains Mono',monospace">SHADOW LONG AUDIT</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Evaluating for live list — 30 day audit</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">DOGE</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">DOT</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">SUI</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">LTC</span>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Same v7 logic — no real trades placed</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Decision at 30 day review: promote or cut</div>
+        <div style="font-size:9px;color:var(--amber);font-family:'JetBrains Mono',monospace;margin-top:4px">⚠️ DOT volume $1.2M — likely to be cut</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px">
+    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center">
+      <div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">SCAN INTERVAL</div>
+      <div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace">60 min</div>
+    </div>
+    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center">
+      <div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">RISK PER TRADE</div>
+      <div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--green)">1.0%</div>
+    </div>
+    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center">
+      <div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">MAX POSITIONS</div>
+      <div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace">3</div>
+    </div>
+    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center">
+      <div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">MODE</div>
+      <div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--amber)">PAPER</div>
+    </div>
+  </div>
+</div>
 <div class="coins" id="coinsGrid"></div>
 <div class="panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
