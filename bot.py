@@ -455,7 +455,7 @@ def scan(client,state):
                     ])
 
         # Check for new shadow short signals
-        for pair in list(CONFIG["pairs"]) + ["DOGE-USD", "DOT-USD"]:
+        for pair in list(CONFIG["pairs"]) + ["DOGE-USD", "DOT-USD", "SUI-USD", "LTC-USD"]:
             if pair not in _scan_signals: continue
             if pair in shadow_state and shadow_state[pair].get("outcome") == "OPEN": continue
             s = _scan_signals[pair]
@@ -650,7 +650,7 @@ def scan(client,state):
     # Tracks virtual long signals on DOGE and DOT without placing real trades
     # Same logic as live bot — RSI < 35, Price > 200 EMA, ADX > 25
     try:
-        SHADOW_LONG_PAIRS = ["DOGE-USD", "DOT-USD"]
+        SHADOW_LONG_PAIRS = ["DOGE-USD", "DOT-USD", "SUI-USD", "LTC-USD"]
         shadow_long_file = Path(__file__).parent / "shadow_longs.csv"
         shadow_long_state_file = Path(__file__).parent / "shadow_long_state.json"
 
