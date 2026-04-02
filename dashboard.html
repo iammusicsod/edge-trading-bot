@@ -174,6 +174,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
   <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Tracks what the short strategy WOULD have done. Zero risk. Pure data for 90 days.</div>
   <div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div></div>
 </div>
+<div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div class="pt" style="margin-bottom:0">Shadow Long Audit — DOGE &amp; DOT (No Real Money)</div><div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace" id="slCount"></div></div><div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE and DOT on the long strategy before adding to the live list. 30-day data collection.</div><div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25 on DOGE or DOT</span></div></div></div>
 <div class="panel">
   <div class="pt">Trade History</div>
   <div id="th"><div class="emp2">Loading...<span>Connecting to bot</span></div></div>
@@ -461,5 +462,45 @@ async function loadShadow(){
 loadShadow();
 setInterval(loadShadow,60000);
 </script>
-</body>
+<script>
+async function loadShadowLong(){
+  try{
+    const r=await fetch('/shadowlong');if(!r.ok)return;
+    const rows=await r.json();
+    const el=document.getElementById('slContent');
+    const cEl=document.getElementById('slCount');
+    if(!rows.length){el.innerHTML='<div class="emp2">No shadow longs yet<span>Waiting for signals on DOGE or DOT</span></div>';return;}
+    const open=rows.filter(r=>r.Outcome==='OPEN').length;
+    const wins=rows.filter(r=>r.Outcome==='TAKE PROFIT').length;
+    const losses=rows.filter(r=>r.Outcome==='STOP LOSS').length;
+    const closed=wins+losses;
+    const wr=closed>0?Math.round(wins/closed*100):0;
+    const totalPnl=rows.filter(r=>r['Simulated P&L (%)']!=='').reduce((a,r)=>a+parseFloat(r['Simulated P&L (%)']),0);
+    cEl.textContent=rows.length+' virtual trades | '+open+' open | '+wr+'% win rate';
+    const sc=(l,v,c)=>'<div style="background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:JetBrains Mono,monospace">'+l+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';
+    let html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">';
+    html+=sc('VIRTUAL TRADES',rows.length,'var(--muted2)')+sc('WIN RATE',wr+'%',wr>=50?'var(--green)':'var(--red)')+sc('WINS / LOSSES',wins+'W / '+losses+'L','var(--muted2)')+sc('TOTAL P&L',(totalPnl>=0?'+ ':' - ')+Math.abs(totalPnl).toFixed(1)+'%',totalPnl>=0?'var(--green)':'var(--red)');
+    html+='</div><div style="border:1px solid var(--border);border-radius:10px;overflow:hidden">';
+    html+='<div style="display:grid;grid-template-columns:140px 60px 90px 90px 90px 80px 80px;gap:8px;padding:8px 12px;background:var(--s2);font-size:9px;color:var(--muted);letter-spacing:1px;font-family:JetBrains Mono,monospace"><span>TIME</span><span>PAIR</span><span>ENTRY</span><span>STOP</span><span>TARGET</span><span>OUTCOME</span><span>P&L</span></div>';
+    const recent=[...rows].reverse().slice(0,10);
+    for(const row of recent){
+      const isOpen=row.Outcome==='OPEN',isWin=row.Outcome==='TAKE PROFIT';
+      const color=isOpen?'var(--amber)':isWin?'var(--green)':'var(--red)';
+      const pnl=row['Simulated P&L (%)'];
+      html+='<div style="display:grid;grid-template-columns:140px 60px 90px 90px 90px 80px 80px;gap:8px;padding:8px 12px;border-top:1px solid var(--border);font-size:11px">';
+      html+='<span style="color:var(--muted);font-family:JetBrains Mono,monospace;font-size:9px">'+(row.Timestamp||'')+'</span>';
+      html+='<span style="font-weight:600">'+(row.Pair||'').split('-')[0]+'</span>';
+      html+='<span style="font-family:JetBrains Mono,monospace">$'+parseFloat(row['Virtual Entry']||0).toFixed(4)+'</span>';
+      html+='<span style="font-family:JetBrains Mono,monospace;color:var(--red)">$'+parseFloat(row['Stop Price']||0).toFixed(4)+'</span>';
+      html+='<span style="font-family:JetBrains Mono,monospace;color:var(--green)">$'+parseFloat(row['Target Price']||0).toFixed(4)+'</span>';
+      html+='<span style="font-size:9px;padding:2px 6px;border-radius:4px;font-weight:600;background:'+(isOpen?'rgba(255,171,64,0.1)':isWin?'rgba(0,230,118,0.1)':'rgba(255,68,68,0.1)')+';color:'+color+'">'+(isOpen?'OPEN':isWin?'WIN':'LOSS')+'</span>';
+      html+='<span style="font-family:JetBrains Mono,monospace;color:'+(pnl?parseFloat(pnl)>=0?'var(--green)':'var(--red)':'var(--muted)')+'">'+(pnl?(parseFloat(pnl)>=0?'+':'')+parseFloat(pnl).toFixed(2)+'%':'—')+'</span></div>';
+    }
+    html+='</div>';
+    el.innerHTML=html;
+  }catch(e){}
+}
+loadShadowLong();
+setInterval(loadShadowLong,60000);
+</script></body>
 </html>
