@@ -16,7 +16,20 @@
   <div class="p-label">Trade Explanations — Why the Bot Entered Each Trade</div>
   <div id="tradeExplanations"><div class="exp-empty">No trades yet<span>Full plain English explanation appears here when the bot trades</span></div></div>
 </div>
-<div class="bottom"><div class="panel"><div class="p-label">Portfolio Growth</div><div id="growthRange" style="font-size:11px;color:var(--muted);margin-bottom:10px;font-family:JetBrains Mono,monospace"></div><div class="chart-wrap"><canvas id="gc"></canvas></div></div><div class="panel"><div class="p-label">Bot Log</div><div class="log-box" id="logbox">Connecting...</div></div></div>
+<div class="bottom"><div class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <div class="p-label" style="margin-bottom:0">Portfolio Growth</div>
+    <div style="display:flex;gap:4px" id="growthFilters">
+      <button onclick="setGrowthRange('1D')" id="gf1D" style="font-size:9px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">1D</button>
+      <button onclick="setGrowthRange('1W')" id="gf1W" style="font-size:9px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">1W</button>
+      <button onclick="setGrowthRange('1M')" id="gf1M" style="font-size:9px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">1M</button>
+      <button onclick="setGrowthRange('3M')" id="gf3M" style="font-size:9px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">3M</button>
+      <button onclick="setGrowthRange('ALL')" id="gfALL" style="font-size:9px;padding:3px 8px;border-radius:5px;border:1px solid rgba(0,230,118,0.4);background:rgba(0,230,118,0.08);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">ALL</button>
+    </div>
+  </div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:8px;font-family:JetBrains Mono,monospace" id="growthRangeLabel"></div>
+  <div class="chart-wrap"><canvas id="gc"></canvas></div>
+</div><div class="panel"><div class="p-label">Bot Log</div><div class="log-box" id="logbox">Connecting...</div></div></div>
 
 
 <div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px">
@@ -512,6 +525,170 @@ if(_orig){
       var r=await fetch('http://localhost:8080/state');
       if(r.ok){var s=await r.json();await updateOpenPositions(s);calBuild(s.trade_history||[]);calRender();}
     }catch(e){}
+  };
+  window.refresh();
+}
+})();
+</script>
+
+<script>
+(function(){
+var growthAllPoints = [];
+var growthRange = 'ALL';
+var growthChart = null;
+
+function setGrowthRange(range){
+  growthRange = range;
+  var btns = ['1D','1W','1M','3M','ALL'];
+  btns.forEach(function(b){
+    var el = document.getElementById('gf'+b);
+    if(!el) return;
+    if(b===range){
+      el.style.borderColor='rgba(0,230,118,0.4)';
+      el.style.background='rgba(0,230,118,0.08)';
+      el.style.color='var(--green)';
+    } else {
+      el.style.borderColor='var(--border)';
+      el.style.background='transparent';
+      el.style.color='var(--muted)';
+    }
+  });
+  renderGrowthChart();
+}
+
+window.setGrowthRange = setGrowthRange;
+
+function filterPoints(points, range){
+  if(!points || !points.length) return points;
+  var now = Date.now();
+  var cutoff = 0;
+  if(range==='1D') cutoff = now - 86400000;
+  else if(range==='1W') cutoff = now - 7*86400000;
+  else if(range==='1M') cutoff = now - 30*86400000;
+  else if(range==='3M') cutoff = now - 90*86400000;
+  else return points;
+  return points.filter(function(p){ return p.t >= cutoff; });
+}
+
+function renderGrowthChart(){
+  var points = filterPoints(growthAllPoints, growthRange);
+  if(!points || !points.length) return;
+
+  var labels = points.map(function(p){
+    var d = new Date(p.t);
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  });
+  var values = points.map(function(p){ return p.v; });
+  var first = points[0].v;
+  var last = points[points.length-1].v;
+  var isPos = last >= first;
+  var color = isPos ? '#00e676' : '#ff5252';
+
+  // Update range label
+  var rangeEl = document.getElementById('growthRangeLabel');
+  if(rangeEl && points.length >= 2){
+    var startD = new Date(points[0].t);
+    var endD = new Date(points[points.length-1].t);
+    var opts = {month:'short',day:'numeric',year:'numeric'};
+    rangeEl.textContent = startD.toLocaleDateString('en-US',opts) + ' — ' + endD.toLocaleDateString('en-US',opts);
+  }
+
+  var ctx = document.getElementById('gc');
+  if(!ctx) return;
+
+  if(growthChart) growthChart.destroy();
+  growthChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: values,
+        borderColor: color,
+        backgroundColor: isPos ? 'rgba(0,230,118,0.06)' : 'rgba(255,82,82,0.06)',
+        borderWidth: 1.5,
+        pointRadius: 0,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: color,
+        pointHoverBorderColor: '#0c0c0e',
+        pointHoverBorderWidth: 2,
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a1f',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#6b6b78',
+          bodyColor: '#e8e8ec',
+          titleFont: { family: 'JetBrains Mono', size: 10 },
+          bodyFont: { family: 'JetBrains Mono', size: 12 },
+          padding: 10,
+          callbacks: {
+            title: function(items){ return items[0].label; },
+            label: function(item){
+              var val = item.raw;
+              var diff = val - first;
+              var pct = ((diff/first)*100).toFixed(2);
+              return '$' + val.toFixed(2) + '  (' + (diff>=0?'+':'') + '$' + diff.toFixed(2) + '  ' + (pct>=0?'+':'') + pct + '%)';
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          display: true,
+          ticks: { color: '#6b6b78', font: { size: 9, family: 'JetBrains Mono' }, maxTicksLimit: 6, autoSkip: true },
+          grid: { display: false }
+        },
+        y: {
+          display: true,
+          ticks: { color: '#6b6b78', font: { size: 9, family: 'JetBrains Mono' }, callback: function(v){ return '$'+v.toLocaleString(); } },
+          grid: { color: 'rgba(255,255,255,0.03)' }
+        }
+      }
+    }
+  });
+}
+
+function updateGrowthChart(state){
+  if(!state) return;
+  var capital = parseFloat(state.capital || 1500);
+  var history = state.trade_history || [];
+  var points = [];
+  var running = 1500;
+
+  points.push({ t: Date.now() - 90*86400000, v: 1500 });
+
+  for(var i = history.length-1; i >= 0; i--){
+    var t = history[i];
+    if(t.side === 'SELL' && t.pnl !== undefined){
+      running += parseFloat(t.pnl || 0);
+      var d = new Date(t.time || Date.now());
+      points.push({ t: d.getTime(), v: parseFloat(running.toFixed(2)) });
+    }
+  }
+  points.push({ t: Date.now(), v: capital });
+
+  points.sort(function(a,b){ return a.t - b.t; });
+  growthAllPoints = points;
+  renderGrowthChart();
+}
+
+var _orig = window.refresh;
+if(_orig){
+  window.refresh = async function(){
+    await _orig();
+    try {
+      var r = await fetch('http://localhost:8080/state');
+      if(r.ok){ var s = await r.json(); updateGrowthChart(s); }
+    } catch(e){}
   };
   window.refresh();
 }
