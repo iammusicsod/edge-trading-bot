@@ -455,7 +455,7 @@ def scan(client,state):
                     ])
 
         # Check for new shadow short signals
-        for pair in CONFIG["pairs"]:
+        for pair in list(CONFIG["pairs"]) + ["DOGE-USD", "DOT-USD"]:
             if pair not in _scan_signals: continue
             if pair in shadow_state and shadow_state[pair].get("outcome") == "OPEN": continue
             s = _scan_signals[pair]
