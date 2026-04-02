@@ -378,6 +378,127 @@ def scan(client,state):
         except: pass
     generate_market_summary(state, scan_results_for_summary, state.get("last_fg", 50), state.get("last_fg_label", "Neutral"), state.get("last_dominance", 50))
 
+
+    # ── SHADOW SHORT LOGGER ─────────────────────────────────────────────────
+    # Tracks virtual short signals without placing any real trades
+    # Mirror of long logic: RSI > 65, Price < 200 EMA, ADX > 25
+    try:
+        import csv
+        shadow_file = Path(__file__).parent / "shadow_shorts.csv"
+        shadow_state_file = Path(__file__).parent / "shadow_state.json"
+
+        # Load existing shadow positions
+        shadow_state = {}
+        if shadow_state_file.exists():
+            try: shadow_state = json.load(open(shadow_state_file))
+            except: shadow_state = {}
+
+        # Check open shadow positions for TP/SL hits
+        for s_pair, s_pos in list(shadow_state.items()):
+            if s_pos.get("outcome") != "OPEN": continue
+            s_px = _scan_signals.get(s_pair, {}).get("price", 0)
+            if s_px == 0: continue
+            s_entry = s_pos["entry_price"]
+            s_sl = s_pos["stop_price"]
+            s_tp = s_pos["target_price"]
+            s_atr = s_pos["atr"]
+            s_highest_drop = s_pos.get("lowest_price", s_entry)
+
+            # Update lowest price
+            if s_px < s_highest_drop:
+                s_pos["lowest_price"] = s_px
+                shadow_state[s_pair] = s_pos
+
+            # Breakeven check
+            be_trigger = s_entry - s_atr * 2.0
+            if not s_pos.get("at_breakeven") and s_px <= be_trigger:
+                s_pos["at_breakeven"] = True
+                s_pos["stop_price"] = s_entry
+                shadow_state[s_pair] = s_pos
+                log(f"  📊 SHADOW {s_pair.split('-')[0]}: Breakeven triggered at ${s_px:,.4f}")
+
+            # Trailing stop after breakeven
+            if s_pos.get("at_breakeven"):
+                trail = s_pos.get("lowest_price", s_px) + s_atr * 1.5
+                if trail < s_pos["stop_price"]:
+                    s_pos["stop_price"] = trail
+                    shadow_state[s_pair] = s_pos
+
+            # Check exits
+            outcome = None
+            if s_px >= s_pos["stop_price"]:
+                outcome = "STOP LOSS"
+            elif s_px <= s_tp:
+                outcome = "TAKE PROFIT"
+
+            if outcome:
+                pnl_pct = (s_entry - s_px) / s_entry * 100
+                s_pos["outcome"] = outcome
+                s_pos["exit_price"] = s_px
+                s_pos["exit_time"] = now_str()
+                s_pos["pnl_pct"] = round(pnl_pct, 2)
+                shadow_state[s_pair] = s_pos
+                log(f"  📊 SHADOW SHORT {s_pair.split('-')[0]}: {outcome} @ ${s_px:,.4f} | P&L: {pnl_pct:+.2f}%")
+
+                # Write to CSV
+                file_exists = shadow_file.exists()
+                with open(shadow_file, "a", newline="") as f:
+                    writer = csv.writer(f)
+                    if not file_exists:
+                        writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
+                    writer.writerow([
+                        s_pos["entry_time"], s_pair,
+                        s_pos["entry_price"], s_pos["original_stop"],
+                        s_pos["target_price"], s_px, now_str(),
+                        outcome, round(pnl_pct, 2),
+                        f"ADX {s_pos.get('adx',0):.0f} at entry"
+                    ])
+
+        # Check for new shadow short signals
+        for pair in CONFIG["pairs"]:
+            if pair not in _scan_signals: continue
+            if pair in shadow_state and shadow_state[pair].get("outcome") == "OPEN": continue
+            s = _scan_signals[pair]
+            px = s.get("price", 0)
+            rsi = s.get("rsi", 50)
+            above_ema = s.get("above_ema", False)
+            adx = s.get("adx", 0)
+            atr = s.get("atr", 0)
+            if px == 0 or atr == 0: continue
+
+            # Short signal: RSI overbought, price BELOW 200 EMA, ADX trending
+            overbought = rsi > 65
+            below_ema = not above_ema
+            trending = adx >= CONFIG["adx_threshold"]
+
+            if overbought and below_ema and trending:
+                sl = round(px + atr * 2.0, 6)
+                tp = round(px - atr * 4.0, 6)
+                coin = pair.split("-")[0]
+                log(f"  📊 SHADOW SHORT signal — {coin} @ ${px:,.4f} | RSI {rsi:.0f} | ADX {adx:.0f}")
+                log(f"     Virtual SL: ${sl:,.6f} | Virtual TP: ${tp:,.6f}")
+                shadow_state[pair] = {
+                    "entry_price": px, "entry_time": now_str(),
+                    "stop_price": sl, "original_stop": sl,
+                    "target_price": tp, "atr": atr,
+                    "lowest_price": px, "at_breakeven": False,
+                    "outcome": "OPEN", "rsi": rsi, "adx": adx
+                }
+                # Write entry to CSV
+                file_exists = shadow_file.exists()
+                with open(shadow_file, "a", newline="") as f:
+                    writer = csv.writer(f)
+                    if not file_exists:
+                        writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
+                    writer.writerow([
+                        now_str(), pair, px, sl, tp, "", "", "OPEN", "",
+                        f"RSI {rsi:.0f} overbought | ADX {adx:.0f} trending"
+                    ])
+
+        json.dump(shadow_state, open(shadow_state_file, "w"), indent=2, default=str)
+    except Exception as se:
+        log(f"  Shadow logger error: {se}")
+
     # Generate plain English market summary
     try:
         all_below_ema = True
