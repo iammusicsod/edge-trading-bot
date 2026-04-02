@@ -500,6 +500,152 @@ def scan(client,state):
         log(f"  Shadow logger error: {se}")
 
 
+
+    # ── STRATEGY AUDIT LOGGER ───────────────────────────────────────────────
+    # Logs every decision the bot makes for 30/90 day AI analysis
+    try:
+        import csv
+        audit_file = Path(__file__).parent / "strategy_audit.csv"
+        rejected_file = Path(__file__).parent / "rejected_signals.csv"
+        equity_file = Path(__file__).parent / "equity_curve.csv"
+
+        # 1. EQUITY CURVE — daily snapshot
+        equity_exists = equity_file.exists()
+        with open(equity_file, "a", newline="") as f:
+            writer = csv.writer(f)
+            if not equity_exists:
+                writer.writerow(["Timestamp","Date","Capital","Total_PnL","Daily_PnL","Open_Trades","Win_Rate","Total_Trades","Wins","Losses","Max_Drawdown"])
+            st2 = state.get("stats", {})
+            t2 = st2.get("total_trades", 0)
+            wr2 = round(st2.get("wins", 0) / t2 * 100, 1) if t2 else 0
+            writer.writerow([
+                now_str(),
+                date_str(),
+                round(state.get("capital", 1500), 2),
+                round(state.get("total_pnl", 0), 2),
+                round(state.get("daily_pnl", 0), 2),
+                len(state.get("open_trades", {})),
+                wr2, t2,
+                st2.get("wins", 0),
+                st2.get("losses", 0),
+                round(state.get("performance", {}).get("max_drawdown", 0), 2)
+            ])
+
+        # 2. REJECTED SIGNALS — RSI + EMA lined up but ADX too low
+        rejected_exists = rejected_file.exists()
+        for pair, s in _scan_signals.items():
+            px = s.get("price", 0)
+            rv = s.get("rsi", 50)
+            adxv = s.get("adx", 0)
+            above = s.get("above_ema", False)
+            atrv = s.get("atr", 0)
+            e200 = s.get("ema200", 0)
+            oversold = rv < CONFIG["rsi_oversold"]
+            vol_ok = s.get("vol_ok", True)
+            trending = adxv >= CONFIG["adx_threshold"]
+
+            # RSI oversold + above EMA but ADX not trending = rejected signal
+            if oversold and above and not trending and vol_ok and px > 0:
+                with open(rejected_file, "a", newline="") as f:
+                    writer = csv.writer(f)
+                    if not rejected_exists:
+                        writer.writerow(["Timestamp","Pair","RSI","ADX","ADX_Threshold","Price","EMA200","ATR","Reason","Potential_SL","Potential_TP"])
+                        rejected_exists = True
+                    sl_pot = round(px - atrv * CONFIG["atr_sl_mult"], 6)
+                    tp_pot = round(px + atrv * CONFIG["atr_tp_mult"], 6)
+                    writer.writerow([
+                        now_str(), pair,
+                        round(rv, 1), round(adxv, 1), CONFIG["adx_threshold"],
+                        px, round(e200, 4), round(atrv, 6),
+                        f"ADX {adxv:.0f} below threshold {CONFIG['adx_threshold']}",
+                        sl_pot, tp_pot
+                    ])
+
+        # 3. AUDIT LOG — every completed trade with full details
+        audit_exists = audit_file.exists()
+        history = state.get("trade_history", [])
+        if len(history) >= 2:
+            # Check last two entries for a completed buy/sell pair
+            last = history[-1]
+            if last.get("side") == "SELL":
+                # Find matching buy
+                for i in range(len(history)-2, -1, -1):
+                    prev = history[i]
+                    if prev.get("pair") == last.get("pair") and prev.get("side") == "BUY":
+                        entry_px = parseFloat = float(prev.get("price", 0))
+                        exit_px = float(last.get("price", 0))
+                        usd = float(prev.get("usd", 0))
+                        pnl = (exit_px - entry_px) / entry_px * usd if entry_px > 0 else 0
+                        pnl_pct = (exit_px - entry_px) / entry_px * 100 if entry_px > 0 else 0
+                        already_logged = False
+                        if audit_file.exists():
+                            with open(audit_file, "r") as rf:
+                                if last.get("time", "") in rf.read():
+                                    already_logged = True
+                        if not already_logged:
+                            with open(audit_file, "a", newline="") as f:
+                                writer = csv.writer(f)
+                                if not audit_exists:
+                                    writer.writerow(["Trade_ID","Type","Pair","Entry_Time","Exit_Time","Entry_Price","Exit_Price","Stop_Loss","Take_Profit","Position_Size_USD","PnL_USD","PnL_Pct","Outcome","RSI_At_Entry","ADX_At_Entry","Entry_Reason","Max_Price_Reached","Min_Price_Reached","MFE_Pct","MAE_Pct"])
+                                    audit_exists = True
+                                pos_data = {}
+                                # Try to get trade details from explanations
+                                exps = []
+                                if TRADES_FILE.exists():
+                                    try: exps = json.load(open(TRADES_FILE))
+                                    except: pass
+                                exp_data = next((e for e in exps if e.get("pair") == prev.get("pair") and e.get("side") == "BUY"), {})
+                                if pnl > 0: outcome = "TAKE PROFIT"
+                                elif abs(pnl) < usd * 0.005: outcome = "BREAKEVEN"
+                                else: outcome = "STOP LOSS"
+                                import hashlib
+                                trade_id = hashlib.md5(f"{prev.get('pair')}{prev.get('time')}".encode()).hexdigest()[:8].upper()
+                                # Get MAE/MFE from open trade history
+                                max_price = exp_data.get("max_price", exit_px)
+                                min_price = exp_data.get("min_price", exit_px)
+                                mfe = round((max_price - entry_px) / entry_px * 100, 2) if entry_px > 0 else 0
+                                mae = round((entry_px - min_price) / entry_px * 100, 2) if entry_px > 0 else 0
+                                writer.writerow([
+                                    trade_id, "LONG",
+                                    prev.get("pair", ""), prev.get("time", ""), last.get("time", ""),
+                                    entry_px, exit_px,
+                                    exp_data.get("stop_loss", ""), exp_data.get("take_profit", ""),
+                                    usd, round(pnl, 2), round(pnl_pct, 2),
+                                    outcome, "", "",
+                                    prev.get("explanation", ""),
+                                    max_price, min_price, mfe, mae
+                                ])
+                        break
+
+        # 4. SYMBOL PERFORMANCE SUMMARY — update per-coin stats
+        perf_file = Path(__file__).parent / "symbol_performance.csv"
+        coin_stats = {}
+        if audit_file.exists():
+            with open(audit_file, "r", newline="") as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    pair = row.get("Pair", "")
+                    if pair not in coin_stats:
+                        coin_stats[pair] = {"trades": 0, "wins": 0, "losses": 0, "total_pnl": 0.0}
+                    coin_stats[pair]["trades"] += 1
+                    pnl_val = float(row.get("PnL_USD", 0) or 0)
+                    coin_stats[pair]["total_pnl"] += pnl_val
+                    if row.get("Outcome") == "TAKE PROFIT":
+                        coin_stats[pair]["wins"] += 1
+                    elif row.get("Outcome") == "STOP LOSS":
+                        coin_stats[pair]["losses"] += 1
+        if coin_stats:
+            with open(perf_file, "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerow(["Pair","Total_Trades","Wins","Losses","Win_Rate_Pct","Total_PnL_USD","Avg_PnL_Per_Trade"])
+                for pair, cs in coin_stats.items():
+                    wr3 = round(cs["wins"] / cs["trades"] * 100, 1) if cs["trades"] else 0
+                    avg = round(cs["total_pnl"] / cs["trades"], 2) if cs["trades"] else 0
+                    writer.writerow([pair, cs["trades"], cs["wins"], cs["losses"], wr3, round(cs["total_pnl"], 2), avg])
+
+    except Exception as ae:
+        log(f"  Audit logger error: {ae}")
+
     # ── SHADOW LONG LOGGER — DOGE & DOT AUDIT ──────────────────────────────
     # Tracks virtual long signals on DOGE and DOT without placing real trades
     # Same logic as live bot — RSI < 35, Price > 200 EMA, ADX > 25
