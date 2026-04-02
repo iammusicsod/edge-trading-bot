@@ -825,5 +825,26 @@ async function loadSummary(){
 loadSummary();
 setInterval(loadSummary, 60000);
 </script>
+
+<script>
+async function loadSummary(){
+  try {
+    const r = await fetch('/summary');
+    if(!r.ok) return;
+    const d = await r.json();
+    const el = document.getElementById('summaryText');
+    const tEl = document.getElementById('summaryTime');
+    if(el && d.summary) el.textContent = d.summary;
+    if(tEl && d.time) tEl.textContent = 'Updated: ' + d.time;
+    if(d.signals) {
+      for(const pair of Object.keys(d.signals)){
+        updateReasoning(pair, d.signals[pair]);
+      }
+    }
+  } catch(e){}
+}
+loadSummary();
+setInterval(loadSummary, 30000);
+</script>
 </body>
 </html>
