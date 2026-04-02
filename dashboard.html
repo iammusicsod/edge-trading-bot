@@ -694,4 +694,189 @@ if(_orig){
 }
 })();
 </script>
+
+<script>
+(function(){
+
+async function updateTradeStatus(){
+  try {
+    var r = await fetch('http://localhost:8080/state');
+    if(!r.ok) return;
+    var state = await r.json();
+    var history = state.trade_history || [];
+    var open = state.open_trades || {};
+    var openKeys = Object.keys(open);
+
+    // ── OPEN POSITIONS ──────────────────────────────────────────────────
+    var openPanel = document.getElementById('openPositionsPanel');
+    var openContent = document.getElementById('openPositionsContent');
+    if(openKeys.length === 0){
+      if(openPanel) openPanel.style.display = 'none';
+    } else {
+      if(openPanel) openPanel.style.display = 'block';
+      var html = '<div style="display:grid;grid-template-columns:repeat('+Math.min(openKeys.length,3)+',1fr);gap:12px">';
+      for(var i=0;i<openKeys.length;i++){
+        var pair = openKeys[i];
+        var pos = open[pair];
+        var coin = pair.split('-')[0];
+        var livePrice = 0;
+        try {
+          var pr = await fetch('https://api.exchange.coinbase.com/products/'+pair+'/ticker');
+          var pd = await pr.json();
+          livePrice = parseFloat(pd.price||0);
+        } catch(e){}
+        var entry = parseFloat(pos.entry_price||0);
+        var usd = parseFloat(pos.usd_invested||0);
+        var sl = parseFloat(pos.stop_loss||0);
+        var tp = parseFloat(pos.take_profit||0);
+        var be = parseFloat(pos.be_trigger||0);
+        var at_be = pos.at_breakeven || false;
+        var upnl = livePrice>0?(livePrice-entry)/entry*usd:0;
+        var pct = livePrice>0?(livePrice-entry)/entry*100:0;
+        var isPos = upnl>=0;
+        var distSL = sl>0?(livePrice-sl)/livePrice*100:0;
+        var distTP = tp>0?(tp-livePrice)/livePrice*100:0;
+        var prog = (sl>0&&tp>0&&livePrice>0)?Math.max(0,Math.min(100,(livePrice-sl)/(tp-sl)*100)):50;
+
+        html += '<div style="background:#0c0c0e;border:1px solid '+(isPos?'rgba(0,230,118,0.2)':'rgba(255,82,82,0.2)')+';border-radius:12px;padding:16px">';
+        html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">';
+        html += '<div style="font-size:16px;font-weight:600">'+coin+'</div>';
+        html += '<div style="font-size:9px;padding:3px 8px;border-radius:5px;background:rgba(0,230,118,0.1);color:var(--green);font-family:JetBrains Mono,monospace;letter-spacing:1px">OPEN</div>';
+        html += '</div>';
+        html += '<div style="font-size:22px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)');margin-bottom:12px">'+(isPos?'+ ':'- ')+'$'+Math.abs(upnl).toFixed(2)+'</div>';
+        html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;margin-bottom:10px">';
+        html += '<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px;font-size:10px">Entry</div><div style="font-family:JetBrains Mono,monospace">$'+entry.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+        html += '<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px;font-size:10px">Live price</div><div style="font-family:JetBrains Mono,monospace">$'+livePrice.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+        html += '<div style="background:rgba(255,82,82,0.06);border:1px solid rgba(255,82,82,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);margin-bottom:2px;font-size:10px">Stop loss</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div><div style="color:var(--muted);font-size:9px">'+distSL.toFixed(1)+'% away</div></div>';
+        html += '<div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--green);margin-bottom:2px;font-size:10px">Target</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+tp.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div><div style="color:var(--muted);font-size:9px">'+distTP.toFixed(1)+'% away</div></div>';
+        html += '</div>';
+        html += '<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-bottom:3px"><span>SL</span><span>'+(at_be?'✅ Breakeven active':'BE at $'+be.toFixed(4))+'</span><span>TP</span></div>';
+        html += '<div style="height:5px;background:rgba(255,255,255,0.05);border-radius:3px"><div style="height:100%;width:'+prog+'%;background:'+(isPos?'var(--green)':'var(--amber)')+';border-radius:3px;transition:width .5s"></div></div>';
+        html += '<div style="font-size:9px;color:var(--muted);text-align:center;margin-top:2px">'+prog.toFixed(0)+'% to target</div></div>';
+        if(pos.explanation){
+          html += '<div style="background:#131316;border-radius:6px;padding:8px 10px;font-size:11px;color:var(--muted2);line-height:1.6;margin-bottom:8px">'+pos.explanation+'</div>';
+        }
+        html += '<div style="font-size:10px;color:var(--muted)">Size: $'+usd.toFixed(2)+' | '+(pos.entry_time||"")+'</div>';
+        html += '</div>';
+      }
+      html += '</div>';
+      if(openContent) openContent.innerHTML = html;
+    }
+
+    // ── TRADE HISTORY ───────────────────────────────────────────────────
+    var thEl = document.getElementById('th');
+    if(!thEl) return;
+    if(history.length === 0){
+      thEl.innerHTML = '<div class="empty">No trades yet<span>60-90 day paper test in progress</span></div>';
+      return;
+    }
+
+    // Pair up buys and sells
+    var pairs_map = {};
+    var paired = [];
+    for(var i=0;i<history.length;i++){
+      var t = history[i];
+      if(t.side === 'BUY'){
+        pairs_map[t.pair] = t;
+      } else if(t.side === 'SELL' && pairs_map[t.pair]){
+        var buy = pairs_map[t.pair];
+        var pnl = (t.price - buy.price) / buy.price * buy.usd;
+        var pct2 = (t.price - buy.price) / buy.price * 100;
+        paired.push({
+          pair: t.pair,
+          coin: t.pair.split('-')[0],
+          entry_price: buy.price,
+          exit_price: t.price,
+          usd: buy.usd,
+          pnl: pnl,
+          pct: pct2,
+          entry_time: buy.time,
+          exit_time: t.time,
+          explanation: buy.explanation || '',
+          status: 'CLOSED'
+        });
+        delete pairs_map[t.pair];
+      }
+    }
+
+    // Add any still-open buys
+    var openPairKeys = Object.keys(pairs_map);
+    for(var j=0;j<openPairKeys.length;j++){
+      var buy2 = pairs_map[openPairKeys[j]];
+      paired.push({
+        pair: buy2.pair,
+        coin: buy2.pair.split('-')[0],
+        entry_price: buy2.price,
+        exit_price: null,
+        usd: buy2.usd,
+        pnl: null,
+        pct: null,
+        entry_time: buy2.time,
+        exit_time: null,
+        explanation: buy2.explanation || '',
+        status: 'OPEN'
+      });
+    }
+
+    paired.reverse();
+
+    var html2 = '';
+    for(var k=0;k<paired.length;k++){
+      var tr = paired[k];
+      var isOpen = tr.status === 'OPEN';
+      var isWin = tr.pnl > 0;
+      html2 += '<div style="background:#0c0c0e;border:1px solid '+(isOpen?'rgba(255,171,64,0.2)':isWin?'rgba(0,230,118,0.15)':'rgba(255,82,82,0.15)')+';border-radius:12px;padding:16px;margin-bottom:10px">';
+      
+      // Header
+      html2 += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">';
+      html2 += '<div style="display:flex;align-items:center;gap:10px">';
+      html2 += '<div style="font-size:16px;font-weight:600">'+tr.coin+'</div>';
+      html2 += '<div style="font-size:9px;padding:3px 8px;border-radius:5px;font-weight:600;letter-spacing:1px;font-family:JetBrains Mono,monospace;background:'+(isOpen?'rgba(255,171,64,0.1)':isWin?'rgba(0,230,118,0.1)':'rgba(255,82,82,0.1)')+';color:'+(isOpen?'var(--amber)':isWin?'var(--green)':'var(--red)')+'">'+tr.status+'</div>';
+      html2 += '</div>';
+      if(!isOpen){
+        html2 += '<div style="font-size:20px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isWin?'var(--green)':'var(--red)')+'">'+( tr.pnl>=0?'+ ':'- ')+'$'+Math.abs(tr.pnl).toFixed(2)+'</div>';
+      }
+      html2 += '</div>';
+
+      // Price details
+      html2 += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px;font-size:11px">';
+      html2 += '<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px;font-size:10px">Entry</div><div style="font-family:JetBrains Mono,monospace">$'+tr.entry_price.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+      html2 += '<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px;font-size:10px">Exit</div><div style="font-family:JetBrains Mono,monospace">'+(tr.exit_price?'$'+tr.exit_price.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:6}):'Still open')+'</div></div>';
+      html2 += '<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px;font-size:10px">Size</div><div style="font-family:JetBrains Mono,monospace">$'+tr.usd.toFixed(2)+'</div></div>';
+      html2 += '<div style="background:#131316;border-radius:6px;padding:6px 8px"><div style="color:var(--muted);margin-bottom:2px;font-size:10px">Change</div><div style="font-family:JetBrains Mono,monospace;color:'+(isOpen?'var(--muted)':isWin?'var(--green)':'var(--red)')+'">'+( tr.pct!==null?(tr.pct>=0?'+':'')+tr.pct.toFixed(2)+'%':'—')+'</div></div>';
+      html2 += '</div>';
+
+      // Explanation
+      if(tr.explanation){
+        html2 += '<div style="background:#131316;border-left:3px solid '+(isOpen?'var(--amber)':isWin?'var(--green)':'var(--red)')+';border-radius:0 6px 6px 0;padding:10px 12px;font-size:11px;color:var(--muted2);line-height:1.7;margin-bottom:10px">';
+        if(isWin) html2 += '<div style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:4px;font-family:JetBrains Mono,monospace;letter-spacing:1px">WHY THE BOT ENTERED</div>';
+        else if(!isOpen) html2 += '<div style="font-size:10px;color:var(--red);font-weight:600;margin-bottom:4px;font-family:JetBrains Mono,monospace;letter-spacing:1px">WHY THE BOT ENTERED</div>';
+        else html2 += '<div style="font-size:10px;color:var(--amber);font-weight:600;margin-bottom:4px;font-family:JetBrains Mono,monospace;letter-spacing:1px">WHY THE BOT ENTERED</div>';
+        html2 += tr.explanation;
+        html2 += '</div>';
+      }
+
+      // What happened
+      if(!isOpen){
+        var what = isWin ? '✅ Take profit hit — trade closed in profit.' : '🛑 Stop loss hit — trade closed to protect capital.';
+        if(tr.pnl !== null && Math.abs(tr.pnl) < tr.usd * 0.005) what = '↔️ Closed near breakeven.';
+        html2 += '<div style="font-size:11px;color:'+(isWin?'var(--green)':'var(--red)')+';margin-bottom:8px">'+what+'</div>';
+      }
+
+      // Times
+      html2 += '<div style="font-size:10px;color:var(--muted)">Entered: '+tr.entry_time+(tr.exit_time?' | Closed: '+tr.exit_time:'')+'</div>';
+      html2 += '</div>';
+    }
+
+    thEl.innerHTML = html2;
+
+  } catch(e){ console.error('Trade status error:', e); }
+}
+
+// Run on load and every 30 seconds
+updateTradeStatus();
+setInterval(updateTradeStatus, 30000);
+
+})();
+</script>
 </body></html>
