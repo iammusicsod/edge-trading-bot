@@ -153,7 +153,6 @@ Rules:
             log(f"  📝 Market summary updated")
             return summary
     except Exception as e:
-        log(f"  Summary error: {e}")
         return None
 
 
@@ -316,6 +315,7 @@ def check_exits(client,state):
             place_order(client,pair,"SELL",pos["usd_invested"],px,state,atr=atr)
 
 def scan(client,state):
+    _scan_signals = {}
     sec(f"SCAN — {time_str()}")
     fg,fgl=get_fear_greed();dominance=get_btc_dominance();funding=get_funding_rate()
     state["last_fg"]=fg;state["last_fg_label"]=fgl;state["last_dominance"]=dominance;state["last_funding"]=funding
@@ -330,6 +330,7 @@ def scan(client,state):
         closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
         lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
         signal=analyze(pair,closes,highs,lows,volumes);ind=signal["indicators"]
+        _scan_signals[pair]=ind
         px=ind.get("price",0);rv=ind.get("rsi",50);e200=ind.get("ema200",0)
         adxv=ind.get("adx",0);atrv=ind.get("atr",0);vol24=ind.get("vol24",0)
         log(f"  Price:   ${px:,.4f}")
@@ -376,6 +377,58 @@ def scan(client,state):
                 }
         except: pass
     generate_market_summary(state, scan_results_for_summary, state.get("last_fg", 50), state.get("last_fg_label", "Neutral"), state.get("last_dominance", 50))
+
+    # Generate plain English market summary
+    try:
+        signals = []
+        closest = []
+        all_below_ema = True
+        for pair in CONFIG["pairs"]:
+            if pair in _scan_signals:
+                s = _scan_signals[pair]
+                missing = []
+                met = 0
+                if s.get("oversold"): met += 1
+                else: missing.append(f"RSI {s.get('rsi',0):.0f} not oversold")
+                if s.get("above_ema"): met += 1; all_below_ema = False
+                else: missing.append("below 200 EMA")
+                if s.get("trending"): met += 1
+                else: missing.append(f"ADX {s.get('adx',0):.0f} ranging")
+                if s.get("vol_ok", True): met += 1
+                else: missing.append("low volume")
+                coin = pair.split("-")[0]
+                if met >= 3: closest.append((coin, met, missing))
+                elif met == 2: closest.append((coin, met, missing))
+
+        closest.sort(key=lambda x: -x[1])
+        lines = []
+        fg = state.get("last_fg", 50)
+        fgl = state.get("last_fg_label", "Neutral")
+        lines.append(f"Market sentiment: Fear & Greed {fg}/100 — {fgl}.")
+
+        if all_below_ema:
+            lines.append("Every coin is currently below its 200 EMA — the market is in a broad downtrend. The bot is sitting in cash and waiting for recovery.")
+        
+        if closest:
+            top = closest[0]
+            if top[1] >= 3:
+                lines.append(f"{top[0]} has all 3 signals firing — watching for entry next scan.")
+            elif top[1] == 2:
+                missing_str = " and ".join(top[2][:1])
+                lines.append(f"{top[0]} is the closest to a signal with 2 of 3 conditions met. Still waiting on: {missing_str}.")
+            if len(closest) > 1:
+                others = [c[0] for c in closest[1:3]]
+                lines.append(f"Other coins to watch: {', '.join(others)}.")
+
+        lines.append("No trades taken this scan. Bot is being patient — all 3 signals must agree before any entry.")
+        summary = " ".join(lines)
+
+        import json
+        sf = Path(__file__).parent / "summary.json"
+        json.dump({"time": now_str(), "summary": summary, "signals": _scan_signals}, open(sf, "w"), indent=2, default=str)
+    except Exception as se:
+        log(f"  Summary: {se}")
+
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
     log(f"  ✅ Next scan at {nxt}.\n");save_state(state)
 
