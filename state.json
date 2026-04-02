@@ -21,9 +21,9 @@
       "explanation": ""
     }
   ],
-  "daily_pnl": -1.2857142857142971,
+  "daily_pnl": 0.0,
   "total_pnl": -1.2857142857142971,
-  "last_reset": "2026-04-01",
+  "last_reset": "2026-04-02",
   "stats": {
     "wins": 0,
     "losses": 1,
@@ -31,10 +31,10 @@
   },
   "last_fg": 12,
   "last_fg_label": "Extreme Fear",
-  "last_dominance": 56.10451803023363,
+  "last_dominance": 56.33330698123184,
   "last_funding": 0.0,
   "trailing_highs": {},
-  "trade_count_today": 1,
+  "trade_count_today": 0,
   "last_trade_date": "2026-04-01",
   "performance": {
     "total_trades": 2,
