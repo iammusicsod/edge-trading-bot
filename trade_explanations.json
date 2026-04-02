@@ -1,5 +1,13 @@
 [
   {
+    "time": "April 01, 2026  08:24:30 PM",
+    "pair": "GRT-USD",
+    "side": "SELL",
+    "price": 0.024149999999999998,
+    "pnl": -1.2857142857142971,
+    "explanation": "Exited loss $1.29. Entry $0.0245 \u2192 Exit $0.0241."
+  },
+  {
     "time": "April 01, 2026  04:31:24 PM",
     "pair": "GRT-USD",
     "side": "BUY",
