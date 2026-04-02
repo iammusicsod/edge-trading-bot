@@ -210,7 +210,8 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
   <!-- COINS -->
   <div class="coins-grid" id="coinsGrid"></div>
 
-  <!-- REASONING -->
+  <!-- MARKET SUMMARY -->
+    <!-- REASONING -->
   <div class="panel">
     <div class="p-label">Live Bot Reasoning — RSI + 200 EMA + ADX</div>
     <div class="reasoning-grid" id="reasoningGrid"></div>
@@ -765,12 +766,85 @@ async function refresh() {
   await fetchLog();
 }
 
+// ── MARKET SUMMARY ───────────────────────────────────────────────────────────
+async function fetchSummary() {
+  try {
+    const r = await fetch('/summary');
+    if (!r.ok) return;
+    const d = await r.json();
+    const el = document.getElementById('summaryText');
+    const tel = document.getElementById('summaryTime');
+    if (el && d.summary) {
+      el.style.opacity = '0';
+      el.style.transition = 'opacity 0.5s';
+      setTimeout(() => {
+        el.textContent = d.summary;
+        el.style.opacity = '1';
+      }, 300);
+    }
+    if (tel && d.time) tel.textContent = 'Updated ' + d.time;
+  } catch(e) {}
+}
+
 // Init
 buildCoins();
 buildReasoning();
 renderCalendar();
 refresh();
 setInterval(refresh, 15000);
+
+async function updateReasoningFromSummary() {
+  try {
+    const r = await fetch('/summary');
+    if (!r.ok) return;
+    const d = await r.json();
+    if (!d.signals) return;
+    for (const pair of Object.keys(d.signals)) {
+      updateReasoning(pair, d.signals[pair]);
+    }
+  } catch(e) {}
+}
+updateReasoningFromSummary();
+setInterval(updateReasoningFromSummary, 30000);
+fetchSummary();
+setInterval(fetchSummary, 60000);
+</script>
+
+<script>
+async function loadSummary(){
+  try {
+    const r = await fetch('/summary');
+    if(!r.ok) return;
+    const d = await r.json();
+    const el = document.getElementById('summaryText');
+    const tEl = document.getElementById('summaryTime');
+    if(el && d.summary) el.textContent = d.summary;
+    if(tEl && d.time) tEl.textContent = 'Updated: ' + d.time;
+  } catch(e) {}
+}
+loadSummary();
+setInterval(loadSummary, 60000);
+</script>
+
+<script>
+async function loadSummary(){
+  try {
+    const r = await fetch('/summary');
+    if(!r.ok) return;
+    const d = await r.json();
+    const el = document.getElementById('summaryText');
+    const tEl = document.getElementById('summaryTime');
+    if(el && d.summary) el.textContent = d.summary;
+    if(tEl && d.time) tEl.textContent = 'Updated: ' + d.time;
+    if(d.signals) {
+      for(const pair of Object.keys(d.signals)){
+        updateReasoning(pair, d.signals[pair]);
+      }
+    }
+  } catch(e){}
+}
+loadSummary();
+setInterval(loadSummary, 30000);
 </script>
 </body>
 </html>
