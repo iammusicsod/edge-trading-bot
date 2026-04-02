@@ -1,0 +1,2 @@
+Trade_ID,Type,Pair,Entry_Time,Exit_Time,Entry_Price,Exit_Price,Stop_Loss,Take_Profit,Position_Size_USD,PnL_USD,PnL_Pct,Outcome,RSI_At_Entry,ADX_At_Entry,Entry_Reason,Max_Price_Reached,Min_Price_Reached,MFE_Pct,MAE_Pct
+AF327921,LONG,GRT-USD,"April 01, 2026  04:31:24 PM","April 01, 2026  08:24:30 PM",0.0245,0.024149999999999998,0.024200000000000003,0.025099999999999997,90.0,-1.29,-1.43,STOP LOSS,,,"Entered LONG GRT: RSI 29 oversold, OBV rising — buying volume, Price above 200 EMA ($0.02). ADX 27. SL $0.02 TP $0.03.",0.024149999999999998,0.024149999999999998,-1.43,1.43
