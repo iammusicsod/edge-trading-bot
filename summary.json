@@ -1,5 +1,5 @@
 {
-  "time": "April 03, 2026  02:05:54 PM",
+  "time": "April 03, 2026  02:05:59 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: LINK, AVAX. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
@@ -83,7 +83,7 @@
       "ema200": 8.945757478837226,
       "adx": 94.11764705882369,
       "atr": 0.06571428571428571,
-      "vol24": 2737426.368045812,
+      "vol24": 2740998.8396797418,
       "above_ema": true,
       "trending": true,
       "oversold": false,
