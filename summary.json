@@ -1,51 +1,51 @@
 {
-  "time": "April 03, 2026  02:03:01 PM",
+  "time": "April 03, 2026  02:03:08 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: LINK, AVAX. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
-      "price": 66651.47,
-      "rsi": 45.530322476054245,
-      "ema200": 67517.79176969448,
+      "price": 66665.87,
+      "rsi": 45.97754464468422,
+      "ema200": 67517.93505327657,
       "adx": 16.122939010724636,
       "atr": 329.2871428571442,
-      "vol24": 346068288.9864202,
+      "vol24": 346084780.3703255,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 65992.895714,
-      "tp": 67968.618571,
-      "be_trigger": 67310.044286
+      "sl": 66007.295714,
+      "tp": 67983.018571,
+      "be_trigger": 67324.444286
     },
     "ETH-USD": {
-      "price": 2046.6,
-      "rsi": 42.508875739645056,
-      "ema200": 2058.381153357511,
+      "price": 2047.22,
+      "rsi": 43.14196492913784,
+      "ema200": 2058.3873225117395,
       "adx": 24.578904333606644,
       "atr": 12.839285714285698,
-      "vol24": 223145624.62843376,
+      "vol24": 223171278.2723197,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 2020.921429,
-      "tp": 2097.957143,
-      "be_trigger": 2072.278571
+      "sl": 2021.541429,
+      "tp": 2098.577143,
+      "be_trigger": 2072.898571
     },
     "SOL-USD": {
-      "price": 79.52,
-      "rsi": 54.740061162079535,
-      "ema200": 83.06977950358302,
+      "price": 79.53,
+      "rsi": 54.90797546012281,
+      "ema200": 83.0698790060706,
       "adx": 28.510638297871875,
       "atr": 0.6257142857142861,
-      "vol24": 88262236.0785879,
+      "vol24": 88264688.35595997,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 78.268571,
-      "tp": 82.022857,
-      "be_trigger": 80.771429
+      "sl": 78.278571,
+      "tp": 82.032857,
+      "be_trigger": 80.781429
     },
     "LINK-USD": {
       "price": 8.679,
@@ -53,7 +53,7 @@
       "ema200": 8.741790995228634,
       "adx": 49.84326018808758,
       "atr": 0.05942857142857148,
-      "vol24": 7330607.394,
+      "vol24": 7334206.74888,
       "above_ema": false,
       "trending": true,
       "oversold": false,
@@ -93,19 +93,19 @@
       "be_trigger": 9.101429
     },
     "ADA-USD": {
-      "price": 0.2455,
-      "rsi": 85.71428571428591,
-      "ema200": 0.24763505989180548,
+      "price": 0.2456,
+      "rsi": 86.7469879518076,
+      "ema200": 0.24763605491668111,
       "adx": 89.01098901098902,
       "atr": 0.0019571428571428556,
-      "vol24": 8452043.906518804,
+      "vol24": 8452148.245446753,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 0.241586,
-      "tp": 0.253329,
-      "be_trigger": 0.249414
+      "sl": 0.241686,
+      "tp": 0.253429,
+      "be_trigger": 0.249514
     }
   }
 }
