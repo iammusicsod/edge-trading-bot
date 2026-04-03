@@ -823,7 +823,7 @@ def main():
         token = os.environ.get("GITHUB_TOKEN", "")
         repo = os.environ.get("GITHUB_REPO", "")
         if token and repo:
-            files_to_pull = ["state.json","shadow_state.json","shadow_long_state.json","shadow_shorts.csv","shadow_longs.csv","equity_curve.csv","strategy_audit.csv","rejected_signals.csv","symbol_performance.csv","summary.json","trade_explanations.json"]
+            
             headers = {"Authorization": f"token {token}", "User-Agent": "EDGE-Bot-v7"}
             base_url = f"https://api.github.com/repos/{repo}/contents/"
             for filename in files_to_pull:
