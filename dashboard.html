@@ -611,8 +611,11 @@ async function loadShadowNarrative(){
     const el=document.getElementById('shadowNarrativeCards');
     if(!el)return;
     if(!open.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px 0">No open shadow short positions right now.</div>';return;}
+    // Show first card by default, rest collapsed
     let html='';
-    for(const row of open){
+    const showAll = window._shadowShowAll || false;
+    const visible = showAll ? open : open.slice(0,1);
+    for(const row of visible){
       const pair=row.Pair||'';
       const coin=pair.split('-')[0];
       const entry=parseFloat(row['Virtual Entry']||0);
@@ -655,6 +658,15 @@ async function loadShadowNarrative(){
         <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px"><div style="height:100%;width:50%;background:var(--red);border-radius:2px"></div></div>
         <div style="font-size:9px;color:var(--muted);margin-top:4px">Zero real money — pure data collection for 90 day short strategy review</div>
       </div>`;
+    }
+    // Add expand/collapse button if more than 1
+    if(open.length > 1){
+      const remaining = open.length - 1;
+      if(!showAll){
+        html+=`<button onclick="window._shadowShowAll=true;loadShadowNarrative()" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,68,68,0.25);background:rgba(255,68,68,0.05);color:var(--red);cursor:pointer;font-size:10px;font-family:JetBrains Mono,monospace;letter-spacing:1px;margin-top:2px">▼ SHOW ${remaining} MORE SHADOW SHORT${remaining>1?'S':''}</button>`;
+      } else {
+        html+=`<button onclick="window._shadowShowAll=false;loadShadowNarrative()" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,68,68,0.25);background:rgba(255,68,68,0.05);color:var(--red);cursor:pointer;font-size:10px;font-family:JetBrains Mono,monospace;letter-spacing:1px;margin-top:2px">▲ COLLAPSE</button>`;
+      }
     }
     el.innerHTML=html;
   }catch(e){}
