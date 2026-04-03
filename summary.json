@@ -1,5 +1,5 @@
 {
-  "time": "April 03, 2026  01:59:23 PM",
+  "time": "April 03, 2026  01:59:29 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: LINK, AVAX. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
@@ -53,7 +53,7 @@
       "ema200": 8.744232123048565,
       "adx": 47.530864197530306,
       "atr": 0.06085714285714288,
-      "vol24": 8535161.95107,
+      "vol24": 8536039.75615,
       "above_ema": false,
       "trending": true,
       "oversold": false,
@@ -63,19 +63,19 @@
       "be_trigger": 8.813714
     },
     "XRP-USD": {
-      "price": 1.3183,
-      "rsi": 48.529411764705806,
-      "ema200": 1.3400569050009348,
+      "price": 1.3177,
+      "rsi": 47.925311203319495,
+      "ema200": 1.3400509348516811,
       "adx": 17.00182815356479,
       "atr": 0.009271428571428597,
-      "vol24": 84178726.66662736,
+      "vol24": 84178445.31752492,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 1.299757,
-      "tp": 1.355386,
-      "be_trigger": 1.336843
+      "sl": 1.299157,
+      "tp": 1.354786,
+      "be_trigger": 1.336243
     },
     "AVAX-USD": {
       "price": 8.98,
@@ -83,7 +83,7 @@
       "ema200": 8.947397620253064,
       "adx": 94.44444444444457,
       "atr": 0.06785714285714281,
-      "vol24": 3193129.778125304,
+      "vol24": 3193229.2781252703,
       "above_ema": true,
       "trending": true,
       "oversold": false,
@@ -93,19 +93,19 @@
       "be_trigger": 9.115714
     },
     "ADA-USD": {
-      "price": 0.246,
-      "rsi": 89.41176470588248,
-      "ema200": 0.24771945112574661,
+      "price": 0.2459,
+      "rsi": 89.28571428571443,
+      "ema200": 0.247718456100871,
       "adx": 89.3617021276596,
       "atr": 0.0019999999999999996,
-      "vol24": 10109604.751987884,
+      "vol24": 10109675.275877219,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 0.242,
-      "tp": 0.254,
-      "be_trigger": 0.25
+      "sl": 0.2419,
+      "tp": 0.2539,
+      "be_trigger": 0.2499
     }
   }
 }
