@@ -1032,6 +1032,46 @@ def main():
     log(f"  Trailing:  {CONFIG['atr_trail_mult']}x ATR from highest after breakeven")
     div("═");log("")
     client=load_client();state=load_state()
+    # ── STARTUP: Pull data files from GitHub on fresh deploy ────────────────
+    try:
+        import os
+        token = os.environ.get("GITHUB_TOKEN", "")
+        repo = os.environ.get("GITHUB_REPO", "")
+        if token and repo:
+            files_to_pull = [
+                "state.json",
+                "shadow_state.json",
+                "shadow_long_state.json",
+                "shadow_shorts.csv",
+                "shadow_longs.csv",
+                "equity_curve.csv",
+                "strategy_audit.csv",
+                "rejected_signals.csv",
+                "symbol_performance.csv",
+                "summary.json",
+                "trade_explanations.json"
+            ]
+            headers = {
+                "Authorization": f"token {token}",
+                "User-Agent": "EDGE-Bot-v7"
+            }
+            base_url = f"https://api.github.com/repos/{repo}/contents/"
+            for filename in files_to_pull:
+                try:
+                    req = urllib.request.Request(
+                        base_url + filename,
+                        headers=headers
+                    )
+                    with urllib.request.urlopen(req, timeout=10) as r:
+                        data = json.loads(r.read())
+                        content = base64.b64decode(data["content"])
+                        filepath = Path(__file__).parent / filename
+                        filepath.write_bytes(content)
+                except:
+                    pass
+            log("  ✅ Startup data restored from GitHub")
+    except Exception as e:
+        log(f"  Startup restore error: {e}")
     start_risk_desk(state, client)
     log("  ✅ Connected | Running first scan...\n")
     scan(client,state)
