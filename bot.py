@@ -970,6 +970,7 @@ def main():
     log(f"  Trailing:  {CONFIG['atr_trail_mult']}x ATR from highest after breakeven")
     div("═");log("")
     client=load_client();state=load_state()
+    start_risk_desk(state, client)
     log("  ✅ Connected | Running first scan...\n")
     scan(client,state)
     schedule.every(CONFIG["scan_interval_minutes"]).minutes.do(scan,client,state)
