@@ -39,19 +39,16 @@
     "adx": 41.682242990654686
   },
   "ADA-USD": {
-    "entry_price": 0.2466,
-    "entry_time": "April 03, 2026  02:45:18 PM",
-    "stop_price": 0.250743,
-    "original_stop": 0.250743,
-    "target_price": 0.238314,
-    "atr": 0.0020714285714285713,
-    "lowest_price": 0.2465,
+    "entry_price": 0.2478,
+    "entry_time": "April 03, 2026  03:24:33 PM",
+    "stop_price": 0.252343,
+    "original_stop": 0.252343,
+    "target_price": 0.238714,
+    "atr": 0.002271428571428575,
+    "lowest_price": 0.2478,
     "at_breakeven": false,
-    "outcome": "STOP LOSS",
-    "rsi": 89.01098901098928,
-    "adx": 90.4761904761905,
-    "exit_price": 0.251,
-    "exit_time": "April 03, 2026  03:05:41 PM",
-    "pnl_pct": -1.78
+    "outcome": "OPEN",
+    "rsi": 90.0000000000002,
+    "adx": 92.80575539568346
   }
 }
