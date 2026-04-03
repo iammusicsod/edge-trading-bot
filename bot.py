@@ -855,66 +855,7 @@ def scan(client,state):
         log(f"  Summary error: {se}")
 
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
-    # ── GITHUB SYNC — push critical files after every scan ──────────────────
-    try:
-        import os
-        token = os.environ.get("GITHUB_TOKEN", "")
-        repo = os.environ.get("GITHUB_REPO", "")
-        if token and repo:
-            files_to_sync = [
-                "state.json",
-                "shadow_state.json",
-                "shadow_long_state.json",
-                "shadow_shorts.csv",
-                "shadow_longs.csv",
-                "equity_curve.csv",
-                "strategy_audit.csv",
-                "rejected_signals.csv",
-                "symbol_performance.csv",
-                "summary.json",
-                "trade_explanations.json"
-            ]
-            headers = {
-                "Authorization": f"token {token}",
-                "Content-Type": "application/json",
-                "User-Agent": "EDGE-Bot-v7"
-            }
-            base_url = f"https://api.github.com/repos/{repo}/contents/"
-            for filename in files_to_sync:
-                filepath = Path(__file__).parent / filename
-                if not filepath.exists():
-                    continue
-                try:
-                    content = filepath.read_bytes()
-                    encoded = base64.b64encode(content).decode()
-                    get_req = _urllib_req.Request(
-                        base_url + filename,
-                        headers=headers
-                    )
-                    try:
-                        with _urllib_req.urlopen(get_req, timeout=10) as r:
-                            current = json.loads(r.read())
-                            sha = current.get("sha", "")
-                    except:
-                        sha = ""
-                    payload = json.dumps({
-                        "message": f"Auto-sync {filename} from bot",
-                        "content": encoded,
-                        "sha": sha
-                    }).encode()
-                    put_req = _urllib_req.Request(
-                        base_url + filename,
-                        data=payload,
-                        headers=headers,
-                        method="PUT"
-                    )
-                    with _urllib_req.urlopen(put_req, timeout=10) as r:
-                        pass
-                except Exception as fe:
-                    log(f"  GitHub sync failed for {filename}: {fe}")
-            log(f"  ✅ GitHub sync complete — all data files saved")
-    except Exception as ge:
-        log(f"  GitHub sync error: {ge}")
+
     log(f"  ✅ Next scan at {nxt}.\n");save_state(state)
 # ── WEBSOCKET RISK DESK ─────────────────────────────────────────────────────
 # Real-time stop loss monitor — separate from hourly scanner
