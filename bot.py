@@ -1072,6 +1072,7 @@ def main():
             log("  ✅ Startup data restored from GitHub")
     except Exception as e:
         log(f"  Startup restore error: {e}")
+    state = load_state()
     start_risk_desk(state, client)
     log("  ✅ Connected | Running first scan...\n")
     scan(client,state)
