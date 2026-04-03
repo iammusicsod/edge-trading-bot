@@ -325,6 +325,16 @@ async function fetchState(){
 
 async function fetchSummary(){
   try{
+    const r=await fetch('/summary');
+    const text=await r.text();
+    if(!text||text.trim()==='')return;
+    const d=JSON.parse(text);
+    if(d.summary)document.getElementById('sumText').textContent=d.summary;
+    if(d.time)document.getElementById('sumTime').textContent='Updated: '+d.time;
+    if(d.signals){for(const pair of Object.keys(d.signals))updR(pair,d.signals[pair]);}
+  }catch(e){console.log('Summary error:',e);}
+}
+  try{
     const r=await fetch('/summary');if(!r.ok)return;
     const d=await r.json();
     if(d.summary)document.getElementById('sumText').textContent=d.summary;
