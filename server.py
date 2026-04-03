@@ -1,11 +1,14 @@
-import http.server, json, os
+import http.server
+import json
+import os
 from pathlib import Path
 
 BOT_DIR = Path(__file__).parent
 PORT = 8080
 
 class Handler(http.server.BaseHTTPRequestHandler):
-    def log_message(self, format, *args): pass
+    def log_message(self, format, *args):
+        pass
 
     def do_GET(self):
         try:
@@ -14,13 +17,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if path == '/summary':
                 f = BOT_DIR / 'summary.json'
                 if f.exists():
-                    raw = f.read_bytes()
-                    self.send_response(200)
-                    self.send_header('Content-Type', 'application/json; charset=utf-8')
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.send_header('Content-Length', str(len(raw)))
-                    self.end_headers()
-                    self.wfile.write(raw)
+                    try:
+                        raw = f.read_bytes()
+                        self.send_response(200)
+                        self.send_header('Content-Type', 'application/json; charset=utf-8')
+                        self.send_header('Access-Control-Allow-Origin', '*')
+                        self.send_header('Content-Length', str(len(raw)))
+                        self.end_headers()
+                        self.wfile.write(raw)
+                    except Exception as e:
+                        self.send_response(500)
+                        self.send_header('Content-Type', 'text/plain')
+                        self.end_headers()
+                        self.wfile.write(str(e).encode())
                 else:
                     body = b'{"summary":"Waiting for first scan...","time":"","signals":{}}'
                     self.send_response(200)
@@ -74,117 +83,69 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 return
 
             if path == '/shadow':
-                import csv, io
                 f = BOT_DIR / 'shadow_shorts.csv'
-                if f.exists():
-                    rows = []
-                    with open(f, newline='', encoding='utf-8', errors='replace') as cf:
-                        for row in csv.DictReader(cf):
-                            rows.append(dict(row))
-                    body = json.dumps(rows).encode()
-                else:
-                    body = b'[]'
+                raw = f.read_bytes() if f.exists() else b''
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Type', 'text/csv')
                 self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Content-Length', str(len(raw)))
                 self.end_headers()
-                self.wfile.write(body)
+                self.wfile.write(raw)
                 return
 
             if path == '/shadowlong':
-                import csv
                 f = BOT_DIR / 'shadow_longs.csv'
-                if f.exists():
-                    rows = []
-                    with open(f, newline='', encoding='utf-8', errors='replace') as cf:
-                        for row in csv.DictReader(cf):
-                            rows.append(dict(row))
-                    body = json.dumps(rows).encode()
-                else:
-                    body = b'[]'
+                raw = f.read_bytes() if f.exists() else b''
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Type', 'text/csv')
                 self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Content-Length', str(len(raw)))
                 self.end_headers()
-                self.wfile.write(body)
+                self.wfile.write(raw)
                 return
 
             if path == '/audit':
-                import csv
                 f = BOT_DIR / 'strategy_audit.csv'
-                if f.exists():
-                    rows = []
-                    with open(f, newline='', encoding='utf-8', errors='replace') as cf:
-                        for row in csv.DictReader(cf):
-                            rows.append(dict(row))
-                    body = json.dumps(rows).encode()
-                else:
-                    body = b'[]'
+                raw = f.read_bytes() if f.exists() else b''
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Type', 'text/csv')
                 self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Content-Length', str(len(raw)))
                 self.end_headers()
-                self.wfile.write(body)
+                self.wfile.write(raw)
                 return
 
             if path == '/rejected':
-                import csv
                 f = BOT_DIR / 'rejected_signals.csv'
-                if f.exists():
-                    rows = []
-                    with open(f, newline='', encoding='utf-8', errors='replace') as cf:
-                        for row in csv.DictReader(cf):
-                            rows.append(dict(row))
-                    body = json.dumps(rows).encode()
-                else:
-                    body = b'[]'
+                raw = f.read_bytes() if f.exists() else b''
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Type', 'text/csv')
                 self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Content-Length', str(len(raw)))
                 self.end_headers()
-                self.wfile.write(body)
+                self.wfile.write(raw)
                 return
 
             if path == '/equity':
-                import csv
                 f = BOT_DIR / 'equity_curve.csv'
-                if f.exists():
-                    rows = []
-                    with open(f, newline='', encoding='utf-8', errors='replace') as cf:
-                        for row in csv.DictReader(cf):
-                            rows.append(dict(row))
-                    body = json.dumps(rows).encode()
-                else:
-                    body = b'[]'
+                raw = f.read_bytes() if f.exists() else b''
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Type', 'text/csv')
                 self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Content-Length', str(len(raw)))
                 self.end_headers()
-                self.wfile.write(body)
+                self.wfile.write(raw)
                 return
 
             if path == '/symbols':
-                import csv
                 f = BOT_DIR / 'symbol_performance.csv'
-                if f.exists():
-                    rows = []
-                    with open(f, newline='', encoding='utf-8', errors='replace') as cf:
-                        for row in csv.DictReader(cf):
-                            rows.append(dict(row))
-                    body = json.dumps(rows).encode()
-                else:
-                    body = b'[]'
+                raw = f.read_bytes() if f.exists() else b''
                 self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
+                self.send_header('Content-Type', 'text/csv')
                 self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Content-Length', str(len(raw)))
                 self.end_headers()
-                self.wfile.write(body)
+                self.wfile.write(raw)
                 return
 
             self.send_response(404)
