@@ -1,5 +1,5 @@
 {
-  "time": "April 03, 2026  02:40:45 PM",
+  "time": "April 03, 2026  02:40:52 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: ETH, SOL. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
@@ -33,19 +33,19 @@
       "be_trigger": 2077.892857
     },
     "SOL-USD": {
-      "price": 79.86,
-      "rsi": 59.475218658892196,
-      "ema200": 83.07316258816014,
+      "price": 79.85,
+      "rsi": 59.35672514619883,
+      "ema200": 83.07306308567257,
       "adx": 39.78494623655873,
       "atr": 0.6571428571428574,
-      "vol24": 90773131.93987997,
+      "vol24": 90775571.00484179,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 78.545714,
-      "tp": 82.488571,
-      "be_trigger": 81.174286
+      "sl": 78.535714,
+      "tp": 82.478571,
+      "be_trigger": 81.164286
     },
     "LINK-USD": {
       "price": 8.703,
