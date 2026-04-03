@@ -396,7 +396,10 @@ def scan(client,state):
                     "signal": sig["direction"]
                 }
         except: pass
-    generate_market_summary(state, scan_results_for_summary, state.get("last_fg", 50), state.get("last_fg_label", "Neutral"), state.get("last_dominance", 50))
+   try:
+        generate_market_summary(state, scan_results_for_summary, state.get("last_fg", 50), state.get("last_fg_label", "Neutral"), state.get("last_dominance", 50))
+    except:
+        pass
 
 
     # ── SHADOW SHORT LOGGER ─────────────────────────────────────────────────
