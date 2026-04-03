@@ -1,5 +1,5 @@
 {
-  "time": "April 03, 2026  03:05:39 PM",
+  "time": "April 03, 2026  03:05:41 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. ADA is the closest with 2 of 3 signals met. Still waiting on: RSI 92 not oversold yet (need < 35). Also watching: BTC, ETH. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
@@ -93,19 +93,19 @@
       "be_trigger": 9.164286
     },
     "ADA-USD": {
-      "price": 0.2506,
-      "rsi": 92.18750000000016,
-      "ema200": 0.24762292819791218,
-      "adx": 92.4812030075188,
-      "atr": 0.002228571428571429,
-      "vol24": 8817925.317226844,
+      "price": 0.251,
+      "rsi": 92.42424242424259,
+      "ema200": 0.24762690829741466,
+      "adx": 92.7536231884058,
+      "atr": 0.0022642857142857148,
+      "vol24": 8845653.499760006,
       "above_ema": true,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 0.246143,
-      "tp": 0.259514,
-      "be_trigger": 0.255057
+      "sl": 0.246471,
+      "tp": 0.260057,
+      "be_trigger": 0.255529
     }
   }
 }
