@@ -1,5 +1,5 @@
 {
-  "time": "April 03, 2026  02:46:17 PM",
+  "time": "April 03, 2026  02:46:21 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: ETH, SOL. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
@@ -33,19 +33,19 @@
       "be_trigger": 2078.052857
     },
     "SOL-USD": {
-      "price": 79.86,
-      "rsi": 59.475218658892196,
-      "ema200": 83.07316258816014,
+      "price": 79.85,
+      "rsi": 59.35672514619883,
+      "ema200": 83.07306308567257,
       "adx": 39.78494623655873,
       "atr": 0.6571428571428574,
-      "vol24": 90799211.95738727,
+      "vol24": 90798888.26458862,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 78.545714,
-      "tp": 82.488571,
-      "be_trigger": 81.174286
+      "sl": 78.535714,
+      "tp": 82.478571,
+      "be_trigger": 81.164286
     },
     "LINK-USD": {
       "price": 8.694,
@@ -63,19 +63,19 @@
       "be_trigger": 8.817429
     },
     "XRP-USD": {
-      "price": 1.3162,
-      "rsi": 50.65789473684203,
-      "ema200": 1.3396514187687827,
+      "price": 1.3161,
+      "rsi": 50.54704595185991,
+      "ema200": 1.339650423743907,
       "adx": 14.500941619585186,
       "atr": 0.009064285714285731,
-      "vol24": 74923020.13110471,
+      "vol24": 74924865.5758901,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 1.298071,
-      "tp": 1.352457,
-      "be_trigger": 1.334329
+      "sl": 1.297971,
+      "tp": 1.352357,
+      "be_trigger": 1.334229
     },
     "AVAX-USD": {
       "price": 8.99,
