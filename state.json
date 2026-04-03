@@ -1,47 +1,30 @@
 {
-  "capital": 1498.7142857142858,
+  "capital": 1500.0,
   "open_trades": {},
-  "trade_history": [
-    {
-      "time": "April 01, 2026  04:31:24 PM",
-      "pair": "GRT-USD",
-      "side": "BUY",
-      "usd": 90.0,
-      "price": 0.0245,
-      "paper": true,
-      "explanation": "Entered LONG GRT: RSI 29 oversold, OBV rising \u2014 buying volume, Price above 200 EMA ($0.02). ADX 27. SL $0.02 TP $0.03."
-    },
-    {
-      "time": "April 01, 2026  08:24:30 PM",
-      "pair": "GRT-USD",
-      "side": "SELL",
-      "usd": 90.0,
-      "price": 0.024149999999999998,
-      "paper": true,
-      "explanation": ""
-    }
-  ],
+  "trade_history": [],
   "daily_pnl": 0.0,
-  "total_pnl": -1.2857142857142971,
+  "total_pnl": 0.0,
   "last_reset": "2026-04-02",
   "stats": {
     "wins": 0,
-    "losses": 1,
-    "total_trades": 2
+    "losses": 0,
+    "breakevens": 0,
+    "total_trades": 0
   },
   "last_fg": 9,
   "last_fg_label": "Extreme Fear",
-  "last_dominance": 56.15019150917491,
+  "last_dominance": 56.10507568099644,
   "last_funding": 0.0,
   "trailing_highs": {},
   "trade_count_today": 0,
   "last_trade_date": "2026-04-01",
   "performance": {
-    "total_trades": 2,
+    "total_trades": 0,
     "wins": 0,
-    "losses": 1,
-    "total_pnl": -1.2857142857142971,
-    "max_drawdown": 0.08571428571428139,
+    "losses": 0,
+    "breakevens": 0,
+    "total_pnl": 0.0,
+    "max_drawdown": 0.0,
     "peak_capital": 1500.0
   },
   "atr_stops": {}

@@ -98,7 +98,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .emp2 span{display:block;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:6px;letter-spacing:1px}
 </style>
 </head>
-<body>
+<body><button onclick="downloadAuditData()" style="position:fixed;bottom:24px;right:24px;z-index:999;font-size:11px;padding:10px 18px;border-radius:8px;border:1px solid rgba(0,230,118,0.4);background:rgba(0,230,118,0.08);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600">⬇ DOWNLOAD AUDIT DATA</button>
 <div class="page">
 <div class="topbar">
   <div><div class="logo">EDGE</div><div class="logo-sub">TRADING BOT v7</div></div>
@@ -264,7 +264,14 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shadowCount"></div>
   </div>
   <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Tracks what the short strategy WOULD have done. Zero risk. Pure data for 90 days.</div>
-  <div id="shadowNarrativeCards" style="margin-bottom:12px"></div><div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div></div>
+  <div id="shadowNarrativeCards" style="margin-bottom:12px"></div>
+<div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div></div>
+<div style="margin-top:10px">
+  <button onclick="toggleShadowTable()" id="shadowToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(255,68,68,0.3);background:rgba(255,68,68,0.06);color:var(--red);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">▼ EXPAND TRADE TABLE</button>
+  <div id="shadowTableWrap" style="display:none;margin-top:10px;overflow-x:auto">
+    <div id="shadowTableContent"></div>
+  </div>
+</div>
 </div>
 <div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div class="pt" style="margin-bottom:0">Shadow Long Audit — DOGE &amp; DOT (No Real Money)</div><div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace" id="slCount"></div></div><div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE and DOT on the long strategy before adding to the live list. 30-day data collection.</div><div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25 on DOGE or DOT</span></div></div></div>
 <div class="panel">
@@ -654,6 +661,109 @@ async function loadShadowNarrative(){
 }
 loadShadowNarrative();
 setInterval(loadShadowNarrative,60000);
+</script>
+
+<script>
+// ── Shadow table expand/collapse ──────────────────────────────────────────────
+let shadowExpanded = false;
+function toggleShadowTable(){
+  shadowExpanded = !shadowExpanded;
+  const wrap = document.getElementById('shadowTableWrap');
+  const btn = document.getElementById('shadowToggleBtn');
+  if(shadowExpanded){
+    wrap.style.display='block';
+    btn.textContent='▲ COLLAPSE TRADE TABLE';
+    loadShadowTable();
+  } else {
+    wrap.style.display='none';
+    btn.textContent='▼ EXPAND TRADE TABLE';
+  }
+}
+
+async function loadShadowTable(){
+  try{
+    const r = await fetch('/shadow');
+    if(!r.ok) return;
+    const rows = await r.json();
+    const el = document.getElementById('shadowTableContent');
+    if(!rows.length){ el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No shadow short trades yet.</div>'; return; }
+    let html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace">';
+    html+='<tr style="border-bottom:1px solid var(--border)">';
+    ['Time','Pair','Entry','Stop','Target','Exit','Outcome','P&L','Notes'].forEach(h=>{
+      html+=`<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">${h}</th>`;
+    });
+    html+='</tr>';
+    rows.forEach(row=>{
+      const isOpen = row.Outcome==='OPEN';
+      const pnl = parseFloat(row['Simulated P&L (%)']||0);
+      const pnlColor = pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--muted)';
+      const outcomeColor = row.Outcome==='WIN'?'var(--green)':row.Outcome==='LOSS'?'var(--red)':isOpen?'rgba(255,171,64,0.9)':'var(--muted)';
+      html+=`<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">
+        <td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">${(row.Timestamp||'').replace('April ','Apr ')}</td>
+        <td style="padding:5px 8px;font-weight:600">${(row.Pair||'').split('-')[0]}</td>
+        <td style="padding:5px 8px">$${parseFloat(row['Virtual Entry']||0).toFixed(4)}</td>
+        <td style="padding:5px 8px;color:var(--red)">$${parseFloat(row['Stop Price']||0).toFixed(4)}</td>
+        <td style="padding:5px 8px;color:var(--green)">$${parseFloat(row['Target Price']||0).toFixed(4)}</td>
+        <td style="padding:5px 8px;color:var(--muted2)">${row['Exit Price']?'$'+parseFloat(row['Exit Price']).toFixed(4):'—'}</td>
+        <td style="padding:5px 8px;color:${outcomeColor};font-weight:600">${row.Outcome||'—'}</td>
+        <td style="padding:5px 8px;color:${pnlColor}">${pnl?pnl.toFixed(2)+'%':'—'}</td>
+        <td style="padding:5px 8px;color:var(--muted);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${row.Notes||''}</td>
+      </tr>`;
+    });
+    html+='</table>';
+    el.innerHTML=html;
+  }catch(e){ console.error(e); }
+}
+
+// ── Download all audit data as zip ────────────────────────────────────────────
+async function downloadAuditData(){
+  const btn = document.querySelector('[onclick="downloadAuditData()"]');
+  const orig = btn.textContent;
+  btn.textContent='⏳ PREPARING...';
+  btn.disabled=true;
+
+  try{
+    const files = [
+      {name:'strategy_audit.csv', url:'/audit'},
+      {name:'rejected_signals.csv', url:'/rejected'},
+      {name:'equity_curve.csv', url:'/equity'},
+      {name:'symbol_performance.csv', url:'/symbols'},
+      {name:'shadow_shorts.csv', url:'/shadow'},
+      {name:'shadow_longs.csv', url:'/shadowlong'}
+    ];
+
+    const now = new Date();
+    const ts = now.getFullYear()+'-'+
+      String(now.getMonth()+1).padStart(2,'0')+'-'+
+      String(now.getDate()).padStart(2,'0')+'_'+
+      String(now.getHours()).padStart(2,'0')+
+      String(now.getMinutes()).padStart(2,'0');
+
+    // Download each file individually since we can't zip in browser without library
+    for(const f of files){
+      try{
+        const r = await fetch(f.url);
+        if(!r.ok) continue;
+        const text = await r.text();
+        if(!text || text.trim()==='[]' || text.trim()==='') continue;
+        const blob = new Blob([text], {type:'text/csv'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `EDGE_v7_${f.name.replace('.csv','')}_${ts}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+        await new Promise(r=>setTimeout(r,300));
+      }catch(e){}
+    }
+    btn.textContent='✅ DOWNLOADED';
+    setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },3000);
+  }catch(e){
+    btn.textContent='❌ ERROR';
+    setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },3000);
+  }
+}
 </script>
 </body>
 </html>

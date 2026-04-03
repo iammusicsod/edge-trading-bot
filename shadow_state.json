@@ -11,5 +11,31 @@
     "outcome": "OPEN",
     "rsi": 67.06161137440736,
     "adx": 64.82758620689633
+  },
+  "SOL-USD": {
+    "entry_price": 79.45,
+    "entry_time": "April 02, 2026  09:21:37 PM",
+    "stop_price": 81.228571,
+    "original_stop": 81.228571,
+    "target_price": 75.892857,
+    "atr": 0.8892857142857115,
+    "lowest_price": 79.11,
+    "at_breakeven": false,
+    "outcome": "OPEN",
+    "rsi": 66.37554585152834,
+    "adx": 26.681127982645904
+  },
+  "XRP-USD": {
+    "entry_price": 1.3153,
+    "entry_time": "April 02, 2026  09:21:37 PM",
+    "stop_price": 1.3375,
+    "original_stop": 1.3375,
+    "target_price": 1.2709,
+    "atr": 0.011100000000000014,
+    "lowest_price": 1.3153,
+    "at_breakeven": false,
+    "outcome": "OPEN",
+    "rsi": 72.22222222222213,
+    "adx": 41.682242990654686
   }
 }
