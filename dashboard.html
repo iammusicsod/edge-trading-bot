@@ -303,25 +303,18 @@ async function fetchState(){
     state=await r.json();
     document.getElementById('cb').textContent='CONNECTED';
     document.getElementById('cb').className='conn ok';
-    updMetrics();updOpen();updHistory();updGrowth();updCal();
+    updMetrics();updOpen();updHistory();updGrowth();updCal();applySummaryFromState();
   }catch(e){
     document.getElementById('cb').textContent='OFFLINE';
     document.getElementById('cb').className='conn err';
   }
 }
 
-async function fetchSummary(){
-  try{
-    var r=await fetch('/summary');
-    var text=await r.text();
-    if(!text||text.trim()==='')return;
-    var d=JSON.parse(text);
-    if(d.summary)document.getElementById('sumText').textContent=d.summary;
-    if(d.time)document.getElementById('sumTime').textContent='Updated: '+d.time;
-    if(d.signals){Object.keys(d.signals).forEach(function(pair){updR(pair,d.signals[pair]);});}
-  }catch(e){console.log('Summary error:',e);}
+function applySummaryFromState(){
+  if(state.ai_summary)document.getElementById('sumText').textContent=state.ai_summary;
+  if(state.ai_summary_time)document.getElementById('sumTime').textContent='Updated: '+state.ai_summary_time;
+  if(state.ai_signals){Object.keys(state.ai_signals).forEach(function(pair){updR(pair,state.ai_signals[pair]);});}
 }
-
 async function fetchPrices(){
   for(var i=0;i<PAIRS.length;i++){
     var p=PAIRS[i];
