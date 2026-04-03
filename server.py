@@ -77,6 +77,50 @@ class Handler(http.server.BaseHTTPRequestHandler):
             elif self.path == '/summary':
                 f = BOT_DIR / 'summary.json'
                 self.send_json(json.loads(f.read_text()) if f.exists() else {"summary": "Waiting for first scan...", "time": ""})
+            elif self.path == '/audit':
+                import csv
+                f = BOT_DIR / 'strategy_audit.csv'
+                if f.exists():
+                    rows = []
+                    with open(f, newline='') as cf:
+                        reader = csv.DictReader(cf)
+                        for row in reader: rows.append(dict(row))
+                    self.send_json(rows)
+                else:
+                    self.send_json([])
+            elif self.path == '/rejected':
+                import csv
+                f = BOT_DIR / 'rejected_signals.csv'
+                if f.exists():
+                    rows = []
+                    with open(f, newline='') as cf:
+                        reader = csv.DictReader(cf)
+                        for row in reader: rows.append(dict(row))
+                    self.send_json(rows)
+                else:
+                    self.send_json([])
+            elif self.path == '/equity':
+                import csv
+                f = BOT_DIR / 'equity_curve.csv'
+                if f.exists():
+                    rows = []
+                    with open(f, newline='') as cf:
+                        reader = csv.DictReader(cf)
+                        for row in reader: rows.append(dict(row))
+                    self.send_json(rows)
+                else:
+                    self.send_json([])
+            elif self.path == '/symbols':
+                import csv
+                f = BOT_DIR / 'symbol_performance.csv'
+                if f.exists():
+                    rows = []
+                    with open(f, newline='') as cf:
+                        reader = csv.DictReader(cf)
+                        for row in reader: rows.append(dict(row))
+                    self.send_json(rows)
+                else:
+                    self.send_json([])
             else:
                 self.send_404()
         except Exception as e:
