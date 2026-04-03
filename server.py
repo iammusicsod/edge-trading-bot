@@ -1,6 +1,7 @@
 import http.server, json, os
 from pathlib import Path
 
+
 BOT_DIR = Path(__file__).parent
 PORT = 8080
 
