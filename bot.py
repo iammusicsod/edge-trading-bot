@@ -854,7 +854,112 @@ def scan(client,state):
 
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
     log(f"  ✅ Next scan at {nxt}.\n");save_state(state)
+# ── WEBSOCKET RISK DESK ─────────────────────────────────────────────────────
+# Real-time stop loss monitor — separate from hourly scanner
+# Watches price tick by tick and exits immediately if stop is breached
+# This is the circuit breaker. The hourly scanner is the portfolio manager.
 
+import threading
+import websocket
+import json as _ws_json
+
+_ws_state_ref = None
+_ws_client_ref = None
+_ws_running = True
+_last_tick_time = {}
+
+def ws_on_message(ws, message):
+    global _ws_state_ref, _ws_client_ref
+    try:
+        data = _ws_json.loads(message)
+        events = data.get("events", [])
+        for event in events:
+            for ticker in event.get("tickers", []):
+                pair = ticker.get("product_id", "")
+                price_str = ticker.get("price", "")
+                if not pair or not price_str:
+                    continue
+                px = float(price_str)
+                _last_tick_time[pair] = time.time()
+
+                if _ws_state_ref is None:
+                    continue
+
+                open_trades = _ws_state_ref.get("open_trades", {})
+                if pair not in open_trades:
+                    continue
+
+                pos = open_trades[pair]
+                sl = pos.get("stop_loss", 0)
+                if sl <= 0:
+                    continue
+
+                if px <= sl:
+                    log(f"  🚨 WEBSOCKET STOP — {pair.split('-')[0]} price ${px:,.4f} breached stop ${sl:,.4f}")
+                    log(f"  ⚡ Circuit breaker firing — exiting position immediately")
+                    place_order(
+                        _ws_client_ref, pair, "SELL",
+                        pos["usd_invested"], px,
+                        _ws_state_ref,
+                        reason="WEBSOCKET_STOP — real-time circuit breaker",
+                        atr=pos.get("atr", 0)
+                    )
+                    save_state(_ws_state_ref)
+                    log(f"  ✅ WEBSOCKET_STOP logged and position closed")
+
+    except Exception as e:
+        log(f"  WebSocket message error: {e}")
+
+def ws_on_error(ws, error):
+    log(f"  ⚠️  WebSocket error: {error}")
+
+def ws_on_close(ws, close_status_code, close_msg):
+    log(f"  ⚠️  WebSocket closed — will reconnect")
+
+def ws_on_open(ws):
+    pairs = CONFIG["pairs"]
+    subscribe_msg = _ws_json.dumps({
+        "type": "subscribe",
+        "product_ids": pairs,
+        "channel": "ticker"
+    })
+    ws.send(subscribe_msg)
+    log(f"  ✅ WebSocket Risk Desk online — watching {len(pairs)} pairs in real time")
+
+def run_websocket_risk_desk(state, client):
+    global _ws_state_ref, _ws_client_ref, _ws_running
+    _ws_state_ref = state
+    _ws_client_ref = client
+    backoff = 1
+
+    while _ws_running:
+        try:
+            log("  🔌 WebSocket Risk Desk connecting...")
+            ws = websocket.WebSocketApp(
+                "wss://advanced-trade-ws.coinbase.com",
+                on_open=ws_on_open,
+                on_message=ws_on_message,
+                on_error=ws_on_error,
+                on_close=ws_on_close
+            )
+            ws.run_forever(ping_interval=30, ping_timeout=10)
+            backoff = min(backoff * 2, 60)
+            log(f"  🔄 WebSocket reconnecting in {backoff}s...")
+            time.sleep(backoff)
+        except Exception as e:
+            log(f"  WebSocket thread error: {e}")
+            time.sleep(backoff)
+            backoff = min(backoff * 2, 60)
+
+def start_risk_desk(state, client):
+    t = threading.Thread(
+        target=run_websocket_risk_desk,
+        args=(state, client),
+        daemon=True
+    )
+    t.start()
+    log("  ✅ WebSocket Risk Desk thread launched")
+    return t
 def main():
     sec("EDGE BOT v7 — FINAL CLEAN VERSION")
     log(f"  Mode:      {'PAPER TRADE' if CONFIG['paper_trade'] else '⚡ LIVE'}")
