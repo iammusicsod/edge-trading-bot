@@ -324,6 +324,15 @@ def scan(client,state):
     state["last_fg"]=fg;state["last_fg_label"]=fgl;state["last_dominance"]=dominance;state["last_funding"]=funding
     log(f"  Fear & Greed: {fg}/100 — {fgl} | BTC Dom: {dominance:.1f}% | Funding: {funding:.4f}%");log("")
     check_exits(client,state)
+    try:
+        sf = Path(__file__).parent / "summary.json"
+        if sf.exists():
+            sd = json.loads(sf.read_bytes().decode('utf-8', errors='replace'))
+            state["ai_summary"] = sd.get("summary", "")
+            state["ai_summary_time"] = sd.get("time", "")
+            state["ai_signals"] = sd.get("signals", {})
+    except:
+        pass
     if not risk_ok(state): save_state(state);return
     for pair in CONFIG["pairs"]:
         coin=pair.split("-")[0];div();log(f"  {coin}");div()
