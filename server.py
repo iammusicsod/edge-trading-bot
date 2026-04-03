@@ -17,9 +17,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def send_text(self, text):
-        body = text.encode()
+        body = text.encode('utf-8', errors='replace')
         self.send_response(200)
-        self.send_header('Content-Type', 'text/plain')
+        self.send_header('Content-Type', 'text/plain; charset=utf-8')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-Length', len(body))
         self.end_headers()
@@ -43,19 +43,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 self.send_html(BOT_DIR / 'dashboard.html')
             elif self.path == '/state':
                 f = BOT_DIR / 'state.json'
-                self.send_json(json.loads(f.read_text()) if f.exists() else {})
+                self.send_json(json.loads(f.read_text(encoding='utf-8')) if f.exists() else {})
             elif self.path == '/log':
                 f = BOT_DIR / 'bot_log.txt'
-                self.send_text(f.read_text() if f.exists() else '')
+                self.send_text(f.read_text(encoding='utf-8', errors='replace') if f.exists() else '')
             elif self.path == '/explanations':
                 f = BOT_DIR / 'trade_explanations.json'
-                self.send_json(json.loads(f.read_text()) if f.exists() else [])
+                self.send_json(json.loads(f.read_text(encoding='utf-8')) if f.exists() else [])
             elif self.path == '/shadow':
                 import csv
                 f = BOT_DIR / 'shadow_shorts.csv'
                 if f.exists():
                     rows = []
-                    with open(f, newline='') as cf:
+                    with open(f, newline='', encoding='utf-8') as cf:
                         reader = csv.DictReader(cf)
                         for row in reader:
                             rows.append(dict(row))
@@ -67,7 +67,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 f = BOT_DIR / 'shadow_longs.csv'
                 if f.exists():
                     rows = []
-                    with open(f, newline='') as cf:
+                    with open(f, newline='', encoding='utf-8') as cf:
                         reader = csv.DictReader(cf)
                         for row in reader:
                             rows.append(dict(row))
@@ -76,13 +76,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     self.send_json([])
             elif self.path == '/summary':
                 f = BOT_DIR / 'summary.json'
-                self.send_json(json.loads(f.read_text()) if f.exists() else {"summary": "Waiting for first scan...", "time": ""})
+                self.send_json(json.loads(f.read_text(encoding='utf-8')) if f.exists() else {"summary": "Waiting for first scan...", "time": ""})
             elif self.path == '/audit':
                 import csv
                 f = BOT_DIR / 'strategy_audit.csv'
                 if f.exists():
                     rows = []
-                    with open(f, newline='') as cf:
+                    with open(f, newline='', encoding='utf-8') as cf:
                         reader = csv.DictReader(cf)
                         for row in reader: rows.append(dict(row))
                     self.send_json(rows)
@@ -93,7 +93,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 f = BOT_DIR / 'rejected_signals.csv'
                 if f.exists():
                     rows = []
-                    with open(f, newline='') as cf:
+                    with open(f, newline='', encoding='utf-8') as cf:
                         reader = csv.DictReader(cf)
                         for row in reader: rows.append(dict(row))
                     self.send_json(rows)
@@ -104,7 +104,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 f = BOT_DIR / 'equity_curve.csv'
                 if f.exists():
                     rows = []
-                    with open(f, newline='') as cf:
+                    with open(f, newline='', encoding='utf-8') as cf:
                         reader = csv.DictReader(cf)
                         for row in reader: rows.append(dict(row))
                     self.send_json(rows)
@@ -115,7 +115,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 f = BOT_DIR / 'symbol_performance.csv'
                 if f.exists():
                     rows = []
-                    with open(f, newline='') as cf:
+                    with open(f, newline='', encoding='utf-8') as cf:
                         reader = csv.DictReader(cf)
                         for row in reader: rows.append(dict(row))
                     self.send_json(rows)
