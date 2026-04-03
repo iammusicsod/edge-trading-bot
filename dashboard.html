@@ -264,7 +264,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shadowCount"></div>
   </div>
   <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Tracks what the short strategy WOULD have done. Zero risk. Pure data for 90 days.</div>
-  <div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div></div>
+  <div id="shadowNarrativeCards" style="margin-bottom:12px"></div><div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div></div>
 </div>
 <div class="panel"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div class="pt" style="margin-bottom:0">Shadow Long Audit — DOGE &amp; DOT (No Real Money)</div><div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace" id="slCount"></div></div><div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE and DOT on the long strategy before adding to the live list. 30-day data collection.</div><div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25 on DOGE or DOT</span></div></div></div>
 <div class="panel">
@@ -594,5 +594,66 @@ async function loadShadowLong(){
 }
 loadShadowLong();
 setInterval(loadShadowLong,60000);
-</script></body>
+</script>
+<script>
+async function loadShadowNarrative(){
+  try{
+    const r=await fetch('/shadow');if(!r.ok)return;
+    const rows=await r.json();
+    const open=rows.filter(r=>r.Outcome==='OPEN');
+    const el=document.getElementById('shadowNarrativeCards');
+    if(!el)return;
+    if(!open.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px 0">No open shadow short positions right now.</div>';return;}
+    let html='';
+    for(const row of open){
+      const pair=row.Pair||'';
+      const coin=pair.split('-')[0];
+      const entry=parseFloat(row['Virtual Entry']||0);
+      const sl=parseFloat(row['Stop Price']||0);
+      const tp=parseFloat(row['Target Price']||0);
+      const notes=row.Notes||'';
+      const rsi=notes.match(/RSI ([\d.]+)/)?.[1]||'—';
+      const adx=notes.match(/ADX ([\d.]+)/)?.[1]||'—';
+      const time=row.Timestamp||'';
+      const range=sl-tp;
+      const mid=(sl+tp)/2;
+      const prog=range>0?Math.max(0,Math.min(100,(sl-mid)/range*100)):50;
+
+      html+=`<div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:12px;padding:16px;margin-bottom:10px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="font-size:16px;font-weight:600">${coin}</div>
+            <div style="font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:1px;font-family:JetBrains Mono,monospace;background:rgba(255,68,68,0.1);color:var(--red)">SHADOW SHORT</div>
+          </div>
+          <div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace">${time}</div>
+        </div>
+        <div style="font-size:13px;color:#c8c8dc;line-height:1.7;margin-bottom:12px;padding:10px 12px;background:var(--s2);border-radius:8px;border-left:3px solid var(--red)">
+          RSI hit <strong style="color:var(--red)">${rsi}</strong> — overbought. ADX at <strong style="color:var(--red)">${adx}</strong> confirming strong downward momentum. Price is below the 200 EMA confirming the downtrend. Shadow short logged to track what the short strategy would have done.
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px">
+          <div style="background:var(--s2);border-radius:6px;padding:8px 10px">
+            <div style="font-size:9px;color:var(--muted);margin-bottom:3px">Virtual Entry</div>
+            <div style="font-family:JetBrains Mono,monospace;font-size:12px">$${entry.toFixed(4)}</div>
+          </div>
+          <div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.2);border-radius:6px;padding:8px 10px">
+            <div style="font-size:9px;color:var(--red);margin-bottom:3px">Stop Loss</div>
+            <div style="font-family:JetBrains Mono,monospace;font-size:12px;color:var(--red)">$${sl.toFixed(4)}</div>
+          </div>
+          <div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.2);border-radius:6px;padding:8px 10px">
+            <div style="font-size:9px;color:var(--green);margin-bottom:3px">Target</div>
+            <div style="font-family:JetBrains Mono,monospace;font-size:12px;color:var(--green)">$${tp.toFixed(4)}</div>
+          </div>
+        </div>
+        <div style="font-size:9px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:3px"><span>Target ↓</span><span>Entry</span><span>Stop ↑</span></div>
+        <div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px"><div style="height:100%;width:50%;background:var(--red);border-radius:2px"></div></div>
+        <div style="font-size:9px;color:var(--muted);margin-top:4px">Zero real money — pure data collection for 90 day short strategy review</div>
+      </div>`;
+    }
+    el.innerHTML=html;
+  }catch(e){}
+}
+loadShadowNarrative();
+setInterval(loadShadowNarrative,60000);
+</script>
+</body>
 </html>
