@@ -1,6 +1,6 @@
 import http.server
 import json
-import os
+import csv
 from pathlib import Path
 
 BOT_DIR = Path(__file__).parent
@@ -10,160 +10,91 @@ class Handler(http.server.BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass
 
+    def send(self, code, body, ctype='application/json'):
+        if isinstance(body, str):
+            body = body.encode('utf-8', errors='replace')
+        self.send_response(code)
+        self.send_header('Content-Type', ctype + '; charset=utf-8')
+        self.send_header('Content-Length', str(len(body)))
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.end_headers()
+        self.wfile.write(body)
+
+    def read_json(self, filepath, default):
+        try:
+            if Path(filepath).exists():
+                raw = Path(filepath).read_bytes()
+                text = raw.decode('utf-8', errors='replace')
+                return json.loads(text)
+            return default
+        except:
+            return default
+
+    def read_csv(self, filepath):
+        rows = []
+        try:
+            if Path(filepath).exists():
+                with open(filepath, newline='', encoding='utf-8', errors='replace') as f:
+                    for row in csv.DictReader(f):
+                        rows.append(dict(row))
+        except:
+            pass
+        return rows
+
     def do_GET(self):
         try:
             path = self.path.split('?')[0]
-            
-            if path == '/summary':
-                f = BOT_DIR / 'summary.json'
-                if f.exists():
-                    try:
-                        raw = f.read_bytes()
-                        self.send_response(200)
-                        self.send_header('Content-Type', 'application/json; charset=utf-8')
-                        self.send_header('Access-Control-Allow-Origin', '*')
-                        self.send_header('Content-Length', str(len(raw)))
-                        self.end_headers()
-                        self.wfile.write(raw)
-                    except Exception as e:
-                        self.send_response(500)
-                        self.send_header('Content-Type', 'text/plain')
-                        self.end_headers()
-                        self.wfile.write(str(e).encode())
-                else:
-                    body = b'{"summary":"Waiting for first scan...","time":"","signals":{}}'
-                    self.send_response(200)
-                    self.send_header('Content-Type', 'application/json')
-                    self.send_header('Access-Control-Allow-Origin', '*')
-                    self.send_header('Content-Length', str(len(body)))
-                    self.end_headers()
-                    self.wfile.write(body)
-                return
 
-            if path == '/' or path == '/index.html':
-                body = open(BOT_DIR / 'dashboard.html', 'rb').read()
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/html')
-                self.send_header('Content-Length', str(len(body)))
-                self.end_headers()
-                self.wfile.write(body)
-                return
+            if path in ('/', '/index.html'):
+                f = BOT_DIR / 'dashboard.html'
+                body = f.read_bytes() if f.exists() else b'Not found'
+                self.send(200, body, 'text/html')
 
-            if path == '/state':
-                f = BOT_DIR / 'state.json'
-                raw = f.read_bytes() if f.exists() else b'{}'
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/state':
+                data = self.read_json(BOT_DIR / 'state.json', {})
+                self.send(200, json.dumps(data, ensure_ascii=True).encode())
 
-            if path == '/log':
+            elif path == '/summary':
+                data = self.read_json(BOT_DIR / 'summary.json', {'summary': 'Waiting for first scan...', 'time': '', 'signals': {}})
+                self.send(200, json.dumps(data, ensure_ascii=True).encode())
+
+            elif path == '/log':
                 f = BOT_DIR / 'bot_log.txt'
                 body = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/plain')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(body)))
-                self.end_headers()
-                self.wfile.write(body)
-                return
+                self.send(200, body, 'text/plain')
 
-            if path == '/explanations':
-                f = BOT_DIR / 'trade_explanations.json'
-                raw = f.read_bytes() if f.exists() else b'[]'
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/explanations':
+                data = self.read_json(BOT_DIR / 'trade_explanations.json', [])
+                self.send(200, json.dumps(data, ensure_ascii=True).encode())
 
-            if path == '/shadow':
-                f = BOT_DIR / 'shadow_shorts.csv'
-                raw = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/csv')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/shadow':
+                self.send(200, json.dumps(self.read_csv(BOT_DIR / 'shadow_shorts.csv'), ensure_ascii=True).encode())
 
-            if path == '/shadowlong':
-                f = BOT_DIR / 'shadow_longs.csv'
-                raw = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/csv')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/shadowlong':
+                self.send(200, json.dumps(self.read_csv(BOT_DIR / 'shadow_longs.csv'), ensure_ascii=True).encode())
 
-            if path == '/audit':
-                f = BOT_DIR / 'strategy_audit.csv'
-                raw = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/csv')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/audit':
+                self.send(200, json.dumps(self.read_csv(BOT_DIR / 'strategy_audit.csv'), ensure_ascii=True).encode())
 
-            if path == '/rejected':
-                f = BOT_DIR / 'rejected_signals.csv'
-                raw = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/csv')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/rejected':
+                self.send(200, json.dumps(self.read_csv(BOT_DIR / 'rejected_signals.csv'), ensure_ascii=True).encode())
 
-            if path == '/equity':
-                f = BOT_DIR / 'equity_curve.csv'
-                raw = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/csv')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/equity':
+                self.send(200, json.dumps(self.read_csv(BOT_DIR / 'equity_curve.csv'), ensure_ascii=True).encode())
 
-            if path == '/symbols':
-                f = BOT_DIR / 'symbol_performance.csv'
-                raw = f.read_bytes() if f.exists() else b''
-                self.send_response(200)
-                self.send_header('Content-Type', 'text/csv')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(raw)))
-                self.end_headers()
-                self.wfile.write(raw)
-                return
+            elif path == '/symbols':
+                self.send(200, json.dumps(self.read_csv(BOT_DIR / 'symbol_performance.csv'), ensure_ascii=True).encode())
 
-            self.send_response(404)
-            self.end_headers()
+            else:
+                self.send(404, b'Not found', 'text/plain')
 
         except Exception as e:
             try:
-                msg = str(e).encode('utf-8', errors='replace')
-                self.send_response(500)
-                self.send_header('Content-Type', 'text/plain')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.send_header('Content-Length', str(len(msg)))
-                self.end_headers()
-                self.wfile.write(msg)
+                self.send(500, str(e).encode('utf-8', errors='replace'), 'text/plain')
             except:
                 pass
 
 if __name__ == '__main__':
     server = http.server.HTTPServer(('', PORT), Handler)
-    print(f'Dashboard server running on port {PORT}')
+    print(f'Dashboard running on port {PORT}')
     server.serve_forever()
