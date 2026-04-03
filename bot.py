@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import json,time,math,schedule,urllib.request
+import json,time,math,schedule,urllib.request,os
 from datetime import datetime,timedelta
 from pathlib import Path
 from coinbase.rest import RESTClient
@@ -37,7 +37,6 @@ def save_explanation(exp):
     exps.insert(0,exp);exps=exps[:50];json.dump(exps,open(TRADES_FILE,"w"),indent=2,default=str)
 
 def load_client():
-    import os
     ak=os.environ.get("API_KEY_NAME");ap=os.environ.get("API_KEY_PRIVATE")
     if ak and ap: return RESTClient(api_key=ak,api_secret=ap)
     k=json.load(open(Path(__file__).parent/CONFIG["api_key_file"]))
@@ -66,15 +65,15 @@ def get_funding_rate():
 
 def generate_market_summary(state, scan_results, fg, fgl, dominance):
     """Call Claude API to generate plain English market summary"""
-    import urllib.request, json
+    api_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if not api_key:
+        log("  ⚠️  No ANTHROPIC_API_KEY — skipping AI summary")
+        return None
 
     fg_val = state.get("last_fg", fg)
     cap = state.get("capital", 1500)
     open_trades = state.get("open_trades", {})
-    st = state.get("stats", {})
 
-    # Build context for Claude
-    coin_lines = []
     closest = []
     waiting = []
     for pair, data in scan_results.items():
@@ -98,7 +97,6 @@ def generate_market_summary(state, scan_results, fg, fgl, dominance):
         else:
             waiting.append(f"{coin} — no conditions met, RSI {rsi:.0f}, {'above' if above_ema else 'below'} 200 EMA, ADX {data.get('adx',0):.0f}")
 
-    open_summary = ""
     if open_trades:
         for pair, pos in open_trades.items():
             coin = pair.split("-")[0]
@@ -142,19 +140,19 @@ Rules:
             data=payload,
             headers={
                 "content-type": "application/json",
-                "anthropic-version": "2023-06-01"
+                "anthropic-version": "2023-06-01",
+                "x-api-key": api_key
             }
         )
         with urllib.request.urlopen(req, timeout=15) as r:
             resp = json.loads(r.read())
             summary = resp["content"][0]["text"].strip()
-            # Save to file
-            import pathlib
-            summary_file = pathlib.Path(__file__).parent / "market_summary.json"
+            summary_file = Path(__file__).parent / "market_summary.json"
             json.dump({"summary": summary, "time": now_str()}, open(summary_file, "w"))
             log(f"  📝 Market summary updated")
             return summary
     except Exception as e:
+        log(f"  ⚠️  Market summary API error: {e}")
         return None
 
 
@@ -334,7 +332,6 @@ def scan(client,state):
         if not candles: log("  No data");continue
         closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
         lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
-        # Spread guard — skip if bid/ask spread > 0.2%
         try:
             bbo = client.get_best_bid_ask(product_ids=[pair])
             bids = bbo.pricebooks[0].bids
@@ -364,6 +361,7 @@ def scan(client,state):
             usd=pos_size(state,atrv,px)
             if usd>=10: place_order(client,pair,"BUY",usd,px,state,signal["reason"],atrv)
             else: log(f"  Too small ${usd:.2f}")
+
     st=state["stats"];perf=state["performance"];t=st["total_trades"];wr=(st["wins"]/t*100) if t else 0
     gr=(state["capital"]-CONFIG["starting_capital"])/CONFIG["starting_capital"]*100
     sec(f"PORTFOLIO — {'PAPER' if CONFIG['paper_trade'] else 'LIVE'}")
@@ -374,85 +372,57 @@ def scan(client,state):
         for p2,pos in state["open_trades"].items():
             be_s="✅ BE active" if pos.get("at_breakeven") else f"BE at ${pos.get('be_trigger',0):,.4f}"
             log(f"  • {p2} ${pos['usd_invested']:.2f} @ ${pos['entry_price']:,.4f} | SL ${pos.get('stop_loss',0):,.4f} | TP ${pos.get('take_profit',0):,.4f} | {be_s}")
-    else: log("  Holding cash — waiting for clean setup")
+    else:
+        log("  Holding cash — waiting for clean setup")
     div("═")
-    # Generate market summary
+
+    # ── BUILD SUMMARY DATA FROM SCAN RESULTS ────────────────────────────────
     scan_results_for_summary = {}
     for pair in CONFIG["pairs"]:
         if pair in state.get("open_trades", {}):
             continue
-        try:
-            candles = get_candles(client, pair)
-            if candles and len(candles) >= 210:
-                closes = [float(c.close) for c in candles]
-                highs = [float(c.high) for c in candles]
-                lows = [float(c.low) for c in candles]
-                volumes = [float(c.volume) for c in candles]
-                sig = analyze(pair, closes, highs, lows, volumes)
-                scan_results_for_summary[pair] = {
-                    "rsi": sig["indicators"].get("rsi", 50),
-                    "above_ema": sig["indicators"].get("above_ema", False),
-                    "adx": sig["indicators"].get("adx", 0),
-                    "signal": sig["direction"]
-                }
-        except: pass
-        try:
-                generate_market_summary(state, scan_results_for_summary, state.get("last_fg", 50), state.get("last_fg_label", "Neutral"), state.get("last_dominance", 50))
-        except:
-                pass    
+        if pair in _scan_signals:
+            s = _scan_signals[pair]
+            scan_results_for_summary[pair] = {
+                "rsi": s.get("rsi", 50),
+                "above_ema": s.get("above_ema", False),
+                "adx": s.get("adx", 0),
+                "signal": "BUY" if (s.get("oversold") and s.get("above_ema") and s.get("trending") and s.get("vol_ok")) else "HOLD"
+            }
 
     # ── SHADOW SHORT LOGGER ─────────────────────────────────────────────────
-    # Tracks virtual short signals without placing any real trades
-    # Mirror of long logic: RSI > 65, Price < 200 EMA, ADX > 25
     try:
         import csv
         shadow_file = Path(__file__).parent / "shadow_shorts.csv"
         shadow_state_file = Path(__file__).parent / "shadow_state.json"
-
-        # Load existing shadow positions
         shadow_state = {}
         if shadow_state_file.exists():
             try: shadow_state = json.load(open(shadow_state_file))
             except: shadow_state = {}
 
-        # Check open shadow positions for TP/SL hits
         for s_pair, s_pos in list(shadow_state.items()):
             if s_pos.get("outcome") != "OPEN": continue
             s_px = _scan_signals.get(s_pair, {}).get("price", 0)
             if s_px == 0: continue
             s_entry = s_pos["entry_price"]
-            s_sl = s_pos["stop_price"]
-            s_tp = s_pos["target_price"]
             s_atr = s_pos["atr"]
-            s_highest_drop = s_pos.get("lowest_price", s_entry)
-
-            # Update lowest price
-            if s_px < s_highest_drop:
+            if s_px < s_pos.get("lowest_price", s_entry):
                 s_pos["lowest_price"] = s_px
                 shadow_state[s_pair] = s_pos
-
-            # Breakeven check
             be_trigger = s_entry - s_atr * 2.0
             if not s_pos.get("at_breakeven") and s_px <= be_trigger:
                 s_pos["at_breakeven"] = True
                 s_pos["stop_price"] = s_entry
                 shadow_state[s_pair] = s_pos
                 log(f"  📊 SHADOW {s_pair.split('-')[0]}: Breakeven triggered at ${s_px:,.4f}")
-
-            # Trailing stop after breakeven
             if s_pos.get("at_breakeven"):
                 trail = s_pos.get("lowest_price", s_px) + s_atr * 1.5
                 if trail < s_pos["stop_price"]:
                     s_pos["stop_price"] = trail
                     shadow_state[s_pair] = s_pos
-
-            # Check exits
             outcome = None
-            if s_px >= s_pos["stop_price"]:
-                outcome = "STOP LOSS"
-            elif s_px <= s_tp:
-                outcome = "TAKE PROFIT"
-
+            if s_px >= s_pos["stop_price"]: outcome = "STOP LOSS"
+            elif s_px <= s_pos["target_price"]: outcome = "TAKE PROFIT"
             if outcome:
                 pnl_pct = (s_entry - s_px) / s_entry * 100
                 s_pos["outcome"] = outcome
@@ -461,22 +431,13 @@ def scan(client,state):
                 s_pos["pnl_pct"] = round(pnl_pct, 2)
                 shadow_state[s_pair] = s_pos
                 log(f"  📊 SHADOW SHORT {s_pair.split('-')[0]}: {outcome} @ ${s_px:,.4f} | P&L: {pnl_pct:+.2f}%")
-
-                # Write to CSV
                 file_exists = shadow_file.exists()
                 with open(shadow_file, "a", newline="") as f:
                     writer = csv.writer(f)
                     if not file_exists:
                         writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
-                    writer.writerow([
-                        s_pos["entry_time"], s_pair,
-                        s_pos["entry_price"], s_pos["original_stop"],
-                        s_pos["target_price"], s_px, now_str(),
-                        outcome, round(pnl_pct, 2),
-                        f"ADX {s_pos.get('adx',0):.0f} at entry"
-                    ])
+                    writer.writerow([s_pos["entry_time"], s_pair, s_pos["entry_price"], s_pos["original_stop"], s_pos["target_price"], s_px, now_str(), outcome, round(pnl_pct, 2), f"ADX {s_pos.get('adx',0):.0f} at entry"])
 
-        # Check for new shadow short signals
         for pair in list(CONFIG["pairs"]) + ["DOGE-USD", "DOT-USD", "SUI-USD", "LTC-USD"]:
             if pair not in _scan_signals: continue
             if pair in shadow_state and shadow_state[pair].get("outcome") == "OPEN": continue
@@ -487,51 +448,33 @@ def scan(client,state):
             adx = s.get("adx", 0)
             atr = s.get("atr", 0)
             if px == 0 or atr == 0: continue
-
-            # Short signal: RSI overbought, price BELOW 200 EMA, ADX trending
             overbought = rsi > 65
             below_ema = not above_ema
             trending = adx >= CONFIG["adx_threshold"]
-
             if overbought and below_ema and trending:
                 sl = round(px + atr * 2.0, 6)
                 tp = round(px - atr * 4.0, 6)
                 coin = pair.split("-")[0]
                 log(f"  📊 SHADOW SHORT signal — {coin} @ ${px:,.4f} | RSI {rsi:.0f} | ADX {adx:.0f}")
-                log(f"     Virtual SL: ${sl:,.6f} | Virtual TP: ${tp:,.6f}")
-                shadow_state[pair] = {
-                    "entry_price": px, "entry_time": now_str(),
-                    "stop_price": sl, "original_stop": sl,
-                    "target_price": tp, "atr": atr,
-                    "lowest_price": px, "at_breakeven": False,
-                    "outcome": "OPEN", "rsi": rsi, "adx": adx
-                }
-                # Write entry to CSV
+                shadow_state[pair] = {"entry_price": px, "entry_time": now_str(), "stop_price": sl, "original_stop": sl, "target_price": tp, "atr": atr, "lowest_price": px, "at_breakeven": False, "outcome": "OPEN", "rsi": rsi, "adx": adx}
                 file_exists = shadow_file.exists()
                 with open(shadow_file, "a", newline="") as f:
                     writer = csv.writer(f)
                     if not file_exists:
                         writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
-                    writer.writerow([
-                        now_str(), pair, px, sl, tp, "", "", "OPEN", "",
-                        f"RSI {rsi:.0f} overbought | ADX {adx:.0f} trending"
-                    ])
+                    writer.writerow([now_str(), pair, px, sl, tp, "", "", "OPEN", "", f"RSI {rsi:.0f} overbought | ADX {adx:.0f} trending"])
 
         json.dump(shadow_state, open(shadow_state_file, "w"), indent=2, default=str)
     except Exception as se:
         log(f"  Shadow logger error: {se}")
 
-
-
     # ── STRATEGY AUDIT LOGGER ───────────────────────────────────────────────
-    # Logs every decision the bot makes for 30/90 day AI analysis
     try:
         import csv
         audit_file = Path(__file__).parent / "strategy_audit.csv"
         rejected_file = Path(__file__).parent / "rejected_signals.csv"
         equity_file = Path(__file__).parent / "equity_curve.csv"
 
-        # 1. EQUITY CURVE — daily snapshot
         equity_exists = equity_file.exists()
         with open(equity_file, "a", newline="") as f:
             writer = csv.writer(f)
@@ -540,20 +483,8 @@ def scan(client,state):
             st2 = state.get("stats", {})
             t2 = st2.get("total_trades", 0)
             wr2 = round(st2.get("wins", 0) / t2 * 100, 1) if t2 else 0
-            writer.writerow([
-                now_str(),
-                date_str(),
-                round(state.get("capital", 1500), 2),
-                round(state.get("total_pnl", 0), 2),
-                round(state.get("daily_pnl", 0), 2),
-                len(state.get("open_trades", {})),
-                wr2, t2,
-                st2.get("wins", 0),
-                st2.get("losses", 0),
-                round(state.get("performance", {}).get("max_drawdown", 0), 2)
-            ])
+            writer.writerow([now_str(), date_str(), round(state.get("capital", 1500), 2), round(state.get("total_pnl", 0), 2), round(state.get("daily_pnl", 0), 2), len(state.get("open_trades", {})), wr2, t2, st2.get("wins", 0), st2.get("losses", 0), round(state.get("performance", {}).get("max_drawdown", 0), 2)])
 
-        # 2. REJECTED SIGNALS — RSI + EMA lined up but ADX too low
         rejected_exists = rejected_file.exists()
         for pair, s in _scan_signals.items():
             px = s.get("price", 0)
@@ -565,8 +496,6 @@ def scan(client,state):
             oversold = rv < CONFIG["rsi_oversold"]
             vol_ok = s.get("vol_ok", True)
             trending = adxv >= CONFIG["adx_threshold"]
-
-            # RSI oversold + above EMA but ADX not trending = rejected signal
             if oversold and above and not trending and vol_ok and px > 0:
                 with open(rejected_file, "a", newline="") as f:
                     writer = csv.writer(f)
@@ -575,26 +504,17 @@ def scan(client,state):
                         rejected_exists = True
                     sl_pot = round(px - atrv * CONFIG["atr_sl_mult"], 6)
                     tp_pot = round(px + atrv * CONFIG["atr_tp_mult"], 6)
-                    writer.writerow([
-                        now_str(), pair,
-                        round(rv, 1), round(adxv, 1), CONFIG["adx_threshold"],
-                        px, round(e200, 4), round(atrv, 6),
-                        f"ADX {adxv:.0f} below threshold {CONFIG['adx_threshold']}",
-                        sl_pot, tp_pot
-                    ])
+                    writer.writerow([now_str(), pair, round(rv, 1), round(adxv, 1), CONFIG["adx_threshold"], px, round(e200, 4), round(atrv, 6), f"ADX {adxv:.0f} below threshold {CONFIG['adx_threshold']}", sl_pot, tp_pot])
 
-        # 3. AUDIT LOG — every completed trade with full details
         audit_exists = audit_file.exists()
         history = state.get("trade_history", [])
         if len(history) >= 2:
-            # Check last two entries for a completed buy/sell pair
             last = history[-1]
             if last.get("side") == "SELL":
-                # Find matching buy
                 for i in range(len(history)-2, -1, -1):
                     prev = history[i]
                     if prev.get("pair") == last.get("pair") and prev.get("side") == "BUY":
-                        entry_px = parseFloat = float(prev.get("price", 0))
+                        entry_px = float(prev.get("price", 0))
                         exit_px = float(last.get("price", 0))
                         usd = float(prev.get("usd", 0))
                         pnl = (exit_px - entry_px) / entry_px * usd if entry_px > 0 else 0
@@ -610,8 +530,6 @@ def scan(client,state):
                                 if not audit_exists:
                                     writer.writerow(["Trade_ID","Type","Pair","Entry_Time","Exit_Time","Entry_Price","Exit_Price","Stop_Loss","Take_Profit","Position_Size_USD","PnL_USD","PnL_Pct","Outcome","RSI_At_Entry","ADX_At_Entry","Entry_Reason","Max_Price_Reached","Min_Price_Reached","MFE_Pct","MAE_Pct"])
                                     audit_exists = True
-                                pos_data = {}
-                                # Try to get trade details from explanations
                                 exps = []
                                 if TRADES_FILE.exists():
                                     try: exps = json.load(open(TRADES_FILE))
@@ -622,24 +540,13 @@ def scan(client,state):
                                 else: outcome = "STOP LOSS"
                                 import hashlib
                                 trade_id = hashlib.md5(f"{prev.get('pair')}{prev.get('time')}".encode()).hexdigest()[:8].upper()
-                                # Get MAE/MFE from open trade history
                                 max_price = exp_data.get("max_price", exit_px)
                                 min_price = exp_data.get("min_price", exit_px)
                                 mfe = round((max_price - entry_px) / entry_px * 100, 2) if entry_px > 0 else 0
                                 mae = round((entry_px - min_price) / entry_px * 100, 2) if entry_px > 0 else 0
-                                writer.writerow([
-                                    trade_id, "LONG",
-                                    prev.get("pair", ""), prev.get("time", ""), last.get("time", ""),
-                                    entry_px, exit_px,
-                                    exp_data.get("stop_loss", ""), exp_data.get("take_profit", ""),
-                                    usd, round(pnl, 2), round(pnl_pct, 2),
-                                    outcome, "", "",
-                                    prev.get("explanation", ""),
-                                    max_price, min_price, mfe, mae
-                                ])
+                                writer.writerow([trade_id, "LONG", prev.get("pair", ""), prev.get("time", ""), last.get("time", ""), entry_px, exit_px, exp_data.get("stop_loss", ""), exp_data.get("take_profit", ""), usd, round(pnl, 2), round(pnl_pct, 2), outcome, "", "", prev.get("explanation", ""), max_price, min_price, mfe, mae])
                         break
 
-        # 4. SYMBOL PERFORMANCE SUMMARY — update per-coin stats
         perf_file = Path(__file__).parent / "symbol_performance.csv"
         coin_stats = {}
         if audit_file.exists():
@@ -652,10 +559,8 @@ def scan(client,state):
                     coin_stats[pair]["trades"] += 1
                     pnl_val = float(row.get("PnL_USD", 0) or 0)
                     coin_stats[pair]["total_pnl"] += pnl_val
-                    if row.get("Outcome") == "TAKE PROFIT":
-                        coin_stats[pair]["wins"] += 1
-                    elif row.get("Outcome") == "STOP LOSS":
-                        coin_stats[pair]["losses"] += 1
+                    if row.get("Outcome") == "TAKE PROFIT": coin_stats[pair]["wins"] += 1
+                    elif row.get("Outcome") == "STOP LOSS": coin_stats[pair]["losses"] += 1
         if coin_stats:
             with open(perf_file, "w", newline="") as f:
                 writer = csv.writer(f)
@@ -664,35 +569,29 @@ def scan(client,state):
                     wr3 = round(cs["wins"] / cs["trades"] * 100, 1) if cs["trades"] else 0
                     avg = round(cs["total_pnl"] / cs["trades"], 2) if cs["trades"] else 0
                     writer.writerow([pair, cs["trades"], cs["wins"], cs["losses"], wr3, round(cs["total_pnl"], 2), avg])
-
     except Exception as ae:
         log(f"  Audit logger error: {ae}")
 
-    # ── SHADOW LONG LOGGER — DOGE & DOT AUDIT ──────────────────────────────
-    # Tracks virtual long signals on DOGE and DOT without placing real trades
-    # Same logic as live bot — RSI < 35, Price > 200 EMA, ADX > 25
+    # ── SHADOW LONG LOGGER ──────────────────────────────────────────────────
     try:
+        import csv
         SHADOW_LONG_PAIRS = ["DOGE-USD", "DOT-USD", "SUI-USD", "LTC-USD"]
         shadow_long_file = Path(__file__).parent / "shadow_longs.csv"
         shadow_long_state_file = Path(__file__).parent / "shadow_long_state.json"
-
         shadow_long_state = {}
         if shadow_long_state_file.exists():
             try: shadow_long_state = json.load(open(shadow_long_state_file))
             except: shadow_long_state = {}
 
-        # Fetch candles and analyze for shadow long pairs
         for pair in SHADOW_LONG_PAIRS:
             coin = pair.split("-")[0]
             try:
                 candles = get_candles(client, pair)
-                if not candles or len(candles) < 210:
-                    continue
+                if not candles or len(candles) < 210: continue
                 closes  = [float(c.close)  for c in candles]
                 highs   = [float(c.high)   for c in candles]
                 lows    = [float(c.low)    for c in candles]
                 volumes = [float(c.volume) for c in candles]
-
                 px    = closes[-1]
                 rv    = calc_rsi(closes)
                 e200  = calc_ema(closes, CONFIG["ema_period"])
@@ -704,41 +603,27 @@ def scan(client,state):
                 oversold = rv < CONFIG["rsi_oversold"]
                 vol_ok = vol24 >= CONFIG["min_volume_24h"]
 
-                # Check open shadow long positions
                 if pair in shadow_long_state and shadow_long_state[pair].get("outcome") == "OPEN":
                     pos = shadow_long_state[pair]
-                    s_entry  = pos["entry_price"]
-                    s_sl     = pos["stop_price"]
-                    s_tp     = pos["target_price"]
-                    s_atr    = pos["atr"]
-                    s_high   = pos.get("highest_price", px)
-
-                    if px > s_high:
+                    s_entry = pos["entry_price"]
+                    s_atr = pos["atr"]
+                    if px > pos.get("highest_price", px):
                         pos["highest_price"] = px
                         shadow_long_state[pair] = pos
-
-                    # Breakeven
                     be_trigger = s_entry + s_atr * 2.0
                     if not pos.get("at_breakeven") and px >= be_trigger:
                         pos["at_breakeven"] = True
                         pos["stop_price"] = s_entry
                         shadow_long_state[pair] = pos
                         log(f"  📊 SHADOW LONG {coin}: Breakeven triggered at ${px:,.4f}")
-
-                    # Trailing after breakeven
                     if pos.get("at_breakeven"):
                         trail = pos.get("highest_price", px) - s_atr * 1.5
                         if trail > pos["stop_price"]:
                             pos["stop_price"] = trail
                             shadow_long_state[pair] = pos
-
-                    # Check exits
                     outcome = None
-                    if px <= pos["stop_price"]:
-                        outcome = "STOP LOSS"
-                    elif px >= s_tp:
-                        outcome = "TAKE PROFIT"
-
+                    if px <= pos["stop_price"]: outcome = "STOP LOSS"
+                    elif px >= pos["target_price"]: outcome = "TAKE PROFIT"
                     if outcome:
                         pnl_pct = (px - s_entry) / s_entry * 100
                         pos["outcome"] = outcome
@@ -747,44 +632,23 @@ def scan(client,state):
                         pos["pnl_pct"] = round(pnl_pct, 2)
                         shadow_long_state[pair] = pos
                         log(f"  📊 SHADOW LONG {coin}: {outcome} @ ${px:,.4f} | P&L: {pnl_pct:+.2f}%")
-
-                        import csv
                         file_exists = shadow_long_file.exists()
                         with open(shadow_long_file, "a", newline="") as f:
                             writer = csv.writer(f)
                             if not file_exists:
                                 writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
-                            writer.writerow([
-                                pos["entry_time"], pair,
-                                pos["entry_price"], pos["original_stop"],
-                                pos["target_price"], px, now_str(),
-                                outcome, round(pnl_pct, 2),
-                                f"RSI {pos.get('rsi',0):.0f} | ADX {pos.get('adx',0):.0f} at entry"
-                            ])
-
-                # Check for new shadow long signal
+                            writer.writerow([pos["entry_time"], pair, pos["entry_price"], pos["original_stop"], pos["target_price"], px, now_str(), outcome, round(pnl_pct, 2), f"RSI {pos.get('rsi',0):.0f} | ADX {pos.get('adx',0):.0f} at entry"])
                 elif oversold and above and trending and vol_ok:
                     sl = round(px - atrv * CONFIG["atr_sl_mult"], 6)
                     tp = round(px + atrv * CONFIG["atr_tp_mult"], 6)
                     log(f"  📊 SHADOW LONG signal — {coin} @ ${px:,.4f} | RSI {rv:.0f} | ADX {adxv:.0f}")
-                    log(f"     Virtual SL: ${sl:,.6f} | Virtual TP: ${tp:,.6f}")
-                    shadow_long_state[pair] = {
-                        "entry_price": px, "entry_time": now_str(),
-                        "stop_price": sl, "original_stop": sl,
-                        "target_price": tp, "atr": atrv,
-                        "highest_price": px, "at_breakeven": False,
-                        "outcome": "OPEN", "rsi": rv, "adx": adxv
-                    }
-                    import csv
+                    shadow_long_state[pair] = {"entry_price": px, "entry_time": now_str(), "stop_price": sl, "original_stop": sl, "target_price": tp, "atr": atrv, "highest_price": px, "at_breakeven": False, "outcome": "OPEN", "rsi": rv, "adx": adxv}
                     file_exists = shadow_long_file.exists()
                     with open(shadow_long_file, "a", newline="") as f:
                         writer = csv.writer(f)
                         if not file_exists:
                             writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
-                        writer.writerow([
-                            now_str(), pair, px, sl, tp, "", "", "OPEN", "",
-                            f"RSI {rv:.0f} oversold | ADX {adxv:.0f} trending | Vol ${vol24/1e6:.1f}M"
-                        ])
+                        writer.writerow([now_str(), pair, px, sl, tp, "", "", "OPEN", "", f"RSI {rv:.0f} oversold | ADX {adxv:.0f} trending | Vol ${vol24/1e6:.1f}M"])
                 else:
                     missing = []
                     if not oversold:  missing.append(f"RSI {rv:.0f}")
@@ -792,7 +656,6 @@ def scan(client,state):
                     if not trending:  missing.append(f"ADX {adxv:.0f}")
                     if not vol_ok:    missing.append(f"Vol ${vol24/1e6:.1f}M low")
                     log(f"  📊 SHADOW {coin}: Waiting — {' | '.join(missing)}")
-
             except Exception as pe:
                 log(f"  Shadow long {coin} error: {pe}")
 
@@ -800,20 +663,26 @@ def scan(client,state):
     except Exception as sle:
         log(f"  Shadow long logger error: {sle}")
 
-    # Generate plain English market summary
+    # ── GENERATE MARKET SUMMARY (AI + local fallback) ────────────────────────
+    # First try Claude API for conversational summary
+    try:
+        ai_summary = generate_market_summary(state, scan_results_for_summary, fg, fgl, dominance)
+    except Exception as e:
+        ai_summary = None
+        log(f"  AI summary error: {e}")
+
+    # Always write local summary to summary.json (this is what the dashboard reads)
     try:
         all_below_ema = True
         closest = []
         for pair in CONFIG["pairs"]:
-            if pair not in _scan_signals:
-                continue
+            if pair not in _scan_signals: continue
             s = _scan_signals[pair]
             oversold  = s.get("rsi", 50) < CONFIG["rsi_oversold"]
             above_ema = s.get("above_ema", False)
             trending  = s.get("adx", 0) >= CONFIG["adx_threshold"]
             vol_ok    = s.get("vol_ok", True)
-            if above_ema:
-                all_below_ema = False
+            if above_ema: all_below_ema = False
             met = sum([oversold, above_ema, trending, vol_ok])
             missing = []
             if not oversold:  missing.append(f"RSI {s.get('rsi',50):.0f} not oversold yet (need < {CONFIG['rsi_oversold']})")
@@ -824,8 +693,6 @@ def scan(client,state):
             closest.append((coin, met, missing, all_3))
 
         closest.sort(key=lambda x: -x[1])
-        fg  = state.get("last_fg", 50)
-        fgl = state.get("last_fg_label", "Neutral")
         lines = [f"Market sentiment: Fear & Greed {fg}/100 — {fgl}."]
 
         ready = [c for c in closest if c[3]]
@@ -850,20 +717,22 @@ def scan(client,state):
         if not ready:
             lines.append("No trades taken this scan. Bot is being patient — all 3 signals must agree before any entry.")
 
+        # Use AI summary if available, otherwise use local summary
+        final_summary = ai_summary if ai_summary else " ".join(lines)
+
         import json as _json
         sf = Path(__file__).parent / "summary.json"
-        _json.dump({"time": now_str(), "summary": " ".join(lines), "signals": _scan_signals}, open(sf, "w"), indent=2, default=str)
+        _json.dump({"time": now_str(), "summary": final_summary, "signals": _scan_signals}, open(sf, "w"), indent=2, default=str)
+        log(f"  ✅ Summary written to summary.json")
     except Exception as se:
         log(f"  Summary error: {se}")
 
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
+    log(f"  ✅ Next scan at {nxt}.\n")
+    save_state(state)
 
-    log(f"  ✅ Next scan at {nxt}.\n");save_state(state)
+
 # ── WEBSOCKET RISK DESK ─────────────────────────────────────────────────────
-# Real-time stop loss monitor — separate from hourly scanner
-# Watches price tick by tick and exits immediately if stop is breached
-# This is the circuit breaker. The hourly scanner is the portfolio manager.
-
 import threading
 import websocket
 import json as _ws_json
@@ -882,36 +751,21 @@ def ws_on_message(ws, message):
             for ticker in event.get("tickers", []):
                 pair = ticker.get("product_id", "")
                 price_str = ticker.get("price", "")
-                if not pair or not price_str:
-                    continue
+                if not pair or not price_str: continue
                 px = float(price_str)
                 _last_tick_time[pair] = time.time()
-
-                if _ws_state_ref is None:
-                    continue
-
+                if _ws_state_ref is None: continue
                 open_trades = _ws_state_ref.get("open_trades", {})
-                if pair not in open_trades:
-                    continue
-
+                if pair not in open_trades: continue
                 pos = open_trades[pair]
                 sl = pos.get("stop_loss", 0)
-                if sl <= 0:
-                    continue
-
+                if sl <= 0: continue
                 if px <= sl:
                     log(f"  🚨 WEBSOCKET STOP — {pair.split('-')[0]} price ${px:,.4f} breached stop ${sl:,.4f}")
                     log(f"  ⚡ Circuit breaker firing — exiting position immediately")
-                    place_order(
-                        _ws_client_ref, pair, "SELL",
-                        pos["usd_invested"], px,
-                        _ws_state_ref,
-                        reason="WEBSOCKET_STOP — real-time circuit breaker",
-                        atr=pos.get("atr", 0)
-                    )
+                    place_order(_ws_client_ref, pair, "SELL", pos["usd_invested"], px, _ws_state_ref, reason="WEBSOCKET_STOP — real-time circuit breaker", atr=pos.get("atr", 0))
                     save_state(_ws_state_ref)
                     log(f"  ✅ WEBSOCKET_STOP logged and position closed")
-
     except Exception as e:
         log(f"  WebSocket message error: {e}")
 
@@ -923,11 +777,7 @@ def ws_on_close(ws, close_status_code, close_msg):
 
 def ws_on_open(ws):
     pairs = CONFIG["pairs"]
-    subscribe_msg = _ws_json.dumps({
-        "type": "subscribe",
-        "product_ids": pairs,
-        "channel": "ticker"
-    })
+    subscribe_msg = _ws_json.dumps({"type": "subscribe", "product_ids": pairs, "channel": "ticker"})
     ws.send(subscribe_msg)
     log(f"  ✅ WebSocket Risk Desk online — watching {len(pairs)} pairs in real time")
 
@@ -936,17 +786,10 @@ def run_websocket_risk_desk(state, client):
     _ws_state_ref = state
     _ws_client_ref = client
     backoff = 1
-
     while _ws_running:
         try:
             log("  🔌 WebSocket Risk Desk connecting...")
-            ws = websocket.WebSocketApp(
-                "wss://advanced-trade-ws.coinbase.com",
-                on_open=ws_on_open,
-                on_message=ws_on_message,
-                on_error=ws_on_error,
-                on_close=ws_on_close
-            )
+            ws = websocket.WebSocketApp("wss://advanced-trade-ws.coinbase.com", on_open=ws_on_open, on_message=ws_on_message, on_error=ws_on_error, on_close=ws_on_close)
             ws.run_forever(ping_interval=30, ping_timeout=10)
             backoff = min(backoff * 2, 60)
             log(f"  🔄 WebSocket reconnecting in {backoff}s...")
@@ -957,14 +800,12 @@ def run_websocket_risk_desk(state, client):
             backoff = min(backoff * 2, 60)
 
 def start_risk_desk(state, client):
-    t = threading.Thread(
-        target=run_websocket_risk_desk,
-        args=(state, client),
-        daemon=True
-    )
+    t = threading.Thread(target=run_websocket_risk_desk, args=(state, client), daemon=True)
     t.start()
     log("  ✅ WebSocket Risk Desk thread launched")
     return t
+
+
 def main():
     sec("EDGE BOT v7 — FINAL CLEAN VERSION")
     log(f"  Mode:      {'PAPER TRADE' if CONFIG['paper_trade'] else '⚡ LIVE'}")
@@ -974,37 +815,20 @@ def main():
     log(f"  Breakeven: +{CONFIG['atr_be_mult']}x ATR → stop moves to entry")
     log(f"  Trailing:  {CONFIG['atr_trail_mult']}x ATR from highest after breakeven")
     div("═");log("")
-    client=load_client();state=load_state()
-    # ── STARTUP: Pull data files from GitHub on fresh deploy ────────────────
+    client=load_client()
+    state=load_state()
+
+    # ── STARTUP: Pull data files from GitHub ────────────────────────────────
     try:
-        import os
         token = os.environ.get("GITHUB_TOKEN", "")
         repo = os.environ.get("GITHUB_REPO", "")
         if token and repo:
-            files_to_pull = [
-                "state.json",
-                "shadow_state.json",
-                "shadow_long_state.json",
-                "shadow_shorts.csv",
-                "shadow_longs.csv",
-                "equity_curve.csv",
-                "strategy_audit.csv",
-                "rejected_signals.csv",
-                "symbol_performance.csv",
-                "summary.json",
-                "trade_explanations.json"
-            ]
-            headers = {
-                "Authorization": f"token {token}",
-                "User-Agent": "EDGE-Bot-v7"
-            }
+            files_to_pull = ["state.json","shadow_state.json","shadow_long_state.json","shadow_shorts.csv","shadow_longs.csv","equity_curve.csv","strategy_audit.csv","rejected_signals.csv","symbol_performance.csv","summary.json","trade_explanations.json"]
+            headers = {"Authorization": f"token {token}", "User-Agent": "EDGE-Bot-v7"}
             base_url = f"https://api.github.com/repos/{repo}/contents/"
             for filename in files_to_pull:
                 try:
-                    req = urllib.request.Request(
-                        base_url + filename,
-                        headers=headers
-                    )
+                    req = urllib.request.Request(base_url + filename, headers=headers)
                     with urllib.request.urlopen(req, timeout=10) as r:
                         data = json.loads(r.read())
                         content = base64.b64decode(data["content"])
@@ -1015,13 +839,16 @@ def main():
             log("  ✅ Startup data restored from GitHub")
     except Exception as e:
         log(f"  Startup restore error: {e}")
+
     state = load_state()
     start_risk_desk(state, client)
     log("  ✅ Connected | Running first scan...\n")
-    scan(client,state)
-    schedule.every(CONFIG["scan_interval_minutes"]).minutes.do(scan,client,state)
+    scan(client, state)
+    schedule.every(CONFIG["scan_interval_minutes"]).minutes.do(scan, client, state)
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
     log(f"  Live. Next scan {nxt}. Ctrl+C to stop.\n")
-    while True: schedule.run_pending();time.sleep(30)
+    while True:
+        schedule.run_pending()
+        time.sleep(30)
 
 if __name__=="__main__": main()
