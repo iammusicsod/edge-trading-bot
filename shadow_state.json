@@ -1,1 +1,15 @@
-{}
+{
+  "LINK-USD": {
+    "entry_price": 8.627,
+    "entry_time": "April 02, 2026  08:20:47 PM",
+    "stop_price": 8.768857,
+    "original_stop": 8.768857,
+    "target_price": 8.343286,
+    "atr": 0.07092857142857133,
+    "lowest_price": 8.627,
+    "at_breakeven": false,
+    "outcome": "OPEN",
+    "rsi": 67.06161137440736,
+    "adx": 64.82758620689633
+  }
+}
