@@ -1,21 +1,21 @@
 {
-  "time": "April 03, 2026  01:59:29 PM",
+  "time": "April 03, 2026  01:59:35 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: LINK, AVAX. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
-      "price": 66668.02,
-      "rsi": 42.80869333265618,
-      "ema200": 67539.16285207283,
+      "price": 66668.46,
+      "rsi": 42.820659424433366,
+      "ema200": 67539.16723018228,
       "adx": 7.754847398545326,
       "atr": 346.481428571431,
-      "vol24": 403391080.812092,
+      "vol24": 403392387.3928307,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 65975.057143,
-      "tp": 68053.945714,
-      "be_trigger": 67360.982857
+      "sl": 65975.497143,
+      "tp": 68054.385714,
+      "be_trigger": 67361.422857
     },
     "ETH-USD": {
       "price": 2048.02,
@@ -23,7 +23,7 @@
       "ema200": 2059.01584868979,
       "adx": 16.733067729084134,
       "atr": 13.332857142857133,
-      "vol24": 276116193.3352481,
+      "vol24": 276116731.0801116,
       "above_ema": false,
       "trending": false,
       "oversold": false,
@@ -38,7 +38,7 @@
       "ema200": 83.12155981902177,
       "adx": 34.883720930231895,
       "atr": 0.6457142857142861,
-      "vol24": 108816487.86331418,
+      "vol24": 108816530.644846,
       "above_ema": false,
       "trending": true,
       "oversold": false,
@@ -63,19 +63,19 @@
       "be_trigger": 8.813714
     },
     "XRP-USD": {
-      "price": 1.3177,
-      "rsi": 47.925311203319495,
-      "ema200": 1.3400509348516811,
+      "price": 1.3176,
+      "rsi": 47.82608695652174,
+      "ema200": 1.3400499398268055,
       "adx": 17.00182815356479,
       "atr": 0.009271428571428597,
-      "vol24": 84178445.31752492,
+      "vol24": 84179368.97708453,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 1.299157,
-      "tp": 1.354786,
-      "be_trigger": 1.336243
+      "sl": 1.299057,
+      "tp": 1.354686,
+      "be_trigger": 1.336143
     },
     "AVAX-USD": {
       "price": 8.98,
