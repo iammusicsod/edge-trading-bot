@@ -47,8 +47,11 @@
     "atr": 0.0020714285714285713,
     "lowest_price": 0.2465,
     "at_breakeven": false,
-    "outcome": "OPEN",
+    "outcome": "STOP LOSS",
     "rsi": 89.01098901098928,
-    "adx": 90.4761904761905
+    "adx": 90.4761904761905,
+    "exit_price": 0.251,
+    "exit_time": "April 03, 2026  03:05:41 PM",
+    "pnl_pct": -1.78
   }
 }
