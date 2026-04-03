@@ -1,21 +1,21 @@
 {
-  "time": "April 03, 2026  02:09:04 PM",
+  "time": "April 03, 2026  02:09:14 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. Also watching: SOL, LINK. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
-      "price": 66775.77,
-      "rsi": 49.742135782829784,
-      "ema200": 67519.02858561487,
+      "price": 66769.41,
+      "rsi": 49.53626175447655,
+      "ema200": 67518.96530203278,
       "adx": 18.700608217137106,
       "atr": 337.2578571428593,
-      "vol24": 347586784.97996616,
+      "vol24": 347612421.39602745,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 66101.254286,
-      "tp": 68124.801429,
-      "be_trigger": 67450.285714
+      "sl": 66094.894286,
+      "tp": 68118.441429,
+      "be_trigger": 67443.925714
     },
     "ETH-USD": {
       "price": 2050.0,
@@ -23,7 +23,7 @@
       "ema200": 2058.414984203282,
       "adx": 27.140600315956075,
       "atr": 13.212142857142826,
-      "vol24": 224043599.49813354,
+      "vol24": 224068638.61696905,
       "above_ema": false,
       "trending": true,
       "oversold": false,
@@ -33,19 +33,19 @@
       "be_trigger": 2076.424286
     },
     "SOL-USD": {
-      "price": 79.83,
-      "rsi": 59.11764705882358,
-      "ema200": 83.07286408069746,
+      "price": 79.85,
+      "rsi": 59.35672514619883,
+      "ema200": 83.07306308567257,
       "adx": 35.8778625954197,
       "atr": 0.6450000000000011,
-      "vol24": 89737186.15619195,
+      "vol24": 89743842.70344882,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 78.54,
-      "tp": 82.41,
-      "be_trigger": 81.12
+      "sl": 78.56,
+      "tp": 82.43,
+      "be_trigger": 81.14
     },
     "LINK-USD": {
       "price": 8.698,
@@ -63,19 +63,19 @@
       "be_trigger": 8.818714
     },
     "XRP-USD": {
-      "price": 1.3179,
-      "rsi": 52.58426966292133,
-      "ema200": 1.3396683341916682,
+      "price": 1.3181,
+      "rsi": 52.79642058165544,
+      "ema200": 1.3396703242414194,
       "adx": 13.523809523809144,
       "atr": 0.008900000000000019,
-      "vol24": 73927518.36777444,
+      "vol24": 73932165.17425723,
       "above_ema": false,
       "trending": false,
       "oversold": false,
       "vol_ok": true,
-      "sl": 1.3001,
-      "tp": 1.3535,
-      "be_trigger": 1.3357
+      "sl": 1.3003,
+      "tp": 1.3537,
+      "be_trigger": 1.3359
     },
     "AVAX-USD": {
       "price": 8.99,
