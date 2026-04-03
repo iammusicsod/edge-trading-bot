@@ -4,7 +4,7 @@ from datetime import datetime,timedelta
 from pathlib import Path
 from coinbase.rest import RESTClient
 
-CONFIG={"paper_trade":True,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":60,"candle_granularity":"ONE_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json"}
+CONFIG={"paper_trade":True,"taker_fee":0.006,"max_spread_pct":0.002,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":60,"candle_granularity":"ONE_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json"}
 LOG_FILE=Path(__file__).parent/"bot_log.txt"
 STATE_FILE=Path(__file__).parent/"state.json"
 TRADES_FILE=Path(__file__).parent/"trade_explanations.json"
@@ -240,7 +240,10 @@ def place_order(client,pair,side,usd,price,state,reason="",atr=0):
     coin=pair.split("-")[0]
     if side=="BUY":
         sl=price-atr*CONFIG["atr_sl_mult"];tp=price+atr*CONFIG["atr_tp_mult"];be=price+atr*CONFIG["atr_be_mult"]
+        entry_fee = usd * CONFIG["taker_fee"]
+        state["capital"] -= entry_fee
         log(f"  💰 {mode} — Buying ${usd:.2f} of {coin} @ ${price:,.4f}")
+        log(f"  💸 Entry fee: ${entry_fee:.2f} (0.6%)")
         log(f"     Stop: ${sl:,.6f} | Target: ${tp:,.6f} | BE triggers at: ${be:,.6f}")
         log(f"     Why: {reason}")
     else:
@@ -262,8 +265,8 @@ def place_order(client,pair,side,usd,price,state,reason="",atr=0):
         state["capital"]-=usd;state["trade_count_today"]=state.get("trade_count_today",0)+1
         save_explanation({"time":now_str(),"pair":pair,"side":"BUY","price":price,"usd":usd,"explanation":reason,"stop_loss":sl,"take_profit":tp,"be_trigger":be})
     elif pair in state["open_trades"]:
-        e=state["open_trades"].pop(pair);pnl=(price-e["entry_price"])/e["entry_price"]*e["usd_invested"]
-        state["capital"]+=e["usd_invested"]+pnl;state["daily_pnl"]+=pnl;state["total_pnl"]+=pnl;state["performance"]["total_pnl"]+=pnl
+        e=state["open_trades"].pop(pair);proceeds=e["usd_invested"]+(price-e["entry_price"])/e["entry_price"]*e["usd_invested"];exit_fee=proceeds*CONFIG["taker_fee"];net_proceeds=proceeds-exit_fee;pnl=net_proceeds-e["usd_invested"]
+        state["capital"]+=net_proceeds;log(f"  💸 Exit fee: ${exit_fee:.2f} (0.6%)");state["daily_pnl"]+=pnl;state["total_pnl"]+=pnl;state["performance"]["total_pnl"]+=pnl
         is_be=abs(pnl)<e["usd_invested"]*0.005
         if pnl>0: state["stats"]["wins"]+=1;state["performance"]["wins"]+=1;log(f"  🏆 Profit: ${pnl:+.2f}")
         elif is_be: state["stats"]["breakevens"]+=1;state["performance"]["breakevens"]+=1;log(f"  ↔️  Breakeven: ${pnl:+.2f}")
@@ -329,6 +332,21 @@ def scan(client,state):
         if not candles: log("  No data");continue
         closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
         lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
+        # Spread guard — skip if bid/ask spread > 0.2%
+        try:
+            bbo = client.get_best_bid_ask(product_ids=[pair])
+            bids = bbo.pricebooks[0].bids
+            asks = bbo.pricebooks[0].asks
+            if bids and asks:
+                bid = float(bids[0].price)
+                ask = float(asks[0].price)
+                mid = (bid + ask) / 2
+                spread_pct = (ask - bid) / mid
+                if spread_pct > CONFIG["max_spread_pct"]:
+                    log(f"  ⚠️  {pair.split('-')[0]} spread {spread_pct*100:.3f}% — too wide, skip")
+                    continue
+        except:
+            pass
         signal=analyze(pair,closes,highs,lows,volumes);ind=signal["indicators"]
         _scan_signals[pair]=ind
         px=ind.get("price",0);rv=ind.get("rsi",50);e200=ind.get("ema200",0)
