@@ -37,5 +37,18 @@
     "outcome": "OPEN",
     "rsi": 72.22222222222213,
     "adx": 41.682242990654686
+  },
+  "ADA-USD": {
+    "entry_price": 0.2453,
+    "entry_time": "April 03, 2026  01:52:39 PM",
+    "stop_price": 0.2493,
+    "original_stop": 0.2493,
+    "target_price": 0.2373,
+    "atr": 0.0019999999999999996,
+    "lowest_price": 0.2453,
+    "at_breakeven": false,
+    "outcome": "OPEN",
+    "rsi": 84.09090909090918,
+    "adx": 89.3617021276596
   }
 }
