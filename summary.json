@@ -1,5 +1,5 @@
 {
-  "time": "April 03, 2026  03:03:03 PM",
+  "time": "April 03, 2026  03:03:10 PM",
   "summary": "Market sentiment: Fear & Greed 9/100 \u2014 Extreme Fear. ADA is the closest with 2 of 3 signals met. Still waiting on: RSI 90 not oversold yet (need < 35). Also watching: BTC, ETH. No trades taken this scan. Bot is being patient \u2014 all 3 signals must agree before any entry.",
   "signals": {
     "BTC-USD": {
@@ -18,34 +18,34 @@
       "be_trigger": 67574.187143
     },
     "ETH-USD": {
-      "price": 2054.24,
-      "rsi": 54.349291975724775,
-      "ema200": 2057.8636054220656,
+      "price": 2054.0,
+      "rsi": 54.08140319316403,
+      "ema200": 2057.861217362364,
       "adx": 40.84507042253569,
       "atr": 12.3542857142857,
-      "vol24": 196623255.67695227,
+      "vol24": 196631071.81179258,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 2029.531429,
-      "tp": 2103.657143,
-      "be_trigger": 2078.948571
+      "sl": 2029.291429,
+      "tp": 2103.417143,
+      "be_trigger": 2078.708571
     },
     "SOL-USD": {
-      "price": 80.28,
-      "rsi": 64.5669291338582,
-      "ema200": 83.03189327818941,
+      "price": 80.24,
+      "rsi": 64.04199475065596,
+      "ema200": 83.03149526823915,
       "adx": 36.36363636363612,
       "atr": 0.6300000000000006,
-      "vol24": 83436719.77160086,
+      "vol24": 83470066.57189536,
       "above_ema": false,
       "trending": true,
       "oversold": false,
       "vol_ok": true,
-      "sl": 79.02,
-      "tp": 82.8,
-      "be_trigger": 81.54
+      "sl": 78.98,
+      "tp": 82.76,
+      "be_trigger": 81.5
     },
     "LINK-USD": {
       "price": 8.717,
@@ -98,7 +98,7 @@
       "ema200": 0.24759805257602163,
       "adx": 90.74074074074076,
       "atr": 0.002042857142857144,
-      "vol24": 8508829.485009417,
+      "vol24": 8509713.91966674,
       "above_ema": true,
       "trending": true,
       "oversold": false,
