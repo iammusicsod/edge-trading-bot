@@ -1,0 +1,12 @@
+{
+  "deploy": {
+    "watchPatterns": [
+      "bot.py",
+      "server.py",
+      "dashboard.html",
+      "requirements.txt",
+      "Procfile",
+      "start.sh"
+    ]
+  }
+}
