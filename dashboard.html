@@ -95,9 +95,11 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .tct{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
 .emp2{text-align:center;padding:32px;color:var(--muted);font-size:13px}
 .emp2 span{display:block;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:6px;letter-spacing:1px}
+#crashBanner{display:none;background:#ff1a1a;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:14px 24px;text-align:center;letter-spacing:2px;border-bottom:3px solid #ff6666;position:sticky;top:0;z-index:9999;animation:pulse 1s infinite}
 </style>
 </head>
 <body>
+<div id="crashBanner">🚨 GLOBAL FUSE BLOWN — ALL ENTRIES BLOCKED</div>
 <button onclick="downloadAuditData()" style="position:fixed;bottom:24px;right:24px;z-index:999;font-size:11px;padding:10px 18px;border-radius:8px;border:1px solid rgba(0,230,118,0.4);background:rgba(0,230,118,0.08);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600">DOWNLOAD AUDIT DATA</button>
 <div class="page">
 <div class="topbar">
@@ -136,9 +138,9 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ADA</span>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI &lt; 35 + 200 EMA + ADX &gt; 25</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR | Target: 4x ATR</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Trailing: 1.5x ATR after breakeven</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI &lt; 35 crossover + 200 EMA + ADX &gt; 25</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR | Target: 4x ATR | Cooldown: 4h</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Crash Gate: BTC+SOL RSI both &lt; 30 = blocked</div>
       </div>
     </div>
     <div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:12px;padding:14px">
@@ -158,7 +160,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LTC</span>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI &gt; 65 + below 200 EMA + ADX &gt; 25</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI crossover &gt;70 then &lt;65 + below 200 EMA + ADX &gt; 25</div>
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">90 day data collection</div>
       </div>
     </div>
@@ -235,7 +237,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shadowCount"></div>
   </div>
   <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Tracks what the short strategy WOULD have done. Zero risk. Pure data for 90 days.</div>
-  <div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div></div>
+  <div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div></div>
   <div style="margin-top:10px">
     <button onclick="toggleShadowTable()" id="shadowToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(255,68,68,0.3);background:rgba(255,68,68,0.06);color:var(--red);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">EXPAND TRADE TABLE</button>
     <div id="shadowTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="shadowTableContent"></div></div>
@@ -246,11 +248,21 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div class="pt" style="margin-bottom:0">Shadow Long Audit</div>
     <div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace" id="slCount"></div>
   </div>
-  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE and DOT on the long strategy. 30-day data collection.</div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE, DOT, SUI, LTC on the long strategy. 30-day data collection.</div>
   <div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25</span></div></div>
+  <div style="margin-top:10px">
+    <button onclick="toggleShadowLongTable()" id="slToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(255,171,64,0.3);background:rgba(255,171,64,0.06);color:var(--amber);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">EXPAND TRADE TABLE</button>
+    <div id="slTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="slTableContent"></div></div>
+  </div>
 </div>
 <div class="panel">
-  <div class="pt">Trade History</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div class="pt" style="margin-bottom:0">Trade History</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="thCount"></div>
+      <button onclick="toggleTradeHistory()" id="thToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(0,230,118,0.3);background:rgba(0,230,118,0.06);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">EXPAND TRADES</button>
+    </div>
+  </div>
   <div id="th"><div class="emp2">No trades yet<span>Bot is watching the market</span></div></div>
 </div>
 </div>
@@ -268,6 +280,7 @@ var PAIRS=[
 var state={},prices={},gc=null,gr='ALL',gp=[{t:Date.now(),v:1500}];
 var cY=new Date().getFullYear(),cM=new Date().getMonth(),cD={};
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var tradeHistoryExpanded=false;
 
 function buildCoins(){
   document.getElementById('coinsGrid').innerHTML=PAIRS.map(function(p){
@@ -296,6 +309,18 @@ function updR(pair,s){
   if(eb){eb.textContent=sig==='BUY'?'BUY':'WAIT';eb.className='badge '+(sig==='BUY'?'bb':'bw');}
 }
 
+function checkCrashGate(){
+  var crash=state.market_crash_active||false;
+  var detail=state.market_crash_detail||'GLOBAL FUSE BLOWN — BTC+SOL RSI both below 30. All entries blocked.';
+  var banner=document.getElementById('crashBanner');
+  if(crash){
+    banner.textContent='🚨 '+detail;
+    banner.style.display='block';
+  }else{
+    banner.style.display='none';
+  }
+}
+
 async function fetchState(){
   try{
     var r=await fetch('/state');
@@ -303,7 +328,7 @@ async function fetchState(){
     state=await r.json();
     document.getElementById('cb').textContent='CONNECTED';
     document.getElementById('cb').className='conn ok';
-    updMetrics();updOpen();updHistory();updGrowth();updCal();applySummaryFromState();
+    updMetrics();updOpen();updHistory();updGrowth();updCal();applySummaryFromState();checkCrashGate();
   }catch(e){
     document.getElementById('cb').textContent='OFFLINE';
     document.getElementById('cb').className='conn err';
@@ -315,6 +340,9 @@ function applySummaryFromState(){
   if(state.ai_summary_time)document.getElementById('sumTime').textContent='Updated: '+state.ai_summary_time;
   if(state.ai_signals){Object.keys(state.ai_signals).forEach(function(pair){updR(pair,state.ai_signals[pair]);});}
 }
+
+async function fetchSummary(){}
+
 async function fetchPrices(){
   for(var i=0;i<PAIRS.length;i++){
     var p=PAIRS[i];
@@ -341,8 +369,8 @@ async function fetchLog(){
     var lb=document.getElementById('lb');
     lb.innerHTML=lines.map(function(l){
       if(l.indexOf('BUY')>-1||l.indexOf('Profit')>-1||l.indexOf('TAKE PROFIT')>-1)return '<div class="lg">'+l+'</div>';
-      if(l.indexOf('STOP')>-1||l.indexOf('Loss')>-1)return '<div class="lr">'+l+'</div>';
-      if(l.indexOf('BREAKEVEN')>-1)return '<div class="la">'+l+'</div>';
+      if(l.indexOf('STOP')>-1||l.indexOf('Loss')>-1||l.indexOf('CRASH')>-1)return '<div class="lr">'+l+'</div>';
+      if(l.indexOf('BREAKEVEN')>-1||l.indexOf('COOLDOWN')>-1)return '<div class="la">'+l+'</div>';
       return '<div>'+l+'</div>';
     }).join('');
     lb.scrollTop=lb.scrollHeight;
@@ -416,8 +444,16 @@ function updOpen(){
   html+='</div>';content.innerHTML=html;
 }
 
+function toggleTradeHistory(){
+  tradeHistoryExpanded=!tradeHistoryExpanded;
+  var btn=document.getElementById('thToggleBtn');
+  btn.textContent=tradeHistoryExpanded?'COLLAPSE TRADES':'EXPAND TRADES';
+  updHistory();
+}
+
 function updHistory(){
   var history=state.trade_history||[],el=document.getElementById('th');
+  var thCount=document.getElementById('thCount');
   if(!history.length){el.innerHTML='<div class="emp2">No trades yet<span>Bot is watching the market</span></div>';return;}
   var trades=[],buyMap={};
   history.forEach(function(t){
@@ -430,6 +466,13 @@ function updHistory(){
     }
   });
   trades.reverse();
+  if(thCount)thCount.textContent=trades.length+' completed trades';
+  if(!tradeHistoryExpanded){
+    var wins=trades.filter(function(t){return t.pnl>0;}).length;
+    var losses=trades.filter(function(t){return t.pnl<=0;}).length;
+    el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+trades.length+' trades — '+wins+' wins / '+losses+' losses — click EXPAND TRADES to view all</div>';
+    return;
+  }
   var html='';
   trades.forEach(function(tr){
     var isWin=tr.pnl>0,isBE=Math.abs(tr.pnl)<tr.usd*0.005;
@@ -522,7 +565,7 @@ window.calPrev=function(){cM--;if(cM<0){cM=11;cY--;}renderCal();};
 window.calNext=function(){cM++;if(cM>11){cM=0;cY++;}renderCal();};
 
 async function refresh(){
-  await Promise.all([fetchState(),fetchPrices(),fetchLog(),fetchSummary()]);
+  await Promise.all([fetchState(),fetchPrices(),fetchLog()]);
   loadShadow();
   loadShadowLong();
 }
@@ -536,7 +579,7 @@ async function loadShadow(){
     var rows=await r.json();
     var el=document.getElementById('shadowContent');
     var cEl=document.getElementById('shadowCount');
-    if(!rows.length){el.innerHTML='<div class="emp2">No shadow shorts yet<span>Waiting for RSI above 65 + below 200 EMA + ADX above 25</span></div>';return;}
+    if(!rows.length){el.innerHTML='<div class="emp2">No shadow shorts yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div>';return;}
     var open=rows.filter(function(r){return r.Outcome==='OPEN';}).length;
     var wins=rows.filter(function(r){return r.Outcome==='TAKE PROFIT';}).length;
     var losses=rows.filter(function(r){return r.Outcome==='STOP LOSS';}).length;
@@ -560,7 +603,7 @@ async function loadShadowLong(){
     var rows=await r.json();
     var el=document.getElementById('slContent');
     var cEl=document.getElementById('slCount');
-    if(!rows.length){el.innerHTML='<div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25</span></div>';return;}
+    if(!rows.length){el.innerHTML='<div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25 on DOGE DOT SUI LTC</span></div>';return;}
     var open=rows.filter(function(r){return r.Outcome==='OPEN';}).length;
     var wins=rows.filter(function(r){return r.Outcome==='TAKE PROFIT';}).length;
     var losses=rows.filter(function(r){return r.Outcome==='STOP LOSS';}).length;
@@ -587,12 +630,53 @@ function toggleShadowTable(){
   btn.textContent=shadowExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
   if(shadowExpanded)loadShadowTable();
 }
+
 async function loadShadowTable(){
   try{
     var r=await fetch('/shadow');if(!r.ok)return;
     var rows=await r.json();
     var el=document.getElementById('shadowTableContent');
     if(!rows.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No shadow short trades yet.</div>';return;}
+    var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
+    ['Time','Pair','Entry','Stop','Target','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
+    html+='</tr>';
+    rows.forEach(function(row){
+      var pnl=parseFloat(row['Simulated P&L (%)']||0);
+      var pc=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--muted)';
+      var isOpen=row.Outcome==='OPEN';
+      var oc=isOpen?'var(--amber)':row.Outcome==='TAKE PROFIT'?'var(--green)':'var(--red)';
+      html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">';
+      html+='<td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">'+(row.Timestamp||'')+'</td>';
+      html+='<td style="padding:5px 8px;font-weight:600">'+(row.Pair||'').split('-')[0]+'</td>';
+      html+='<td style="padding:5px 8px">$'+parseFloat(row['Virtual Entry']||0).toFixed(4)+'</td>';
+      html+='<td style="padding:5px 8px;color:var(--red)">$'+parseFloat(row['Stop Price']||0).toFixed(4)+'</td>';
+      html+='<td style="padding:5px 8px;color:var(--green)">$'+parseFloat(row['Target Price']||0).toFixed(4)+'</td>';
+      html+='<td style="padding:5px 8px;color:var(--muted2)">'+(row['Exit Price']?'$'+parseFloat(row['Exit Price']).toFixed(4):'--')+'</td>';
+      html+='<td style="padding:5px 8px;color:'+oc+';font-weight:600">'+(row.Outcome||'--')+'</td>';
+      html+='<td style="padding:5px 8px;color:'+pc+'">'+(pnl?pnl.toFixed(2)+'%':'--')+'</td>';
+      html+='</tr>';
+    });
+    html+='</table>';
+    el.innerHTML=html;
+  }catch(e){}
+}
+
+var slExpanded=false;
+function toggleShadowLongTable(){
+  slExpanded=!slExpanded;
+  var wrap=document.getElementById('slTableWrap');
+  var btn=document.getElementById('slToggleBtn');
+  wrap.style.display=slExpanded?'block':'none';
+  btn.textContent=slExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
+  if(slExpanded)loadShadowLongTable();
+}
+
+async function loadShadowLongTable(){
+  try{
+    var r=await fetch('/shadowlong');if(!r.ok)return;
+    var rows=await r.json();
+    var el=document.getElementById('slTableContent');
+    if(!rows.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No shadow long trades yet.</div>';return;}
     var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
     ['Time','Pair','Entry','Stop','Target','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
     html+='</tr>';
@@ -632,25 +716,32 @@ async function downloadAuditData(){
     ];
     var now=new Date();
     var ts=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+    var downloaded=0;
     for(var i=0;i<files.length;i++){
       try{
         var f=files[i];
-        var r=await fetch(f.url);if(!r.ok)continue;
+        var r=await fetch(f.url);
+        if(!r.ok)continue;
         var text=await r.text();
         if(!text||text.trim()==='[]'||text.trim()==='')continue;
-        var blob=new Blob([text],{type:'text/csv'});
+        var parsed=JSON.parse(text);
+        if(Array.isArray(parsed)&&parsed.length===0)continue;
+        var blob=new Blob([text],{type:'text/csv;charset=utf-8;'});
         var a=document.createElement('a');
         a.href=URL.createObjectURL(blob);
         a.download='EDGE_v7_'+f.name.replace('.csv','')+'_'+ts+'.csv';
-        document.body.appendChild(a);a.click();document.body.removeChild(a);
-        URL.revokeObjectURL(a.href);
-        await new Promise(function(res){setTimeout(res,300);});
+        a.style.display='none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href);},1000);
+        downloaded++;
+        await new Promise(function(res){setTimeout(res,500);});
       }catch(e){}
     }
-    btn.textContent='DOWNLOADED';
+    btn.textContent=downloaded>0?'DOWNLOADED '+downloaded+' FILES':'NO DATA YET';
     setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);
   }catch(e){
-    btn.textContent='ERROR';
+    btn.textContent='ERROR — TRY AGAIN';
     setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);
   }
 }
