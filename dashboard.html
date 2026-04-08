@@ -20,10 +20,10 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .conn{font-size:9px;font-family:'JetBrains Mono',monospace;padding:5px 12px;border-radius:20px;border:1px solid var(--border)}
 .conn.ok{color:var(--green);border-color:rgba(0,230,118,0.2);background:rgba(0,230,118,0.08)}
 .conn.err{color:var(--amber);border-color:rgba(255,171,64,0.2);background:rgba(255,171,64,0.08)}
-.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px}
+.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:14px}
 .mc{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px}
 .mc-l{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:10px}
-.mc-v{font-size:22px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.mc-v{font-size:20px;font-weight:600;font-family:'JetBrains Mono',monospace}
 .mc-s{font-size:10px;color:var(--muted);margin-top:5px;font-family:'JetBrains Mono',monospace}
 .green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
 .alpha{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
@@ -41,6 +41,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .badge{font-size:7px;font-weight:600;padding:2px 6px;border-radius:4px;letter-spacing:1px;font-family:'JetBrains Mono',monospace}
 .bw{background:rgba(255,171,64,0.1);color:var(--amber)}
 .bb{background:rgba(0,230,118,0.1);color:var(--green)}
+.bs{background:rgba(255,68,68,0.1);color:var(--red)}
 .cc-px{font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
 .cc-chg{font-size:9px;font-family:'JetBrains Mono',monospace}
 .up{color:var(--green)}.dn{color:var(--red)}
@@ -57,6 +58,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .rs{font-size:9px;margin-top:8px;padding:4px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;text-align:center;font-weight:600;letter-spacing:1px}
 .rs.wait{background:rgba(255,171,64,0.1);color:var(--amber)}
 .rs.buy{background:rgba(0,230,118,0.1);color:var(--green)}
+.rs.short{background:rgba(255,68,68,0.1);color:var(--red)}
 .bot{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:14px}
 .cw{position:relative;height:180px;margin-top:8px}
 .gfr{display:flex;gap:4px}
@@ -96,6 +98,10 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .emp2{text-align:center;padding:32px;color:var(--muted);font-size:13px}
 .emp2 span{display:block;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:6px;letter-spacing:1px}
 #crashBanner{display:none;background:#ff1a1a;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:14px 24px;text-align:center;letter-spacing:2px;border-bottom:3px solid #ff6666;position:sticky;top:0;z-index:9999;animation:pulse 1s infinite}
+.expand-btn{font-size:10px;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600}
+.expand-btn-green{border:1px solid rgba(0,230,118,0.3);background:rgba(0,230,118,0.06);color:var(--green)}
+.expand-btn-red{border:1px solid rgba(255,68,68,0.3);background:rgba(255,68,68,0.06);color:var(--red)}
+.expand-btn-amber{border:1px solid rgba(255,171,64,0.3);background:rgba(255,171,64,0.06);color:var(--amber)}
 </style>
 </head>
 <body>
@@ -110,24 +116,30 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div class="conn ok" id="cb">CONNECTED</div>
   </div>
 </div>
+
+<!-- METRICS — 6 cards including short capital -->
 <div class="metrics">
-  <div class="mc"><div class="mc-l">Capital</div><div class="mc-v" id="mCap">$1,500.00</div><div class="mc-s" id="mGr">0.00%</div></div>
-  <div class="mc"><div class="mc-l">Total P&amp;L</div><div class="mc-v" id="mPnl">+$0.00</div><div class="mc-s" id="mDay">Today: +$0.00</div></div>
+  <div class="mc"><div class="mc-l">Long Capital</div><div class="mc-v" id="mCap">$1,500.00</div><div class="mc-s" id="mGr">0.00%</div></div>
+  <div class="mc"><div class="mc-l">Short Capital</div><div class="mc-v" id="mShortCap">$1,500.00</div><div class="mc-s" id="mShortGr">0.00%</div></div>
+  <div class="mc"><div class="mc-l">Long P&amp;L</div><div class="mc-v" id="mPnl">+$0.00</div><div class="mc-s" id="mDay">Today: +$0.00</div></div>
   <div class="mc"><div class="mc-l">Win Rate</div><div class="mc-v" id="mWR">0%</div><div class="mc-s" id="mWL">0W / 0L</div></div>
   <div class="mc"><div class="mc-l">Total Trades</div><div class="mc-v" id="mT">0</div><div class="mc-s" id="mBE">0 breakevens</div></div>
   <div class="mc"><div class="mc-l">Max Drawdown</div><div class="mc-v" id="mDD">0.0%</div><div class="mc-s" id="mOp">0 open</div></div>
 </div>
+
 <div class="alpha">
   <div class="ac"><div class="ac-l">Fear &amp; Greed</div><div class="ac-v" id="aFG">--</div><div class="ac-s" id="aFGl">Loading...</div></div>
   <div class="ac"><div class="ac-l">BTC Dominance</div><div class="ac-v" id="aDom">--%</div><div class="ac-s">Market share</div></div>
   <div class="ac"><div class="ac-l">Funding Rate</div><div class="ac-v" id="aFund">--%</div><div class="ac-s">BTC perpetual</div></div>
 </div>
+
+<!-- SYSTEM STATUS -->
 <div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px">
   <div style="font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:14px">System Status</div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
     <div style="background:#0a0a0c;border:1px solid rgba(0,230,118,0.2);border-radius:12px;padding:14px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--green);letter-spacing:2px;font-family:'JetBrains Mono',monospace">LIVE LONGS</div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Real paper trades -- 1% risk each</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Real paper trades — 1% risk each</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px">
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">BTC</span>
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ETH</span>
@@ -138,14 +150,14 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ADA</span>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI &lt; 35 crossover + 200 EMA + ADX &gt; 25</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI crossover &lt;30→&gt;35 + 200 EMA + ADX &gt; 25</div>
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR | Target: 4x ATR | Cooldown: 4h</div>
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Crash Gate: BTC+SOL RSI both &lt; 30 = blocked</div>
       </div>
     </div>
     <div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:12px;padding:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--red);letter-spacing:2px;font-family:'JetBrains Mono',monospace">SHADOW SHORTS</div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Virtual only -- zero real money -- 90 day data</div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--red);letter-spacing:2px;font-family:'JetBrains Mono',monospace">LIVE SHORTS</div></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Paper shorts — virtual capital — real signals</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px">
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">BTC</span>
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">ETH</span>
@@ -160,13 +172,14 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LTC</span>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI crossover &gt;70 then &lt;65 + below 200 EMA + ADX &gt; 25</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">90 day data collection</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI hook &gt;70→&lt;65 + below 200 EMA + ADX &gt; 25</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR above entry | Target: 4x ATR below</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Virtual capital tracked separately — 1% risk/trade</div>
       </div>
     </div>
     <div style="background:#0a0a0c;border:1px solid rgba(255,171,64,0.2);border-radius:12px;padding:14px">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--amber);letter-spacing:2px;font-family:'JetBrains Mono',monospace">SHADOW LONG AUDIT</div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Evaluating for live list -- 30 day audit</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Evaluating for live list — 30 day audit</div>
       <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">DOGE</span>
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">DOT</span>
@@ -174,7 +187,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">LTC</span>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Same v7 logic -- no real trades placed</div>
+        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Same v7 logic — no real trades placed</div>
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Decision at 30 day review: promote or cut</div>
       </div>
     </div>
@@ -186,22 +199,37 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">MODE</div><div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--amber)">PAPER</div></div>
   </div>
 </div>
+
 <div class="coins" id="coinsGrid"></div>
+
 <div class="panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <div class="pt" style="margin-bottom:0">Market Summary -- What the Bot Is Thinking</div>
+    <div class="pt" style="margin-bottom:0">Market Summary — What the Bot Is Thinking</div>
     <div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="sumTime"></div>
   </div>
   <div style="font-size:14px;color:#c8c8dc;line-height:1.8;padding:14px;background:#0a0a0c;border-radius:10px;border-left:3px solid var(--amber)" id="sumText">Loading market summary...</div>
 </div>
+
 <div class="panel">
-  <div class="pt">Live Bot Reasoning -- RSI + 200 EMA + ADX</div>
+  <div class="pt">Live Bot Reasoning — RSI + 200 EMA + ADX</div>
   <div class="rg" id="rg"></div>
 </div>
+
+<!-- OPEN LONG POSITIONS -->
 <div id="opPanel" style="display:none" class="panel">
-  <div class="pt">Open Positions</div>
+  <div class="pt">Open Long Positions</div>
   <div id="opContent"></div>
 </div>
+
+<!-- OPEN SHORT POSITIONS -->
+<div id="shortOpPanel" style="display:none" class="panel">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+    <div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div>
+    <div class="pt" style="margin-bottom:0;color:var(--red)">Open Short Positions — Paper</div>
+  </div>
+  <div id="shortOpContent"></div>
+</div>
+
 <div class="bot">
   <div class="panel" style="margin-bottom:0">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
@@ -221,6 +249,8 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
     <div class="lb2" id="lb"></div>
   </div>
 </div>
+
+<!-- CALENDAR -->
 <div class="panel" style="margin-top:14px">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
     <button style="padding:5px 14px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px;font-family:'JetBrains Mono',monospace" onclick="calPrev()">Prev</button>
@@ -231,40 +261,80 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
   <div class="cg" id="calG"></div>
   <div class="cs2" id="calS"></div>
 </div>
+
+<!-- SHORTS SECTION -->
 <div class="panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div class="pt" style="margin-bottom:0">Shadow Short Tracker</div>
-    <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shadowCount"></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div>
+      <div class="pt" style="margin-bottom:0;color:var(--red)">Shorts</div>
+    </div>
+    <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shortCount"></div>
   </div>
-  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Tracks what the short strategy WOULD have done. Zero risk. Pure data for 90 days.</div>
-  <div id="shadowContent"><div class="emp2">No shadow shorts yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div></div>
+  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Paper shorts running live with virtual capital. RSI hook &gt;70→&lt;65 + below 200 EMA + ADX &gt; 25.</div>
+  <div id="shortContent"><div class="emp2">No short trades yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div></div>
   <div style="margin-top:10px">
-    <button onclick="toggleShadowTable()" id="shadowToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(255,68,68,0.3);background:rgba(255,68,68,0.06);color:var(--red);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">EXPAND TRADE TABLE</button>
-    <div id="shadowTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="shadowTableContent"></div></div>
+    <button onclick="toggleShortTable()" id="shortToggleBtn" class="expand-btn expand-btn-red">EXPAND TRADE TABLE</button>
+    <div id="shortTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="shortTableContent"></div></div>
   </div>
 </div>
+
+<!-- SHADOW LONG AUDIT -->
 <div class="panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
     <div class="pt" style="margin-bottom:0">Shadow Long Audit</div>
     <div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace" id="slCount"></div>
   </div>
   <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE, DOT, SUI, LTC on the long strategy. 30-day data collection.</div>
-  <div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25</span></div></div>
+  <div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25 on DOGE DOT SUI LTC</span></div></div>
   <div style="margin-top:10px">
-    <button onclick="toggleShadowLongTable()" id="slToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(255,171,64,0.3);background:rgba(255,171,64,0.06);color:var(--amber);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">EXPAND TRADE TABLE</button>
+    <button onclick="toggleShadowLongTable()" id="slToggleBtn" class="expand-btn expand-btn-amber">EXPAND TRADE TABLE</button>
     <div id="slTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="slTableContent"></div></div>
   </div>
 </div>
+
+<!-- SHORT TRADE HISTORY -->
 <div class="panel">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div class="pt" style="margin-bottom:0">Trade History</div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--red)"></div>
+      <div class="pt" style="margin-bottom:0">Short Trade History</div>
+    </div>
     <div style="display:flex;align-items:center;gap:10px">
-      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="thCount"></div>
-      <button onclick="toggleTradeHistory()" id="thToggleBtn" style="font-size:10px;padding:5px 14px;border-radius:6px;border:1px solid rgba(0,230,118,0.3);background:rgba(0,230,118,0.06);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px">EXPAND TRADES</button>
+      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shortThCount"></div>
+      <button onclick="toggleShortHistory()" id="shortThBtn" class="expand-btn expand-btn-red">EXPAND SHORTS</button>
     </div>
   </div>
-  <div id="th"><div class="emp2">No trades yet<span>Bot is watching the market</span></div></div>
+  <div id="shortTh"><div class="emp2">No short trades closed yet<span>Waiting for first short to open and close</span></div></div>
 </div>
+
+<!-- LONG TRADE HISTORY -->
+<div class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--green)"></div>
+      <div class="pt" style="margin-bottom:0">Long Trade History</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="longThCount"></div>
+      <button onclick="toggleLongHistory()" id="longThBtn" class="expand-btn expand-btn-green">EXPAND LONGS</button>
+    </div>
+  </div>
+  <div id="longTh"><div class="emp2">No long trades closed yet<span>Bot is watching the market</span></div></div>
+</div>
+
+<!-- ALL TRADES -->
+<div class="panel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div class="pt" style="margin-bottom:0">All Trades</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="allThCount"></div>
+      <button onclick="toggleAllHistory()" id="allThBtn" class="expand-btn expand-btn-green">EXPAND ALL TRADES</button>
+    </div>
+  </div>
+  <div id="allTh"><div class="emp2">No trades yet<span>Bot is watching the market</span></div></div>
+</div>
+
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
@@ -280,7 +350,7 @@ var PAIRS=[
 var state={},prices={},gc=null,gr='ALL',gp=[{t:Date.now(),v:1500}];
 var cY=new Date().getFullYear(),cM=new Date().getMonth(),cD={};
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-var tradeHistoryExpanded=false;
+var longHistExpanded=false,shortHistExpanded=false,allHistExpanded=false;
 
 function buildCoins(){
   document.getElementById('coinsGrid').innerHTML=PAIRS.map(function(p){
@@ -296,7 +366,9 @@ function buildRG(){
 
 function updR(pair,s){
   var over=s.rsi<35,above=s.above_ema,trend=s.trending,vol=s.vol_ok!==false;
-  var sig=(over&&above&&trend&&vol)?'BUY':'HOLD';
+  var longSig=(over&&above&&trend&&vol);
+  var lastRsi=state.last_rsi&&state.last_rsi[pair]||50;
+  var shortSig=(lastRsi>70&&s.rsi<=65&&!above&&trend);
   var e1=document.getElementById('r1-'+pair);
   var e2=document.getElementById('r2-'+pair);
   var e3=document.getElementById('r3-'+pair);
@@ -305,20 +377,24 @@ function updR(pair,s){
   if(e1){e1.textContent=s.rsi?s.rsi.toFixed(0):'--';e1.className='rv '+(over?'g':s.rsi>65?'r':'a');}
   if(e2){e2.textContent=above?'Above':'Below';e2.className='rv '+(above?'g':'r');}
   if(e3){e3.textContent=s.adx?s.adx.toFixed(0):'--';e3.className='rv '+(trend?'g':'a');}
-  if(es){es.textContent=sig==='BUY'?'BUY SIGNAL':'Waiting...';es.className='rs '+(sig==='BUY'?'buy':'wait');}
-  if(eb){eb.textContent=sig==='BUY'?'BUY':'WAIT';eb.className='badge '+(sig==='BUY'?'bb':'bw');}
+  if(es){
+    if(longSig){es.textContent='LONG SIGNAL';es.className='rs buy';}
+    else if(shortSig){es.textContent='SHORT SIGNAL';es.className='rs short';}
+    else{es.textContent='Waiting...';es.className='rs wait';}
+  }
+  if(eb){
+    if(longSig){eb.textContent='LONG';eb.className='badge bb';}
+    else if(shortSig){eb.textContent='SHORT';eb.className='badge bs';}
+    else{eb.textContent='WAIT';eb.className='badge bw';}
+  }
 }
 
 function checkCrashGate(){
   var crash=state.market_crash_active||false;
   var detail=state.market_crash_detail||'GLOBAL FUSE BLOWN — BTC+SOL RSI both below 30. All entries blocked.';
   var banner=document.getElementById('crashBanner');
-  if(crash){
-    banner.textContent='🚨 '+detail;
-    banner.style.display='block';
-  }else{
-    banner.style.display='none';
-  }
+  if(crash){banner.textContent='🚨 '+detail;banner.style.display='block';}
+  else{banner.style.display='none';}
 }
 
 async function fetchState(){
@@ -328,7 +404,7 @@ async function fetchState(){
     state=await r.json();
     document.getElementById('cb').textContent='CONNECTED';
     document.getElementById('cb').className='conn ok';
-    updMetrics();updOpen();updHistory();updGrowth();updCal();applySummaryFromState();checkCrashGate();
+    updMetrics();updOpen();updShortOpen();updHistories();updGrowth();updCal();applySummaryFromState();checkCrashGate();
   }catch(e){
     document.getElementById('cb').textContent='OFFLINE';
     document.getElementById('cb').className='conn err';
@@ -340,8 +416,6 @@ function applySummaryFromState(){
   if(state.ai_summary_time)document.getElementById('sumTime').textContent='Updated: '+state.ai_summary_time;
   if(state.ai_signals){Object.keys(state.ai_signals).forEach(function(pair){updR(pair,state.ai_signals[pair]);});}
 }
-
-async function fetchSummary(){}
 
 async function fetchPrices(){
   for(var i=0;i<PAIRS.length;i++){
@@ -362,15 +436,14 @@ async function fetchPrices(){
 
 async function fetchLog(){
   try{
-    var r=await fetch('/log');
-    if(!r.ok)return;
+    var r=await fetch('/log');if(!r.ok)return;
     var txt=await r.text();
     var lines=txt.trim().split('\n').slice(-80);
     var lb=document.getElementById('lb');
     lb.innerHTML=lines.map(function(l){
-      if(l.indexOf('BUY')>-1||l.indexOf('Profit')>-1||l.indexOf('TAKE PROFIT')>-1)return '<div class="lg">'+l+'</div>';
+      if(l.indexOf('SHORT PROFIT')>-1||l.indexOf('TAKE PROFIT')>-1||l.indexOf('Profit')>-1)return '<div class="lg">'+l+'</div>';
       if(l.indexOf('STOP')>-1||l.indexOf('Loss')>-1||l.indexOf('CRASH')>-1)return '<div class="lr">'+l+'</div>';
-      if(l.indexOf('BREAKEVEN')>-1||l.indexOf('COOLDOWN')>-1)return '<div class="la">'+l+'</div>';
+      if(l.indexOf('BREAKEVEN')>-1||l.indexOf('COOLDOWN')>-1||l.indexOf('SHORT SIGNAL')>-1)return '<div class="la">'+l+'</div>';
       return '<div>'+l+'</div>';
     }).join('');
     lb.scrollTop=lb.scrollHeight;
@@ -379,34 +452,35 @@ async function fetchLog(){
 
 function updMetrics(){
   var cap=parseFloat(state.capital||1500),gr2=(cap-1500)/1500*100;
+  var shortCap=parseFloat(state.short_capital||1500),shortGr=(shortCap-1500)/1500*100;
   var pnl=parseFloat(state.total_pnl||0),dpnl=parseFloat(state.daily_pnl||0);
   var st=state.stats||{},perf=state.performance||{};
   var t=st.total_trades||0,w=st.wins||0,l=st.losses||0,be=st.breakevens||0;
   var wr=t>0?Math.round(w/t*100):0,dd=parseFloat(perf.max_drawdown||0);
   var oc=Object.keys(state.open_trades||{}).length;
-  var ce=document.getElementById('mCap');
-  ce.textContent='$'+cap.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  ce.className='mc-v '+(gr2>=0?'green':'red');
-  var ge=document.getElementById('mGr');
-  ge.textContent=(gr2>=0?'+ ':'- ')+Math.abs(gr2).toFixed(2)+'%';
-  ge.className='mc-s '+(gr2>=0?'green':'red');
-  var pe=document.getElementById('mPnl');
-  pe.textContent=(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2);
-  pe.className='mc-v '+(pnl>=0?'green':'red');
-  var de=document.getElementById('mDay');
-  de.textContent='Today: '+(dpnl>=0?'+$':'-$')+Math.abs(dpnl).toFixed(2);
-  de.className='mc-s '+(dpnl>=0?'green':'red');
+  var soc=Object.keys(state.short_open_trades||{}).length;
+  document.getElementById('mCap').textContent='$'+cap.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('mCap').className='mc-v '+(gr2>=0?'green':'red');
+  document.getElementById('mGr').textContent=(gr2>=0?'▲':'▼')+Math.abs(gr2).toFixed(2)+'%';
+  document.getElementById('mGr').className='mc-s '+(gr2>=0?'green':'red');
+  document.getElementById('mShortCap').textContent='$'+shortCap.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById('mShortCap').className='mc-v '+(shortGr>=0?'green':'red');
+  document.getElementById('mShortGr').textContent=(shortGr>=0?'▲':'▼')+Math.abs(shortGr).toFixed(2)+'%';
+  document.getElementById('mShortGr').className='mc-s '+(shortGr>=0?'green':'red');
+  document.getElementById('mPnl').textContent=(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2);
+  document.getElementById('mPnl').className='mc-v '+(pnl>=0?'green':'red');
+  document.getElementById('mDay').textContent='Today: '+(dpnl>=0?'+$':'-$')+Math.abs(dpnl).toFixed(2);
+  document.getElementById('mDay').className='mc-s '+(dpnl>=0?'green':'red');
   document.getElementById('mWR').textContent=wr+'%';
   document.getElementById('mWL').textContent=w+'W / '+l+'L';
   document.getElementById('mT').textContent=t;
   document.getElementById('mBE').textContent=be+' breakeven'+(be!==1?'s':'');
   document.getElementById('mDD').textContent=dd.toFixed(2)+'%';
-  document.getElementById('mOp').textContent=oc+' open';
+  document.getElementById('mOp').textContent=oc+' long | '+soc+' short open';
   var fg=state.last_fg||50,fgl=state.last_fg_label||'Neutral';
   var dom=parseFloat(state.last_dominance||0),fund=parseFloat(state.last_funding||0);
   var fe=document.getElementById('aFG');
-  fe.textContent=fg+' / 100';
-  fe.className='ac-v '+(fg<25?'red':fg>75?'green':'');
+  fe.textContent=fg+' / 100';fe.className='ac-v '+(fg<25?'red':fg>75?'green':'');
   document.getElementById('aFGl').textContent=fgl;
   document.getElementById('aDom').textContent=dom.toFixed(1)+'%';
   document.getElementById('aFund').textContent=(fund>=0?'+':'')+fund.toFixed(4)+'%';
@@ -422,18 +496,18 @@ function updOpen(){
     var pos=open[pair],coin=pair.split('-')[0];
     var px=(prices[pair]||{}).price||0;
     var entry=parseFloat(pos.entry_price||0),usd=parseFloat(pos.usd_invested||0);
-    var sl=parseFloat(pos.stop_loss||0),tp=parseFloat(pos.take_profit||0),be=parseFloat(pos.be_trigger||0);
+    var sl=parseFloat(pos.stop_loss||0),tp=parseFloat(pos.take_profit||0);
     var at_be=pos.at_breakeven||false;
     var upnl=px>0?(px-entry)/entry*usd:0,isPos=upnl>=0;
     var dSL=sl>0&&px>0?(px-sl)/px*100:0,dTP=tp>0&&px>0?(tp-px)/px*100:0;
     var prog=sl>0&&tp>0&&px>0?Math.max(0,Math.min(100,(px-sl)/(tp-sl)*100)):50;
     html+='<div style="background:#0a0a0c;border:1px solid '+(isPos?'rgba(0,230,118,0.2)':'rgba(255,68,68,0.2)')+';border-radius:12px;padding:16px">';
-    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:16px;font-weight:600">'+coin+'</div><div style="font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;font-family:JetBrains Mono,monospace;background:rgba(0,230,118,0.1);color:var(--green)">OPEN</div></div>';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:16px;font-weight:600">'+coin+'</div><div style="font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;font-family:JetBrains Mono,monospace;background:rgba(0,230,118,0.1);color:var(--green)">LONG OPEN</div></div>';
     html+='<div style="font-size:22px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)')+';margin-bottom:10px">'+(isPos?'+$':'-$')+Math.abs(upnl).toFixed(2)+'</div>';
     html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">';
     html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Live price</div><div style="font-family:JetBrains Mono,monospace">$'+px.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
     html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Entry</div><div style="font-family:JetBrains Mono,monospace">$'+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);font-size:9px">Stop loss</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dSL.toFixed(1)+'% away</div></div>';
+    html+='<div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);font-size:9px">Stop</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dSL.toFixed(1)+'% away</div></div>';
     html+='<div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--green);font-size:9px">Target</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+tp.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dTP.toFixed(1)+'% away</div></div>';
     html+='</div>';
     html+='<div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px"><div style="height:100%;width:'+prog+'%;background:'+(isPos?'var(--green)':'var(--amber)')+';border-radius:2px"></div></div>';
@@ -444,54 +518,149 @@ function updOpen(){
   html+='</div>';content.innerHTML=html;
 }
 
-function toggleTradeHistory(){
-  tradeHistoryExpanded=!tradeHistoryExpanded;
-  var btn=document.getElementById('thToggleBtn');
-  btn.textContent=tradeHistoryExpanded?'COLLAPSE TRADES':'EXPAND TRADES';
-  updHistory();
+function updShortOpen(){
+  var open=state.short_open_trades||{},keys=Object.keys(open);
+  var panel=document.getElementById('shortOpPanel'),content=document.getElementById('shortOpContent');
+  if(!keys.length){panel.style.display='none';return;}
+  panel.style.display='block';
+  var html='<div style="display:grid;grid-template-columns:repeat('+Math.min(keys.length,3)+',1fr);gap:12px">';
+  keys.forEach(function(pair){
+    var pos=open[pair],coin=pair.split('-')[0];
+    var px=(prices[pair]||{}).price||0;
+    var entry=parseFloat(pos.entry_price||0),usd=parseFloat(pos.usd_invested||0);
+    var sl=parseFloat(pos.stop_loss||0),tp=parseFloat(pos.take_profit||0);
+    var upnl=px>0?(entry-px)/entry*usd:0,isPos=upnl>=0;
+    var dSL=sl>0&&px>0?(sl-px)/px*100:0,dTP=tp>0&&px>0?(px-tp)/px*100:0;
+    var prog=sl>0&&tp>0&&px>0?Math.max(0,Math.min(100,(entry-px)/(entry-tp)*100)):50;
+    html+='<div style="background:#0a0a0c;border:1px solid '+(isPos?'rgba(0,230,118,0.2)':'rgba(255,68,68,0.2)')+';border-radius:12px;padding:16px">';
+    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:16px;font-weight:600">'+coin+'</div><div style="font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;font-family:JetBrains Mono,monospace;background:rgba(255,68,68,0.1);color:var(--red)">SHORT OPEN</div></div>';
+    html+='<div style="font-size:22px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)')+';margin-bottom:10px">'+(isPos?'+$':'-$')+Math.abs(upnl).toFixed(2)+'</div>';
+    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">';
+    html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Live price</div><div style="font-family:JetBrains Mono,monospace">$'+px.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+    html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Short entry</div><div style="font-family:JetBrains Mono,monospace">$'+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+    html+='<div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);font-size:9px">Stop (above)</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dSL.toFixed(1)+'% up</div></div>';
+    html+='<div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--green);font-size:9px">Target (below)</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+tp.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dTP.toFixed(1)+'% down</div></div>';
+    html+='</div>';
+    html+='<div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px"><div style="height:100%;width:'+prog+'%;background:'+(isPos?'var(--green)':'var(--red)')+';border-radius:2px"></div></div>';
+    html+='<div style="font-size:9px;color:var(--muted);text-align:center;margin-top:3px;margin-bottom:8px">'+prog.toFixed(0)+'% to target</div>';
+    if(pos.explanation)html+='<div style="background:var(--s2);border-left:2px solid var(--red);padding:8px 10px;font-size:11px;color:var(--muted2);line-height:1.6">'+pos.explanation+'</div>';
+    html+='<div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:JetBrains Mono,monospace">$'+usd.toFixed(2)+' virtual | '+(pos.entry_time||'')+'</div></div>';
+  });
+  html+='</div>';content.innerHTML=html;
 }
 
-function updHistory(){
-  var history=state.trade_history||[],el=document.getElementById('th');
-  var thCount=document.getElementById('thCount');
-  if(!history.length){el.innerHTML='<div class="emp2">No trades yet<span>Bot is watching the market</span></div>';return;}
-  var trades=[],buyMap={};
+function buildTradeCard(tr, isShort){
+  var isWin=tr.pnl>0,isBE=Math.abs(tr.pnl)<tr.usd*0.005;
+  var bc=isWin?'rgba(0,230,118,0.15)':'rgba(255,68,68,0.15)';
+  var bco=isWin?'var(--green)':'var(--red)';
+  var label=isBE?'BREAKEVEN':isWin?'WIN':'LOSS';
+  var typeLabel=isShort?'SHORT':'LONG';
+  var typeBg=isShort?'rgba(255,68,68,0.1)':'rgba(0,230,118,0.1)';
+  var typeColor=isShort?'var(--red)':'var(--green)';
+  var html='<div class="tc" style="border:1px solid '+bc+'">';
+  html+='<div class="tch"><div class="tcl"><div class="tcc">'+tr.coin+'</div>';
+  html+='<div class="tcb" style="background:'+typeBg+';color:'+typeColor+'">'+typeLabel+'</div>';
+  html+='<div class="tcb" style="background:'+(isWin?'rgba(0,230,118,0.1)':'rgba(255,68,68,0.1)')+';color:'+bco+'">'+label+'</div></div>';
+  html+='<div class="tcp" style="color:'+bco+'">'+(tr.pnl>=0?'+$':'-$')+Math.abs(tr.pnl).toFixed(2)+'</div></div>';
+  html+='<div class="tcg">';
+  html+='<div class="tce"><div class="tcel">Entry</div><div class="tcev">$'+parseFloat(tr.entry).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+  html+='<div class="tce"><div class="tcel">Exit</div><div class="tcev">$'+parseFloat(tr.exit).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
+  html+='<div class="tce"><div class="tcel">Size</div><div class="tcev">$'+parseFloat(tr.usd).toFixed(2)+(isShort?' virtual':'')+'</div></div>';
+  html+='<div class="tce"><div class="tcel">Change</div><div class="tcev" style="color:'+bco+'">'+(tr.pct>=0?'+':'')+tr.pct.toFixed(2)+'%</div></div>';
+  html+='</div>';
+  if(tr.exp)html+='<div class="tcw"><div class="tcwl">WHY THE BOT '+(isShort?'SHORTED':'ENTERED')+'</div><div class="tcwt">'+tr.exp+'</div></div>';
+  html+='<div class="tct">'+tr.et+' to '+tr.xt+'</div></div>';
+  return html;
+}
+
+function parseTradeHistory(){
+  var history=state.trade_history||[];
+  var longs=[],shorts=[];
+  var longBuyMap={},shortEntryMap={};
   history.forEach(function(t){
-    if(t.side==='BUY'){buyMap[t.pair]=t;}
-    else if(t.side==='SELL'&&buyMap[t.pair]){
-      var buy=buyMap[t.pair];
+    var type=t.type||'LONG';
+    if(t.side==='BUY'||t.side==='SHORT'){
+      if(type==='SHORT'||t.side==='SHORT') shortEntryMap[t.pair]=t;
+      else longBuyMap[t.pair]=t;
+    } else if(t.side==='SELL'&&longBuyMap[t.pair]){
+      var buy=longBuyMap[t.pair];
       var pnl=(t.price-buy.price)/buy.price*buy.usd;
-      trades.push({coin:t.pair.split('-')[0],entry:buy.price,exit:t.price,usd:buy.usd,pnl:pnl,pct:(t.price-buy.price)/buy.price*100,et:buy.time,xt:t.time,exp:buy.explanation||''});
-      delete buyMap[t.pair];
+      longs.push({coin:t.pair.split('-')[0],entry:buy.price,exit:t.price,usd:buy.usd,pnl:pnl,pct:(t.price-buy.price)/buy.price*100,et:buy.time,xt:t.time,exp:buy.explanation||''});
+      delete longBuyMap[t.pair];
+    } else if(t.side==='SHORT_CLOSE'&&shortEntryMap[t.pair]){
+      var entry=shortEntryMap[t.pair];
+      var pnl2=t.pnl||((entry.price-t.price)/entry.price*entry.usd);
+      var pct2=(entry.price-t.price)/entry.price*100;
+      shorts.push({coin:t.pair.split('-')[0],entry:entry.price,exit:t.price,usd:entry.usd,pnl:pnl2,pct:pct2,et:entry.time,xt:t.time,exp:entry.explanation||''});
+      delete shortEntryMap[t.pair];
     }
   });
-  trades.reverse();
-  if(thCount)thCount.textContent=trades.length+' completed trades';
-  if(!tradeHistoryExpanded){
-    var wins=trades.filter(function(t){return t.pnl>0;}).length;
-    var losses=trades.filter(function(t){return t.pnl<=0;}).length;
-    el.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+trades.length+' trades — '+wins+' wins / '+losses+' losses — click EXPAND TRADES to view all</div>';
-    return;
+  longs.reverse();shorts.reverse();
+  return {longs:longs,shorts:shorts};
+}
+
+function toggleLongHistory(){
+  longHistExpanded=!longHistExpanded;
+  document.getElementById('longThBtn').textContent=longHistExpanded?'COLLAPSE LONGS':'EXPAND LONGS';
+  updHistories();
+}
+function toggleShortHistory(){
+  shortHistExpanded=!shortHistExpanded;
+  document.getElementById('shortThBtn').textContent=shortHistExpanded?'COLLAPSE SHORTS':'EXPAND SHORTS';
+  updHistories();
+}
+function toggleAllHistory(){
+  allHistExpanded=!allHistExpanded;
+  document.getElementById('allThBtn').textContent=allHistExpanded?'COLLAPSE ALL TRADES':'EXPAND ALL TRADES';
+  updHistories();
+}
+
+function updHistories(){
+  var parsed=parseTradeHistory();
+  var longs=parsed.longs,shorts=parsed.shorts;
+  var longEl=document.getElementById('longTh');
+  var shortEl=document.getElementById('shortTh');
+  var allEl=document.getElementById('allTh');
+  var longCount=document.getElementById('longThCount');
+  var shortCount=document.getElementById('shortThCount');
+  var allCount=document.getElementById('allThCount');
+
+  // Long history
+  if(longCount) longCount.textContent=longs.length+' completed longs';
+  if(!longs.length){
+    longEl.innerHTML='<div class="emp2">No long trades closed yet<span>Bot is watching the market</span></div>';
+  } else if(!longHistExpanded){
+    var lw=longs.filter(function(t){return t.pnl>0;}).length;
+    longEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+longs.length+' longs — '+lw+' wins / '+(longs.length-lw)+' losses — click EXPAND LONGS to view</div>';
+  } else {
+    longEl.innerHTML=longs.map(function(tr){return buildTradeCard(tr,false);}).join('');
   }
-  var html='';
-  trades.forEach(function(tr){
-    var isWin=tr.pnl>0,isBE=Math.abs(tr.pnl)<tr.usd*0.005;
-    var bc=isWin?'rgba(0,230,118,0.15)':'rgba(255,68,68,0.15)';
-    var bco=isWin?'var(--green)':'var(--red)';
-    var label=isBE?'BREAKEVEN':isWin?'WIN':'LOSS';
-    html+='<div class="tc" style="border:1px solid '+bc+'">';
-    html+='<div class="tch"><div class="tcl"><div class="tcc">'+tr.coin+'</div><div class="tcb" style="background:'+(isWin?'rgba(0,230,118,0.1)':'rgba(255,68,68,0.1)')+';color:'+bco+'">'+label+'</div></div>';
-    html+='<div class="tcp" style="color:'+bco+'">'+(tr.pnl>=0?'+$':'-$')+Math.abs(tr.pnl).toFixed(2)+'</div></div>';
-    html+='<div class="tcg">';
-    html+='<div class="tce"><div class="tcel">Entry</div><div class="tcev">$'+parseFloat(tr.entry).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div class="tce"><div class="tcel">Exit</div><div class="tcev">$'+parseFloat(tr.exit).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div class="tce"><div class="tcel">Size</div><div class="tcev">$'+parseFloat(tr.usd).toFixed(2)+'</div></div>';
-    html+='<div class="tce"><div class="tcel">Change</div><div class="tcev" style="color:'+bco+'">'+(tr.pct>=0?'+':'')+tr.pct.toFixed(2)+'%</div></div>';
-    html+='</div>';
-    if(tr.exp)html+='<div class="tcw"><div class="tcwl">WHY THE BOT ENTERED</div><div class="tcwt">'+tr.exp+'</div></div>';
-    html+='<div class="tct">'+tr.et+' to '+tr.xt+'</div></div>';
-  });
-  el.innerHTML=html;
+
+  // Short history
+  if(shortCount) shortCount.textContent=shorts.length+' completed shorts';
+  if(!shorts.length){
+    shortEl.innerHTML='<div class="emp2">No short trades closed yet<span>Waiting for first short to open and close</span></div>';
+  } else if(!shortHistExpanded){
+    var sw=shorts.filter(function(t){return t.pnl>0;}).length;
+    shortEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+shorts.length+' shorts — '+sw+' wins / '+(shorts.length-sw)+' losses — click EXPAND SHORTS to view</div>';
+  } else {
+    shortEl.innerHTML=shorts.map(function(tr){return buildTradeCard(tr,true);}).join('');
+  }
+
+  // All trades combined
+  var all=longs.concat(shorts).sort(function(a,b){return new Date(b.xt)-new Date(a.xt);});
+  if(allCount) allCount.textContent=all.length+' total trades';
+  if(!all.length){
+    allEl.innerHTML='<div class="emp2">No trades yet<span>Bot is watching the market</span></div>';
+  } else if(!allHistExpanded){
+    var aw=all.filter(function(t){return t.pnl>0;}).length;
+    allEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+all.length+' total trades — '+aw+' wins / '+(all.length-aw)+' losses — click EXPAND ALL TRADES to view</div>';
+  } else {
+    allEl.innerHTML=all.map(function(tr){
+      var isShort=shorts.indexOf(tr)>-1||tr.type==='SHORT';
+      return buildTradeCard(tr,isShort);
+    }).join('');
+  }
 }
 
 function setR(r){gr=r;document.querySelectorAll('.gf').forEach(function(b){b.classList.toggle('on',b.textContent===r);});renderG();}
@@ -499,19 +668,15 @@ function setR(r){gr=r;document.querySelectorAll('.gf').forEach(function(b){b.cla
 function updGrowth(){
   var history=state.trade_history||[],cap=parseFloat(state.capital||1500);
   gp=[{t:Date.now()-90*86400000,v:1500}];
-  var run=1500;
-  for(var i=history.length-1;i>=0;i--){
-    var t=history[i];
-    if(t.side==='SELL'){
-      for(var j=i-1;j>=0;j--){
-        if(history[j].pair===t.pair&&history[j].side==='BUY'){
-          run+=(t.price-history[j].price)/history[j].price*history[j].usd;
-          gp.push({t:new Date(t.time).getTime()||Date.now(),v:parseFloat(run.toFixed(2))});
-          break;
-        }
-      }
+  var run=1500,buyMap={};
+  history.forEach(function(t){
+    if(t.side==='BUY'){buyMap[t.pair]=t;}
+    else if(t.side==='SELL'&&buyMap[t.pair]){
+      run+=(t.price-buyMap[t.pair].price)/buyMap[t.pair].price*buyMap[t.pair].usd;
+      gp.push({t:new Date(t.time).getTime()||Date.now(),v:parseFloat(run.toFixed(2))});
+      delete buyMap[t.pair];
     }
-  }
+  });
   gp.push({t:Date.now(),v:cap});
   gp.sort(function(a,b){return a.t-b.t;});
   renderG();
@@ -536,14 +701,24 @@ function renderG(){
 
 function buildCD(){
   cD={};var history=state.trade_history||[];
-  for(var i=0;i<history.length;i++){
-    var t=history[i];if(t.side!=='SELL')continue;
-    var d=new Date(t.time);if(isNaN(d.getTime()))continue;
-    var pnl=0;
-    for(var j=i-1;j>=0;j--){if(history[j].pair===t.pair&&history[j].side==='BUY'){pnl=(t.price-history[j].price)/history[j].price*history[j].usd;break;}}
-    var key=d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();
-    if(!cD[key])cD[key]={pnl:0,trades:0};cD[key].pnl+=pnl;cD[key].trades++;
-  }
+  var buyMap={},shortMap={};
+  history.forEach(function(t){
+    if(t.side==='BUY'){buyMap[t.pair]=t;}
+    else if(t.side==='SHORT'){shortMap[t.pair]=t;}
+    else if(t.side==='SELL'&&buyMap[t.pair]){
+      var d=new Date(t.time);if(isNaN(d.getTime()))return;
+      var pnl=(t.price-buyMap[t.pair].price)/buyMap[t.pair].price*buyMap[t.pair].usd;
+      var key=d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();
+      if(!cD[key])cD[key]={pnl:0,trades:0};cD[key].pnl+=pnl;cD[key].trades++;
+      delete buyMap[t.pair];
+    } else if(t.side==='SHORT_CLOSE'&&shortMap[t.pair]){
+      var d2=new Date(t.time);if(isNaN(d2.getTime()))return;
+      var pnl2=t.pnl||0;
+      var key2=d2.getFullYear()+'-'+d2.getMonth()+'-'+d2.getDate();
+      if(!cD[key2])cD[key2]={pnl:0,trades:0};cD[key2].pnl+=pnl2;cD[key2].trades++;
+      delete shortMap[t.pair];
+    }
+  });
 }
 function updCal(){buildCD();renderCal();}
 function renderCal(){
@@ -564,37 +739,70 @@ function renderCal(){
 window.calPrev=function(){cM--;if(cM<0){cM=11;cY--;}renderCal();};
 window.calNext=function(){cM++;if(cM>11){cM=0;cY++;}renderCal();};
 
-async function refresh(){
-  await Promise.all([fetchState(),fetchPrices(),fetchLog()]);
-  loadShadow();
-  loadShadowLong();
+// Shorts stats section (from trade_history)
+function updShortStats(){
+  var parsed=parseTradeHistory();
+  var shorts=parsed.shorts;
+  var el=document.getElementById('shortContent');
+  var cEl=document.getElementById('shortCount');
+  var openShorts=Object.keys(state.short_open_trades||{}).length;
+  var wins=shorts.filter(function(t){return t.pnl>0;}).length;
+  var losses=shorts.filter(function(t){return t.pnl<=0&&Math.abs(t.pnl)>=t.usd*0.005;}).length;
+  var closed=wins+losses;
+  var wr=closed>0?Math.round(wins/closed*100):0;
+  var totalPnl=shorts.reduce(function(a,t){return a+t.pnl;},0);
+  cEl.textContent=shorts.length+' closed | '+openShorts+' open | '+wr+'% win rate';
+  if(!shorts.length&&!openShorts){
+    el.innerHTML='<div class="emp2">No short trades yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div>';
+    return;
+  }
+  var sc=function(l,v,c){return '<div style="background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:JetBrains Mono,monospace">'+l+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';};
+  var html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">';
+  html+=sc('OPEN SHORTS',openShorts,'var(--amber)');
+  html+=sc('WIN RATE',wr+'%',wr>=50?'var(--green)':'var(--red)');
+  html+=sc('WINS / LOSSES',wins+'W / '+losses+'L','var(--muted2)');
+  html+=sc('TOTAL P&L',(totalPnl>=0?'+$':'-$')+Math.abs(totalPnl).toFixed(2),totalPnl>=0?'var(--green)':'var(--red)');
+  html+='</div>';
+  var shortCap=parseFloat(state.short_capital||1500);
+  var shortGr=(shortCap-1500)/1500*100;
+  html+='<div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:10px;padding:12px;font-family:JetBrains Mono,monospace;font-size:11px;color:var(--muted2)">';
+  html+='Virtual Short Capital: <span style="color:'+(shortGr>=0?'var(--green)':'var(--red)')+'">$'+shortCap.toFixed(2)+' ('+(shortGr>=0?'+':'')+shortGr.toFixed(2)+'%)</span></div>';
+  el.innerHTML=html;
 }
-buildCoins();buildRG();renderCal();refresh();setInterval(refresh,15000);
-</script>
 
-<script>
-async function loadShadow(){
-  try{
-    var r=await fetch('/shadow');if(!r.ok)return;
-    var rows=await r.json();
-    var el=document.getElementById('shadowContent');
-    var cEl=document.getElementById('shadowCount');
-    if(!rows.length){el.innerHTML='<div class="emp2">No shadow shorts yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div>';return;}
-    var open=rows.filter(function(r){return r.Outcome==='OPEN';}).length;
-    var wins=rows.filter(function(r){return r.Outcome==='TAKE PROFIT';}).length;
-    var losses=rows.filter(function(r){return r.Outcome==='STOP LOSS';}).length;
-    var closed=wins+losses,wr=closed>0?Math.round(wins/closed*100):0;
-    var totalPnl=rows.filter(function(r){return r['Simulated P&L (%)']!=='';}).reduce(function(a,r){return a+parseFloat(r['Simulated P&L (%)']||0);},0);
-    cEl.textContent=rows.length+' virtual trades | '+open+' open | '+wr+'% win rate';
-    var sc=function(l,v,c){return '<div style="background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:JetBrains Mono,monospace">'+l+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';};
-    var html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">';
-    html+=sc('VIRTUAL TRADES',rows.length,'var(--muted2)');
-    html+=sc('WIN RATE',wr+'%',wr>=50?'var(--green)':'var(--red)');
-    html+=sc('WINS / LOSSES',wins+'W / '+losses+'L','var(--muted2)');
-    html+=sc('TOTAL P&L',(totalPnl>=0?'+ ':'-')+Math.abs(totalPnl).toFixed(1)+'%',totalPnl>=0?'var(--green)':'var(--red)');
-    html+='</div>';
-    el.innerHTML=html;
-  }catch(e){}
+var shortTableExpanded=false;
+function toggleShortTable(){
+  shortTableExpanded=!shortTableExpanded;
+  var wrap=document.getElementById('shortTableWrap');
+  var btn=document.getElementById('shortToggleBtn');
+  wrap.style.display=shortTableExpanded?'block':'none';
+  btn.textContent=shortTableExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
+  if(shortTableExpanded)loadShortTable();
+}
+function loadShortTable(){
+  var parsed=parseTradeHistory();
+  var shorts=parsed.shorts;
+  var el=document.getElementById('shortTableContent');
+  if(!shorts.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No short trades closed yet.</div>';return;}
+  var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
+  ['Time','Pair','Entry','Stop (was)','Target (was)','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
+  html+='</tr>';
+  shorts.forEach(function(tr){
+    var isWin=tr.pnl>0;
+    var oc=isWin?'var(--green)':'var(--red)';
+    html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">';
+    html+='<td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">'+tr.et+'</td>';
+    html+='<td style="padding:5px 8px;font-weight:600">'+tr.coin+'</td>';
+    html+='<td style="padding:5px 8px">$'+parseFloat(tr.entry).toFixed(4)+'</td>';
+    html+='<td style="padding:5px 8px;color:var(--red)">—</td>';
+    html+='<td style="padding:5px 8px;color:var(--green)">—</td>';
+    html+='<td style="padding:5px 8px">$'+parseFloat(tr.exit).toFixed(4)+'</td>';
+    html+='<td style="padding:5px 8px;color:'+oc+';font-weight:600">'+(isWin?'WIN':'LOSS')+'</td>';
+    html+='<td style="padding:5px 8px;color:'+oc+'">'+(tr.pnl>=0?'+$':'-$')+Math.abs(tr.pnl).toFixed(2)+'</td>';
+    html+='</tr>';
+  });
+  html+='</table>';
+  el.innerHTML=html;
 }
 
 async function loadShadowLong(){
@@ -621,46 +829,6 @@ async function loadShadowLong(){
   }catch(e){}
 }
 
-var shadowExpanded=false;
-function toggleShadowTable(){
-  shadowExpanded=!shadowExpanded;
-  var wrap=document.getElementById('shadowTableWrap');
-  var btn=document.getElementById('shadowToggleBtn');
-  wrap.style.display=shadowExpanded?'block':'none';
-  btn.textContent=shadowExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
-  if(shadowExpanded)loadShadowTable();
-}
-
-async function loadShadowTable(){
-  try{
-    var r=await fetch('/shadow');if(!r.ok)return;
-    var rows=await r.json();
-    var el=document.getElementById('shadowTableContent');
-    if(!rows.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No shadow short trades yet.</div>';return;}
-    var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
-    ['Time','Pair','Entry','Stop','Target','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
-    html+='</tr>';
-    rows.forEach(function(row){
-      var pnl=parseFloat(row['Simulated P&L (%)']||0);
-      var pc=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--muted)';
-      var isOpen=row.Outcome==='OPEN';
-      var oc=isOpen?'var(--amber)':row.Outcome==='TAKE PROFIT'?'var(--green)':'var(--red)';
-      html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">';
-      html+='<td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">'+(row.Timestamp||'')+'</td>';
-      html+='<td style="padding:5px 8px;font-weight:600">'+(row.Pair||'').split('-')[0]+'</td>';
-      html+='<td style="padding:5px 8px">$'+parseFloat(row['Virtual Entry']||0).toFixed(4)+'</td>';
-      html+='<td style="padding:5px 8px;color:var(--red)">$'+parseFloat(row['Stop Price']||0).toFixed(4)+'</td>';
-      html+='<td style="padding:5px 8px;color:var(--green)">$'+parseFloat(row['Target Price']||0).toFixed(4)+'</td>';
-      html+='<td style="padding:5px 8px;color:var(--muted2)">'+(row['Exit Price']?'$'+parseFloat(row['Exit Price']).toFixed(4):'--')+'</td>';
-      html+='<td style="padding:5px 8px;color:'+oc+';font-weight:600">'+(row.Outcome||'--')+'</td>';
-      html+='<td style="padding:5px 8px;color:'+pc+'">'+(pnl?pnl.toFixed(2)+'%':'--')+'</td>';
-      html+='</tr>';
-    });
-    html+='</table>';
-    el.innerHTML=html;
-  }catch(e){}
-}
-
 var slExpanded=false;
 function toggleShadowLongTable(){
   slExpanded=!slExpanded;
@@ -670,7 +838,6 @@ function toggleShadowLongTable(){
   btn.textContent=slExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
   if(slExpanded)loadShadowLongTable();
 }
-
 async function loadShadowLongTable(){
   try{
     var r=await fetch('/shadowlong');if(!r.ok)return;
@@ -703,15 +870,11 @@ async function loadShadowLongTable(){
 
 async function downloadAuditData(){
   var btn=document.querySelector('[onclick="downloadAuditData()"]');
-  var orig=btn.textContent;
-  btn.textContent='PREPARING...';btn.disabled=true;
+  var orig=btn.textContent;btn.textContent='PREPARING...';btn.disabled=true;
   try{
     var files=[
-      {name:'strategy_audit.csv',url:'/audit'},
-      {name:'rejected_signals.csv',url:'/rejected'},
-      {name:'equity_curve.csv',url:'/equity'},
-      {name:'symbol_performance.csv',url:'/symbols'},
-      {name:'shadow_shorts.csv',url:'/shadow'},
+      {name:'strategy_audit.csv',url:'/audit'},{name:'rejected_signals.csv',url:'/rejected'},
+      {name:'equity_curve.csv',url:'/equity'},{name:'symbol_performance.csv',url:'/symbols'},
       {name:'shadow_longs.csv',url:'/shadowlong'}
     ];
     var now=new Date();
@@ -719,32 +882,27 @@ async function downloadAuditData(){
     var downloaded=0;
     for(var i=0;i<files.length;i++){
       try{
-        var f=files[i];
-        var r=await fetch(f.url);
-        if(!r.ok)continue;
-        var text=await r.text();
-        if(!text||text.trim()==='[]'||text.trim()==='')continue;
-        var parsed=JSON.parse(text);
-        if(Array.isArray(parsed)&&parsed.length===0)continue;
+        var f=files[i];var r=await fetch(f.url);if(!r.ok)continue;
+        var text=await r.text();if(!text||text.trim()==='[]'||text.trim()==='')continue;
         var blob=new Blob([text],{type:'text/csv;charset=utf-8;'});
-        var a=document.createElement('a');
-        a.href=URL.createObjectURL(blob);
+        var a=document.createElement('a');a.href=URL.createObjectURL(blob);
         a.download='EDGE_v7_'+f.name.replace('.csv','')+'_'+ts+'.csv';
-        a.style.display='none';
-        document.body.appendChild(a);
-        a.click();
+        a.style.display='none';document.body.appendChild(a);a.click();
         setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href);},1000);
-        downloaded++;
-        await new Promise(function(res){setTimeout(res,500);});
+        downloaded++;await new Promise(function(res){setTimeout(res,500);});
       }catch(e){}
     }
     btn.textContent=downloaded>0?'DOWNLOADED '+downloaded+' FILES':'NO DATA YET';
     setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);
-  }catch(e){
-    btn.textContent='ERROR — TRY AGAIN';
-    setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);
-  }
+  }catch(e){btn.textContent='ERROR';setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);}
 }
+
+async function refresh(){
+  await Promise.all([fetchState(),fetchPrices(),fetchLog()]);
+  updShortStats();
+  loadShadowLong();
+}
+buildCoins();buildRG();renderCal();refresh();setInterval(refresh,15000);
 </script>
 </body>
 </html>
