@@ -1,31 +1,250 @@
 {
-  "capital": 1500.0,
-  "open_trades": {},
-  "trade_history": [],
-  "daily_pnl": 0.0,
-  "total_pnl": 0.0,
-  "last_reset": "2026-04-02",
+  "capital": 891.140969723436,
+  "open_trades": {
+    "SOL-USD": {
+      "entry_price": 83.0,
+      "usd_invested": 218.35,
+      "entry_time": "April 08, 2026  03:08:49 PM",
+      "highest_price": 83.0,
+      "atr": 0.6392857142857135,
+      "stop_loss": 81.72142857142858,
+      "take_profit": 85.55714285714285,
+      "be_trigger": 84.27857142857142,
+      "at_breakeven": false,
+      "explanation": "RSI 26 oversold — bounce likely. Price $83.0000 above 200 EMA $81.5759 — uptrend intact. ADX 46 — trending. Vol $169.5M. SL $81.721429 | TP $85.557143 | BE at $84.278571."
+    },
+    "LINK-USD": {
+      "entry_price": 9.004,
+      "usd_invested": 185.41,
+      "entry_time": "April 08, 2026  03:08:49 PM",
+      "highest_price": 9.0545,
+      "atr": 0.07435714285714314,
+      "stop_loss": 8.855285714285714,
+      "take_profit": 9.301428571428572,
+      "be_trigger": 9.152714285714286,
+      "at_breakeven": false,
+      "explanation": "RSI 24 oversold — bounce likely. Price $9.0040 above 200 EMA $8.8139 — uptrend intact. ADX 35 — trending. Vol $17.3M. SL $8.855286 | TP $9.301429 | BE at $9.152714."
+    },
+    "ADA-USD": {
+      "entry_price": 0.2534,
+      "usd_invested": 157.43,
+      "entry_time": "April 08, 2026  03:08:50 PM",
+      "highest_price": 0.25435,
+      "atr": 0.0024071428571428577,
+      "stop_loss": 0.2485857142857143,
+      "take_profit": 0.26302857142857144,
+      "be_trigger": 0.25821428571428573,
+      "at_breakeven": false,
+      "explanation": "RSI 19 oversold — bounce likely. Price $0.2534 above 200 EMA $0.2478 — uptrend intact. ADX 36 — trending. Vol $19.8M. SL $0.248586 | TP $0.263029 | BE at $0.258214."
+    }
+  },
+  "trade_history": [
+    {
+      "time": "April 06, 2026  04:26:27 PM",
+      "pair": "AVAX-USD",
+      "side": "BUY",
+      "usd": 225.0,
+      "price": 9.37,
+      "paper": true,
+      "explanation": "RSI 26 oversold — bounce likely. Price $9.3700 above 200 EMA $8.9649 — uptrend intact. ADX 41 — trending. Vol $8.1M. SL $9.225714 | TP $9.658571 | BE at $9.514286."
+    },
+    {
+      "time": "April 06, 2026  05:42:11 PM",
+      "pair": "ADA-USD",
+      "side": "BUY",
+      "usd": 191.05,
+      "price": 0.2518,
+      "paper": true,
+      "explanation": "RSI 25 oversold — bounce likely. Price $0.2518 above 200 EMA $0.2463 — uptrend intact. ADX 27 — trending. Vol $15.1M. SL $0.247500 | TP $0.260400 | BE at $0.256100."
+    },
+    {
+      "time": "April 06, 2026  10:31:26 PM",
+      "pair": "AVAX-USD",
+      "side": "SELL",
+      "usd": 225.0,
+      "price": 9.22,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 06, 2026  10:45:15 PM",
+      "pair": "AVAX-USD",
+      "side": "BUY",
+      "usd": 195.23,
+      "price": 9.21,
+      "paper": true,
+      "explanation": "RSI 22 oversold — bounce likely. Price $9.2100 above 200 EMA $8.9751 — uptrend intact. ADX 56 — trending. Vol $8.2M. SL $9.091429 | TP $9.447143 | BE at $9.328571."
+    },
+    {
+      "time": "April 06, 2026  10:59:31 PM",
+      "pair": "ADA-USD",
+      "side": "SELL",
+      "usd": 191.05,
+      "price": 0.2475,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 06, 2026  11:00:19 PM",
+      "pair": "AVAX-USD",
+      "side": "SELL",
+      "usd": 195.23,
+      "price": 9.09,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 07, 2026  12:00:59 AM",
+      "pair": "ETH-USD",
+      "side": "BUY",
+      "usd": 222.5,
+      "price": 2107.6,
+      "paper": true,
+      "explanation": "RSI 32 oversold — bounce likely. Price $2,107.6000 above 200 EMA $2,072.7788 — uptrend intact. ADX 44 — trending. Vol $380.8M. SL $2,072.955714 | TP $2,176.888571 | BE at $2,142.244286."
+    },
+    {
+      "time": "April 07, 2026  12:01:00 AM",
+      "pair": "LINK-USD",
+      "side": "BUY",
+      "usd": 188.92,
+      "price": 8.796,
+      "paper": true,
+      "explanation": "RSI 20 oversold — bounce likely. Price $8.7960 above 200 EMA $8.7305 — uptrend intact. ADX 67 — trending. Vol $10.8M. SL $8.669857 | TP $9.048286 | BE at $8.922143."
+    },
+    {
+      "time": "April 07, 2026  01:16:44 AM",
+      "pair": "BTC-USD",
+      "side": "BUY",
+      "usd": 160.41,
+      "price": 68662.35,
+      "paper": true,
+      "explanation": "RSI 35 oversold — bounce likely. Price $68,662.3500 above 200 EMA $67,614.3621 — uptrend intact. ADX 30 — trending. Vol $756.6M. SL $67,720.284286 | TP $70,546.481429 | BE at $69,604.415714."
+    },
+    {
+      "time": "April 07, 2026  12:00:22 PM",
+      "pair": "LINK-USD",
+      "side": "SELL",
+      "usd": 188.92,
+      "price": 8.668,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 07, 2026  02:02:14 PM",
+      "pair": "ETH-USD",
+      "side": "SELL",
+      "usd": 222.5,
+      "price": 2069.881,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 07, 2026  03:07:20 PM",
+      "pair": "BTC-USD",
+      "side": "SELL",
+      "usd": 160.41,
+      "price": 67719.29,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 08, 2026  01:52:52 PM",
+      "pair": "SOL-USD",
+      "side": "BUY",
+      "usd": 220.14,
+      "price": 84.18,
+      "paper": true,
+      "explanation": "RSI 26 oversold — bounce likely. Price $84.1800 above 200 EMA $81.5725 — uptrend intact. ADX 35 — trending. Vol $173.1M. SL $82.864286 | TP $86.811429 | BE at $85.495714."
+    },
+    {
+      "time": "April 08, 2026  01:52:53 PM",
+      "pair": "ADA-USD",
+      "side": "BUY",
+      "usd": 186.92,
+      "price": 0.2579,
+      "paper": true,
+      "explanation": "RSI 31 oversold — bounce likely. Price $0.2579 above 200 EMA $0.2477 — uptrend intact. ADX 25 — trending. Vol $19.4M. SL $0.253057 | TP $0.267586 | BE at $0.262743."
+    },
+    {
+      "time": "April 08, 2026  02:35:01 PM",
+      "pair": "SOL-USD",
+      "side": "SELL",
+      "usd": 220.14,
+      "price": 82.85,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 08, 2026  02:35:30 PM",
+      "pair": "ADA-USD",
+      "side": "SELL",
+      "usd": 186.92,
+      "price": 0.253,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
+    },
+    {
+      "time": "April 08, 2026  03:08:49 PM",
+      "pair": "SOL-USD",
+      "side": "BUY",
+      "usd": 218.35,
+      "price": 83.0,
+      "paper": true,
+      "explanation": "RSI 26 oversold — bounce likely. Price $83.0000 above 200 EMA $81.5759 — uptrend intact. ADX 46 — trending. Vol $169.5M. SL $81.721429 | TP $85.557143 | BE at $84.278571."
+    },
+    {
+      "time": "April 08, 2026  03:08:49 PM",
+      "pair": "LINK-USD",
+      "side": "BUY",
+      "usd": 185.41,
+      "price": 9.004,
+      "paper": true,
+      "explanation": "RSI 24 oversold — bounce likely. Price $9.0040 above 200 EMA $8.8139 — uptrend intact. ADX 35 — trending. Vol $17.3M. SL $8.855286 | TP $9.301429 | BE at $9.152714."
+    },
+    {
+      "time": "April 08, 2026  03:08:50 PM",
+      "pair": "ADA-USD",
+      "side": "BUY",
+      "usd": 157.43,
+      "price": 0.2534,
+      "paper": true,
+      "explanation": "RSI 19 oversold — bounce likely. Price $0.2534 above 200 EMA $0.2478 — uptrend intact. ADX 36 — trending. Vol $19.8M. SL $0.248586 | TP $0.263029 | BE at $0.258214."
+    }
+  ],
+  "daily_pnl": -9.429687430689881,
+  "total_pnl": -34.76087027656334,
+  "last_reset": "2026-04-08",
   "stats": {
     "wins": 0,
-    "losses": 0,
+    "losses": 8,
     "breakevens": 0,
-    "total_trades": 0
+    "total_trades": 19
   },
-  "last_fg": 9,
+  "last_fg": 17,
   "last_fg_label": "Extreme Fear",
-  "last_dominance": 56.088260936545,
+  "last_dominance": 56.88771090210919,
   "last_funding": 0.0,
   "trailing_highs": {},
-  "trade_count_today": 0,
+  "trade_count_today": 5,
   "last_trade_date": "2026-04-01",
   "performance": {
-    "total_trades": 0,
+    "total_trades": 19,
     "wins": 0,
-    "losses": 0,
+    "losses": 8,
     "breakevens": 0,
-    "total_pnl": 0.0,
-    "max_drawdown": 0.0,
+    "total_pnl": -34.76087027656334,
+    "max_drawdown": 27.126286432874792,
     "peak_capital": 1500.0
   },
-  "atr_stops": {}
+  "atr_stops": {},
+  "trade_count_today": 5,
+  "last_rsi": {
+    "BTC-USD": 51.99559121345967,
+    "ETH-USD": 45.35162950257284,
+    "SOL-USD": 42.081447963800876,
+    "LINK-USD": 34.09090909090921,
+    "XRP-USD": 37.96033994334288,
+    "AVAX-USD": 31.372549019607646,
+    "ADA-USD": 23.021582733813176
+  }
 }
