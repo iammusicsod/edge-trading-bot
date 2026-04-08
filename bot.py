@@ -432,6 +432,16 @@ def check_exits(client,state):
             if trail>pos.get("stop_loss",sl): pos["stop_loss"]=trail;state["open_trades"][pair]=pos;sl=trail
         be_str="✅ BE active" if at_be else f"BE at ${be_trig:,.4f}"
         log(f"  📊 {pair.split('-')[0]}: ${px:,.4f} | {ch:+.1f}% | SL ${sl:,.4f} | TP ${tp:,.4f} | {be_str}")
+try:
+    entry_dt=datetime.strptime(pos.get("entry_time",""),"%B %d, %Y  %I:%M:%S %p")
+    hours_open=(datetime.now()-entry_dt).total_seconds()/3600
+    movement_atr=abs(px-entry)/atr if atr>0 else 0
+    if hours_open>=6 and not at_be:
+        log(f"  ⚠️  STALE TRADE WARNING — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | no breakeven yet")
+    elif hours_open>=4 and not at_be:
+        log(f"  🕐 TRADE WATCH — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | approaching stale zone")
+except:
+    pass
         if px<=sl:
             log(f"  {'↔️  BREAKEVEN STOP' if at_be else '🛑 STOP LOSS'} — {pair.split('-')[0]}")
             place_order(client,pair,"SELL",pos["usd_invested"],px,state,reason="STOP_LOSS — hourly check",atr=atr)
