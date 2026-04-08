@@ -6,10 +6,13 @@ from coinbase.rest import RESTClient
 import base64
 import urllib.request as _urllib_req
 
-CONFIG={"paper_trade":True,"taker_fee":0.006,"max_spread_pct":0.002,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":60,"candle_granularity":"ONE_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json"}
+CONFIG={"paper_trade":True,"taker_fee":0.006,"max_spread_pct":0.002,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"rsi_oversold_reset":30,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":60,"candle_granularity":"ONE_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json","stop_cooldown_hours":4,"market_crash_rsi":30}
 LOG_FILE=Path(__file__).parent/"bot_log.txt"
 STATE_FILE=Path(__file__).parent/"state.json"
 TRADES_FILE=Path(__file__).parent/"trade_explanations.json"
+
+# ── COOLDOWN TRACKER ─────────────────────────────────────────────────────────
+_stop_cooldowns = {}  # pair -> timestamp of last stop loss exit
 
 def now_str(): return datetime.now().strftime("%B %d, %Y  %I:%M:%S %p")
 def time_str(): return datetime.now().strftime("%I:%M %p")
@@ -24,9 +27,10 @@ def load_state():
     if STATE_FILE.exists():
         s=json.load(open(STATE_FILE))
         s.setdefault("trade_count_today",0)
+        s.setdefault("last_rsi",{})
         s.setdefault("performance",{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":CONFIG["starting_capital"]})
         return s
-    return {"capital":CONFIG["starting_capital"],"open_trades":{},"trade_history":[],"daily_pnl":0.0,"total_pnl":0.0,"last_reset":date_str(),"trade_count_today":0,"stats":{"wins":0,"losses":0,"breakevens":0,"total_trades":0},"performance":{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":CONFIG["starting_capital"]},"last_fg":50,"last_fg_label":"Neutral","last_dominance":50,"last_funding":0.0}
+    return {"capital":CONFIG["starting_capital"],"open_trades":{},"trade_history":[],"daily_pnl":0.0,"total_pnl":0.0,"last_reset":date_str(),"trade_count_today":0,"last_rsi":{},"stats":{"wins":0,"losses":0,"breakevens":0,"total_trades":0},"performance":{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":CONFIG["starting_capital"]},"last_fg":50,"last_fg_label":"Neutral","last_dominance":50,"last_funding":0.0}
 
 def save_state(s): json.dump(s,open(STATE_FILE,"w"),indent=2,default=str)
 def save_explanation(exp):
@@ -62,6 +66,54 @@ def get_funding_rate():
     if d: return float(d.get("lastFundingRate",d.get("fundingRate",0)))*100
     return 0.0
 
+def is_in_cooldown(pair):
+    """Check if a pair is in cooldown after a stop loss"""
+    if pair not in _stop_cooldowns:
+        return False, 0
+    elapsed = time.time() - _stop_cooldowns[pair]
+    cooldown_seconds = CONFIG["stop_cooldown_hours"] * 3600
+    if elapsed < cooldown_seconds:
+        remaining_minutes = int((cooldown_seconds - elapsed) / 60)
+        return True, remaining_minutes
+    return False, 0
+
+def set_cooldown(pair):
+    """Set cooldown timer for a pair after stop loss"""
+    _stop_cooldowns[pair] = time.time()
+    log(f"  ⏳ {pair.split('-')[0]} — 4-hour cooldown started after stop loss")
+
+def check_market_crash(scan_signals):
+    """
+    REJECT_MARKET_CRASH — if BTC and SOL are both below RSI 30
+    simultaneously this is a systemic crash not an individual coin dip.
+    Block all new entries.
+    """
+    btc_rsi = scan_signals.get("BTC-USD", {}).get("rsi", 50)
+    sol_rsi = scan_signals.get("SOL-USD", {}).get("rsi", 50)
+    crash_threshold = CONFIG["market_crash_rsi"]
+    if btc_rsi < crash_threshold and sol_rsi < crash_threshold:
+        log(f"  🚨 REJECT_MARKET_CRASH — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}")
+        log(f"  🚨 Systemic crash detected — blocking all new entries this scan")
+        return True
+    return False
+
+def rsi_crossover_confirmed(pair, current_rsi, state):
+    """
+    RSI Crossover filter — only enter when RSI was below 30 (reset level)
+    and has now crossed back above 35 (entry level).
+    This confirms the bounce has actually started rather than buying
+    into a continuing fall.
+    """
+    last_rsi = state.get("last_rsi", {}).get(pair, 50)
+    reset_level = CONFIG["rsi_oversold_reset"]  # 30
+    entry_level = CONFIG["rsi_oversold"]  # 35
+    # RSI must have been below 30 on previous scan AND is now above 35
+    crossover = last_rsi < reset_level and current_rsi >= entry_level
+    if crossover:
+        log(f"  ✅ RSI CROSSOVER confirmed — was {last_rsi:.1f} last scan, now {current_rsi:.1f} — bounce confirmed")
+    elif current_rsi < entry_level:
+        log(f"  ⏳ RSI {current_rsi:.1f} oversold but no crossover yet — last scan was {last_rsi:.1f} (need < {reset_level} then cross > {entry_level})")
+    return crossover
 
 def generate_market_summary(state, scan_results, fg, fgl, dominance):
     """Call Claude API to generate plain English market summary"""
@@ -98,9 +150,7 @@ def generate_market_summary(state, scan_results, fg, fgl, dominance):
             waiting.append(f"{coin} — no conditions met, RSI {rsi:.0f}, {'above' if above_ema else 'below'} 200 EMA, ADX {data.get('adx',0):.0f}")
 
     if open_trades:
-        for pair, pos in open_trades.items():
-            coin = pair.split("-")[0]
-            open_summary = f"Currently holding {coin} at ${pos.get('entry_price', 0):.4f}."
+        open_summary = f"Currently holding {len(open_trades)} position(s)."
     else:
         open_summary = "No open positions — holding cash."
 
@@ -154,7 +204,6 @@ Rules:
     except Exception as e:
         log(f"  ⚠️  Market summary API error: {e}")
         return None
-
 
 def get_candles(client,pair):
     try:
@@ -271,6 +320,9 @@ def place_order(client,pair,side,usd,price,state,reason="",atr=0):
         if pnl>0: state["stats"]["wins"]+=1;state["performance"]["wins"]+=1;log(f"  🏆 Profit: ${pnl:+.2f}")
         elif is_be: state["stats"]["breakevens"]+=1;state["performance"]["breakevens"]+=1;log(f"  ↔️  Breakeven: ${pnl:+.2f}")
         else: state["stats"]["losses"]+=1;state["performance"]["losses"]+=1;log(f"  📉 Loss: ${pnl:+.2f}")
+        # Set cooldown if this was a stop loss exit
+        if "STOP" in reason or "WEBSOCKET_STOP" in reason:
+            set_cooldown(pair)
         peak=state["performance"].get("peak_capital",CONFIG["starting_capital"])
         if state["capital"]>peak: state["performance"]["peak_capital"]=state["capital"]
         else:
@@ -312,7 +364,7 @@ def check_exits(client,state):
         log(f"  📊 {pair.split('-')[0]}: ${px:,.4f} | {ch:+.1f}% | SL ${sl:,.4f} | TP ${tp:,.4f} | {be_str}")
         if px<=sl:
             log(f"  {'↔️  BREAKEVEN STOP' if at_be else '🛑 STOP LOSS'} — {pair.split('-')[0]}")
-            place_order(client,pair,"SELL",pos["usd_invested"],px,state,atr=atr)
+            place_order(client,pair,"SELL",pos["usd_invested"],px,state,reason="STOP_LOSS — hourly check",atr=atr)
         elif px>=tp:
             log(f"  🎯 TAKE PROFIT — {pair.split('-')[0]} +{ch:.1f}%")
             place_order(client,pair,"SELL",pos["usd_invested"],px,state,atr=atr)
@@ -334,13 +386,31 @@ def scan(client,state):
     except:
         pass
     if not risk_ok(state): save_state(state);return
+
+    # ── FIRST PASS — collect all signals including BTC for crash detection ──
+    for pair in CONFIG["pairs"]:
+        coin=pair.split("-")[0]
+        if pair in state["open_trades"]: continue
+        candles=get_candles(client,pair)
+        if not candles: continue
+        closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
+        lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
+        signal=analyze(pair,closes,highs,lows,volumes)
+        _scan_signals[pair]=signal["indicators"]
+
+    # ── CHECK MARKET CRASH GATE ─────────────────────────────────────────────
+    market_crash = check_market_crash(_scan_signals)
+
+    # ── SECOND PASS — log and execute entries ───────────────────────────────
     for pair in CONFIG["pairs"]:
         coin=pair.split("-")[0];div();log(f"  {coin}");div()
         if pair in state["open_trades"]: log("  Already holding — skipping");continue
-        candles=get_candles(client,pair)
-        if not candles: log("  No data");continue
-        closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
-        lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
+        if pair not in _scan_signals: log("  No data");continue
+
+        ind = _scan_signals[pair]
+        px=ind.get("price",0);rv=ind.get("rsi",50);e200=ind.get("ema200",0)
+        adxv=ind.get("adx",0);atrv=ind.get("atr",0);vol24=ind.get("vol24",0)
+
         try:
             bbo = client.get_best_bid_ask(product_ids=[pair])
             bids = bbo.pricebooks[0].bids
@@ -351,25 +421,56 @@ def scan(client,state):
                 mid = (bid + ask) / 2
                 spread_pct = (ask - bid) / mid
                 if spread_pct > CONFIG["max_spread_pct"]:
-                    log(f"  ⚠️  {pair.split('-')[0]} spread {spread_pct*100:.3f}% — too wide, skip")
+                    log(f"  ⚠️  Spread {spread_pct*100:.3f}% — too wide, skip")
                     continue
         except:
             pass
-        signal=analyze(pair,closes,highs,lows,volumes);ind=signal["indicators"]
-        _scan_signals[pair]=ind
-        px=ind.get("price",0);rv=ind.get("rsi",50);e200=ind.get("ema200",0)
-        adxv=ind.get("adx",0);atrv=ind.get("atr",0);vol24=ind.get("vol24",0)
+
         log(f"  Price:   ${px:,.4f}")
         log(f"  RSI:     {rv:.1f}  {'✅ oversold — signal firing' if rv<35 else '— neutral' if rv<65 else '🔴 overbought'}")
         log(f"  200 EMA: ${e200:,.4f}  {'✅ price above — uptrend' if ind.get('above_ema') else '⚠️  price below — skip'}")
         log(f"  ADX:     {adxv:.1f}  {'✅ trending — ok to trade' if ind.get('trending') else '⚠️  ranging — skip'}")
         log(f"  Vol 24h: ${vol24/1e6:.1f}M  {'✅ sufficient liquidity' if vol24>=CONFIG['min_volume_24h'] else '⚠️  too low — skip'}")
         log(f"  ATR:     ${atrv:,.6f} | SL: ${ind.get('sl',0):,.4f} | TP: ${ind.get('tp',0):,.4f}")
-        log(f"  → {signal['reason']}")
-        if signal["direction"]=="BUY" and px>0:
+
+        # Reconstruct signal direction
+        oversold=ind.get("oversold",False);above=ind.get("above_ema",False)
+        trending=ind.get("trending",False);vol_ok=ind.get("vol_ok",True)
+
+        if oversold and above and trending and vol_ok and px>0:
+            # ── GATE 1: Market crash check ──────────────────────────────────
+            if market_crash:
+                log(f"  🚫 REJECT_MARKET_CRASH — skipping {coin} entry")
+                continue
+
+            # ── GATE 2: Cooldown check ───────────────────────────────────────
+            in_cooldown, remaining = is_in_cooldown(pair)
+            if in_cooldown:
+                log(f"  ⏳ COOLDOWN — {coin} blocked for {remaining} more minutes after stop loss")
+                continue
+
+            # ── GATE 3: RSI Crossover check ──────────────────────────────────
+            if not rsi_crossover_confirmed(pair, rv, state):
+                log(f"  ⏳ RSI CROSSOVER PENDING — waiting for RSI to drop below {CONFIG['rsi_oversold_reset']} then cross above {CONFIG['rsi_oversold']}")
+                continue
+
+            # All gates cleared — place order
+            reason=f"RSI {rv:.0f} oversold — bounce likely. Price ${px:,.4f} above 200 EMA ${e200:,.4f} — uptrend intact. ADX {adxv:.0f} — trending. Vol ${vol24/1e6:.1f}M. SL ${ind.get('sl',0):,.6f} | TP ${ind.get('tp',0):,.6f} | BE at ${ind.get('be_trigger',0):,.6f}."
             usd=pos_size(state,atrv,px)
-            if usd>=10: place_order(client,pair,"BUY",usd,px,state,signal["reason"],atrv)
+            if usd>=10: place_order(client,pair,"BUY",usd,px,state,reason,atrv)
             else: log(f"  Too small ${usd:.2f}")
+        else:
+            missing=[]
+            if not oversold: missing.append(f"RSI {rv:.0f} not oversold (need < {CONFIG['rsi_oversold']})")
+            if not above: missing.append(f"Price below 200 EMA ${e200:,.4f}")
+            if not trending: missing.append(f"ADX {adxv:.0f} ranging (need > {CONFIG['adx_threshold']})")
+            if not vol_ok: missing.append(f"Vol ${vol24/1e6:.1f}M too low (need > $5M)")
+            log(f"  → Waiting: {' | '.join(missing)}")
+
+    # ── UPDATE LAST RSI for crossover tracking ──────────────────────────────
+    if "last_rsi" not in state: state["last_rsi"] = {}
+    for pair, ind in _scan_signals.items():
+        state["last_rsi"][pair] = ind.get("rsi", 50)
 
     st=state["stats"];perf=state["performance"];t=st["total_trades"];wr=(st["wins"]/t*100) if t else 0
     gr=(state["capital"]-CONFIG["starting_capital"])/CONFIG["starting_capital"]*100
@@ -388,8 +489,7 @@ def scan(client,state):
     # ── BUILD SUMMARY DATA FROM SCAN RESULTS ────────────────────────────────
     scan_results_for_summary = {}
     for pair in CONFIG["pairs"]:
-        if pair in state.get("open_trades", {}):
-            continue
+        if pair in state.get("open_trades", {}): continue
         if pair in _scan_signals:
             s = _scan_signals[pair]
             scan_results_for_summary[pair] = {
@@ -457,21 +557,31 @@ def scan(client,state):
             adx = s.get("adx", 0)
             atr = s.get("atr", 0)
             if px == 0 or atr == 0: continue
-            overbought = rsi > 65
+            # RSI crossover for shorts — RSI was above 70 and crossed back DOWN through 65
+            last_rsi_val = state.get("last_rsi", {}).get(pair, 50)
+            overbought_reset = last_rsi_val > 70
+            overbought_cross = rsi <= 65
+            overbought = overbought_reset and overbought_cross
             below_ema = not above_ema
             trending = adx >= CONFIG["adx_threshold"]
+            coin = pair.split("-")[0]
             if overbought and below_ema and trending:
                 sl = round(px + atr * 2.0, 6)
                 tp = round(px - atr * 4.0, 6)
-                coin = pair.split("-")[0]
-                log(f"  📊 SHADOW SHORT signal — {coin} @ ${px:,.4f} | RSI {rsi:.0f} | ADX {adx:.0f}")
+                log(f"  📊 SHADOW SHORT signal — {coin} @ ${px:,.4f} | RSI crossover {last_rsi_val:.0f}→{rsi:.0f} | ADX {adx:.0f}")
                 shadow_state[pair] = {"entry_price": px, "entry_time": now_str(), "stop_price": sl, "original_stop": sl, "target_price": tp, "atr": atr, "lowest_price": px, "at_breakeven": False, "outcome": "OPEN", "rsi": rsi, "adx": adx}
                 file_exists = shadow_file.exists()
                 with open(shadow_file, "a", newline="") as f:
                     writer = csv.writer(f)
                     if not file_exists:
                         writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
-                    writer.writerow([now_str(), pair, px, sl, tp, "", "", "OPEN", "", f"RSI {rsi:.0f} overbought | ADX {adx:.0f} trending"])
+                    writer.writerow([now_str(), pair, px, sl, tp, "", "", "OPEN", "", f"RSI crossover {last_rsi_val:.0f}→{rsi:.0f} | ADX {adx:.0f} trending"])
+            else:
+                missing_s = []
+                if not overbought: missing_s.append(f"RSI {rsi:.0f} no crossover (need >70 then cross <65)")
+                if not below_ema: missing_s.append("above 200 EMA")
+                if not trending: missing_s.append(f"ADX {adx:.0f}")
+                log(f"  📊 SHADOW SHORT {coin}: Waiting — {' | '.join(missing_s)}")
 
         json.dump(shadow_state, open(shadow_state_file, "w"), indent=2, default=str)
     except Exception as se:
@@ -611,6 +721,8 @@ def scan(client,state):
                 trending = adxv >= CONFIG["adx_threshold"]
                 oversold = rv < CONFIG["rsi_oversold"]
                 vol_ok = vol24 >= CONFIG["min_volume_24h"]
+                # Add to scan signals for BTC dominance tracking
+                _scan_signals[pair] = {"price":px,"rsi":rv,"ema200":e200,"adx":adxv,"atr":atrv,"vol24":vol24,"above_ema":above,"trending":trending,"oversold":oversold,"vol_ok":vol_ok}
 
                 if pair in shadow_long_state and shadow_long_state[pair].get("outcome") == "OPEN":
                     pos = shadow_long_state[pair]
@@ -672,15 +784,13 @@ def scan(client,state):
     except Exception as sle:
         log(f"  Shadow long logger error: {sle}")
 
-    # ── GENERATE MARKET SUMMARY (AI + local fallback) ────────────────────────
-    # First try Claude API for conversational summary
+    # ── GENERATE MARKET SUMMARY ──────────────────────────────────────────────
     try:
         ai_summary = generate_market_summary(state, scan_results_for_summary, fg, fgl, dominance)
     except Exception as e:
         ai_summary = None
         log(f"  AI summary error: {e}")
 
-    # Always write local summary to summary.json (this is what the dashboard reads)
     try:
         all_below_ema = True
         closest = []
@@ -703,38 +813,45 @@ def scan(client,state):
 
         closest.sort(key=lambda x: -x[1])
         lines = [f"Market sentiment: Fear & Greed {fg}/100 — {fgl}."]
-
         ready = [c for c in closest if c[3]]
         if ready:
             for c in ready:
                 lines.append(f"{c[0]} has all 3 signals firing — RSI oversold, price above 200 EMA, ADX trending. Bot will enter on next scan if conditions hold.")
         elif all_below_ema:
-            lines.append("Every coin is below its 200 EMA right now — the entire market is in a downtrend. RSI and ADX may look good but the bot correctly stays in cash until price recovers above the 200 EMA.")
+            lines.append("Every coin is below its 200 EMA right now — the entire market is in a downtrend. Bot correctly stays in cash.")
             two_of_three = [c for c in closest if c[1] >= 3]
             if two_of_three:
                 top = two_of_three[0]
-                lines.append(f"Closest to a signal: {top[0]} — only missing {top[2][0] if top[2] else 'one condition'}.")
+                lines.append(f"Closest: {top[0]} — missing {top[2][0] if top[2] else 'one condition'}.")
         else:
             two = [c for c in closest if c[1] >= 3 and not c[3]]
             if two:
                 top = two[0]
-                lines.append(f"{top[0]} is the closest with {top[1]-1} of 3 signals met. Still waiting on: {', '.join(top[2])}.")
+                lines.append(f"{top[0]} is closest with {top[1]-1} of 3 signals met. Waiting on: {', '.join(top[2])}.")
             others = [c[0] for c in closest[1:3] if not c[3]]
             if others:
                 lines.append(f"Also watching: {', '.join(others)}.")
-
         if not ready:
-            lines.append("No trades taken this scan. Bot is being patient — all 3 signals must agree before any entry.")
+            lines.append("No trades taken this scan. Bot is being patient.")
 
-        # Use AI summary if available, otherwise use local summary
         final_summary = ai_summary if ai_summary else " ".join(lines)
-
         import json as _json
         sf = Path(__file__).parent / "summary.json"
         _json.dump({"time": now_str(), "summary": final_summary, "signals": _scan_signals}, open(sf, "w", encoding="utf-8"), indent=2, default=str, ensure_ascii=True)
         log(f"  ✅ Summary written to summary.json")
     except Exception as se:
         log(f"  Summary error: {se}")
+
+    # ── INJECT SUMMARY INTO STATE FOR DASHBOARD ──────────────────────────────
+    try:
+        sf = Path(__file__).parent / "summary.json"
+        if sf.exists():
+            sd = json.loads(sf.read_bytes().decode('utf-8', errors='replace'))
+            state["ai_summary"] = sd.get("summary", "")
+            state["ai_summary_time"] = sd.get("time", "")
+            state["ai_signals"] = sd.get("signals", {})
+    except:
+        pass
 
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
     log(f"  ✅ Next scan at {nxt}.\n")
@@ -773,6 +890,8 @@ def ws_on_message(ws, message):
                     log(f"  🚨 WEBSOCKET STOP — {pair.split('-')[0]} price ${px:,.4f} breached stop ${sl:,.4f}")
                     log(f"  ⚡ Circuit breaker firing — exiting position immediately")
                     place_order(_ws_client_ref, pair, "SELL", pos["usd_invested"], px, _ws_state_ref, reason="WEBSOCKET_STOP — real-time circuit breaker", atr=pos.get("atr", 0))
+                    # Set cooldown immediately after WebSocket stop
+                    set_cooldown(pair)
                     save_state(_ws_state_ref)
                     log(f"  ✅ WEBSOCKET_STOP logged and position closed")
     except Exception as e:
@@ -818,11 +937,13 @@ def start_risk_desk(state, client):
 def main():
     sec("EDGE BOT v7 — FINAL CLEAN VERSION")
     log(f"  Mode:      {'PAPER TRADE' if CONFIG['paper_trade'] else '⚡ LIVE'}")
-    log(f"  Entry:     RSI < {CONFIG['rsi_oversold']} + Price > 200 EMA + ADX > {CONFIG['adx_threshold']}")
+    log(f"  Entry:     RSI < {CONFIG['rsi_oversold']} (crossover from < {CONFIG['rsi_oversold_reset']}) + Price > 200 EMA + ADX > {CONFIG['adx_threshold']}")
     log(f"  Volume:    Min ${CONFIG['min_volume_24h']/1e6:.0f}M 24h | Longs only")
     log(f"  Stop:      {CONFIG['atr_sl_mult']}x ATR | Target: {CONFIG['atr_tp_mult']}x ATR | Risk: {CONFIG['risk_per_trade']*100:.0f}%/trade")
     log(f"  Breakeven: +{CONFIG['atr_be_mult']}x ATR → stop moves to entry")
     log(f"  Trailing:  {CONFIG['atr_trail_mult']}x ATR from highest after breakeven")
+    log(f"  Cooldown:  {CONFIG['stop_cooldown_hours']}h after any stop loss exit")
+    log(f"  Crash Gate: Block entries if BTC+SOL RSI both < {CONFIG['market_crash_rsi']}")
     div("═");log("")
     client=load_client()
     state=load_state()
