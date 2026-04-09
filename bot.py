@@ -655,7 +655,7 @@ def scan(client,state):
 
     try:
         import csv
-        SHADOW_LONG_PAIRS=["DOGE-USD","DOT-USD","SUI-USD","LTC-USD"]
+        SHADOW_LONG_PAIRS=["DOGE-USD","DOT-USD","SUI-USD","LTC-USD","TAO-USD","FET-USD"]
         shadow_long_file=Path(__file__).parent/"shadow_longs.csv"
         shadow_long_state_file=Path(__file__).parent/"shadow_long_state.json"
         shadow_long_state={}
