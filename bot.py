@@ -83,7 +83,26 @@ def set_cooldown(pair):
     _stop_cooldowns[pair]=time.time()
     log(f"  ⏳ {pair.split('-')[0]} — 4-hour cooldown started after stop loss")
 
-def check_market_crash(scan_signals,state):
+def check_market_crash(scan_signals, state):
+    btc_rsi=scan_signals.get("BTC-USD",{}).get("rsi",50)
+    sol_rsi=scan_signals.get("SOL-USD",{}).get("rsi",50)
+    crash_threshold=CONFIG["market_crash_rsi"]
+    fg=state.get("last_fg",50)
+    if btc_rsi<crash_threshold and sol_rsi<crash_threshold:
+        log(f"  🚨 REJECT_MARKET_CRASH — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}")
+        log(f"  🚨 Systemic crash detected — blocking all new entries this scan")
+        state["market_crash_active"]=True
+        state["market_crash_detail"]=f"GLOBAL FUSE BLOWN — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}. All entries blocked."
+        return True
+    elif fg<20:
+        log(f"  🚨 REJECT_EXTREME_FEAR — Fear & Greed {fg}/100 — market in panic. Bot in cash until F&G recovers above 20.")
+        state["market_crash_active"]=True
+        state["market_crash_detail"]=f"EXTREME FEAR LOCKDOWN — Fear & Greed {fg}/100. No entries until sentiment recovers above 20."
+        return True
+    else:
+        state["market_crash_active"]=False
+        state["market_crash_detail"]=""
+        return False
     btc_rsi=scan_signals.get("BTC-USD",{}).get("rsi",50)
     sol_rsi=scan_signals.get("SOL-USD",{}).get("rsi",50)
     crash_threshold=CONFIG["market_crash_rsi"]
