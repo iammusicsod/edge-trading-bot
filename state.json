@@ -1,5 +1,5 @@
 {
-  "capital": 891.140969723436,
+  "capital": 886.96,
   "open_trades": {
     "SOL-USD": {
       "entry_price": 83.0,
@@ -12,18 +12,6 @@
       "be_trigger": 84.27857142857142,
       "at_breakeven": false,
       "explanation": "RSI 26 oversold — bounce likely. Price $83.0000 above 200 EMA $81.5759 — uptrend intact. ADX 46 — trending. Vol $169.5M. SL $81.721429 | TP $85.557143 | BE at $84.278571."
-    },
-    "LINK-USD": {
-      "entry_price": 9.004,
-      "usd_invested": 185.41,
-      "entry_time": "April 08, 2026  03:08:49 PM",
-      "highest_price": 9.0545,
-      "atr": 0.07435714285714314,
-      "stop_loss": 8.855285714285714,
-      "take_profit": 9.301428571428572,
-      "be_trigger": 9.152714285714286,
-      "at_breakeven": false,
-      "explanation": "RSI 24 oversold — bounce likely. Price $9.0040 above 200 EMA $8.8139 — uptrend intact. ADX 35 — trending. Vol $17.3M. SL $8.855286 | TP $9.301429 | BE at $9.152714."
     },
     "ADA-USD": {
       "entry_price": 0.2534,
@@ -209,35 +197,43 @@
       "price": 0.2534,
       "paper": true,
       "explanation": "RSI 19 oversold — bounce likely. Price $0.2534 above 200 EMA $0.2478 — uptrend intact. ADX 36 — trending. Vol $19.8M. SL $0.248586 | TP $0.263029 | BE at $0.258214."
+    },
+    {
+      "time": "April 09, 2026  12:08:20 AM",
+      "pair": "LINK-USD",
+      "side": "SELL",
+      "usd": 185.41,
+      "price": 8.855285714285714,
+      "paper": true,
+      "explanation": "WEBSOCKET_STOP — real-time circuit breaker"
     }
   ],
-  "daily_pnl": -9.429687430689881,
-  "total_pnl": -34.76087027656334,
-  "last_reset": "2026-04-08",
+  "daily_pnl": -4.18,
+  "total_pnl": -38.94,
+  "last_reset": "2026-04-09",
   "stats": {
     "wins": 0,
-    "losses": 8,
+    "losses": 9,
     "breakevens": 0,
-    "total_trades": 19
+    "total_trades": 20
   },
   "last_fg": 17,
   "last_fg_label": "Extreme Fear",
   "last_dominance": 56.88771090210919,
   "last_funding": 0.0,
   "trailing_highs": {},
-  "trade_count_today": 5,
-  "last_trade_date": "2026-04-01",
+  "trade_count_today": 1,
+  "last_trade_date": "2026-04-09",
   "performance": {
-    "total_trades": 19,
+    "total_trades": 20,
     "wins": 0,
-    "losses": 8,
+    "losses": 9,
     "breakevens": 0,
-    "total_pnl": -34.76087027656334,
-    "max_drawdown": 27.126286432874792,
+    "total_pnl": -38.94,
+    "max_drawdown": 28.5,
     "peak_capital": 1500.0
   },
   "atr_stops": {},
-  "trade_count_today": 5,
   "last_rsi": {
     "BTC-USD": 51.99559121345967,
     "ETH-USD": 45.35162950257284,
@@ -246,5 +242,16 @@
     "XRP-USD": 37.96033994334288,
     "AVAX-USD": 31.372549019607646,
     "ADA-USD": 23.021582733813176
-  }
+  },
+  "short_capital": 891.140969723436,
+  "short_open_trades": {},
+  "short_stats": {
+    "wins": 0,
+    "losses": 0,
+    "breakevens": 0,
+    "total_trades": 0,
+    "total_pnl": 0.0
+  },
+  "market_crash_active": false,
+  "market_crash_detail": ""
 }
