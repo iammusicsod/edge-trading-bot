@@ -12,8 +12,7 @@ LOG_FILE=Path(__file__).parent/"bot_log.txt"
 STATE_FILE=Path(__file__).parent/"state.json"
 TRADES_FILE=Path(__file__).parent/"trade_explanations.json"
 
-# ── COOLDOWN TRACKER ─────────────────────────────────────────────────────────
-_stop_cooldowns = {}
+_stop_cooldowns={}
 
 def now_str(): return datetime.now().strftime("%B %d, %Y  %I:%M:%S %p")
 def time_str(): return datetime.now().strftime("%I:%M %p")
@@ -29,12 +28,12 @@ def load_state():
         s=json.load(open(STATE_FILE))
         s.setdefault("trade_count_today",0)
         s.setdefault("last_rsi",{})
-        s.setdefault("short_capital", s.get("capital", CONFIG["starting_capital"]))
-        s.setdefault("short_open_trades", {})
-        s.setdefault("short_stats", {"wins":0,"losses":0,"breakevens":0,"total_trades":0,"total_pnl":0.0})
+        s.setdefault("short_capital",s.get("capital",CONFIG["starting_capital"]))
+        s.setdefault("short_open_trades",{})
+        s.setdefault("short_stats",{"wins":0,"losses":0,"breakevens":0,"total_trades":0,"total_pnl":0.0})
         s.setdefault("performance",{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":CONFIG["starting_capital"]})
         return s
-    cap = CONFIG["starting_capital"]
+    cap=CONFIG["starting_capital"]
     return {"capital":cap,"open_trades":{},"trade_history":[],"daily_pnl":0.0,"total_pnl":0.0,"last_reset":date_str(),"trade_count_today":0,"last_rsi":{},"short_capital":cap,"short_open_trades":{},"short_stats":{"wins":0,"losses":0,"breakevens":0,"total_trades":0,"total_pnl":0.0},"stats":{"wins":0,"losses":0,"breakevens":0,"total_trades":0},"performance":{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":cap},"last_fg":50,"last_fg_label":"Neutral","last_dominance":50,"last_funding":0.0}
 
 def save_state(s): json.dump(s,open(STATE_FILE,"w"),indent=2,default=str)
@@ -84,7 +83,7 @@ def set_cooldown(pair):
     _stop_cooldowns[pair]=time.time()
     log(f"  ⏳ {pair.split('-')[0]} — 4-hour cooldown started after stop loss")
 
-def check_market_crash(scan_signals, state):
+def check_market_crash(scan_signals,state):
     btc_rsi=scan_signals.get("BTC-USD",{}).get("rsi",50)
     sol_rsi=scan_signals.get("SOL-USD",{}).get("rsi",50)
     crash_threshold=CONFIG["market_crash_rsi"]
@@ -99,7 +98,7 @@ def check_market_crash(scan_signals, state):
         state["market_crash_detail"]=""
         return False
 
-def rsi_crossover_confirmed(pair, current_rsi, state):
+def rsi_crossover_confirmed(pair,current_rsi,state):
     last_rsi=state.get("last_rsi",{}).get(pair,50)
     reset_level=CONFIG["rsi_oversold_reset"]
     entry_level=CONFIG["rsi_oversold"]
@@ -110,18 +109,16 @@ def rsi_crossover_confirmed(pair, current_rsi, state):
         log(f"  ⏳ RSI {current_rsi:.1f} oversold but no crossover yet — last scan was {last_rsi:.1f} (need < {reset_level} then cross > {entry_level})")
     return crossover
 
-def pos_size_short(state, atr, price):
-    """Position sizing for paper shorts using virtual short_capital"""
-    capital=state.get("short_capital", CONFIG["starting_capital"])
+def pos_size_short(state,atr,price):
+    capital=state.get("short_capital",CONFIG["starting_capital"])
     risk=capital*CONFIG["risk_per_trade"]
     stop=atr*CONFIG["atr_sl_mult"]
     if stop<=0 or price<=0: return round(risk*4,2)
-    return round(min((risk/stop)*price, capital*0.15),2)
+    return round(min((risk/stop)*price,capital*0.15),2)
 
-def place_short(pair, price, state, reason="", atr=0):
-    """Place a live paper short trade — affects virtual short_capital"""
+def place_short(pair,price,state,reason="",atr=0):
     coin=pair.split("-")[0]
-    usd=pos_size_short(state, atr, price)
+    usd=pos_size_short(state,atr,price)
     if usd<10:
         log(f"  📉 SHORT too small ${usd:.2f} — skip")
         return
@@ -134,25 +131,16 @@ def place_short(pair, price, state, reason="", atr=0):
     log(f"  💸 Entry fee: ${entry_fee:.2f} (0.6%)")
     log(f"     Stop: ${sl:,.6f} | Target: ${tp:,.6f} | BE triggers at: ${be:,.6f}")
     log(f"     Why: {reason}")
-    state["short_open_trades"][pair]={
-        "entry_price":price,"usd_invested":usd,"entry_time":now_str(),
-        "lowest_price":price,"atr":atr,"stop_loss":sl,"take_profit":tp,
-        "be_trigger":be,"at_breakeven":False,"explanation":reason,"type":"SHORT"
-    }
+    state["short_open_trades"][pair]={"entry_price":price,"usd_invested":usd,"entry_time":now_str(),"lowest_price":price,"atr":atr,"stop_loss":sl,"take_profit":tp,"be_trigger":be,"at_breakeven":False,"explanation":reason,"type":"SHORT"}
     state["short_stats"]["total_trades"]+=1
-    state["trade_history"].append({
-        "time":now_str(),"pair":pair,"side":"SHORT","usd":usd,"price":price,
-        "paper":True,"explanation":reason,"type":"SHORT"
-    })
-    save_explanation({"time":now_str(),"pair":pair,"side":"SHORT","price":price,"usd":usd,
-                      "explanation":reason,"stop_loss":sl,"take_profit":tp,"be_trigger":be})
+    state["trade_history"].append({"time":now_str(),"pair":pair,"side":"SHORT","usd":usd,"price":price,"paper":True,"explanation":reason,"type":"SHORT"})
+    save_explanation({"time":now_str(),"pair":pair,"side":"SHORT","price":price,"usd":usd,"explanation":reason,"stop_loss":sl,"take_profit":tp,"be_trigger":be})
 
-def close_short(pair, price, state, reason=""):
-    """Close a live paper short — calculate P&L and update virtual short_capital"""
+def close_short(pair,price,state,reason=""):
     if pair not in state.get("short_open_trades",{}): return
     pos=state["short_open_trades"].pop(pair)
     coin=pair.split("-")[0]
-    entry=pos["entry_price"];usd=pos["usd_invested"];atr=pos.get("atr",0)
+    entry=pos["entry_price"];usd=pos["usd_invested"]
     pnl_pct=(entry-price)/entry
     proceeds=usd+(pnl_pct*usd)
     exit_fee=proceeds*CONFIG["taker_fee"]
@@ -163,25 +151,18 @@ def close_short(pair, price, state, reason=""):
     log(f"  📉 PAPER SHORT CLOSE — {coin} @ ${price:,.4f} | P&L: ${pnl:+.2f} ({pnl_pct*100:+.2f}%)")
     log(f"  💸 Exit fee: ${exit_fee:.2f} (0.6%)")
     if pnl>0:
-        state["short_stats"]["wins"]+=1
-        state["short_stats"]["total_pnl"]+=pnl
+        state["short_stats"]["wins"]+=1;state["short_stats"]["total_pnl"]+=pnl
         log(f"  🏆 SHORT PROFIT: ${pnl:+.2f}")
     elif is_be:
         state["short_stats"]["breakevens"]+=1
         log(f"  ↔️  SHORT BREAKEVEN: ${pnl:+.2f}")
     else:
-        state["short_stats"]["losses"]+=1
-        state["short_stats"]["total_pnl"]+=pnl
+        state["short_stats"]["losses"]+=1;state["short_stats"]["total_pnl"]+=pnl
         log(f"  📉 SHORT LOSS: ${pnl:+.2f}")
-    state["trade_history"].append({
-        "time":now_str(),"pair":pair,"side":"SHORT_CLOSE","usd":usd,"price":price,
-        "paper":True,"explanation":reason,"type":"SHORT","pnl":round(pnl,2)
-    })
-    save_explanation({"time":now_str(),"pair":pair,"side":"SHORT_CLOSE","price":price,"pnl":pnl,
-                      "explanation":f"Short closed {reason}. Entry ${entry:,.4f} → Exit ${price:,.4f}. P&L ${pnl:+.2f}"})
+    state["trade_history"].append({"time":now_str(),"pair":pair,"side":"SHORT_CLOSE","usd":usd,"price":price,"paper":True,"explanation":reason,"type":"SHORT","pnl":round(pnl,2)})
+    save_explanation({"time":now_str(),"pair":pair,"side":"SHORT_CLOSE","price":price,"pnl":pnl,"explanation":f"Short closed {reason}. Entry ${entry:,.4f} → Exit ${price:,.4f}. P&L ${pnl:+.2f}"})
 
-def check_short_exits(client, state):
-    """Check all open paper shorts for stop loss or take profit"""
+def check_short_exits(client,state):
     shorts=state.get("short_open_trades",{})
     if not shorts: return
     log("  Checking short positions...")
@@ -193,10 +174,9 @@ def check_short_exits(client, state):
         tp=pos.get("take_profit",entry-atr*CONFIG["atr_tp_mult"])
         be_trig=pos.get("be_trigger",entry-atr*CONFIG["atr_be_mult"])
         at_be=pos.get("at_breakeven",False)
-        ch=(entry-px)/entry*100  # positive when price falls (short profit)
+        ch=(entry-px)/entry*100
         if px<pos.get("lowest_price",px):
-            pos["lowest_price"]=px
-            state["short_open_trades"][pair]=pos
+            pos["lowest_price"]=px;state["short_open_trades"][pair]=pos
         lowest=pos.get("lowest_price",px)
         if not at_be and px<=be_trig:
             pos["stop_loss"]=entry;pos["at_breakeven"]=True
@@ -205,18 +185,17 @@ def check_short_exits(client, state):
         if at_be:
             trail=lowest+atr*CONFIG["atr_trail_mult"]
             if trail<pos.get("stop_loss",sl):
-                pos["stop_loss"]=trail
-                state["short_open_trades"][pair]=pos;sl=trail
+                pos["stop_loss"]=trail;state["short_open_trades"][pair]=pos;sl=trail
         be_str="✅ BE active" if at_be else f"BE at ${be_trig:,.4f}"
         log(f"  📉 SHORT {pair.split('-')[0]}: ${px:,.4f} | {ch:+.1f}% favour | SL ${sl:,.4f} | TP ${tp:,.4f} | {be_str}")
         if px>=sl:
             log(f"  🛑 SHORT STOP LOSS — {pair.split('-')[0]}")
-            close_short(pair, px, state, reason="SHORT_STOP_LOSS")
+            close_short(pair,px,state,reason="SHORT_STOP_LOSS")
         elif px<=tp:
             log(f"  🎯 SHORT TAKE PROFIT — {pair.split('-')[0]} +{ch:.1f}%")
-            close_short(pair, px, state, reason="SHORT_TAKE_PROFIT")
+            close_short(pair,px,state,reason="SHORT_TAKE_PROFIT")
 
-def generate_market_summary(state, scan_results, fg, fgl, dominance):
+def generate_market_summary(state,scan_results,fg,fgl,dominance):
     api_key=os.environ.get("ANTHROPIC_API_KEY","")
     if not api_key:
         log("  ⚠️  No ANTHROPIC_API_KEY — skipping AI summary")
@@ -432,16 +411,16 @@ def check_exits(client,state):
             if trail>pos.get("stop_loss",sl): pos["stop_loss"]=trail;state["open_trades"][pair]=pos;sl=trail
         be_str="✅ BE active" if at_be else f"BE at ${be_trig:,.4f}"
         log(f"  📊 {pair.split('-')[0]}: ${px:,.4f} | {ch:+.1f}% | SL ${sl:,.4f} | TP ${tp:,.4f} | {be_str}")
-try:
-    entry_dt=datetime.strptime(pos.get("entry_time",""),"%B %d, %Y  %I:%M:%S %p")
-    hours_open=(datetime.now()-entry_dt).total_seconds()/3600
-    movement_atr=abs(px-entry)/atr if atr>0 else 0
-    if hours_open>=6 and not at_be:
-        log(f"  ⚠️  STALE TRADE WARNING — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | no breakeven yet")
-    elif hours_open>=4 and not at_be:
-        log(f"  🕐 TRADE WATCH — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | approaching stale zone")
-except:
-    pass
+        try:
+            entry_dt=datetime.strptime(pos.get("entry_time",""),"%B %d, %Y  %I:%M:%S %p")
+            hours_open=(datetime.now()-entry_dt).total_seconds()/3600
+            movement_atr=abs(px-entry)/atr if atr>0 else 0
+            if hours_open>=6 and not at_be:
+                log(f"  ⚠️  STALE TRADE WARNING — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | no breakeven yet")
+            elif hours_open>=4 and not at_be:
+                log(f"  🕐 TRADE WATCH — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | approaching stale zone")
+        except:
+            pass
         if px<=sl:
             log(f"  {'↔️  BREAKEVEN STOP' if at_be else '🛑 STOP LOSS'} — {pair.split('-')[0]}")
             place_order(client,pair,"SELL",pos["usd_invested"],px,state,reason="STOP_LOSS — hourly check",atr=atr)
@@ -467,7 +446,6 @@ def scan(client,state):
     except: pass
     if not risk_ok(state): save_state(state);return
 
-    # ── FIRST PASS — collect all signals including BTC ──────────────────────
     for pair in CONFIG["pairs"]:
         if pair in state["open_trades"]: continue
         candles=get_candles(client,pair)
@@ -477,10 +455,8 @@ def scan(client,state):
         signal=analyze(pair,closes,highs,lows,volumes)
         _scan_signals[pair]=signal["indicators"]
 
-    # ── MARKET CRASH GATE ───────────────────────────────────────────────────
-    market_crash=check_market_crash(_scan_signals, state)
+    market_crash=check_market_crash(_scan_signals,state)
 
-    # ── SECOND PASS — long entries ──────────────────────────────────────────
     for pair in CONFIG["pairs"]:
         coin=pair.split("-")[0];div();log(f"  {coin}");div()
         if pair in state["open_trades"]: log("  Already holding long — skipping");continue
@@ -522,11 +498,9 @@ def scan(client,state):
             if not vol_ok: missing.append(f"Vol too low")
             log(f"  → Waiting: {' | '.join(missing)}")
 
-    # ── LIVE PAPER SHORTS ───────────────────────────────────────────────────
     SHORT_PAIRS=list(CONFIG["pairs"])+["DOGE-USD","DOT-USD","SUI-USD","LTC-USD"]
     for pair in SHORT_PAIRS:
         if pair not in _scan_signals:
-            # fetch candles for shadow-only pairs
             try:
                 candles=get_candles(client,pair)
                 if not candles or len(candles)<210: continue
@@ -563,7 +537,6 @@ def scan(client,state):
             if adx<CONFIG["adx_threshold"]: missing_s.append(f"ADX {adx:.0f} weak")
             log(f"  📉 SHORT {coin}: Waiting — {' | '.join(missing_s)}")
 
-    # ── UPDATE LAST RSI ─────────────────────────────────────────────────────
     if "last_rsi" not in state: state["last_rsi"]={}
     for pair,ind in _scan_signals.items():
         state["last_rsi"][pair]=ind.get("rsi",50)
@@ -590,7 +563,6 @@ def scan(client,state):
         log("  Holding cash — waiting for clean setups")
     div("═")
 
-    # ── BUILD SUMMARY DATA ──────────────────────────────────────────────────
     scan_results_for_summary={}
     for pair in CONFIG["pairs"]:
         if pair in state.get("open_trades",{}): continue
@@ -598,7 +570,6 @@ def scan(client,state):
             s=_scan_signals[pair]
             scan_results_for_summary[pair]={"rsi":s.get("rsi",50),"above_ema":s.get("above_ema",False),"adx":s.get("adx",0),"signal":"BUY" if (s.get("oversold") and s.get("above_ema") and s.get("trending") and s.get("vol_ok")) else "HOLD"}
 
-    # ── STRATEGY AUDIT LOGGER ───────────────────────────────────────────────
     try:
         import csv
         audit_file=Path(__file__).parent/"strategy_audit.csv"
@@ -682,7 +653,6 @@ def scan(client,state):
     except Exception as ae:
         log(f"  Audit logger error: {ae}")
 
-    # ── SHADOW LONG LOGGER ──────────────────────────────────────────────────
     try:
         import csv
         SHADOW_LONG_PAIRS=["DOGE-USD","DOT-USD","SUI-USD","LTC-USD"]
@@ -752,7 +722,6 @@ def scan(client,state):
         json.dump(shadow_long_state,open(shadow_long_state_file,"w"),indent=2,default=str)
     except Exception as sle: log(f"  Shadow long logger error: {sle}")
 
-    # ── GENERATE MARKET SUMMARY ─────────────────────────────────────────────
     try:
         ai_summary=generate_market_summary(state,scan_results_for_summary,fg,fgl,dominance)
     except Exception as e:
@@ -795,7 +764,6 @@ def scan(client,state):
         log(f"  ✅ Summary written to summary.json")
     except Exception as se: log(f"  Summary error: {se}")
 
-    # ── INJECT SUMMARY INTO STATE ───────────────────────────────────────────
     try:
         sf=Path(__file__).parent/"summary.json"
         if sf.exists():
@@ -810,7 +778,6 @@ def scan(client,state):
     save_state(state)
 
 
-# ── WEBSOCKET RISK DESK ─────────────────────────────────────────────────────
 import threading
 import websocket
 import json as _ws_json
@@ -831,7 +798,6 @@ def ws_on_message(ws,message):
                 if not pair or not price_str: continue
                 px=float(price_str);_last_tick_time[pair]=time.time()
                 if _ws_state_ref is None: continue
-                # Check long stops
                 open_trades=_ws_state_ref.get("open_trades",{})
                 if pair in open_trades:
                     pos=open_trades[pair];sl=pos.get("stop_loss",0)
@@ -840,7 +806,6 @@ def ws_on_message(ws,message):
                         place_order(_ws_client_ref,pair,"SELL",pos["usd_invested"],px,_ws_state_ref,reason="WEBSOCKET_STOP — real-time circuit breaker",atr=pos.get("atr",0))
                         set_cooldown(pair);save_state(_ws_state_ref)
                         log(f"  ✅ WEBSOCKET_STOP logged and position closed")
-                # Check short stops
                 short_trades=_ws_state_ref.get("short_open_trades",{})
                 if pair in short_trades:
                     pos=short_trades[pair];sl=pos.get("stop_loss",0)
@@ -884,9 +849,9 @@ def main():
     log(f"  Stop:      {CONFIG['atr_sl_mult']}x ATR | Target: {CONFIG['atr_tp_mult']}x ATR | Risk: {CONFIG['risk_per_trade']*100:.0f}%/trade")
     log(f"  Cooldown:  {CONFIG['stop_cooldown_hours']}h after any stop loss exit")
     log(f"  Crash Gate: Block entries if BTC+SOL RSI both < {CONFIG['market_crash_rsi']}")
+    log(f"  Stale Monitor: Warning at 4h, Alert at 6h — observation only")
     div("═");log("")
     client=load_client();state=load_state()
-
     try:
         token=os.environ.get("GITHUB_TOKEN","");repo=os.environ.get("GITHUB_REPO","")
         if token and repo:
@@ -902,7 +867,6 @@ def main():
                 except: pass
             log("  ✅ Startup data restored from GitHub")
     except Exception as e: log(f"  Startup restore error: {e}")
-
     state=load_state()
     start_risk_desk(state,client)
     log("  ✅ Connected | Running first scan...\n")
