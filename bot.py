@@ -1,851 +1,887 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EDGE Bot v7</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-height:100vh}
-:root{--s1:#111114;--s2:#17171b;--border:rgba(255,255,255,0.06);--muted:#5a5a68;--muted2:#8888a0;--green:#00e676;--red:#ff4444;--amber:#ffab40}
-.page{max-width:1280px;margin:0 auto;padding:28px 24px}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;padding-bottom:18px;border-bottom:1px solid var(--border)}
-.logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:600;letter-spacing:8px}
-.logo-sub{font-size:9px;color:var(--muted);letter-spacing:4px;margin-top:3px;font-family:'JetBrains Mono',monospace}
-.topbar-right{display:flex;align-items:center;gap:10px}
-.pill{display:flex;align-items:center;gap:6px;background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);border-radius:20px;padding:5px 14px;font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace;letter-spacing:2px}
-.pulse{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes flashBanner{0%,100%{opacity:1}50%{opacity:0.3}}
-.conn{font-size:9px;font-family:'JetBrains Mono',monospace;padding:5px 12px;border-radius:20px;border:1px solid var(--border)}
-.conn.ok{color:var(--green);border-color:rgba(0,230,118,0.2);background:rgba(0,230,118,0.08)}
-.conn.err{color:var(--amber);border-color:rgba(255,171,64,0.2);background:rgba(255,171,64,0.08)}
-.metrics{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:14px}
-.mc{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px}
-.mc-l{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:10px}
-.mc-v{font-size:20px;font-weight:600;font-family:'JetBrains Mono',monospace}
-.mc-s{font-size:10px;color:var(--muted);margin-top:5px;font-family:'JetBrains Mono',monospace}
-.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
-.alpha{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
-.ac{background:var(--s1);border:1px solid var(--border);border-radius:14px;padding:16px}
-.ac-l{font-size:9px;letter-spacing:2px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
-.ac-v{font-size:20px;font-weight:600;font-family:'JetBrains Mono',monospace}
-.ac-s{font-size:10px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace}
-.coins{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-bottom:14px}
-.cc{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:12px}
-.cc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.cc-id{display:flex;align-items:center;gap:6px}
-.cc-logo{width:22px;height:22px;border-radius:50%;object-fit:cover}
-.cc-sym{font-size:11px;font-weight:500}
-.cc-name{font-size:8px;color:var(--muted)}
-.badge{font-size:7px;font-weight:600;padding:2px 6px;border-radius:4px;letter-spacing:1px;font-family:'JetBrains Mono',monospace}
-.bw{background:rgba(255,171,64,0.1);color:var(--amber)}
-.bb{background:rgba(0,230,118,0.1);color:var(--green)}
-.bs{background:rgba(255,68,68,0.1);color:var(--red)}
-.cc-px{font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:2px}
-.cc-chg{font-size:9px;font-family:'JetBrains Mono',monospace}
-.up{color:var(--green)}.dn{color:var(--red)}
-.panel{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px}
-.pt{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:14px}
-.rg{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
-.rc{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:12px}
-.rc-p{font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:10px}
-.rc-r{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:10px}
-.rc-r:last-of-type{border:none}
-.rl{color:var(--muted)}
-.rv{font-family:'JetBrains Mono',monospace;font-size:10px}
-.rv.g{color:var(--green)}.rv.r{color:var(--red)}.rv.a{color:var(--amber)}
-.rs{font-size:9px;margin-top:8px;padding:4px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;text-align:center;font-weight:600;letter-spacing:1px}
-.rs.wait{background:rgba(255,171,64,0.1);color:var(--amber)}
-.rs.buy{background:rgba(0,230,118,0.1);color:var(--green)}
-.rs.short{background:rgba(255,68,68,0.1);color:var(--red)}
-.bot{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-bottom:14px}
-.cw{position:relative;height:180px;margin-top:8px}
-.gfr{display:flex;gap:4px}
-.gf{font-size:9px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
-.gf.on{border-color:rgba(0,230,118,0.4);background:rgba(0,230,118,0.08);color:var(--green)}
-.lb2{background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:12px;height:180px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted2);line-height:1.8}
-.lb2::-webkit-scrollbar{width:2px}.lb2::-webkit-scrollbar-thumb{background:#222}
-.lg{color:var(--green)}.lr{color:var(--red)}.la{color:var(--amber)}
-.cn{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}
-.cdl{text-align:center;font-size:9px;color:var(--muted);padding:3px;font-family:'JetBrains Mono',monospace}
-.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.ce{border-radius:6px;padding:5px 2px;text-align:center;font-size:11px}
-.ce.emp{background:transparent}
-.ce.non{background:var(--s2);border:1px solid var(--border);color:var(--muted)}
-.ce.tod{background:var(--s2);border:1px solid var(--amber);color:var(--amber)}
-.ce.win{background:rgba(0,230,118,0.1);border:1px solid rgba(0,230,118,0.25);color:var(--green)}
-.ce.los{background:rgba(255,68,68,0.1);border:1px solid rgba(255,68,68,0.25);color:var(--red)}
-.cpnl{font-size:9px;margin-top:1px}
-.cs2{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
-.csc{background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px}
-.csl{font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
-.csva{font-size:16px;font-weight:600;font-family:'JetBrains Mono',monospace}
-.tc{background:#0a0a0c;border-radius:12px;padding:16px;margin-bottom:10px}
-.tch{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.tcl{display:flex;align-items:center;gap:10px}
-.tcc{font-size:16px;font-weight:600}
-.tcb{font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:1px;font-family:'JetBrains Mono',monospace}
-.tcp{font-size:20px;font-weight:600;font-family:'JetBrains Mono',monospace}
-.tcg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
-.tce{background:var(--s2);border-radius:6px;padding:8px 10px}
-.tcel{font-size:9px;color:var(--muted);margin-bottom:3px}
-.tcev{font-family:'JetBrains Mono',monospace;font-size:11px}
-.tcw{border-left:3px solid var(--border);padding:8px 12px;background:var(--s2);border-radius:0 6px 6px 0;margin-bottom:10px}
-.tcwl{font-size:9px;font-weight:600;letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:5px}
-.tcwt{font-size:11px;color:var(--muted2);line-height:1.7}
-.tct{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.emp2{text-align:center;padding:32px;color:var(--muted);font-size:13px}
-.emp2 span{display:block;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:6px;letter-spacing:1px}
-#crashBanner{display:none;background:#ff1a1a;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:14px 24px;text-align:center;letter-spacing:2px;border-bottom:3px solid #ff6666;position:relative;z-index:100}
-#crashBanner.flashing{animation:flashBanner 0.6s ease-in-out 5}
-.expand-btn{font-size:10px;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600}
-.expand-btn-green{border:1px solid rgba(0,230,118,0.3);background:rgba(0,230,118,0.06);color:var(--green)}
-.expand-btn-red{border:1px solid rgba(255,68,68,0.3);background:rgba(255,68,68,0.06);color:var(--red)}
-.expand-btn-amber{border:1px solid rgba(255,171,64,0.3);background:rgba(255,171,64,0.06);color:var(--amber)}
-</style>
-</head>
-<body>
-<div id="crashBanner">🚨 EXTREME FEAR LOCKDOWN — BOT IN CASH</div>
-<button onclick="downloadAuditData()" style="position:fixed;bottom:24px;right:24px;z-index:999;font-size:11px;padding:10px 18px;border-radius:8px;border:1px solid rgba(0,230,118,0.4);background:rgba(0,230,118,0.08);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600">DOWNLOAD AUDIT DATA</button>
-<div class="page">
-<div class="topbar">
-  <div><div class="logo">EDGE</div><div class="logo-sub">TRADING BOT v7</div></div>
-  <div class="topbar-right">
-    <div style="font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);padding:5px 12px;border-radius:20px;border:1px solid var(--border)" id="nxt">Next scan: --</div>
-    <div class="pill"><div class="pulse"></div>PAPER TRADE</div>
-    <div class="conn ok" id="cb">CONNECTED</div>
-  </div>
-</div>
-<div class="metrics">
-  <div class="mc"><div class="mc-l">Long Capital</div><div class="mc-v" id="mCap">$1,500.00</div><div class="mc-s" id="mGr">0.00%</div></div>
-  <div class="mc"><div class="mc-l">Short Capital</div><div class="mc-v" id="mShortCap">$1,500.00</div><div class="mc-s" id="mShortGr">0.00%</div></div>
-  <div class="mc"><div class="mc-l">Long P&amp;L</div><div class="mc-v" id="mPnl">+$0.00</div><div class="mc-s" id="mDay">Today: +$0.00</div></div>
-  <div class="mc"><div class="mc-l">Win Rate</div><div class="mc-v" id="mWR">0%</div><div class="mc-s" id="mWL">0W / 0L</div></div>
-  <div class="mc"><div class="mc-l">Total Trades</div><div class="mc-v" id="mT">0</div><div class="mc-s" id="mBE">0 breakevens</div></div>
-  <div class="mc"><div class="mc-l">Max Drawdown</div><div class="mc-v" id="mDD">0.0%</div><div class="mc-s" id="mOp">0 open</div></div>
-</div>
-<div class="alpha">
-  <div class="ac"><div class="ac-l">Fear &amp; Greed</div><div class="ac-v" id="aFG">--</div><div class="ac-s" id="aFGl">Loading...</div></div>
-  <div class="ac"><div class="ac-l">BTC Dominance</div><div class="ac-v" id="aDom">--%</div><div class="ac-s">Market share</div></div>
-  <div class="ac"><div class="ac-l">Funding Rate</div><div class="ac-v" id="aFund">--%</div><div class="ac-s">BTC perpetual</div></div>
-</div>
-<div style="background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:14px">
-  <div style="font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin-bottom:14px">System Status</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
-    <div style="background:#0a0a0c;border:1px solid rgba(0,230,118,0.2);border-radius:12px;padding:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--green);letter-spacing:2px;font-family:'JetBrains Mono',monospace">LIVE LONGS</div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Real paper trades — 1% risk each</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px">
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">BTC</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ETH</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">SOL</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">LINK</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">XRP</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">AVAX</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(0,230,118,0.08);color:var(--green);font-family:'JetBrains Mono',monospace;border:1px solid rgba(0,230,118,0.15)">ADA</span>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI crossover &lt;30→&gt;35 + 200 EMA + ADX &gt; 25</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR | Target: 4x ATR | Cooldown: 4h</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Crash Gate: BTC+SOL RSI both &lt; 30 = blocked</div>
-        <div style="font-size:9px;color:var(--amber);font-family:'JetBrains Mono',monospace">Fear Gate: F&amp;G &lt; 20 = LOCKDOWN</div>
-      </div>
-    </div>
-    <div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:12px;padding:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--red);letter-spacing:2px;font-family:'JetBrains Mono',monospace">LIVE SHORTS</div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Paper shorts — virtual capital — real signals</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px">
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">BTC</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">ETH</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">SOL</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LINK</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">XRP</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">AVAX</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">ADA</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">DOGE</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">DOT</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">SUI</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LTC</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">TAO</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">FET</span>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI hook &gt;70→&lt;65 + below 200 EMA + ADX &gt; 25</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR above entry | Target: 4x ATR below</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Virtual capital tracked separately — 1% risk/trade</div>
-      </div>
-    </div>
-    <div style="background:#0a0a0c;border:1px solid rgba(255,171,64,0.2);border-radius:12px;padding:14px">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite"></div><div style="font-size:10px;font-weight:600;color:var(--amber);letter-spacing:2px;font-family:'JetBrains Mono',monospace">SHADOW LONG AUDIT</div></div>
-      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">Evaluating for live list — 30 day audit</div>
-      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">DOGE</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">DOT</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">SUI</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">LTC</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">TAO</span>
-        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,171,64,0.08);color:var(--amber);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,171,64,0.15)">FET</span>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Same v7 logic — no real trades placed</div>
-        <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">6 coins — Decision at 30 day review: promote or cut</div>
-      </div>
-    </div>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px">
-    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">SCAN INTERVAL</div><div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace">60 min</div></div>
-    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">RISK PER TRADE</div><div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--green)">1.0%</div></div>
-    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">MAX POSITIONS</div><div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace">3</div></div>
-    <div style="background:var(--s2);border-radius:10px;padding:10px 12px;text-align:center"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;font-family:'JetBrains Mono',monospace;margin-bottom:4px">MODE</div><div style="font-size:14px;font-weight:600;font-family:'JetBrains Mono',monospace;color:var(--amber)">PAPER</div></div>
-  </div>
-</div>
-<div class="coins" id="coinsGrid"></div>
-<div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <div class="pt" style="margin-bottom:0">Market Summary — What the Bot Is Thinking</div>
-    <div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="sumTime"></div>
-  </div>
-  <div style="font-size:14px;color:#c8c8dc;line-height:1.8;padding:14px;background:#0a0a0c;border-radius:10px;border-left:3px solid var(--amber)" id="sumText">Loading market summary...</div>
-</div>
-<div class="panel">
-  <div class="pt">Live Bot Reasoning — RSI + 200 EMA + ADX</div>
-  <div class="rg" id="rg"></div>
-</div>
-<div id="opPanel" style="display:none" class="panel">
-  <div class="pt">Open Long Positions</div>
-  <div id="opContent"></div>
-</div>
-<div id="shortOpPanel" style="display:none" class="panel">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
-    <div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div>
-    <div class="pt" style="margin-bottom:0;color:var(--red)">Open Short Positions — Paper</div>
-  </div>
-  <div id="shortOpContent"></div>
-</div>
-<div class="bot">
-  <div class="panel" style="margin-bottom:0">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
-      <div class="pt" style="margin-bottom:0">Portfolio Growth</div>
-      <div class="gfr">
-        <button class="gf" onclick="setR('1D')">1D</button>
-        <button class="gf" onclick="setR('1W')">1W</button>
-        <button class="gf" onclick="setR('1M')">1M</button>
-        <button class="gf on" onclick="setR('ALL')">ALL</button>
-      </div>
-    </div>
-    <div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:4px" id="gLabel">Since bot started</div>
-    <div class="cw"><canvas id="gc"></canvas></div>
-  </div>
-  <div class="panel" style="margin-bottom:0">
-    <div class="pt">Bot Log</div>
-    <div class="lb2" id="lb"></div>
-  </div>
-</div>
-<div class="panel" style="margin-top:14px">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-    <button style="padding:5px 14px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px;font-family:'JetBrains Mono',monospace" onclick="calPrev()">Prev</button>
-    <div style="font-size:13px;font-weight:500;font-family:'JetBrains Mono',monospace" id="calT"></div>
-    <button style="padding:5px 14px;background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:6px;cursor:pointer;font-size:11px;font-family:'JetBrains Mono',monospace" onclick="calNext()">Next</button>
-  </div>
-  <div class="cn"><div class="cdl">Sun</div><div class="cdl">Mon</div><div class="cdl">Tue</div><div class="cdl">Wed</div><div class="cdl">Thu</div><div class="cdl">Fri</div><div class="cdl">Sat</div></div>
-  <div class="cg" id="calG"></div>
-  <div class="cs2" id="calS"></div>
-</div>
-<div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <div style="width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite"></div>
-      <div class="pt" style="margin-bottom:0;color:var(--red)">Shorts</div>
-    </div>
-    <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shortCount"></div>
-  </div>
-  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Paper shorts running live with virtual capital. RSI hook &gt;70→&lt;65 + below 200 EMA + ADX &gt; 25.</div>
-  <div id="shortContent"><div class="emp2">No short trades yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div></div>
-  <div style="margin-top:10px">
-    <button onclick="toggleShortTable()" id="shortToggleBtn" class="expand-btn expand-btn-red">EXPAND TRADE TABLE</button>
-    <div id="shortTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="shortTableContent"></div></div>
-  </div>
-</div>
-<div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div class="pt" style="margin-bottom:0">Shadow Long Audit</div>
-    <div style="font-size:9px;color:var(--muted);font-family:JetBrains Mono,monospace" id="slCount"></div>
-  </div>
-  <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Auditing DOGE, DOT, SUI, LTC, TAO, FET on the long strategy. 30-day data collection.</div>
-  <div id="slContent"><div class="emp2">No shadow longs yet<span>Waiting for RSI below 35 + above 200 EMA + ADX above 25</span></div></div>
-  <div style="margin-top:10px">
-    <button onclick="toggleShadowLongTable()" id="slToggleBtn" class="expand-btn expand-btn-amber">EXPAND TRADE TABLE</button>
-    <div id="slTableWrap" style="display:none;margin-top:10px;overflow-x:auto"><div id="slTableContent"></div></div>
-  </div>
-</div>
-<div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <div style="width:8px;height:8px;border-radius:50%;background:var(--red)"></div>
-      <div class="pt" style="margin-bottom:0">Short Trade History</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="shortThCount"></div>
-      <button onclick="toggleShortHistory()" id="shortThBtn" class="expand-btn expand-btn-red">EXPAND SHORTS</button>
-    </div>
-  </div>
-  <div id="shortTh"><div class="emp2">No short trades closed yet<span>Waiting for first short to open and close</span></div></div>
-</div>
-<div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div style="display:flex;align-items:center;gap:8px">
-      <div style="width:8px;height:8px;border-radius:50%;background:var(--green)"></div>
-      <div class="pt" style="margin-bottom:0">Long Trade History</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="longThCount"></div>
-      <button onclick="toggleLongHistory()" id="longThBtn" class="expand-btn expand-btn-green">EXPAND LONGS</button>
-    </div>
-  </div>
-  <div id="longTh"><div class="emp2">No long trades closed yet<span>Bot is watching the market</span></div></div>
-</div>
-<div class="panel">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
-    <div class="pt" style="margin-bottom:0">All Trades</div>
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace" id="allThCount"></div>
-      <button onclick="toggleAllHistory()" id="allThBtn" class="expand-btn expand-btn-green">EXPAND ALL TRADES</button>
-    </div>
-  </div>
-  <div id="allTh"><div class="emp2">No trades yet<span>Bot is watching the market</span></div></div>
-</div>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<script>
-var PAIRS=[
-  {id:'BTC-USD',sym:'BTC',name:'Bitcoin',logo:'https://assets.coingecko.com/coins/images/1/small/bitcoin.png'},
-  {id:'ETH-USD',sym:'ETH',name:'Ethereum',logo:'https://assets.coingecko.com/coins/images/279/small/ethereum.png'},
-  {id:'SOL-USD',sym:'SOL',name:'Solana',logo:'https://assets.coingecko.com/coins/images/4128/small/solana.png'},
-  {id:'LINK-USD',sym:'LINK',name:'Chainlink',logo:'https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png'},
-  {id:'XRP-USD',sym:'XRP',name:'XRP',logo:'https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png'},
-  {id:'AVAX-USD',sym:'AVAX',name:'Avalanche',logo:'https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png'},
-  {id:'ADA-USD',sym:'ADA',name:'Cardano',logo:'https://assets.coingecko.com/coins/images/975/small/cardano.png'}
-];
-var state={},prices={},gc=null,gr='ALL',gp=[{t:Date.now(),v:1500}];
-var cY=new Date().getFullYear(),cM=new Date().getMonth(),cD={};
-var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-var longHistExpanded=false,shortHistExpanded=false,allHistExpanded=false;
-var bannerShown=false;
+#!/usr/bin/env python3
+import json,time,math,schedule,urllib.request,os
+from datetime import datetime,timedelta
+from pathlib import Path
+from coinbase.rest import RESTClient
+import base64
+import urllib.request as _urllib_req
 
-function showCrashBanner(msg){
-  var b=document.getElementById('crashBanner');
-  b.textContent='🚨 '+msg;
-  b.style.display='block';
-  if(!bannerShown){
-    bannerShown=true;
-    b.classList.add('flashing');
-    setTimeout(function(){b.classList.remove('flashing');},3000);
-  }
-}
+CONFIG={"paper_trade":True,"taker_fee":0.006,"max_spread_pct":0.002,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"rsi_oversold_reset":30,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":60,"candle_granularity":"ONE_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json","stop_cooldown_hours":4,"market_crash_rsi":30}
 
-function hideCrashBanner(){
-  var b=document.getElementById('crashBanner');
-  b.style.display='none';
-  bannerShown=false;
-}
+LOG_FILE=Path(__file__).parent/"bot_log.txt"
+STATE_FILE=Path(__file__).parent/"state.json"
+TRADES_FILE=Path(__file__).parent/"trade_explanations.json"
 
-function buildCoins(){
-  document.getElementById('coinsGrid').innerHTML=PAIRS.map(function(p){
-    return '<div class="cc"><div class="cc-top"><div class="cc-id"><img class="cc-logo" src="'+p.logo+'" onerror="this.style.display=\'none\'"><div><div class="cc-sym">'+p.sym+'</div><div class="cc-name">'+p.name+'</div></div></div><div class="badge bw" id="b-'+p.id+'">WAIT</div></div><div class="cc-px" id="p-'+p.id+'">$--</div><div class="cc-chg" id="c-'+p.id+'">--</div></div>';
-  }).join('');
-}
+_stop_cooldowns={}
 
-function buildRG(){
-  document.getElementById('rg').innerHTML=PAIRS.map(function(p){
-    return '<div class="rc"><div class="rc-p">'+p.sym+'</div><div class="rc-r"><span class="rl">RSI</span><span class="rv a" id="r1-'+p.id+'">--</span></div><div class="rc-r"><span class="rl">200 EMA</span><span class="rv a" id="r2-'+p.id+'">--</span></div><div class="rc-r"><span class="rl">ADX</span><span class="rv a" id="r3-'+p.id+'">--</span></div><div class="rs wait" id="rs-'+p.id+'">Waiting...</div></div>';
-  }).join('');
-}
+def now_str(): return datetime.now().strftime("%B %d, %Y  %I:%M:%S %p")
+def time_str(): return datetime.now().strftime("%I:%M %p")
+def date_str(): return datetime.now().date().isoformat()
+def log(msg):
+    line=f"[{now_str()}]  {msg}";print(line)
+    open(LOG_FILE,"a").write(line+"\n")
+def div(c="─"): log(c*60)
+def sec(t): div("═");log(f"  {t}");div("═")
 
-function updR(pair,s){
-  var over=s.rsi<35,above=s.above_ema,trend=s.trending,vol=s.vol_ok!==false;
-  var longSig=(over&&above&&trend&&vol);
-  var lastRsi=state.last_rsi&&state.last_rsi[pair]||50;
-  var shortSig=(lastRsi>70&&s.rsi<=65&&!above&&trend);
-  var e1=document.getElementById('r1-'+pair);
-  var e2=document.getElementById('r2-'+pair);
-  var e3=document.getElementById('r3-'+pair);
-  var es=document.getElementById('rs-'+pair);
-  var eb=document.getElementById('b-'+pair);
-  if(e1){e1.textContent=s.rsi?s.rsi.toFixed(0):'--';e1.className='rv '+(over?'g':s.rsi>65?'r':'a');}
-  if(e2){e2.textContent=above?'Above':'Below';e2.className='rv '+(above?'g':'r');}
-  if(e3){e3.textContent=s.adx?s.adx.toFixed(0):'--';e3.className='rv '+(trend?'g':'a');}
-  if(es){
-    if(longSig){es.textContent='LONG SIGNAL';es.className='rs buy';}
-    else if(shortSig){es.textContent='SHORT SIGNAL';es.className='rs short';}
-    else{es.textContent='Waiting...';es.className='rs wait';}
-  }
-  if(eb){
-    if(longSig){eb.textContent='LONG';eb.className='badge bb';}
-    else if(shortSig){eb.textContent='SHORT';eb.className='badge bs';}
-    else{eb.textContent='WAIT';eb.className='badge bw';}
-  }
-}
+def load_state():
+    if STATE_FILE.exists():
+        s=json.load(open(STATE_FILE))
+        s.setdefault("trade_count_today",0)
+        s.setdefault("last_rsi",{})
+        s.setdefault("short_capital",s.get("capital",CONFIG["starting_capital"]))
+        s.setdefault("short_open_trades",{})
+        s.setdefault("short_stats",{"wins":0,"losses":0,"breakevens":0,"total_trades":0,"total_pnl":0.0})
+        s.setdefault("performance",{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":CONFIG["starting_capital"]})
+        return s
+    cap=CONFIG["starting_capital"]
+    return {"capital":cap,"open_trades":{},"trade_history":[],"daily_pnl":0.0,"total_pnl":0.0,"last_reset":date_str(),"trade_count_today":0,"last_rsi":{},"short_capital":cap,"short_open_trades":{},"short_stats":{"wins":0,"losses":0,"breakevens":0,"total_trades":0,"total_pnl":0.0},"stats":{"wins":0,"losses":0,"breakevens":0,"total_trades":0},"performance":{"total_trades":0,"wins":0,"losses":0,"breakevens":0,"total_pnl":0.0,"max_drawdown":0.0,"peak_capital":cap},"last_fg":50,"last_fg_label":"Neutral","last_dominance":50,"last_funding":0.0}
 
-function checkCrashGate(){
-  var crash=state.market_crash_active||false;
-  var detail=state.market_crash_detail||'';
-  if(crash&&detail){showCrashBanner(detail);}
-  else{hideCrashBanner();}
-}
+def save_state(s): json.dump(s,open(STATE_FILE,"w"),indent=2,default=str)
+def save_explanation(exp):
+    exps=[]
+    if TRADES_FILE.exists():
+        try: exps=json.load(open(TRADES_FILE))
+        except: exps=[]
+    exps.insert(0,exp);exps=exps[:50];json.dump(exps,open(TRADES_FILE,"w"),indent=2,default=str)
 
-async function fetchState(){
-  try{
-    var r=await fetch('/state');
-    if(!r.ok)throw new Error();
-    state=await r.json();
-    document.getElementById('cb').textContent='CONNECTED';
-    document.getElementById('cb').className='conn ok';
-    updMetrics();updOpen();updShortOpen();updHistories();updGrowth();updCal();applySummaryFromState();checkCrashGate();
-  }catch(e){
-    document.getElementById('cb').textContent='OFFLINE';
-    document.getElementById('cb').className='conn err';
-  }
-}
+def load_client():
+    ak=os.environ.get("API_KEY_NAME");ap=os.environ.get("API_KEY_PRIVATE")
+    if ak and ap: return RESTClient(api_key=ak,api_secret=ap)
+    k=json.load(open(Path(__file__).parent/CONFIG["api_key_file"]))
+    return RESTClient(api_key=k["name"],api_secret=k["privateKey"])
 
-function applySummaryFromState(){
-  if(state.ai_summary)document.getElementById('sumText').textContent=state.ai_summary;
-  if(state.ai_summary_time)document.getElementById('sumTime').textContent='Updated: '+state.ai_summary_time;
-  if(state.ai_signals){Object.keys(state.ai_signals).forEach(function(pair){updR(pair,state.ai_signals[pair]);});}
-}
+def fetch_url(url,timeout=5):
+    try:
+        with urllib.request.urlopen(url,timeout=timeout) as r: return json.loads(r.read())
+    except: return None
 
-async function fetchPrices(){
-  for(var i=0;i<PAIRS.length;i++){
-    var p=PAIRS[i];
-    try{
-      var r=await fetch('https://api.exchange.coinbase.com/products/'+p.id+'/ticker');
-      var d=await r.json();
-      var px=parseFloat(d.price||0),o=parseFloat(d.open_24h||px);
-      var chg=o>0?(px-o)/o*100:0;
-      prices[p.id]={price:px,chg:chg};
-      var pe=document.getElementById('p-'+p.id);
-      var ce=document.getElementById('c-'+p.id);
-      if(pe)pe.textContent='$'+px.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:px<1?6:2});
-      if(ce){ce.textContent=(chg>=0?'+':'')+chg.toFixed(2)+'%';ce.className='cc-chg '+(chg>=0?'up':'dn');}
-    }catch(e){}
-  }
-}
+def get_fear_greed():
+    d=fetch_url("https://api.alternative.me/fng/")
+    if d: return int(d["data"][0]["value"]),d["data"][0]["value_classification"]
+    return 50,"Neutral"
 
-async function fetchLog(){
-  try{
-    var r=await fetch('/log');if(!r.ok)return;
-    var txt=await r.text();
-    var lines=txt.trim().split('\n').slice(-80);
-    var lb=document.getElementById('lb');
-    lb.innerHTML=lines.map(function(l){
-      if(l.indexOf('SHORT PROFIT')>-1||l.indexOf('TAKE PROFIT')>-1||l.indexOf('Profit')>-1)return '<div class="lg">'+l+'</div>';
-      if(l.indexOf('STOP')>-1||l.indexOf('Loss')>-1||l.indexOf('CRASH')>-1||l.indexOf('FEAR')>-1)return '<div class="lr">'+l+'</div>';
-      if(l.indexOf('BREAKEVEN')>-1||l.indexOf('COOLDOWN')>-1||l.indexOf('STALE')>-1||l.indexOf('WATCH')>-1)return '<div class="la">'+l+'</div>';
-      return '<div>'+l+'</div>';
-    }).join('');
-    lb.scrollTop=lb.scrollHeight;
-  }catch(e){}
-}
+def get_btc_dominance():
+    d=fetch_url("https://api.coingecko.com/api/v3/global")
+    if d: return float(d["data"]["market_cap_percentage"]["btc"])
+    return 50.0
 
-function updMetrics(){
-  var cap=parseFloat(state.capital||1500),gr2=(cap-1500)/1500*100;
-  var shortCap=parseFloat(state.short_capital||1500),shortGr=(shortCap-1500)/1500*100;
-  var pnl=parseFloat(state.total_pnl||0),dpnl=parseFloat(state.daily_pnl||0);
-  var st=state.stats||{},perf=state.performance||{};
-  var t=st.total_trades||0,w=st.wins||0,l=st.losses||0,be=st.breakevens||0;
-  var wr=t>0?Math.round(w/t*100):0,dd=parseFloat(perf.max_drawdown||0);
-  var oc=Object.keys(state.open_trades||{}).length;
-  var soc=Object.keys(state.short_open_trades||{}).length;
-  document.getElementById('mCap').textContent='$'+cap.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  document.getElementById('mCap').className='mc-v '+(gr2>=0?'green':'red');
-  document.getElementById('mGr').textContent=(gr2>=0?'▲':'▼')+Math.abs(gr2).toFixed(2)+'%';
-  document.getElementById('mGr').className='mc-s '+(gr2>=0?'green':'red');
-  document.getElementById('mShortCap').textContent='$'+shortCap.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-  document.getElementById('mShortCap').className='mc-v '+(shortGr>=0?'green':'red');
-  document.getElementById('mShortGr').textContent=(shortGr>=0?'▲':'▼')+Math.abs(shortGr).toFixed(2)+'%';
-  document.getElementById('mShortGr').className='mc-s '+(shortGr>=0?'green':'red');
-  document.getElementById('mPnl').textContent=(pnl>=0?'+$':'-$')+Math.abs(pnl).toFixed(2);
-  document.getElementById('mPnl').className='mc-v '+(pnl>=0?'green':'red');
-  document.getElementById('mDay').textContent='Today: '+(dpnl>=0?'+$':'-$')+Math.abs(dpnl).toFixed(2);
-  document.getElementById('mDay').className='mc-s '+(dpnl>=0?'green':'red');
-  document.getElementById('mWR').textContent=wr+'%';
-  document.getElementById('mWL').textContent=w+'W / '+l+'L';
-  document.getElementById('mT').textContent=t;
-  document.getElementById('mBE').textContent=be+' breakeven'+(be!==1?'s':'');
-  document.getElementById('mDD').textContent=dd.toFixed(2)+'%';
-  document.getElementById('mOp').textContent=oc+' long | '+soc+' short open';
-  var fg=state.last_fg||50,fgl=state.last_fg_label||'Neutral';
-  var dom=parseFloat(state.last_dominance||0),fund=parseFloat(state.last_funding||0);
-  var fe=document.getElementById('aFG');
-  fe.textContent=fg+' / 100';fe.className='ac-v '+(fg<25?'red':fg>75?'green':'');
-  document.getElementById('aFGl').textContent=fgl;
-  document.getElementById('aDom').textContent=dom.toFixed(1)+'%';
-  document.getElementById('aFund').textContent=(fund>=0?'+':'')+fund.toFixed(4)+'%';
-}
+def get_funding_rate():
+    d=fetch_url("https://fapi.binance.com/fapi/v1/premiumIndex?symbol=BTCUSDT")
+    if d: return float(d.get("lastFundingRate",d.get("fundingRate",0)))*100
+    return 0.0
 
-function updOpen(){
-  var open=state.open_trades||{},keys=Object.keys(open);
-  var panel=document.getElementById('opPanel'),content=document.getElementById('opContent');
-  if(!keys.length){panel.style.display='none';return;}
-  panel.style.display='block';
-  var html='<div style="display:grid;grid-template-columns:repeat('+Math.min(keys.length,3)+',1fr);gap:12px">';
-  keys.forEach(function(pair){
-    var pos=open[pair],coin=pair.split('-')[0];
-    var px=(prices[pair]||{}).price||0;
-    var entry=parseFloat(pos.entry_price||0),usd=parseFloat(pos.usd_invested||0);
-    var sl=parseFloat(pos.stop_loss||0),tp=parseFloat(pos.take_profit||0);
-    var at_be=pos.at_breakeven||false;
-    var upnl=px>0?(px-entry)/entry*usd:0,isPos=upnl>=0;
-    var dSL=sl>0&&px>0?(px-sl)/px*100:0,dTP=tp>0&&px>0?(tp-px)/px*100:0;
-    var prog=sl>0&&tp>0&&px>0?Math.max(0,Math.min(100,(px-sl)/(tp-sl)*100)):50;
-    html+='<div style="background:#0a0a0c;border:1px solid '+(isPos?'rgba(0,230,118,0.2)':'rgba(255,68,68,0.2)')+';border-radius:12px;padding:16px">';
-    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:16px;font-weight:600">'+coin+'</div><div style="font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;font-family:JetBrains Mono,monospace;background:rgba(0,230,118,0.1);color:var(--green)">LONG OPEN</div></div>';
-    html+='<div style="font-size:22px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)')+';margin-bottom:10px">'+(isPos?'+$':'-$')+Math.abs(upnl).toFixed(2)+'</div>';
-    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">';
-    html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Live price</div><div style="font-family:JetBrains Mono,monospace">$'+px.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Entry</div><div style="font-family:JetBrains Mono,monospace">$'+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);font-size:9px">Stop</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dSL.toFixed(1)+'% away</div></div>';
-    html+='<div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--green);font-size:9px">Target</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+tp.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dTP.toFixed(1)+'% away</div></div>';
-    html+='</div>';
-    html+='<div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px"><div style="height:100%;width:'+prog+'%;background:'+(isPos?'var(--green)':'var(--amber)')+';border-radius:2px"></div></div>';
-    html+='<div style="font-size:9px;color:var(--muted);text-align:center;margin-top:3px;margin-bottom:8px">'+prog.toFixed(0)+'% to target</div>';
-    if(pos.explanation)html+='<div style="background:var(--s2);border-left:2px solid var(--amber);padding:8px 10px;font-size:11px;color:var(--muted2);line-height:1.6">'+pos.explanation+'</div>';
-    html+='<div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:JetBrains Mono,monospace">$'+usd.toFixed(2)+' | '+(pos.entry_time||'')+'</div></div>';
-  });
-  html+='</div>';content.innerHTML=html;
-}
+def is_in_cooldown(pair):
+    if pair not in _stop_cooldowns: return False,0
+    elapsed=time.time()-_stop_cooldowns[pair]
+    cooldown_seconds=CONFIG["stop_cooldown_hours"]*3600
+    if elapsed<cooldown_seconds:
+        remaining_minutes=int((cooldown_seconds-elapsed)/60)
+        return True,remaining_minutes
+    return False,0
 
-function updShortOpen(){
-  var open=state.short_open_trades||{},keys=Object.keys(open);
-  var panel=document.getElementById('shortOpPanel'),content=document.getElementById('shortOpContent');
-  if(!keys.length){panel.style.display='none';return;}
-  panel.style.display='block';
-  var html='<div style="display:grid;grid-template-columns:repeat('+Math.min(keys.length,3)+',1fr);gap:12px">';
-  keys.forEach(function(pair){
-    var pos=open[pair],coin=pair.split('-')[0];
-    var px=(prices[pair]||{}).price||0;
-    var entry=parseFloat(pos.entry_price||0),usd=parseFloat(pos.usd_invested||0);
-    var sl=parseFloat(pos.stop_loss||0),tp=parseFloat(pos.take_profit||0);
-    var upnl=px>0?(entry-px)/entry*usd:0,isPos=upnl>=0;
-    var dSL=sl>0&&px>0?(sl-px)/px*100:0,dTP=tp>0&&px>0?(px-tp)/px*100:0;
-    var prog=sl>0&&tp>0&&px>0?Math.max(0,Math.min(100,(entry-px)/(entry-tp)*100)):50;
-    html+='<div style="background:#0a0a0c;border:1px solid '+(isPos?'rgba(0,230,118,0.2)':'rgba(255,68,68,0.2)')+';border-radius:12px;padding:16px">';
-    html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div style="font-size:16px;font-weight:600">'+coin+'</div><div style="font-size:8px;padding:3px 8px;border-radius:4px;font-weight:600;font-family:JetBrains Mono,monospace;background:rgba(255,68,68,0.1);color:var(--red)">SHORT OPEN</div></div>';
-    html+='<div style="font-size:22px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+(isPos?'var(--green)':'var(--red)')+';margin-bottom:10px">'+(isPos?'+$':'-$')+Math.abs(upnl).toFixed(2)+'</div>';
-    html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">';
-    html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Live price</div><div style="font-family:JetBrains Mono,monospace">$'+px.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div style="background:var(--s2);border-radius:6px;padding:6px 8px"><div style="color:var(--muted);font-size:9px">Short entry</div><div style="font-family:JetBrains Mono,monospace">$'+entry.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-    html+='<div style="background:rgba(255,68,68,0.06);border:1px solid rgba(255,68,68,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--red);font-size:9px">Stop (above)</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+sl.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dSL.toFixed(1)+'% up</div></div>';
-    html+='<div style="background:rgba(0,230,118,0.06);border:1px solid rgba(0,230,118,0.15);border-radius:6px;padding:6px 8px"><div style="color:var(--green);font-size:9px">Target (below)</div><div style="font-family:JetBrains Mono,monospace;font-size:10px">$'+tp.toFixed(6)+'</div><div style="color:var(--muted);font-size:9px">'+dTP.toFixed(1)+'% down</div></div>';
-    html+='</div>';
-    html+='<div style="height:4px;background:rgba(255,255,255,0.05);border-radius:2px"><div style="height:100%;width:'+prog+'%;background:'+(isPos?'var(--green)':'var(--red)')+';border-radius:2px"></div></div>';
-    html+='<div style="font-size:9px;color:var(--muted);text-align:center;margin-top:3px;margin-bottom:8px">'+prog.toFixed(0)+'% to target</div>';
-    if(pos.explanation)html+='<div style="background:var(--s2);border-left:2px solid var(--red);padding:8px 10px;font-size:11px;color:var(--muted2);line-height:1.6">'+pos.explanation+'</div>';
-    html+='<div style="font-size:10px;color:var(--muted);margin-top:8px;font-family:JetBrains Mono,monospace">$'+usd.toFixed(2)+' virtual | '+(pos.entry_time||'')+'</div></div>';
-  });
-  html+='</div>';content.innerHTML=html;
-}
+def set_cooldown(pair):
+    _stop_cooldowns[pair]=time.time()
+    log(f"  ⏳ {pair.split('-')[0]} — 4-hour cooldown started after stop loss")
 
-function buildTradeCard(tr,isShort){
-  var isWin=tr.pnl>0,isBE=Math.abs(tr.pnl)<tr.usd*0.005;
-  var bc=isWin?'rgba(0,230,118,0.15)':'rgba(255,68,68,0.15)';
-  var bco=isWin?'var(--green)':'var(--red)';
-  var label=isBE?'BREAKEVEN':isWin?'WIN':'LOSS';
-  var typeLabel=isShort?'SHORT':'LONG';
-  var typeBg=isShort?'rgba(255,68,68,0.1)':'rgba(0,230,118,0.1)';
-  var typeColor=isShort?'var(--red)':'var(--green)';
-  var html='<div class="tc" style="border:1px solid '+bc+'">';
-  html+='<div class="tch"><div class="tcl"><div class="tcc">'+tr.coin+'</div>';
-  html+='<div class="tcb" style="background:'+typeBg+';color:'+typeColor+'">'+typeLabel+'</div>';
-  html+='<div class="tcb" style="background:'+(isWin?'rgba(0,230,118,0.1)':'rgba(255,68,68,0.1)')+';color:'+bco+'">'+label+'</div></div>';
-  html+='<div class="tcp" style="color:'+bco+'">'+(tr.pnl>=0?'+$':'-$')+Math.abs(tr.pnl).toFixed(2)+'</div></div>';
-  html+='<div class="tcg">';
-  html+='<div class="tce"><div class="tcel">Entry</div><div class="tcev">$'+parseFloat(tr.entry).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-  html+='<div class="tce"><div class="tcel">Exit</div><div class="tcev">$'+parseFloat(tr.exit).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})+'</div></div>';
-  html+='<div class="tce"><div class="tcel">Size</div><div class="tcev">$'+parseFloat(tr.usd).toFixed(2)+(isShort?' virtual':'')+'</div></div>';
-  html+='<div class="tce"><div class="tcel">Change</div><div class="tcev" style="color:'+bco+'">'+(tr.pct>=0?'+':'')+tr.pct.toFixed(2)+'%</div></div>';
-  html+='</div>';
-  if(tr.exp)html+='<div class="tcw"><div class="tcwl">WHY THE BOT '+(isShort?'SHORTED':'ENTERED')+'</div><div class="tcwt">'+tr.exp+'</div></div>';
-  html+='<div class="tct">'+tr.et+' to '+tr.xt+'</div></div>';
-  return html;
-}
+def check_market_crash(scan_signals,state):
+    btc_rsi=scan_signals.get("BTC-USD",{}).get("rsi",50)
+    sol_rsi=scan_signals.get("SOL-USD",{}).get("rsi",50)
+    crash_threshold=CONFIG["market_crash_rsi"]
+    fg=state.get("last_fg",50)
+    if btc_rsi<crash_threshold and sol_rsi<crash_threshold:
+        log(f"  🚨 REJECT_MARKET_CRASH — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}")
+        log(f"  🚨 Systemic crash detected — blocking all new entries this scan")
+        state["market_crash_active"]=True
+        state["market_crash_detail"]=f"GLOBAL FUSE BLOWN — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}. All entries blocked."
+        return True
+    elif fg<20:
+        log(f"  🚨 REJECT_EXTREME_FEAR — Fear & Greed {fg}/100 — market in panic. Bot in cash until F&G recovers above 20.")
+        state["market_crash_active"]=True
+        state["market_crash_detail"]=f"EXTREME FEAR LOCKDOWN — Fear & Greed {fg}/100. No entries until sentiment recovers above 20."
+        return True
+    else:
+        state["market_crash_active"]=False
+        state["market_crash_detail"]=""
+        return False
 
-function parseTradeHistory(){
-  var history=state.trade_history||[];
-  var longs=[],shorts=[];
-  var longBuyMap={},shortEntryMap={};
-  history.forEach(function(t){
-    if(t.side==='BUY'){longBuyMap[t.pair]=t;}
-    else if(t.side==='SHORT'){shortEntryMap[t.pair]=t;}
-    else if(t.side==='SELL'&&longBuyMap[t.pair]){
-      var buy=longBuyMap[t.pair];
-      var pnl=(t.price-buy.price)/buy.price*buy.usd;
-      longs.push({coin:t.pair.split('-')[0],entry:buy.price,exit:t.price,usd:buy.usd,pnl:pnl,pct:(t.price-buy.price)/buy.price*100,et:buy.time,xt:t.time,exp:buy.explanation||''});
-      delete longBuyMap[t.pair];
-    } else if(t.side==='SHORT_CLOSE'&&shortEntryMap[t.pair]){
-      var entry=shortEntryMap[t.pair];
-      var pnl2=t.pnl||((entry.price-t.price)/entry.price*entry.usd);
-      var pct2=(entry.price-t.price)/entry.price*100;
-      shorts.push({coin:t.pair.split('-')[0],entry:entry.price,exit:t.price,usd:entry.usd,pnl:pnl2,pct:pct2,et:entry.time,xt:t.time,exp:entry.explanation||''});
-      delete shortEntryMap[t.pair];
-    }
-  });
-  longs.reverse();shorts.reverse();
-  return{longs:longs,shorts:shorts};
-}
+def rsi_crossover_confirmed(pair,current_rsi,state):
+    last_rsi=state.get("last_rsi",{}).get(pair,50)
+    reset_level=CONFIG["rsi_oversold_reset"]
+    entry_level=CONFIG["rsi_oversold"]
+    crossover=last_rsi<reset_level and current_rsi>=entry_level
+    if crossover:
+        log(f"  ✅ RSI CROSSOVER confirmed — was {last_rsi:.1f} last scan, now {current_rsi:.1f} — bounce confirmed")
+    elif current_rsi<entry_level:
+        log(f"  ⏳ RSI {current_rsi:.1f} oversold but no crossover yet — last scan was {last_rsi:.1f} (need < {reset_level} then cross > {entry_level})")
+    return crossover
 
-function toggleLongHistory(){longHistExpanded=!longHistExpanded;document.getElementById('longThBtn').textContent=longHistExpanded?'COLLAPSE LONGS':'EXPAND LONGS';updHistories();}
-function toggleShortHistory(){shortHistExpanded=!shortHistExpanded;document.getElementById('shortThBtn').textContent=shortHistExpanded?'COLLAPSE SHORTS':'EXPAND SHORTS';updHistories();}
-function toggleAllHistory(){allHistExpanded=!allHistExpanded;document.getElementById('allThBtn').textContent=allHistExpanded?'COLLAPSE ALL TRADES':'EXPAND ALL TRADES';updHistories();}
+def pos_size_short(state,atr,price):
+    capital=state.get("short_capital",CONFIG["starting_capital"])
+    risk=capital*CONFIG["risk_per_trade"]
+    stop=atr*CONFIG["atr_sl_mult"]
+    if stop<=0 or price<=0: return round(risk*4,2)
+    return round(min((risk/stop)*price,capital*0.15),2)
 
-function updHistories(){
-  var parsed=parseTradeHistory();
-  var longs=parsed.longs,shorts=parsed.shorts;
-  var longEl=document.getElementById('longTh');
-  var shortEl=document.getElementById('shortTh');
-  var allEl=document.getElementById('allTh');
-  var longCount=document.getElementById('longThCount');
-  var shortCount=document.getElementById('shortThCount');
-  var allCount=document.getElementById('allThCount');
-  if(longCount)longCount.textContent=longs.length+' completed longs';
-  if(!longs.length){longEl.innerHTML='<div class="emp2">No long trades closed yet<span>Bot is watching the market</span></div>';}
-  else if(!longHistExpanded){var lw=longs.filter(function(t){return t.pnl>0;}).length;longEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+longs.length+' longs — '+lw+' wins / '+(longs.length-lw)+' losses — click EXPAND LONGS to view</div>';}
-  else{longEl.innerHTML=longs.map(function(tr){return buildTradeCard(tr,false);}).join('');}
-  if(shortCount)shortCount.textContent=shorts.length+' completed shorts';
-  if(!shorts.length){shortEl.innerHTML='<div class="emp2">No short trades closed yet<span>Waiting for first short to open and close</span></div>';}
-  else if(!shortHistExpanded){var sw=shorts.filter(function(t){return t.pnl>0;}).length;shortEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+shorts.length+' shorts — '+sw+' wins / '+(shorts.length-sw)+' losses — click EXPAND SHORTS to view</div>';}
-  else{shortEl.innerHTML=shorts.map(function(tr){return buildTradeCard(tr,true);}).join('');}
-  var all=longs.map(function(t){t._isShort=false;return t;}).concat(shorts.map(function(t){t._isShort=true;return t;}));
-  all.sort(function(a,b){return new Date(b.xt)-new Date(a.xt);});
-  if(allCount)allCount.textContent=all.length+' total trades';
-  if(!all.length){allEl.innerHTML='<div class="emp2">No trades yet<span>Bot is watching the market</span></div>';}
-  else if(!allHistExpanded){var aw=all.filter(function(t){return t.pnl>0;}).length;allEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+all.length+' total trades — '+aw+' wins / '+(all.length-aw)+' losses — click EXPAND ALL TRADES to view</div>';}
-  else{allEl.innerHTML=all.map(function(tr){return buildTradeCard(tr,tr._isShort);}).join('');}
-}
+def place_short(pair,price,state,reason="",atr=0):
+    coin=pair.split("-")[0]
+    usd=pos_size_short(state,atr,price)
+    if usd<10:
+        log(f"  📉 SHORT too small ${usd:.2f} — skip")
+        return
+    sl=round(price+atr*CONFIG["atr_sl_mult"],6)
+    tp=round(price-atr*CONFIG["atr_tp_mult"],6)
+    be=round(price-atr*CONFIG["atr_be_mult"],6)
+    entry_fee=usd*CONFIG["taker_fee"]
+    state["short_capital"]-=entry_fee
+    log(f"  📉 PAPER SHORT — Shorting ${usd:.2f} of {coin} @ ${price:,.4f}")
+    log(f"  💸 Entry fee: ${entry_fee:.2f} (0.6%)")
+    log(f"     Stop: ${sl:,.6f} | Target: ${tp:,.6f} | BE triggers at: ${be:,.6f}")
+    log(f"     Why: {reason}")
+    state["short_open_trades"][pair]={"entry_price":price,"usd_invested":usd,"entry_time":now_str(),"lowest_price":price,"atr":atr,"stop_loss":sl,"take_profit":tp,"be_trigger":be,"at_breakeven":False,"explanation":reason,"type":"SHORT"}
+    state["short_stats"]["total_trades"]+=1
+    state["trade_history"].append({"time":now_str(),"pair":pair,"side":"SHORT","usd":usd,"price":price,"paper":True,"explanation":reason,"type":"SHORT"})
+    save_explanation({"time":now_str(),"pair":pair,"side":"SHORT","price":price,"usd":usd,"explanation":reason,"stop_loss":sl,"take_profit":tp,"be_trigger":be})
 
-function setR(r){gr=r;document.querySelectorAll('.gf').forEach(function(b){b.classList.toggle('on',b.textContent===r);});renderG();}
+def close_short(pair,price,state,reason=""):
+    if pair not in state.get("short_open_trades",{}): return
+    pos=state["short_open_trades"].pop(pair)
+    coin=pair.split("-")[0]
+    entry=pos["entry_price"];usd=pos["usd_invested"]
+    pnl_pct=(entry-price)/entry
+    proceeds=usd+(pnl_pct*usd)
+    exit_fee=proceeds*CONFIG["taker_fee"]
+    net_proceeds=proceeds-exit_fee
+    pnl=net_proceeds-usd
+    state["short_capital"]+=net_proceeds
+    is_be=abs(pnl)<usd*0.005
+    log(f"  📉 PAPER SHORT CLOSE — {coin} @ ${price:,.4f} | P&L: ${pnl:+.2f} ({pnl_pct*100:+.2f}%)")
+    log(f"  💸 Exit fee: ${exit_fee:.2f} (0.6%)")
+    if pnl>0:
+        state["short_stats"]["wins"]+=1;state["short_stats"]["total_pnl"]+=pnl
+        log(f"  🏆 SHORT PROFIT: ${pnl:+.2f}")
+    elif is_be:
+        state["short_stats"]["breakevens"]+=1
+        log(f"  ↔️  SHORT BREAKEVEN: ${pnl:+.2f}")
+    else:
+        state["short_stats"]["losses"]+=1;state["short_stats"]["total_pnl"]+=pnl
+        log(f"  📉 SHORT LOSS: ${pnl:+.2f}")
+    state["trade_history"].append({"time":now_str(),"pair":pair,"side":"SHORT_CLOSE","usd":usd,"price":price,"paper":True,"explanation":reason,"type":"SHORT","pnl":round(pnl,2)})
+    save_explanation({"time":now_str(),"pair":pair,"side":"SHORT_CLOSE","price":price,"pnl":pnl,"explanation":f"Short closed {reason}. Entry ${entry:,.4f} → Exit ${price:,.4f}. P&L ${pnl:+.2f}"})
 
-function updGrowth(){
-  var history=state.trade_history||[],cap=parseFloat(state.capital||1500);
-  gp=[{t:Date.now()-90*86400000,v:1500}];
-  var run=1500,buyMap={};
-  history.forEach(function(t){
-    if(t.side==='BUY'){buyMap[t.pair]=t;}
-    else if(t.side==='SELL'&&buyMap[t.pair]){
-      run+=(t.price-buyMap[t.pair].price)/buyMap[t.pair].price*buyMap[t.pair].usd;
-      gp.push({t:new Date(t.time).getTime()||Date.now(),v:parseFloat(run.toFixed(2))});
-      delete buyMap[t.pair];
-    }
-  });
-  gp.push({t:Date.now(),v:cap});
-  gp.sort(function(a,b){return a.t-b.t;});
-  renderG();
-}
+def check_short_exits(client,state):
+    shorts=state.get("short_open_trades",{})
+    if not shorts: return
+    log("  Checking short positions...")
+    for pair,pos in list(shorts.items()):
+        px=get_price(client,pair)
+        if px==0: continue
+        entry=pos["entry_price"];atr=pos.get("atr",entry*0.02)
+        sl=pos.get("stop_loss",entry+atr*CONFIG["atr_sl_mult"])
+        tp=pos.get("take_profit",entry-atr*CONFIG["atr_tp_mult"])
+        be_trig=pos.get("be_trigger",entry-atr*CONFIG["atr_be_mult"])
+        at_be=pos.get("at_breakeven",False)
+        ch=(entry-px)/entry*100
+        if px<pos.get("lowest_price",px):
+            pos["lowest_price"]=px;state["short_open_trades"][pair]=pos
+        lowest=pos.get("lowest_price",px)
+        if not at_be and px<=be_trig:
+            pos["stop_loss"]=entry;pos["at_breakeven"]=True
+            state["short_open_trades"][pair]=pos;sl=entry
+            log(f"  ↔️  SHORT BREAKEVEN — {pair.split('-')[0]} hit -2x ATR. Stop → entry ${entry:,.6f}")
+        if at_be:
+            trail=lowest+atr*CONFIG["atr_trail_mult"]
+            if trail<pos.get("stop_loss",sl):
+                pos["stop_loss"]=trail;state["short_open_trades"][pair]=pos;sl=trail
+        be_str="✅ BE active" if at_be else f"BE at ${be_trig:,.4f}"
+        log(f"  📉 SHORT {pair.split('-')[0]}: ${px:,.4f} | {ch:+.1f}% favour | SL ${sl:,.4f} | TP ${tp:,.4f} | {be_str}")
+        if px>=sl:
+            log(f"  🛑 SHORT STOP LOSS — {pair.split('-')[0]}")
+            close_short(pair,px,state,reason="SHORT_STOP_LOSS")
+        elif px<=tp:
+            log(f"  🎯 SHORT TAKE PROFIT — {pair.split('-')[0]} +{ch:.1f}%")
+            close_short(pair,px,state,reason="SHORT_TAKE_PROFIT")
 
-function renderG(){
-  var now=Date.now(),cuts={'1D':now-86400000,'1W':now-7*86400000,'1M':now-30*86400000,'ALL':0};
-  var pts=gp.filter(function(p){return p.t>=(cuts[gr]||0);});
-  if(!pts.length)return;
-  var first=pts[0].v,last=pts[pts.length-1].v,isPos=last>=first,color=isPos?'#00e676':'#ff4444';
-  var labels=pts.map(function(p){return new Date(p.t).toLocaleDateString('en-US',{month:'short',day:'numeric'});});
-  var vals=pts.map(function(p){return p.v;});
-  if(pts.length>=2){var s=new Date(pts[0].t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});var e=new Date(pts[pts.length-1].t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('gLabel').textContent=s+' to '+e;}
-  var ctx=document.getElementById('gc');if(!ctx)return;
-  if(gc)gc.destroy();
-  gc=new Chart(ctx,{type:'line',data:{labels:labels,datasets:[{data:vals,borderColor:color,backgroundColor:isPos?'rgba(0,230,118,0.06)':'rgba(255,68,68,0.06)',borderWidth:1.5,pointRadius:0,tension:0.3,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a5a68',font:{size:9,family:'JetBrains Mono'},maxTicksLimit:6},grid:{display:false}},y:{ticks:{color:'#5a5a68',font:{size:9,family:'JetBrains Mono'},callback:function(v){return '$'+v.toLocaleString();}},grid:{color:'rgba(255,255,255,0.03)'}}}}});
-}
+def generate_market_summary(state,scan_results,fg,fgl,dominance):
+    api_key=os.environ.get("ANTHROPIC_API_KEY","")
+    if not api_key:
+        log("  ⚠️  No ANTHROPIC_API_KEY — skipping AI summary")
+        return None
+    fg_val=state.get("last_fg",fg)
+    cap=state.get("capital",1500)
+    open_trades=state.get("open_trades",{})
+    closest=[];waiting=[]
+    for pair,data in scan_results.items():
+        coin=pair.split("-")[0]
+        rsi=data.get("rsi",50);above_ema=data.get("above_ema",False)
+        trending=data.get("adx",0)>=25;oversold=rsi<35
+        sig=data.get("signal","HOLD");conditions_met=sum([oversold,above_ema,trending])
+        if sig=="BUY":
+            closest.append(f"{coin} — ALL 3 SIGNALS FIRING — BUY triggered")
+        elif conditions_met==2:
+            missing=[]
+            if not oversold: missing.append(f"RSI {rsi:.0f} needs to drop to 35")
+            if not above_ema: missing.append("price needs to rise above 200 EMA")
+            if not trending: missing.append(f"ADX {data.get('adx',0):.0f} needs to reach 25")
+            closest.append(f"{coin} — 2 of 3 conditions met, missing: {', '.join(missing)}")
+        elif conditions_met==1:
+            waiting.append(f"{coin} — only 1 condition met, RSI {rsi:.0f}, {'above' if above_ema else 'below'} 200 EMA, ADX {data.get('adx',0):.0f}")
+        else:
+            waiting.append(f"{coin} — no conditions met, RSI {rsi:.0f}, {'above' if above_ema else 'below'} 200 EMA, ADX {data.get('adx',0):.0f}")
+    if open_trades: open_summary=f"Currently holding {len(open_trades)} long position(s)."
+    else: open_summary="No open long positions — holding cash."
+    short_open=state.get("short_open_trades",{})
+    if short_open: open_summary+=f" {len(short_open)} paper short(s) active."
+    prompt=f"""You are a sharp, direct trading analyst giving a quick market update for a crypto bot. Write exactly like this example — conversational, clear, no jargon, like explaining to a smart friend:
+"Right now the market is in a weird spot — Extreme Fear (12/100), BTC hovering right around its 200 EMA, and most coins showing neutral RSI in the 40-50 range. None of them are oversold enough to trigger RSI below 35 while also being above their 200 EMA with ADX trending. The bot is doing exactly what it should — being patient and waiting for a clean setup. ETH is the closest — it has the 200 EMA and ADX conditions met. It just needs RSI to drop to 35."
+Now write a similar update using this current data:
+Fear & Greed: {fg_val}/100 — {fgl}
+BTC Dominance: {dominance:.1f}%
+Capital: ${cap:.2f}
+{open_summary}
+Coin status:
+{chr(10).join(closest) if closest else "No coins close to triggering"}
+{chr(10).join(waiting)}
+Rules:
+- 2-4 sentences max
+- Mention Fear & Greed naturally
+- Call out the closest coin by name and exactly what it needs
+- End with what to watch for
+- Sound like a real person, not a robot
+- No bullet points, just flowing text
+"""
+    try:
+        payload=json.dumps({"model":"claude-sonnet-4-20250514","max_tokens":300,"messages":[{"role":"user","content":prompt}]}).encode()
+        req=urllib.request.Request("https://api.anthropic.com/v1/messages",data=payload,headers={"content-type":"application/json","anthropic-version":"2023-06-01","x-api-key":api_key})
+        with urllib.request.urlopen(req,timeout=15) as r:
+            resp=json.loads(r.read())
+            summary=resp["content"][0]["text"].strip()
+            json.dump({"summary":summary,"time":now_str()},open(Path(__file__).parent/"market_summary.json","w"))
+            log(f"  📝 Market summary updated")
+            return summary
+    except Exception as e:
+        log(f"  ⚠️  Market summary API error: {e}")
+        return None
 
-function buildCD(){
-  cD={};var history=state.trade_history||[];
-  var buyMap={},shortMap={};
-  history.forEach(function(t){
-    if(t.side==='BUY'){buyMap[t.pair]=t;}
-    else if(t.side==='SHORT'){shortMap[t.pair]=t;}
-    else if(t.side==='SELL'&&buyMap[t.pair]){
-      var d=new Date(t.time);if(isNaN(d.getTime()))return;
-      var pnl=(t.price-buyMap[t.pair].price)/buyMap[t.pair].price*buyMap[t.pair].usd;
-      var key=d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();
-      if(!cD[key])cD[key]={pnl:0,trades:0};cD[key].pnl+=pnl;cD[key].trades++;
-      delete buyMap[t.pair];
-    } else if(t.side==='SHORT_CLOSE'&&shortMap[t.pair]){
-      var d2=new Date(t.time);if(isNaN(d2.getTime()))return;
-      var pnl2=t.pnl||0;
-      var key2=d2.getFullYear()+'-'+d2.getMonth()+'-'+d2.getDate();
-      if(!cD[key2])cD[key2]={pnl:0,trades:0};cD[key2].pnl+=pnl2;cD[key2].trades++;
-      delete shortMap[t.pair];
-    }
-  });
-}
+def get_candles(client,pair):
+    try:
+        end=int(time.time());start=end-3600*CONFIG["candle_count"]
+        r=client.get_candles(product_id=pair,start=str(start),end=str(end),granularity=CONFIG["candle_granularity"])
+        return sorted(r.candles if hasattr(r,"candles") else [],key=lambda c:int(c.start))
+    except Exception as e: log(f"  No candles {pair}: {e}");return []
 
-function updCal(){buildCD();renderCal();}
-function renderCal(){
-  document.getElementById('calT').textContent=MONTHS[cM]+' '+cY;
-  var first=new Date(cY,cM,1).getDay(),days=new Date(cY,cM+1,0).getDate(),today=new Date();
-  var html='',mP=0,wins=0,losses=0,tD=0;
-  for(var e=0;e<first;e++)html+='<div class="ce emp"></div>';
-  for(var day=1;day<=days;day++){
-    var key=cY+'-'+cM+'-'+day,data=cD[key];
-    var isT=today.getDate()===day&&today.getMonth()===cM&&today.getFullYear()===cY;
-    if(data){mP+=data.pnl;tD++;var g=data.pnl>=0;if(g)wins++;else losses++;html+='<div class="ce '+(g?'win':'los')+'"><div style="font-weight:600">'+day+'</div><div class="cpnl">'+(data.pnl>=0?'+':'')+data.pnl.toFixed(0)+'</div></div>';}
-    else html+='<div class="ce '+(isT?'tod':'non')+'">'+day+'</div>';
-  }
-  document.getElementById('calG').innerHTML=html;
-  var sc=function(l,v,c){return '<div class="csc"><div class="csl">'+l+'</div><div class="csva" style="color:'+c+'">'+v+'</div></div>';};
-  document.getElementById('calS').innerHTML=sc('MONTH P&L',(mP>=0?'+ ':'-')+'$'+Math.abs(mP).toFixed(2),mP>=0?'var(--green)':'var(--red)')+sc('WIN DAYS',wins,'var(--green)')+sc('LOSS DAYS',losses,'var(--red)')+sc('TRADE DAYS',tD,'var(--muted2)');
-}
-window.calPrev=function(){cM--;if(cM<0){cM=11;cY--;}renderCal();};
-window.calNext=function(){cM++;if(cM>11){cM=0;cY++;}renderCal();};
+def get_price(client,pair):
+    try:
+        r=client.get_best_bid_ask(product_ids=[pair])
+        for p in r.pricebooks:
+            if p.product_id==pair:
+                b=float(p.bids[0].price) if p.bids else 0;a=float(p.asks[0].price) if p.asks else 0;return(b+a)/2
+    except: pass
+    return 0.0
 
-function updShortStats(){
-  var parsed=parseTradeHistory();
-  var shorts=parsed.shorts;
-  var el=document.getElementById('shortContent');
-  var cEl=document.getElementById('shortCount');
-  var openShorts=Object.keys(state.short_open_trades||{}).length;
-  var wins=shorts.filter(function(t){return t.pnl>0;}).length;
-  var losses=shorts.filter(function(t){return t.pnl<=0&&Math.abs(t.pnl)>=t.usd*0.005;}).length;
-  var closed=wins+losses;
-  var wr=closed>0?Math.round(wins/closed*100):0;
-  var totalPnl=shorts.reduce(function(a,t){return a+t.pnl;},0);
-  cEl.textContent=shorts.length+' closed | '+openShorts+' open | '+wr+'% win rate';
-  if(!shorts.length&&!openShorts){el.innerHTML='<div class="emp2">No short trades yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div>';return;}
-  var sc=function(l,v,c){return '<div style="background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:JetBrains Mono,monospace">'+l+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';};
-  var html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">';
-  html+=sc('OPEN SHORTS',openShorts,'var(--amber)');
-  html+=sc('WIN RATE',wr+'%',wr>=50?'var(--green)':'var(--red)');
-  html+=sc('WINS / LOSSES',wins+'W / '+losses+'L','var(--muted2)');
-  html+=sc('TOTAL P&L',(totalPnl>=0?'+$':'-$')+Math.abs(totalPnl).toFixed(2),totalPnl>=0?'var(--green)':'var(--red)');
-  html+='</div>';
-  var shortCap=parseFloat(state.short_capital||1500);
-  var shortGr=(shortCap-1500)/1500*100;
-  html+='<div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:10px;padding:12px;font-family:JetBrains Mono,monospace;font-size:11px;color:var(--muted2)">Virtual Short Capital: <span style="color:'+(shortGr>=0?'var(--green)':'var(--red)')+'">$'+shortCap.toFixed(2)+' ('+(shortGr>=0?'+':'')+shortGr.toFixed(2)+'%)</span></div>';
-  el.innerHTML=html;
-}
+def calc_ema(prices,n):
+    if len(prices)<n: return prices[-1] if prices else 0.0
+    k=2/(n+1);e=sum(prices[:n])/n
+    for v in prices[n:]: e=v*k+e*(1-k)
+    return e
 
-var shortTableExpanded=false;
-function toggleShortTable(){
-  shortTableExpanded=!shortTableExpanded;
-  var wrap=document.getElementById('shortTableWrap');
-  var btn=document.getElementById('shortToggleBtn');
-  wrap.style.display=shortTableExpanded?'block':'none';
-  btn.textContent=shortTableExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
-  if(shortTableExpanded)loadShortTable();
-}
-function loadShortTable(){
-  var parsed=parseTradeHistory();var shorts=parsed.shorts;
-  var el=document.getElementById('shortTableContent');
-  if(!shorts.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No short trades closed yet.</div>';return;}
-  var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
-  ['Time','Pair','Entry','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
-  html+='</tr>';
-  shorts.forEach(function(tr){
-    var isWin=tr.pnl>0;var oc=isWin?'var(--green)':'var(--red)';
-    html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">';
-    html+='<td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">'+tr.et+'</td>';
-    html+='<td style="padding:5px 8px;font-weight:600">'+tr.coin+'</td>';
-    html+='<td style="padding:5px 8px">$'+parseFloat(tr.entry).toFixed(4)+'</td>';
-    html+='<td style="padding:5px 8px">$'+parseFloat(tr.exit).toFixed(4)+'</td>';
-    html+='<td style="padding:5px 8px;color:'+oc+';font-weight:600">'+(isWin?'WIN':'LOSS')+'</td>';
-    html+='<td style="padding:5px 8px;color:'+oc+'">'+(tr.pnl>=0?'+$':'-$')+Math.abs(tr.pnl).toFixed(2)+'</td>';
-    html+='</tr>';
-  });
-  html+='</table>';el.innerHTML=html;
-}
+def calc_rsi(closes,n=14):
+    if len(closes)<n+1: return 50.0
+    g=[abs(closes[i]-closes[i-1]) for i in range(-n,0) if closes[i]>closes[i-1]]
+    l=[abs(closes[i]-closes[i-1]) for i in range(-n,0) if closes[i]<=closes[i-1]]
+    ag=sum(g)/n if g else 0;al=sum(l)/n if l else 1e-9
+    return 100-(100/(1+ag/al))
 
-async function loadShadowLong(){
-  try{
-    var r=await fetch('/shadowlong');if(!r.ok)return;
-    var rows=await r.json();
-    var el=document.getElementById('slContent');
-    var cEl=document.getElementById('slCount');
-    if(!rows.length){el.innerHTML='<div class="emp2">No shadow longs yet<span>Watching DOGE DOT SUI LTC TAO FET — waiting for signals</span></div>';return;}
-    var open=rows.filter(function(r){return r.Outcome==='OPEN';}).length;
-    var wins=rows.filter(function(r){return r.Outcome==='TAKE PROFIT';}).length;
-    var losses=rows.filter(function(r){return r.Outcome==='STOP LOSS';}).length;
-    var closed=wins+losses,wr=closed>0?Math.round(wins/closed*100):0;
-    var totalPnl=rows.filter(function(r){return r['Simulated P&L (%)']!=='';}).reduce(function(a,r){return a+parseFloat(r['Simulated P&L (%)']||0);},0);
-    cEl.textContent=rows.length+' virtual trades | '+open+' open | '+wr+'% win rate';
-    var sc=function(l,v,c){return '<div style="background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:JetBrains Mono,monospace">'+l+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';};
-    var html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">';
-    html+=sc('VIRTUAL TRADES',rows.length,'var(--muted2)');
-    html+=sc('WIN RATE',wr+'%',wr>=50?'var(--green)':'var(--red)');
-    html+=sc('WINS / LOSSES',wins+'W / '+losses+'L','var(--muted2)');
-    html+=sc('TOTAL P&L',(totalPnl>=0?'+ ':'-')+Math.abs(totalPnl).toFixed(1)+'%',totalPnl>=0?'var(--green)':'var(--red)');
-    html+='</div>';
-    el.innerHTML=html;
-  }catch(e){}
-}
+def calc_adx(highs,lows,closes,n=14):
+    if len(closes)<n*2: return 20.0
+    try:
+        trs,pdms,ndms=[],[],[]
+        for i in range(1,len(closes)):
+            h,l,pc=highs[i],lows[i],closes[i-1]
+            trs.append(max(h-l,abs(h-pc),abs(l-pc)))
+            pdms.append(max(h-highs[i-1],0) if(h-highs[i-1])>(lows[i-1]-l) else 0)
+            ndms.append(max(lows[i-1]-l,0) if(lows[i-1]-l)>(h-highs[i-1]) else 0)
+        atr=sum(trs[-n:])/n
+        if atr==0: return 20.0
+        pdi=(sum(pdms[-n:])/n)/atr*100;ndi=(sum(ndms[-n:])/n)/atr*100
+        return abs(pdi-ndi)/(pdi+ndi)*100 if(pdi+ndi)>0 else 0
+    except: return 20.0
 
-var slExpanded=false;
-function toggleShadowLongTable(){
-  slExpanded=!slExpanded;
-  var wrap=document.getElementById('slTableWrap');
-  var btn=document.getElementById('slToggleBtn');
-  wrap.style.display=slExpanded?'block':'none';
-  btn.textContent=slExpanded?'COLLAPSE TRADE TABLE':'EXPAND TRADE TABLE';
-  if(slExpanded)loadShadowLongTable();
-}
-async function loadShadowLongTable(){
-  try{
-    var r=await fetch('/shadowlong');if(!r.ok)return;
-    var rows=await r.json();
-    var el=document.getElementById('slTableContent');
-    if(!rows.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No shadow long trades yet.</div>';return;}
-    var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
-    ['Time','Pair','Entry','Stop','Target','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
-    html+='</tr>';
-    rows.forEach(function(row){
-      var pnl=parseFloat(row['Simulated P&L (%)']||0);
-      var pc=pnl>0?'var(--green)':pnl<0?'var(--red)':'var(--muted)';
-      var isOpen=row.Outcome==='OPEN';
-      var oc=isOpen?'var(--amber)':row.Outcome==='TAKE PROFIT'?'var(--green)':'var(--red)';
-      html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">';
-      html+='<td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">'+(row.Timestamp||'')+'</td>';
-      html+='<td style="padding:5px 8px;font-weight:600">'+(row.Pair||'').split('-')[0]+'</td>';
-      html+='<td style="padding:5px 8px">$'+parseFloat(row['Virtual Entry']||0).toFixed(4)+'</td>';
-      html+='<td style="padding:5px 8px;color:var(--red)">$'+parseFloat(row['Stop Price']||0).toFixed(4)+'</td>';
-      html+='<td style="padding:5px 8px;color:var(--green)">$'+parseFloat(row['Target Price']||0).toFixed(4)+'</td>';
-      html+='<td style="padding:5px 8px;color:var(--muted2)">'+(row['Exit Price']?'$'+parseFloat(row['Exit Price']).toFixed(4):'--')+'</td>';
-      html+='<td style="padding:5px 8px;color:'+oc+';font-weight:600">'+(row.Outcome||'--')+'</td>';
-      html+='<td style="padding:5px 8px;color:'+pc+'">'+(pnl?pnl.toFixed(2)+'%':'--')+'</td>';
-      html+='</tr>';
-    });
-    html+='</table>';el.innerHTML=html;
-  }catch(e){}
-}
+def calc_atr(highs,lows,closes,n=14):
+    if len(closes)<n+1: return closes[-1]*0.02 if closes else 1.0
+    trs=[max(highs[i]-lows[i],abs(highs[i]-closes[i-1]),abs(lows[i]-closes[i-1])) for i in range(-n,0)]
+    return sum(trs)/n
 
-async function downloadAuditData(){
-  var btn=document.querySelector('[onclick="downloadAuditData()"]');
-  var orig=btn.textContent;btn.textContent='PREPARING...';btn.disabled=true;
-  try{
-    var files=[{name:'strategy_audit.csv',url:'/audit'},{name:'rejected_signals.csv',url:'/rejected'},{name:'equity_curve.csv',url:'/equity'},{name:'symbol_performance.csv',url:'/symbols'},{name:'shadow_longs.csv',url:'/shadowlong'}];
-    var now=new Date();
-    var ts=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
-    var downloaded=0;
-    for(var i=0;i<files.length;i++){
-      try{
-        var f=files[i];var r=await fetch(f.url);if(!r.ok)continue;
-        var text=await r.text();if(!text||text.trim()==='[]'||text.trim()==='')continue;
-        var blob=new Blob([text],{type:'text/csv;charset=utf-8;'});
-        var a=document.createElement('a');a.href=URL.createObjectURL(blob);
-        a.download='EDGE_v7_'+f.name.replace('.csv','')+'_'+ts+'.csv';
-        a.style.display='none';document.body.appendChild(a);a.click();
-        setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href);},1000);
-        downloaded++;await new Promise(function(res){setTimeout(res,500);});
-      }catch(e){}
-    }
-    btn.textContent=downloaded>0?'DOWNLOADED '+downloaded+' FILES':'NO DATA YET';
-    setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);
-  }catch(e){btn.textContent='ERROR';setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);}
-}
+def calc_volume_24h(closes,volumes):
+    if len(closes)<24 or len(volumes)<24: return 0.0
+    return sum(closes[-24+i]*volumes[-24+i] for i in range(24))
 
-async function refresh(){
-  await Promise.all([fetchState(),fetchPrices(),fetchLog()]);
-  updShortStats();
-  loadShadowLong();
-}
-buildCoins();buildRG();renderCal();refresh();setInterval(refresh,15000);
-</script>
-</body>
-</html>
+def analyze(pair,closes,highs,lows,volumes):
+    if len(closes)<210: return{"direction":"HOLD","reason":"Not enough data","indicators":{}}
+    px=closes[-1];rv=calc_rsi(closes);e200=calc_ema(closes,CONFIG["ema_period"])
+    adxv=calc_adx(highs,lows,closes);atrv=calc_atr(highs,lows,closes)
+    vol24=calc_volume_24h(closes,volumes)
+    above=px>e200*1.001;trending=adxv>=CONFIG["adx_threshold"]
+    oversold=rv<CONFIG["rsi_oversold"];vol_ok=vol24>=CONFIG["min_volume_24h"]
+    sl=round(px-atrv*CONFIG["atr_sl_mult"],6);tp=round(px+atrv*CONFIG["atr_tp_mult"],6)
+    be=round(px+atrv*CONFIG["atr_be_mult"],6)
+    ind={"price":px,"rsi":rv,"ema200":e200,"adx":adxv,"atr":atrv,"vol24":vol24,"above_ema":above,"trending":trending,"oversold":oversold,"vol_ok":vol_ok,"sl":sl,"tp":tp,"be_trigger":be}
+    if oversold and above and trending and vol_ok:
+        reason=f"RSI {rv:.0f} oversold — bounce likely. Price ${px:,.4f} above 200 EMA ${e200:,.4f} — uptrend intact. ADX {adxv:.0f} — trending. Vol ${vol24/1e6:.1f}M. SL ${sl:,.6f} | TP ${tp:,.6f} | BE at ${be:,.6f}."
+        return{"direction":"BUY","reason":reason,"indicators":ind}
+    missing=[]
+    if not oversold: missing.append(f"RSI {rv:.0f} not oversold (need < {CONFIG['rsi_oversold']})")
+    if not above: missing.append(f"Price below 200 EMA ${e200:,.4f}")
+    if not trending: missing.append(f"ADX {adxv:.0f} ranging (need > {CONFIG['adx_threshold']})")
+    if not vol_ok: missing.append(f"Vol ${vol24/1e6:.1f}M too low (need > $5M)")
+    return{"direction":"HOLD","reason":"Waiting: "+" | ".join(missing),"indicators":ind}
+
+def pos_size(state,atr,price):
+    capital=state["capital"];risk=capital*CONFIG["risk_per_trade"]
+    stop=atr*CONFIG["atr_sl_mult"]
+    if stop<=0 or price<=0: return round(risk*4,2)
+    return round(min((risk/stop)*price,capital*0.15),2)
+
+def place_order(client,pair,side,usd,price,state,reason="",atr=0):
+    mode="PAPER TRADE" if CONFIG["paper_trade"] else "LIVE TRADE"
+    coin=pair.split("-")[0]
+    if side=="BUY":
+        sl=price-atr*CONFIG["atr_sl_mult"];tp=price+atr*CONFIG["atr_tp_mult"];be=price+atr*CONFIG["atr_be_mult"]
+        entry_fee=usd*CONFIG["taker_fee"]
+        state["capital"]-=entry_fee
+        log(f"  💰 {mode} — Buying ${usd:.2f} of {coin} @ ${price:,.4f}")
+        log(f"  💸 Entry fee: ${entry_fee:.2f} (0.6%)")
+        log(f"     Stop: ${sl:,.6f} | Target: ${tp:,.6f} | BE triggers at: ${be:,.6f}")
+        log(f"     Why: {reason}")
+    else:
+        if pair in state["open_trades"]:
+            entry=state["open_trades"][pair].get("entry_price",price);pct=(price-entry)/entry*100
+            log(f"  💸 {mode} — Selling {coin} @ ${price:,.4f} ({'gained' if pct>0 else 'lost'} {abs(pct):.2f}%)")
+    if not CONFIG["paper_trade"]:
+        try:
+            import uuid;cid=str(uuid.uuid4())
+            if side=="BUY": r=client.market_order_buy(client_order_id=cid,product_id=pair,quote_size=str(usd))
+            else: r=client.market_order_sell(client_order_id=cid,product_id=pair,base_size=str(round(usd/price,8)))
+            log("  ✅ Confirmed!" if getattr(r,"success",True) else "  ⚠️  Check Coinbase")
+        except Exception as e: log(f"  ❌ {e}");return False
+    state["trade_history"].append({"time":now_str(),"pair":pair,"side":side,"usd":usd,"price":price,"paper":CONFIG["paper_trade"],"explanation":reason,"type":"LONG"})
+    state["stats"]["total_trades"]+=1;state["performance"]["total_trades"]+=1
+    if side=="BUY":
+        sl=price-atr*CONFIG["atr_sl_mult"];tp=price+atr*CONFIG["atr_tp_mult"];be=price+atr*CONFIG["atr_be_mult"]
+        state["open_trades"][pair]={"entry_price":price,"usd_invested":usd,"entry_time":now_str(),"highest_price":price,"atr":atr,"stop_loss":sl,"take_profit":tp,"be_trigger":be,"at_breakeven":False,"explanation":reason,"type":"LONG"}
+        state["capital"]-=usd;state["trade_count_today"]=state.get("trade_count_today",0)+1
+        save_explanation({"time":now_str(),"pair":pair,"side":"BUY","price":price,"usd":usd,"explanation":reason,"stop_loss":sl,"take_profit":tp,"be_trigger":be})
+    elif pair in state["open_trades"]:
+        e=state["open_trades"].pop(pair);proceeds=e["usd_invested"]+(price-e["entry_price"])/e["entry_price"]*e["usd_invested"];exit_fee=proceeds*CONFIG["taker_fee"];net_proceeds=proceeds-exit_fee;pnl=net_proceeds-e["usd_invested"]
+        state["capital"]+=net_proceeds;log(f"  💸 Exit fee: ${exit_fee:.2f} (0.6%)");state["daily_pnl"]+=pnl;state["total_pnl"]+=pnl;state["performance"]["total_pnl"]+=pnl
+        is_be=abs(pnl)<e["usd_invested"]*0.005
+        if pnl>0: state["stats"]["wins"]+=1;state["performance"]["wins"]+=1;log(f"  🏆 Profit: ${pnl:+.2f}")
+        elif is_be: state["stats"]["breakevens"]+=1;state["performance"]["breakevens"]+=1;log(f"  ↔️  Breakeven: ${pnl:+.2f}")
+        else: state["stats"]["losses"]+=1;state["performance"]["losses"]+=1;log(f"  📉 Loss: ${pnl:+.2f}")
+        if "STOP" in reason or "WEBSOCKET_STOP" in reason: set_cooldown(pair)
+        peak=state["performance"].get("peak_capital",CONFIG["starting_capital"])
+        if state["capital"]>peak: state["performance"]["peak_capital"]=state["capital"]
+        else:
+            dd=(peak-state["capital"])/peak*100
+            if dd>state["performance"].get("max_drawdown",0): state["performance"]["max_drawdown"]=dd
+        save_explanation({"time":now_str(),"pair":pair,"side":"SELL","price":price,"pnl":pnl,"explanation":f"Exited {'profit' if pnl>0 else 'breakeven' if is_be else 'loss'} ${abs(pnl):.2f}. Entry ${e['entry_price']:,.4f} → Exit ${price:,.4f}."})
+    return True
+
+def risk_ok(state):
+    today=date_str()
+    if state.get("last_reset")!=today:
+        state["daily_pnl"]=0.0;state["last_reset"]=today;state["trade_count_today"]=0;log("  🔄 Daily reset")
+    if state["daily_pnl"]<-CONFIG["starting_capital"]*CONFIG["max_daily_loss_pct"]:
+        log("  🛑 Daily loss limit");return False
+    if len(state["open_trades"])>=CONFIG["max_open_trades"]:
+        log(f"  ⏸️  Max {CONFIG['max_open_trades']} positions");return False
+    return True
+
+def check_exits(client,state):
+    if not state["open_trades"]: return
+    log("  Checking long positions...")
+    for pair,pos in list(state["open_trades"].items()):
+        px=get_price(client,pair)
+        if px==0: continue
+        entry=pos["entry_price"];atr=pos.get("atr",entry*0.02)
+        sl=pos.get("stop_loss",entry-atr*CONFIG["atr_sl_mult"])
+        tp=pos.get("take_profit",entry+atr*CONFIG["atr_tp_mult"])
+        be_trig=pos.get("be_trigger",entry+atr*CONFIG["atr_be_mult"])
+        at_be=pos.get("at_breakeven",False);ch=(px-entry)/entry*100
+        if px>pos.get("highest_price",px): pos["highest_price"]=px;state["open_trades"][pair]=pos
+        highest=pos.get("highest_price",px)
+        if not at_be and px>=be_trig:
+            pos["stop_loss"]=entry;pos["at_breakeven"]=True;state["open_trades"][pair]=pos;sl=entry
+            log(f"  ↔️  BREAKEVEN — {pair.split('-')[0]} hit +2x ATR. Stop → entry ${entry:,.6f}")
+        if at_be:
+            trail=highest-atr*CONFIG["atr_trail_mult"]
+            if trail>pos.get("stop_loss",sl): pos["stop_loss"]=trail;state["open_trades"][pair]=pos;sl=trail
+        be_str="✅ BE active" if at_be else f"BE at ${be_trig:,.4f}"
+        log(f"  📊 {pair.split('-')[0]}: ${px:,.4f} | {ch:+.1f}% | SL ${sl:,.4f} | TP ${tp:,.4f} | {be_str}")
+        try:
+            entry_dt=datetime.strptime(pos.get("entry_time",""),"%B %d, %Y  %I:%M:%S %p")
+            hours_open=(datetime.now()-entry_dt).total_seconds()/3600
+            movement_atr=abs(px-entry)/atr if atr>0 else 0
+            if hours_open>=6 and not at_be:
+                log(f"  ⚠️  STALE TRADE WARNING — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | no breakeven yet")
+            elif hours_open>=4 and not at_be:
+                log(f"  🕐 TRADE WATCH — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | approaching stale zone")
+        except:
+            pass
+        if px<=sl:
+            log(f"  {'↔️  BREAKEVEN STOP' if at_be else '🛑 STOP LOSS'} — {pair.split('-')[0]}")
+            place_order(client,pair,"SELL",pos["usd_invested"],px,state,reason="STOP_LOSS — hourly check",atr=atr)
+        elif px>=tp:
+            log(f"  🎯 TAKE PROFIT — {pair.split('-')[0]} +{ch:.1f}%")
+            place_order(client,pair,"SELL",pos["usd_invested"],px,state,atr=atr)
+
+def scan(client,state):
+    _scan_signals={}
+    sec(f"SCAN — {time_str()}")
+    fg,fgl=get_fear_greed();dominance=get_btc_dominance();funding=get_funding_rate()
+    state["last_fg"]=fg;state["last_fg_label"]=fgl;state["last_dominance"]=dominance;state["last_funding"]=funding
+    log(f"  Fear & Greed: {fg}/100 — {fgl} | BTC Dom: {dominance:.1f}% | Funding: {funding:.4f}%");log("")
+    check_exits(client,state)
+    check_short_exits(client,state)
+    try:
+        sf=Path(__file__).parent/"summary.json"
+        if sf.exists():
+            sd=json.loads(sf.read_bytes().decode('utf-8',errors='replace'))
+            state["ai_summary"]=sd.get("summary","")
+            state["ai_summary_time"]=sd.get("time","")
+            state["ai_signals"]=sd.get("signals",{})
+    except: pass
+    if not risk_ok(state): save_state(state);return
+
+    for pair in CONFIG["pairs"]:
+        if pair in state["open_trades"]: continue
+        candles=get_candles(client,pair)
+        if not candles: continue
+        closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
+        lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
+        signal=analyze(pair,closes,highs,lows,volumes)
+        _scan_signals[pair]=signal["indicators"]
+
+    market_crash=check_market_crash(_scan_signals,state)
+
+    for pair in CONFIG["pairs"]:
+        coin=pair.split("-")[0];div();log(f"  {coin}");div()
+        if pair in state["open_trades"]: log("  Already holding long — skipping");continue
+        if pair not in _scan_signals: log("  No data");continue
+        ind=_scan_signals[pair]
+        px=ind.get("price",0);rv=ind.get("rsi",50);e200=ind.get("ema200",0)
+        adxv=ind.get("adx",0);atrv=ind.get("atr",0);vol24=ind.get("vol24",0)
+        try:
+            bbo=client.get_best_bid_ask(product_ids=[pair])
+            bids=bbo.pricebooks[0].bids;asks=bbo.pricebooks[0].asks
+            if bids and asks:
+                bid=float(bids[0].price);ask=float(asks[0].price);mid=(bid+ask)/2
+                spread_pct=(ask-bid)/mid
+                if spread_pct>CONFIG["max_spread_pct"]:
+                    log(f"  ⚠️  Spread {spread_pct*100:.3f}% — too wide, skip");continue
+        except: pass
+        log(f"  Price:   ${px:,.4f}")
+        log(f"  RSI:     {rv:.1f}  {'✅ oversold — signal firing' if rv<35 else '— neutral' if rv<65 else '🔴 overbought'}")
+        log(f"  200 EMA: ${e200:,.4f}  {'✅ price above — uptrend' if ind.get('above_ema') else '⚠️  price below — skip'}")
+        log(f"  ADX:     {adxv:.1f}  {'✅ trending' if ind.get('trending') else '⚠️  ranging — skip'}")
+        log(f"  Vol 24h: ${vol24/1e6:.1f}M  {'✅ sufficient' if vol24>=CONFIG['min_volume_24h'] else '⚠️  too low — skip'}")
+        log(f"  ATR:     ${atrv:,.6f} | SL: ${ind.get('sl',0):,.4f} | TP: ${ind.get('tp',0):,.4f}")
+        oversold=ind.get("oversold",False);above=ind.get("above_ema",False)
+        trending=ind.get("trending",False);vol_ok=ind.get("vol_ok",True)
+        if oversold and above and trending and vol_ok and px>0:
+            if market_crash: log(f"  🚫 REJECT_MARKET_CRASH — skipping {coin} entry");continue
+            in_cooldown,remaining=is_in_cooldown(pair)
+            if in_cooldown: log(f"  ⏳ COOLDOWN — {coin} blocked for {remaining} more minutes");continue
+            if not rsi_crossover_confirmed(pair,rv,state): log(f"  ⏳ RSI CROSSOVER PENDING");continue
+            reason=f"RSI {rv:.0f} oversold crossover — bounce confirmed. Price ${px:,.4f} above 200 EMA ${e200:,.4f}. ADX {adxv:.0f} trending. Vol ${vol24/1e6:.1f}M. SL ${ind.get('sl',0):,.6f} | TP ${ind.get('tp',0):,.6f} | BE at ${ind.get('be_trigger',0):,.6f}."
+            usd=pos_size(state,atrv,px)
+            if usd>=10: place_order(client,pair,"BUY",usd,px,state,reason,atrv)
+            else: log(f"  Too small ${usd:.2f}")
+        else:
+            missing=[]
+            if not oversold: missing.append(f"RSI {rv:.0f} not oversold")
+            if not above: missing.append(f"Price below 200 EMA")
+            if not trending: missing.append(f"ADX {adxv:.0f} ranging")
+            if not vol_ok: missing.append(f"Vol too low")
+            log(f"  → Waiting: {' | '.join(missing)}")
+
+    SHORT_PAIRS=list(CONFIG["pairs"])+["DOGE-USD","DOT-USD","SUI-USD","LTC-USD","TAO-USD","FET-USD"]
+    for pair in SHORT_PAIRS:
+        if pair not in _scan_signals:
+            try:
+                candles=get_candles(client,pair)
+                if not candles or len(candles)<210: continue
+                closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
+                lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
+                px2=closes[-1];rv2=calc_rsi(closes);e200_2=calc_ema(closes,CONFIG["ema_period"])
+                adxv2=calc_adx(highs,lows,closes);atrv2=calc_atr(highs,lows,closes)
+                vol24_2=calc_volume_24h(closes,volumes)
+                above2=px2>e200_2*1.001;trending2=adxv2>=CONFIG["adx_threshold"]
+                vol_ok2=vol24_2>=CONFIG["min_volume_24h"]
+                _scan_signals[pair]={"price":px2,"rsi":rv2,"ema200":e200_2,"adx":adxv2,"atr":atrv2,"vol24":vol24_2,"above_ema":above2,"trending":trending2,"oversold":rv2<CONFIG["rsi_oversold"],"vol_ok":vol_ok2}
+            except: continue
+        if pair not in _scan_signals: continue
+        s=_scan_signals[pair]
+        px=s.get("price",0);rsi=s.get("rsi",50);above_ema=s.get("above_ema",False)
+        adx=s.get("adx",0);atr=s.get("atr",0)
+        if px==0 or atr==0: continue
+        coin=pair.split("-")[0]
+        last_rsi_val=state.get("last_rsi",{}).get(pair,50)
+        overbought_reset=last_rsi_val>70
+        overbought_cross=rsi<=65
+        short_signal=overbought_reset and overbought_cross and (not above_ema) and adx>=CONFIG["adx_threshold"]
+        if pair in state.get("short_open_trades",{}):
+            log(f"  📉 SHORT {coin}: already open — skipping")
+        elif short_signal:
+            reason=f"RSI hook {last_rsi_val:.0f}→{rsi:.0f} — overbought exhausted. Price ${px:,.4f} below 200 EMA — downtrend. ADX {adx:.0f} trending. SL ${round(px+atr*2,4)} | TP ${round(px-atr*4,4)}."
+            log(f"  📉 SHORT SIGNAL — {coin} @ ${px:,.4f} | RSI {last_rsi_val:.0f}→{rsi:.0f} | ADX {adx:.0f}")
+            place_short(pair,px,state,reason=reason,atr=atr)
+        else:
+            missing_s=[]
+            if not overbought_reset: missing_s.append(f"RSI {rsi:.0f} needs >70 first (was {last_rsi_val:.0f})")
+            elif not overbought_cross: missing_s.append(f"RSI {rsi:.0f} needs to cross <65")
+            if above_ema: missing_s.append("above 200 EMA")
+            if adx<CONFIG["adx_threshold"]: missing_s.append(f"ADX {adx:.0f} weak")
+            log(f"  📉 SHORT {coin}: Waiting — {' | '.join(missing_s)}")
+
+    if "last_rsi" not in state: state["last_rsi"]={}
+    for pair,ind in _scan_signals.items():
+        state["last_rsi"][pair]=ind.get("rsi",50)
+
+    st=state["stats"];perf=state["performance"];t=st["total_trades"];wr=(st["wins"]/t*100) if t else 0
+    gr=(state["capital"]-CONFIG["starting_capital"])/CONFIG["starting_capital"]*100
+    short_cap=state.get("short_capital",CONFIG["starting_capital"])
+    short_gr=(short_cap-CONFIG["starting_capital"])/CONFIG["starting_capital"]*100
+    ss=state.get("short_stats",{})
+    sec(f"PORTFOLIO — {'PAPER' if CONFIG['paper_trade'] else 'LIVE'}")
+    log(f"  LONG Capital: ${state['capital']:,.2f} ({'▲' if gr>=0 else '▼'}{abs(gr):.1f}%) | P/L: ${state['total_pnl']:+,.2f}")
+    log(f"  SHORT Capital: ${short_cap:,.2f} ({'▲' if short_gr>=0 else '▼'}{abs(short_gr):.1f}%) | Shorts: {ss.get('total_trades',0)} | W:{ss.get('wins',0)} L:{ss.get('losses',0)}")
+    log(f"  Long Trades: {t} | Wins: {st['wins']} | Losses: {st['losses']} | WR: {wr:.1f}%")
+    log(f"  Drawdown: {perf.get('max_drawdown',0):.1f}%")
+    if state["open_trades"]:
+        for p2,pos in state["open_trades"].items():
+            be_s="✅ BE active" if pos.get("at_breakeven") else f"BE at ${pos.get('be_trigger',0):,.4f}"
+            log(f"  • LONG {p2} ${pos['usd_invested']:.2f} @ ${pos['entry_price']:,.4f} | SL ${pos.get('stop_loss',0):,.4f} | TP ${pos.get('take_profit',0):,.4f} | {be_s}")
+    if state.get("short_open_trades"):
+        for p2,pos in state["short_open_trades"].items():
+            be_s="✅ BE active" if pos.get("at_breakeven") else f"BE at ${pos.get('be_trigger',0):,.4f}"
+            log(f"  • SHORT {p2} ${pos['usd_invested']:.2f} @ ${pos['entry_price']:,.4f} | SL ${pos.get('stop_loss',0):,.4f} | TP ${pos.get('take_profit',0):,.4f} | {be_s}")
+    if not state["open_trades"] and not state.get("short_open_trades"):
+        log("  Holding cash — waiting for clean setups")
+    div("═")
+
+    scan_results_for_summary={}
+    for pair in CONFIG["pairs"]:
+        if pair in state.get("open_trades",{}): continue
+        if pair in _scan_signals:
+            s=_scan_signals[pair]
+            scan_results_for_summary[pair]={"rsi":s.get("rsi",50),"above_ema":s.get("above_ema",False),"adx":s.get("adx",0),"signal":"BUY" if (s.get("oversold") and s.get("above_ema") and s.get("trending") and s.get("vol_ok")) else "HOLD"}
+
+    try:
+        import csv
+        audit_file=Path(__file__).parent/"strategy_audit.csv"
+        rejected_file=Path(__file__).parent/"rejected_signals.csv"
+        equity_file=Path(__file__).parent/"equity_curve.csv"
+        equity_exists=equity_file.exists()
+        with open(equity_file,"a",newline="") as f:
+            writer=csv.writer(f)
+            if not equity_exists:
+                writer.writerow(["Timestamp","Date","Long_Capital","Short_Capital","Total_PnL","Daily_PnL","Open_Longs","Open_Shorts","Win_Rate","Total_Trades","Wins","Losses","Max_Drawdown"])
+            st2=state.get("stats",{});t2=st2.get("total_trades",0)
+            wr2=round(st2.get("wins",0)/t2*100,1) if t2 else 0
+            writer.writerow([now_str(),date_str(),round(state.get("capital",1500),2),round(state.get("short_capital",1500),2),round(state.get("total_pnl",0),2),round(state.get("daily_pnl",0),2),len(state.get("open_trades",{})),len(state.get("short_open_trades",{})),wr2,t2,st2.get("wins",0),st2.get("losses",0),round(state.get("performance",{}).get("max_drawdown",0),2)])
+        rejected_exists=rejected_file.exists()
+        for pair,s in _scan_signals.items():
+            px=s.get("price",0);rv=s.get("rsi",50);adxv=s.get("adx",0)
+            above=s.get("above_ema",False);atrv=s.get("atr",0);e200=s.get("ema200",0)
+            oversold=rv<CONFIG["rsi_oversold"];vol_ok=s.get("vol_ok",True);trending=adxv>=CONFIG["adx_threshold"]
+            if oversold and above and not trending and vol_ok and px>0:
+                with open(rejected_file,"a",newline="") as f:
+                    writer=csv.writer(f)
+                    if not rejected_exists:
+                        writer.writerow(["Timestamp","Pair","RSI","ADX","ADX_Threshold","Price","EMA200","ATR","Reason","Potential_SL","Potential_TP"])
+                        rejected_exists=True
+                    writer.writerow([now_str(),pair,round(rv,1),round(adxv,1),CONFIG["adx_threshold"],px,round(e200,4),round(atrv,6),f"ADX {adxv:.0f} below threshold",round(px-atrv*CONFIG["atr_sl_mult"],6),round(px+atrv*CONFIG["atr_tp_mult"],6)])
+        audit_exists=audit_file.exists()
+        history=state.get("trade_history",[])
+        if len(history)>=2:
+            last=history[-1]
+            if last.get("side")=="SELL":
+                for i in range(len(history)-2,-1,-1):
+                    prev=history[i]
+                    if prev.get("pair")==last.get("pair") and prev.get("side")=="BUY":
+                        entry_px=float(prev.get("price",0));exit_px=float(last.get("price",0))
+                        usd=float(prev.get("usd",0))
+                        pnl=(exit_px-entry_px)/entry_px*usd if entry_px>0 else 0
+                        pnl_pct=(exit_px-entry_px)/entry_px*100 if entry_px>0 else 0
+                        already_logged=False
+                        if audit_file.exists():
+                            with open(audit_file,"r") as rf:
+                                if last.get("time","") in rf.read(): already_logged=True
+                        if not already_logged:
+                            with open(audit_file,"a",newline="") as f:
+                                writer=csv.writer(f)
+                                if not audit_exists:
+                                    writer.writerow(["Trade_ID","Type","Pair","Entry_Time","Exit_Time","Entry_Price","Exit_Price","Stop_Loss","Take_Profit","Position_Size_USD","PnL_USD","PnL_Pct","Outcome","Entry_Reason","MFE_Pct","MAE_Pct"])
+                                    audit_exists=True
+                                exps=[]
+                                if TRADES_FILE.exists():
+                                    try: exps=json.load(open(TRADES_FILE))
+                                    except: pass
+                                exp_data=next((e for e in exps if e.get("pair")==prev.get("pair") and e.get("side")=="BUY"),{})
+                                if pnl>0: outcome="TAKE PROFIT"
+                                elif abs(pnl)<usd*0.005: outcome="BREAKEVEN"
+                                else: outcome="STOP LOSS"
+                                import hashlib
+                                trade_id=hashlib.md5(f"{prev.get('pair')}{prev.get('time')}".encode()).hexdigest()[:8].upper()
+                                writer.writerow([trade_id,"LONG",prev.get("pair",""),prev.get("time",""),last.get("time",""),entry_px,exit_px,exp_data.get("stop_loss",""),exp_data.get("take_profit",""),usd,round(pnl,2),round(pnl_pct,2),outcome,prev.get("explanation",""),"",""])
+                        break
+        perf_file=Path(__file__).parent/"symbol_performance.csv"
+        coin_stats={}
+        if audit_file.exists():
+            with open(audit_file,"r",newline="") as f:
+                reader=csv.DictReader(f)
+                for row in reader:
+                    pair=row.get("Pair","")
+                    if pair not in coin_stats: coin_stats[pair]={"trades":0,"wins":0,"losses":0,"total_pnl":0.0}
+                    coin_stats[pair]["trades"]+=1
+                    pnl_val=float(row.get("PnL_USD",0) or 0)
+                    coin_stats[pair]["total_pnl"]+=pnl_val
+                    if row.get("Outcome")=="TAKE PROFIT": coin_stats[pair]["wins"]+=1
+                    elif row.get("Outcome")=="STOP LOSS": coin_stats[pair]["losses"]+=1
+        if coin_stats:
+            with open(perf_file,"w",newline="") as f:
+                writer=csv.writer(f)
+                writer.writerow(["Pair","Total_Trades","Wins","Losses","Win_Rate_Pct","Total_PnL_USD","Avg_PnL_Per_Trade"])
+                for pair,cs in coin_stats.items():
+                    wr3=round(cs["wins"]/cs["trades"]*100,1) if cs["trades"] else 0
+                    avg=round(cs["total_pnl"]/cs["trades"],2) if cs["trades"] else 0
+                    writer.writerow([pair,cs["trades"],cs["wins"],cs["losses"],wr3,round(cs["total_pnl"],2),avg])
+    except Exception as ae:
+        log(f"  Audit logger error: {ae}")
+
+    try:
+        import csv
+        SHADOW_LONG_PAIRS=["DOGE-USD","DOT-USD","SUI-USD","LTC-USD","TAO-USD","FET-USD"]
+        shadow_long_file=Path(__file__).parent/"shadow_longs.csv"
+        shadow_long_state_file=Path(__file__).parent/"shadow_long_state.json"
+        shadow_long_state={}
+        if shadow_long_state_file.exists():
+            try: shadow_long_state=json.load(open(shadow_long_state_file))
+            except: shadow_long_state={}
+        for pair in SHADOW_LONG_PAIRS:
+            coin=pair.split("-")[0]
+            try:
+                if pair not in _scan_signals:
+                    candles=get_candles(client,pair)
+                    if not candles or len(candles)<210: continue
+                    closes=[float(c.close) for c in candles];highs=[float(c.high) for c in candles]
+                    lows=[float(c.low) for c in candles];volumes=[float(c.volume) for c in candles]
+                    px=closes[-1];rv=calc_rsi(closes);e200=calc_ema(closes,CONFIG["ema_period"])
+                    adxv=calc_adx(highs,lows,closes);atrv=calc_atr(highs,lows,closes)
+                    vol24=calc_volume_24h(closes,volumes)
+                    above=px>e200*1.001;trending=adxv>=CONFIG["adx_threshold"]
+                    oversold=rv<CONFIG["rsi_oversold"];vol_ok=vol24>=CONFIG["min_volume_24h"]
+                    _scan_signals[pair]={"price":px,"rsi":rv,"ema200":e200,"adx":adxv,"atr":atrv,"vol24":vol24,"above_ema":above,"trending":trending,"oversold":oversold,"vol_ok":vol_ok}
+                s=_scan_signals[pair]
+                px=s["price"];rv=s["rsi"];e200=s["ema200"];adxv=s["adx"];atrv=s["atr"];vol24=s["vol24"]
+                above=s["above_ema"];trending=s["trending"];oversold=s["oversold"];vol_ok=s["vol_ok"]
+                if pair in shadow_long_state and shadow_long_state[pair].get("outcome")=="OPEN":
+                    pos=shadow_long_state[pair];s_entry=pos["entry_price"];s_atr=pos["atr"]
+                    if px>pos.get("highest_price",px): pos["highest_price"]=px;shadow_long_state[pair]=pos
+                    be_trigger=s_entry+s_atr*2.0
+                    if not pos.get("at_breakeven") and px>=be_trigger:
+                        pos["at_breakeven"]=True;pos["stop_price"]=s_entry;shadow_long_state[pair]=pos
+                        log(f"  📊 SHADOW LONG {coin}: Breakeven triggered at ${px:,.4f}")
+                    if pos.get("at_breakeven"):
+                        trail=pos.get("highest_price",px)-s_atr*1.5
+                        if trail>pos["stop_price"]: pos["stop_price"]=trail;shadow_long_state[pair]=pos
+                    outcome=None
+                    if px<=pos["stop_price"]: outcome="STOP LOSS"
+                    elif px>=pos["target_price"]: outcome="TAKE PROFIT"
+                    if outcome:
+                        pnl_pct=(px-s_entry)/s_entry*100
+                        pos["outcome"]=outcome;pos["exit_price"]=px;pos["exit_time"]=now_str();pos["pnl_pct"]=round(pnl_pct,2)
+                        shadow_long_state[pair]=pos
+                        log(f"  📊 SHADOW LONG {coin}: {outcome} @ ${px:,.4f} | P&L: {pnl_pct:+.2f}%")
+                        file_exists=shadow_long_file.exists()
+                        with open(shadow_long_file,"a",newline="") as f:
+                            writer=csv.writer(f)
+                            if not file_exists: writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
+                            writer.writerow([pos["entry_time"],pair,pos["entry_price"],pos["original_stop"],pos["target_price"],px,now_str(),outcome,round(pnl_pct,2),f"RSI {pos.get('rsi',0):.0f} | ADX {pos.get('adx',0):.0f}"])
+                elif oversold and above and trending and vol_ok:
+                    sl=round(px-atrv*CONFIG["atr_sl_mult"],6);tp=round(px+atrv*CONFIG["atr_tp_mult"],6)
+                    log(f"  📊 SHADOW LONG signal — {coin} @ ${px:,.4f} | RSI {rv:.0f} | ADX {adxv:.0f}")
+                    shadow_long_state[pair]={"entry_price":px,"entry_time":now_str(),"stop_price":sl,"original_stop":sl,"target_price":tp,"atr":atrv,"highest_price":px,"at_breakeven":False,"outcome":"OPEN","rsi":rv,"adx":adxv}
+                    file_exists=shadow_long_file.exists()
+                    with open(shadow_long_file,"a",newline="") as f:
+                        writer=csv.writer(f)
+                        if not file_exists: writer.writerow(["Timestamp","Pair","Virtual Entry","Stop Price","Target Price","Exit Price","Exit Time","Outcome","Simulated P&L (%)","Notes"])
+                        writer.writerow([now_str(),pair,px,sl,tp,"","","OPEN","",f"RSI {rv:.0f} | ADX {adxv:.0f} | Vol ${vol24/1e6:.1f}M"])
+                else:
+                    missing=[]
+                    if not oversold: missing.append(f"RSI {rv:.0f}")
+                    if not above: missing.append("below 200 EMA")
+                    if not trending: missing.append(f"ADX {adxv:.0f}")
+                    if not vol_ok: missing.append(f"Vol ${vol24/1e6:.1f}M low")
+                    log(f"  📊 SHADOW {coin}: Waiting — {' | '.join(missing)}")
+            except Exception as pe: log(f"  Shadow long {coin} error: {pe}")
+        json.dump(shadow_long_state,open(shadow_long_state_file,"w"),indent=2,default=str)
+    except Exception as sle: log(f"  Shadow long logger error: {sle}")
+
+    try:
+        ai_summary=generate_market_summary(state,scan_results_for_summary,fg,fgl,dominance)
+    except Exception as e:
+        ai_summary=None;log(f"  AI summary error: {e}")
+    try:
+        all_below_ema=True;closest=[]
+        for pair in CONFIG["pairs"]:
+            if pair not in _scan_signals: continue
+            s=_scan_signals[pair]
+            oversold=s.get("rsi",50)<CONFIG["rsi_oversold"];above_ema=s.get("above_ema",False)
+            trending=s.get("adx",0)>=CONFIG["adx_threshold"];vol_ok=s.get("vol_ok",True)
+            if above_ema: all_below_ema=False
+            met=sum([oversold,above_ema,trending,vol_ok]);missing=[]
+            if not oversold: missing.append(f"RSI {s.get('rsi',50):.0f} not oversold yet")
+            if not above_ema: missing.append("price below 200 EMA")
+            if not trending: missing.append(f"ADX {s.get('adx',0):.0f} ranging")
+            coin=pair.split("-")[0];all_3=oversold and above_ema and trending and vol_ok
+            closest.append((coin,met,missing,all_3))
+        closest.sort(key=lambda x:-x[1])
+        lines=[f"Market sentiment: Fear & Greed {fg}/100 — {fgl}."]
+        ready=[c for c in closest if c[3]]
+        if ready:
+            for c in ready: lines.append(f"{c[0]} has all 3 signals firing — bot will enter on next scan if conditions hold.")
+        elif all_below_ema:
+            lines.append("Every coin is below its 200 EMA — entire market in downtrend. Bot correctly stays in cash.")
+            two_of_three=[c for c in closest if c[1]>=3]
+            if two_of_three:
+                top=two_of_three[0];lines.append(f"Closest: {top[0]} — missing {top[2][0] if top[2] else 'one condition'}.")
+        else:
+            two=[c for c in closest if c[1]>=3 and not c[3]]
+            if two:
+                top=two[0];lines.append(f"{top[0]} is closest with {top[1]-1} of 3 signals met. Waiting on: {', '.join(top[2])}.")
+            others=[c[0] for c in closest[1:3] if not c[3]]
+            if others: lines.append(f"Also watching: {', '.join(others)}.")
+        if not ready: lines.append("No trades taken this scan. Bot is being patient.")
+        final_summary=ai_summary if ai_summary else " ".join(lines)
+        import json as _json
+        sf=Path(__file__).parent/"summary.json"
+        _json.dump({"time":now_str(),"summary":final_summary,"signals":_scan_signals},open(sf,"w",encoding="utf-8"),indent=2,default=str,ensure_ascii=True)
+        log(f"  ✅ Summary written to summary.json")
+    except Exception as se: log(f"  Summary error: {se}")
+
+    try:
+        sf=Path(__file__).parent/"summary.json"
+        if sf.exists():
+            sd=json.loads(sf.read_bytes().decode('utf-8',errors='replace'))
+            state["ai_summary"]=sd.get("summary","")
+            state["ai_summary_time"]=sd.get("time","")
+            state["ai_signals"]=sd.get("signals",{})
+    except: pass
+
+    nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
+    log(f"  ✅ Next scan at {nxt}.\n")
+    save_state(state)
+
+
+import threading
+import websocket
+import json as _ws_json
+
+_ws_state_ref=None
+_ws_client_ref=None
+_ws_running=True
+_last_tick_time={}
+
+def ws_on_message(ws,message):
+    global _ws_state_ref,_ws_client_ref
+    try:
+        data=_ws_json.loads(message)
+        events=data.get("events",[])
+        for event in events:
+            for ticker in event.get("tickers",[]):
+                pair=ticker.get("product_id","");price_str=ticker.get("price","")
+                if not pair or not price_str: continue
+                px=float(price_str);_last_tick_time[pair]=time.time()
+                if _ws_state_ref is None: continue
+                open_trades=_ws_state_ref.get("open_trades",{})
+                if pair in open_trades:
+                    pos=open_trades[pair];sl=pos.get("stop_loss",0)
+                    if sl>0 and px<=sl:
+                        log(f"  🚨 WEBSOCKET STOP — {pair.split('-')[0]} price ${px:,.4f} breached stop ${sl:,.4f}")
+                        place_order(_ws_client_ref,pair,"SELL",pos["usd_invested"],px,_ws_state_ref,reason="WEBSOCKET_STOP — real-time circuit breaker",atr=pos.get("atr",0))
+                        set_cooldown(pair);save_state(_ws_state_ref)
+                        log(f"  ✅ WEBSOCKET_STOP logged and position closed")
+                short_trades=_ws_state_ref.get("short_open_trades",{})
+                if pair in short_trades:
+                    pos=short_trades[pair];sl=pos.get("stop_loss",0)
+                    if sl>0 and px>=sl:
+                        log(f"  🚨 SHORT WEBSOCKET STOP — {pair.split('-')[0]} price ${px:,.4f} breached stop ${sl:,.4f}")
+                        close_short(pair,px,_ws_state_ref,reason="SHORT_WEBSOCKET_STOP")
+                        save_state(_ws_state_ref)
+                        log(f"  ✅ SHORT WEBSOCKET_STOP logged and position closed")
+    except Exception as e: log(f"  WebSocket message error: {e}")
+
+def ws_on_error(ws,error): log(f"  ⚠️  WebSocket error: {error}")
+def ws_on_close(ws,close_status_code,close_msg): log(f"  ⚠️  WebSocket closed — will reconnect")
+
+def ws_on_open(ws):
+    pairs=CONFIG["pairs"]
+    subscribe_msg=_ws_json.dumps({"type":"subscribe","product_ids":pairs,"channel":"ticker"})
+    ws.send(subscribe_msg)
+    log(f"  ✅ WebSocket Risk Desk online — watching {len(pairs)} pairs in real time")
+
+def run_websocket_risk_desk(state,client):
+    global _ws_state_ref,_ws_client_ref,_ws_running
+    _ws_state_ref=state;_ws_client_ref=client;backoff=1
+    while _ws_running:
+        try:
+            log("  🔌 WebSocket Risk Desk connecting...")
+            ws=websocket.WebSocketApp("wss://advanced-trade-ws.coinbase.com",on_open=ws_on_open,on_message=ws_on_message,on_error=ws_on_error,on_close=ws_on_close)
+            ws.run_forever(ping_interval=30,ping_timeout=10)
+            backoff=min(backoff*2,60);log(f"  🔄 WebSocket reconnecting in {backoff}s...");time.sleep(backoff)
+        except Exception as e:
+            log(f"  WebSocket thread error: {e}");time.sleep(backoff);backoff=min(backoff*2,60)
+
+def start_risk_desk(state,client):
+    t=threading.Thread(target=run_websocket_risk_desk,args=(state,client),daemon=True)
+    t.start();log("  ✅ WebSocket Risk Desk thread launched");return t
+
+def main():
+    sec("EDGE BOT v7 — LIVE PAPER SHORTS ACTIVE")
+    log(f"  Mode:      {'PAPER TRADE' if CONFIG['paper_trade'] else '⚡ LIVE'}")
+    log(f"  Entry:     RSI < {CONFIG['rsi_oversold']} (crossover from < {CONFIG['rsi_oversold_reset']}) + Price > 200 EMA + ADX > {CONFIG['adx_threshold']}")
+    log(f"  Shorts:    RSI hook >70→<65 + below 200 EMA + ADX > {CONFIG['adx_threshold']} — LIVE ON PAPER")
+    log(f"  Stop:      {CONFIG['atr_sl_mult']}x ATR | Target: {CONFIG['atr_tp_mult']}x ATR | Risk: {CONFIG['risk_per_trade']*100:.0f}%/trade")
+    log(f"  Cooldown:  {CONFIG['stop_cooldown_hours']}h after any stop loss exit")
+    log(f"  Crash Gate: Block entries if BTC+SOL RSI both < {CONFIG['market_crash_rsi']}")
+    log(f"  Fear Gate:  Block entries if Fear & Greed < 20")
+    log(f"  Stale Monitor: Warning at 4h, Alert at 6h — observation only")
+    div("═");log("")
+    client=load_client();state=load_state()
+    try:
+        token=os.environ.get("GITHUB_TOKEN","");repo=os.environ.get("GITHUB_REPO","")
+        if token and repo:
+            files_to_pull=["state.json","shadow_long_state.json","shadow_longs.csv","equity_curve.csv","strategy_audit.csv","rejected_signals.csv","symbol_performance.csv","trade_explanations.json"]
+            headers={"Authorization":f"token {token}","User-Agent":"EDGE-Bot-v7"}
+            base_url=f"https://api.github.com/repos/{repo}/contents/"
+            for filename in files_to_pull:
+                try:
+                    req=urllib.request.Request(base_url+filename,headers=headers)
+                    with urllib.request.urlopen(req,timeout=10) as r:
+                        data=json.loads(r.read());content=base64.b64decode(data["content"])
+                        (Path(__file__).parent/filename).write_bytes(content)
+                except: pass
+            log("  ✅ Startup data restored from GitHub")
+    except Exception as e: log(f"  Startup restore error: {e}")
+    state=load_state()
+    start_risk_desk(state,client)
+    log("  ✅ Connected | Running first scan...\n")
+    scan(client,state)
+    schedule.every(CONFIG["scan_interval_minutes"]).minutes.do(scan,client,state)
+    nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
+    log(f"  Live. Next scan {nxt}. Ctrl+C to stop.\n")
+    while True:
+        schedule.run_pending();time.sleep(30)
+
+if __name__=="__main__": main()
