@@ -17,6 +17,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .pill{display:flex;align-items:center;gap:6px;background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);border-radius:20px;padding:5px 14px;font-size:9px;color:var(--green);font-family:'JetBrains Mono',monospace;letter-spacing:2px}
 .pulse{width:5px;height:5px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes flashBanner{0%,100%{opacity:1}50%{opacity:0.3}}
 .conn{font-size:9px;font-family:'JetBrains Mono',monospace;padding:5px 12px;border-radius:20px;border:1px solid var(--border)}
 .conn.ok{color:var(--green);border-color:rgba(0,230,118,0.2);background:rgba(0,230,118,0.08)}
 .conn.err{color:var(--amber);border-color:rgba(255,171,64,0.2);background:rgba(255,171,64,0.08)}
@@ -97,7 +98,8 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 .tct{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace}
 .emp2{text-align:center;padding:32px;color:var(--muted);font-size:13px}
 .emp2 span{display:block;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);margin-top:6px;letter-spacing:1px}
-#crashBanner{display:none;background:#ff1a1a;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:14px 24px;text-align:center;letter-spacing:2px;border-bottom:3px solid #ff6666;position:sticky;top:0;z-index:9999;animation:pulse 1s infinite}
+#crashBanner{display:none;background:#ff1a1a;color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:14px 24px;text-align:center;letter-spacing:2px;border-bottom:3px solid #ff6666;position:relative;z-index:100}
+#crashBanner.flashing{animation:flashBanner 0.6s ease-in-out 5}
 .expand-btn{font-size:10px;padding:5px 14px;border-radius:6px;cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600}
 .expand-btn-green{border:1px solid rgba(0,230,118,0.3);background:rgba(0,230,118,0.06);color:var(--green)}
 .expand-btn-red{border:1px solid rgba(255,68,68,0.3);background:rgba(255,68,68,0.06);color:var(--red)}
@@ -105,7 +107,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
 </style>
 </head>
 <body>
-<div id="crashBanner">🚨 GLOBAL FUSE BLOWN — ALL ENTRIES BLOCKED</div>
+<div id="crashBanner">🚨 EXTREME FEAR LOCKDOWN — BOT IN CASH</div>
 <button onclick="downloadAuditData()" style="position:fixed;bottom:24px;right:24px;z-index:999;font-size:11px;padding:10px 18px;border-radius:8px;border:1px solid rgba(0,230,118,0.4);background:rgba(0,230,118,0.08);color:var(--green);cursor:pointer;font-family:JetBrains Mono,monospace;letter-spacing:1px;font-weight:600">DOWNLOAD AUDIT DATA</button>
 <div class="page">
 <div class="topbar">
@@ -148,6 +150,7 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI crossover &lt;30→&gt;35 + 200 EMA + ADX &gt; 25</div>
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Stop: 2x ATR | Target: 4x ATR | Cooldown: 4h</div>
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Crash Gate: BTC+SOL RSI both &lt; 30 = blocked</div>
+        <div style="font-size:9px;color:var(--amber);font-family:'JetBrains Mono',monospace">Fear Gate: F&amp;G &lt; 20 = LOCKDOWN</div>
       </div>
     </div>
     <div style="background:#0a0a0c;border:1px solid rgba(255,68,68,0.2);border-radius:12px;padding:14px">
@@ -165,6 +168,8 @@ html,body{background:#0a0a0c;color:#e8e8ec;font-family:'Outfit',sans-serif;min-h
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">DOT</span>
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">SUI</span>
         <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">LTC</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">TAO</span>
+        <span style="font-size:9px;padding:2px 8px;border-radius:4px;background:rgba(255,68,68,0.08);color:var(--red);font-family:'JetBrains Mono',monospace;border:1px solid rgba(255,68,68,0.15)">FET</span>
       </div>
       <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
         <div style="font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace">Entry: RSI hook &gt;70→&lt;65 + below 200 EMA + ADX &gt; 25</div>
@@ -327,6 +332,24 @@ var state={},prices={},gc=null,gr='ALL',gp=[{t:Date.now(),v:1500}];
 var cY=new Date().getFullYear(),cM=new Date().getMonth(),cD={};
 var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 var longHistExpanded=false,shortHistExpanded=false,allHistExpanded=false;
+var bannerShown=false;
+
+function showCrashBanner(msg){
+  var b=document.getElementById('crashBanner');
+  b.textContent='🚨 '+msg;
+  b.style.display='block';
+  if(!bannerShown){
+    bannerShown=true;
+    b.classList.add('flashing');
+    setTimeout(function(){b.classList.remove('flashing');},3000);
+  }
+}
+
+function hideCrashBanner(){
+  var b=document.getElementById('crashBanner');
+  b.style.display='none';
+  bannerShown=false;
+}
 
 function buildCoins(){
   document.getElementById('coinsGrid').innerHTML=PAIRS.map(function(p){
@@ -367,10 +390,9 @@ function updR(pair,s){
 
 function checkCrashGate(){
   var crash=state.market_crash_active||false;
-  var detail=state.market_crash_detail||'GLOBAL FUSE BLOWN — BTC+SOL RSI both below 30. All entries blocked.';
-  var banner=document.getElementById('crashBanner');
-  if(crash){banner.textContent='🚨 '+detail;banner.style.display='block';}
-  else{banner.style.display='none';}
+  var detail=state.market_crash_detail||'';
+  if(crash&&detail){showCrashBanner(detail);}
+  else{hideCrashBanner();}
 }
 
 async function fetchState(){
@@ -418,7 +440,7 @@ async function fetchLog(){
     var lb=document.getElementById('lb');
     lb.innerHTML=lines.map(function(l){
       if(l.indexOf('SHORT PROFIT')>-1||l.indexOf('TAKE PROFIT')>-1||l.indexOf('Profit')>-1)return '<div class="lg">'+l+'</div>';
-      if(l.indexOf('STOP')>-1||l.indexOf('Loss')>-1||l.indexOf('CRASH')>-1)return '<div class="lr">'+l+'</div>';
+      if(l.indexOf('STOP')>-1||l.indexOf('Loss')>-1||l.indexOf('CRASH')>-1||l.indexOf('FEAR')>-1)return '<div class="lr">'+l+'</div>';
       if(l.indexOf('BREAKEVEN')>-1||l.indexOf('COOLDOWN')>-1||l.indexOf('STALE')>-1||l.indexOf('WATCH')>-1)return '<div class="la">'+l+'</div>';
       return '<div>'+l+'</div>';
     }).join('');
@@ -554,7 +576,6 @@ function parseTradeHistory(){
   var longs=[],shorts=[];
   var longBuyMap={},shortEntryMap={};
   history.forEach(function(t){
-    var type=t.type||'LONG';
     if(t.side==='BUY'){longBuyMap[t.pair]=t;}
     else if(t.side==='SHORT'){shortEntryMap[t.pair]=t;}
     else if(t.side==='SELL'&&longBuyMap[t.pair]){
@@ -574,21 +595,9 @@ function parseTradeHistory(){
   return{longs:longs,shorts:shorts};
 }
 
-function toggleLongHistory(){
-  longHistExpanded=!longHistExpanded;
-  document.getElementById('longThBtn').textContent=longHistExpanded?'COLLAPSE LONGS':'EXPAND LONGS';
-  updHistories();
-}
-function toggleShortHistory(){
-  shortHistExpanded=!shortHistExpanded;
-  document.getElementById('shortThBtn').textContent=shortHistExpanded?'COLLAPSE SHORTS':'EXPAND SHORTS';
-  updHistories();
-}
-function toggleAllHistory(){
-  allHistExpanded=!allHistExpanded;
-  document.getElementById('allThBtn').textContent=allHistExpanded?'COLLAPSE ALL TRADES':'EXPAND ALL TRADES';
-  updHistories();
-}
+function toggleLongHistory(){longHistExpanded=!longHistExpanded;document.getElementById('longThBtn').textContent=longHistExpanded?'COLLAPSE LONGS':'EXPAND LONGS';updHistories();}
+function toggleShortHistory(){shortHistExpanded=!shortHistExpanded;document.getElementById('shortThBtn').textContent=shortHistExpanded?'COLLAPSE SHORTS':'EXPAND SHORTS';updHistories();}
+function toggleAllHistory(){allHistExpanded=!allHistExpanded;document.getElementById('allThBtn').textContent=allHistExpanded?'COLLAPSE ALL TRADES':'EXPAND ALL TRADES';updHistories();}
 
 function updHistories(){
   var parsed=parseTradeHistory();
@@ -600,34 +609,19 @@ function updHistories(){
   var shortCount=document.getElementById('shortThCount');
   var allCount=document.getElementById('allThCount');
   if(longCount)longCount.textContent=longs.length+' completed longs';
-  if(!longs.length){
-    longEl.innerHTML='<div class="emp2">No long trades closed yet<span>Bot is watching the market</span></div>';
-  } else if(!longHistExpanded){
-    var lw=longs.filter(function(t){return t.pnl>0;}).length;
-    longEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+longs.length+' longs — '+lw+' wins / '+(longs.length-lw)+' losses — click EXPAND LONGS to view</div>';
-  } else {
-    longEl.innerHTML=longs.map(function(tr){return buildTradeCard(tr,false);}).join('');
-  }
+  if(!longs.length){longEl.innerHTML='<div class="emp2">No long trades closed yet<span>Bot is watching the market</span></div>';}
+  else if(!longHistExpanded){var lw=longs.filter(function(t){return t.pnl>0;}).length;longEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+longs.length+' longs — '+lw+' wins / '+(longs.length-lw)+' losses — click EXPAND LONGS to view</div>';}
+  else{longEl.innerHTML=longs.map(function(tr){return buildTradeCard(tr,false);}).join('');}
   if(shortCount)shortCount.textContent=shorts.length+' completed shorts';
-  if(!shorts.length){
-    shortEl.innerHTML='<div class="emp2">No short trades closed yet<span>Waiting for first short to open and close</span></div>';
-  } else if(!shortHistExpanded){
-    var sw=shorts.filter(function(t){return t.pnl>0;}).length;
-    shortEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+shorts.length+' shorts — '+sw+' wins / '+(shorts.length-sw)+' losses — click EXPAND SHORTS to view</div>';
-  } else {
-    shortEl.innerHTML=shorts.map(function(tr){return buildTradeCard(tr,true);}).join('');
-  }
+  if(!shorts.length){shortEl.innerHTML='<div class="emp2">No short trades closed yet<span>Waiting for first short to open and close</span></div>';}
+  else if(!shortHistExpanded){var sw=shorts.filter(function(t){return t.pnl>0;}).length;shortEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+shorts.length+' shorts — '+sw+' wins / '+(shorts.length-sw)+' losses — click EXPAND SHORTS to view</div>';}
+  else{shortEl.innerHTML=shorts.map(function(tr){return buildTradeCard(tr,true);}).join('');}
   var all=longs.map(function(t){t._isShort=false;return t;}).concat(shorts.map(function(t){t._isShort=true;return t;}));
   all.sort(function(a,b){return new Date(b.xt)-new Date(a.xt);});
   if(allCount)allCount.textContent=all.length+' total trades';
-  if(!all.length){
-    allEl.innerHTML='<div class="emp2">No trades yet<span>Bot is watching the market</span></div>';
-  } else if(!allHistExpanded){
-    var aw=all.filter(function(t){return t.pnl>0;}).length;
-    allEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+all.length+' total trades — '+aw+' wins / '+(all.length-aw)+' losses — click EXPAND ALL TRADES to view</div>';
-  } else {
-    allEl.innerHTML=all.map(function(tr){return buildTradeCard(tr,tr._isShort);}).join('');
-  }
+  if(!all.length){allEl.innerHTML='<div class="emp2">No trades yet<span>Bot is watching the market</span></div>';}
+  else if(!allHistExpanded){var aw=all.filter(function(t){return t.pnl>0;}).length;allEl.innerHTML='<div style="text-align:center;padding:20px;color:var(--muted);font-family:JetBrains Mono,monospace;font-size:11px">'+all.length+' total trades — '+aw+' wins / '+(all.length-aw)+' losses — click EXPAND ALL TRADES to view</div>';}
+  else{allEl.innerHTML=all.map(function(tr){return buildTradeCard(tr,tr._isShort);}).join('');}
 }
 
 function setR(r){gr=r;document.querySelectorAll('.gf').forEach(function(b){b.classList.toggle('on',b.textContent===r);});renderG();}
@@ -656,11 +650,7 @@ function renderG(){
   var first=pts[0].v,last=pts[pts.length-1].v,isPos=last>=first,color=isPos?'#00e676':'#ff4444';
   var labels=pts.map(function(p){return new Date(p.t).toLocaleDateString('en-US',{month:'short',day:'numeric'});});
   var vals=pts.map(function(p){return p.v;});
-  if(pts.length>=2){
-    var s=new Date(pts[0].t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    var e=new Date(pts[pts.length-1].t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    document.getElementById('gLabel').textContent=s+' to '+e;
-  }
+  if(pts.length>=2){var s=new Date(pts[0].t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});var e=new Date(pts[pts.length-1].t).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});document.getElementById('gLabel').textContent=s+' to '+e;}
   var ctx=document.getElementById('gc');if(!ctx)return;
   if(gc)gc.destroy();
   gc=new Chart(ctx,{type:'line',data:{labels:labels,datasets:[{data:vals,borderColor:color,backgroundColor:isPos?'rgba(0,230,118,0.06)':'rgba(255,68,68,0.06)',borderWidth:1.5,pointRadius:0,tension:0.3,fill:true}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#5a5a68',font:{size:9,family:'JetBrains Mono'},maxTicksLimit:6},grid:{display:false}},y:{ticks:{color:'#5a5a68',font:{size:9,family:'JetBrains Mono'},callback:function(v){return '$'+v.toLocaleString();}},grid:{color:'rgba(255,255,255,0.03)'}}}}});
@@ -687,6 +677,7 @@ function buildCD(){
     }
   });
 }
+
 function updCal(){buildCD();renderCal();}
 function renderCal(){
   document.getElementById('calT').textContent=MONTHS[cM]+' '+cY;
@@ -718,10 +709,7 @@ function updShortStats(){
   var wr=closed>0?Math.round(wins/closed*100):0;
   var totalPnl=shorts.reduce(function(a,t){return a+t.pnl;},0);
   cEl.textContent=shorts.length+' closed | '+openShorts+' open | '+wr+'% win rate';
-  if(!shorts.length&&!openShorts){
-    el.innerHTML='<div class="emp2">No short trades yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div>';
-    return;
-  }
+  if(!shorts.length&&!openShorts){el.innerHTML='<div class="emp2">No short trades yet<span>Waiting for RSI crossover above 70 then below 65 + below 200 EMA + ADX above 25</span></div>';return;}
   var sc=function(l,v,c){return '<div style="background:#0a0a0c;border:1px solid var(--border);border-radius:10px;padding:10px 12px"><div style="font-size:9px;color:var(--muted);letter-spacing:1px;margin-bottom:4px;font-family:JetBrains Mono,monospace">'+l+'</div><div style="font-size:16px;font-weight:600;font-family:JetBrains Mono,monospace;color:'+c+'">'+v+'</div></div>';};
   var html='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">';
   html+=sc('OPEN SHORTS',openShorts,'var(--amber)');
@@ -745,16 +733,14 @@ function toggleShortTable(){
   if(shortTableExpanded)loadShortTable();
 }
 function loadShortTable(){
-  var parsed=parseTradeHistory();
-  var shorts=parsed.shorts;
+  var parsed=parseTradeHistory();var shorts=parsed.shorts;
   var el=document.getElementById('shortTableContent');
   if(!shorts.length){el.innerHTML='<div style="font-size:11px;color:var(--muted);padding:8px">No short trades closed yet.</div>';return;}
   var html='<table style="width:100%;border-collapse:collapse;font-size:10px;font-family:JetBrains Mono,monospace"><tr style="border-bottom:1px solid var(--border)">';
   ['Time','Pair','Entry','Exit','Outcome','P&L'].forEach(function(h){html+='<th style="padding:6px 8px;text-align:left;color:var(--muted);font-weight:500;white-space:nowrap">'+h+'</th>';});
   html+='</tr>';
   shorts.forEach(function(tr){
-    var isWin=tr.pnl>0;
-    var oc=isWin?'var(--green)':'var(--red)';
+    var isWin=tr.pnl>0;var oc=isWin?'var(--green)':'var(--red)';
     html+='<tr style="border-bottom:1px solid rgba(255,255,255,0.03)">';
     html+='<td style="padding:5px 8px;color:var(--muted2);white-space:nowrap">'+tr.et+'</td>';
     html+='<td style="padding:5px 8px;font-weight:600">'+tr.coin+'</td>';
@@ -764,8 +750,7 @@ function loadShortTable(){
     html+='<td style="padding:5px 8px;color:'+oc+'">'+(tr.pnl>=0?'+$':'-$')+Math.abs(tr.pnl).toFixed(2)+'</td>';
     html+='</tr>';
   });
-  html+='</table>';
-  el.innerHTML=html;
+  html+='</table>';el.innerHTML=html;
 }
 
 async function loadShadowLong(){
@@ -774,7 +759,7 @@ async function loadShadowLong(){
     var rows=await r.json();
     var el=document.getElementById('slContent');
     var cEl=document.getElementById('slCount');
-    if(!rows.length){el.innerHTML='<div class="emp2">No shadow longs yet<span>Watching DOGE DOT SUI LTC TAO FET — waiting for RSI below 35 + above 200 EMA + ADX above 25</span></div>';return;}
+    if(!rows.length){el.innerHTML='<div class="emp2">No shadow longs yet<span>Watching DOGE DOT SUI LTC TAO FET — waiting for signals</span></div>';return;}
     var open=rows.filter(function(r){return r.Outcome==='OPEN';}).length;
     var wins=rows.filter(function(r){return r.Outcome==='TAKE PROFIT';}).length;
     var losses=rows.filter(function(r){return r.Outcome==='STOP LOSS';}).length;
@@ -826,8 +811,7 @@ async function loadShadowLongTable(){
       html+='<td style="padding:5px 8px;color:'+pc+'">'+(pnl?pnl.toFixed(2)+'%':'--')+'</td>';
       html+='</tr>';
     });
-    html+='</table>';
-    el.innerHTML=html;
+    html+='</table>';el.innerHTML=html;
   }catch(e){}
 }
 
@@ -835,11 +819,7 @@ async function downloadAuditData(){
   var btn=document.querySelector('[onclick="downloadAuditData()"]');
   var orig=btn.textContent;btn.textContent='PREPARING...';btn.disabled=true;
   try{
-    var files=[
-      {name:'strategy_audit.csv',url:'/audit'},{name:'rejected_signals.csv',url:'/rejected'},
-      {name:'equity_curve.csv',url:'/equity'},{name:'symbol_performance.csv',url:'/symbols'},
-      {name:'shadow_longs.csv',url:'/shadowlong'}
-    ];
+    var files=[{name:'strategy_audit.csv',url:'/audit'},{name:'rejected_signals.csv',url:'/rejected'},{name:'equity_curve.csv',url:'/equity'},{name:'symbol_performance.csv',url:'/symbols'},{name:'shadow_longs.csv',url:'/shadowlong'}];
     var now=new Date();
     var ts=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
     var downloaded=0;
