@@ -56,7 +56,6 @@ def fetch_url(url,timeout=5):
     except: return None
 
 def get_fear_greed():
-    # Try Alternative.me crypto F&G — most accurate for crypto
     try:
         req=urllib.request.Request(
             "https://api.alternative.me/fng/?limit=1&format=json",
@@ -66,28 +65,9 @@ def get_fear_greed():
             d=json.loads(r.read())
             score=int(d["data"][0]["value"])
             label=d["data"][0]["value_classification"]
-            log(f"  📡 Fear & Greed: {score}/100 — {label}")
             return score,label
     except Exception as e:
         log(f"  ⚠️  Fear & Greed API failed: {e}")
-    return 50,"Neutral"
-    try:
-        req=urllib.request.Request(
-            "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
-            headers={"User-Agent":"Mozilla/5.0","Referer":"https://www.cnn.com/"}
-        )
-        with urllib.request.urlopen(req,timeout=5) as r:
-            d=json.loads(r.read())
-            score=int(float(d["fear_and_greed"]["score"]))
-            rating=d["fear_and_greed"]["rating"].replace("_"," ").title()
-            log(f"  📡 Fear & Greed (CNN real-time): {score}/100 — {rating}")
-            return score,rating
-    except Exception as e:
-        log(f"  ⚠️  CNN Fear & Greed failed: {e} — falling back to Alternative.me")
-    try:
-        d=fetch_url("https://api.alternative.me/fng/")
-        if d: return int(d["data"][0]["value"]),d["data"][0]["value_classification"]
-    except: pass
     return 50,"Neutral"
 
 def get_btc_dominance():
@@ -885,7 +865,7 @@ def main():
     log(f"  Stop:      {CONFIG['atr_sl_mult']}x ATR | Target: {CONFIG['atr_tp_mult']}x ATR | Risk: {CONFIG['risk_per_trade']*100:.0f}%/trade")
     log(f"  Cooldown:  {CONFIG['stop_cooldown_hours']}h after any stop loss exit")
     log(f"  Crash Gate: Block entries if BTC+SOL RSI both < {CONFIG['market_crash_rsi']}")
-    log(f"  Fear Gate:  Block entries if Fear & Greed < 20 (CNN real-time)")
+    log(f"  Fear Gate:  Block entries if Fear & Greed < 20")
     log(f"  Stale Monitor: Warning at 4h, Alert at 6h — observation only")
     div("═");log("")
     client=load_client();state=load_state()
