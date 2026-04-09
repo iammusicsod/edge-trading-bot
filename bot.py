@@ -56,6 +56,21 @@ def fetch_url(url,timeout=5):
     except: return None
 
 def get_fear_greed():
+    # Try Alternative.me crypto F&G — most accurate for crypto
+    try:
+        req=urllib.request.Request(
+            "https://api.alternative.me/fng/?limit=1&format=json",
+            headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
+        )
+        with urllib.request.urlopen(req,timeout=5) as r:
+            d=json.loads(r.read())
+            score=int(d["data"][0]["value"])
+            label=d["data"][0]["value_classification"]
+            log(f"  📡 Fear & Greed: {score}/100 — {label}")
+            return score,label
+    except Exception as e:
+        log(f"  ⚠️  Fear & Greed API failed: {e}")
+    return 50,"Neutral"
     try:
         req=urllib.request.Request(
             "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
