@@ -6,7 +6,7 @@ from coinbase.rest import RESTClient
 import base64
 import urllib.request as _urllib_req
 
-CONFIG={"paper_trade":True,"taker_fee":0.006,"max_spread_pct":0.002,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"rsi_oversold_reset":30,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":60,"candle_granularity":"ONE_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json","stop_cooldown_hours":4,"market_crash_rsi":30}
+CONFIG={"paper_trade":True,"taker_fee":0.006,"max_spread_pct":0.002,"starting_capital":1500.0,"risk_per_trade":0.01,"max_daily_loss_pct":0.025,"max_open_trades":3,"pairs":["BTC-USD","ETH-USD","SOL-USD","LINK-USD","XRP-USD","AVAX-USD","ADA-USD"],"rsi_oversold":35,"rsi_oversold_reset":30,"adx_threshold":25,"ema_period":200,"atr_period":14,"atr_sl_mult":2.0,"atr_tp_mult":4.0,"atr_be_mult":2.0,"atr_trail_mult":1.5,"min_volume_24h":5000000,"scan_interval_minutes":240,"candle_granularity":"FOUR_HOUR","candle_count":220,"api_key_file":"cdp_api_key.json","stop_cooldown_hours":4,"market_crash_rsi":30}
 
 LOG_FILE=Path(__file__).parent/"bot_log.txt"
 STATE_FILE=Path(__file__).parent/"state.json"
@@ -274,7 +274,7 @@ Rules:
 
 def get_candles(client,pair):
     try:
-        end=int(time.time());start=end-3600*CONFIG["candle_count"]
+        end=int(time.time());start=end-14400*CONFIG["candle_count"]
         r=client.get_candles(product_id=pair,start=str(start),end=str(end),granularity=CONFIG["candle_granularity"])
         return sorted(r.candles if hasattr(r,"candles") else [],key=lambda c:int(c.start))
     except Exception as e: log(f"  No candles {pair}: {e}");return []
@@ -322,8 +322,8 @@ def calc_atr(highs,lows,closes,n=14):
     return sum(trs)/n
 
 def calc_volume_24h(closes,volumes):
-    if len(closes)<24 or len(volumes)<24: return 0.0
-    return sum(closes[-24+i]*volumes[-24+i] for i in range(24))
+    if len(closes)<6 or len(volumes)<6: return 0.0
+    return sum(closes[-6+i]*volumes[-6+i] for i in range(6))
 
 def analyze(pair,closes,highs,lows,volumes):
     if len(closes)<210: return{"direction":"HOLD","reason":"Not enough data","indicators":{}}
@@ -408,7 +408,7 @@ def risk_ok(state):
 
 def check_exits(client,state):
     if not state["open_trades"]: return
-    log("  Checking long positions...")
+    log("  ── HOURLY EXIT CHECK ──────────────────────────────────────")
     for pair,pos in list(state["open_trades"].items()):
         px=get_price(client,pair)
         if px==0: continue
@@ -431,9 +431,9 @@ def check_exits(client,state):
             entry_dt=datetime.strptime(pos.get("entry_time",""),"%B %d, %Y  %I:%M:%S %p")
             hours_open=(datetime.now()-entry_dt).total_seconds()/3600
             movement_atr=abs(px-entry)/atr if atr>0 else 0
-            if hours_open>=6 and not at_be:
+            if hours_open>=24 and not at_be:
                 log(f"  ⚠️  STALE TRADE WARNING — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | no breakeven yet")
-            elif hours_open>=4 and not at_be:
+            elif hours_open>=16 and not at_be:
                 log(f"  🕐 TRADE WATCH — {pair.split('-')[0]} open {hours_open:.1f}h | {movement_atr:.2f}x ATR movement | approaching stale zone")
         except:
             pass
@@ -443,10 +443,16 @@ def check_exits(client,state):
         elif px>=tp:
             log(f"  🎯 TAKE PROFIT — {pair.split('-')[0]} +{ch:.1f}%")
             place_order(client,pair,"SELL",pos["usd_invested"],px,state,atr=atr)
+    save_state(state)
+
+def hourly_management(client,state):
+    log(f"  ⏱️  HOURLY MANAGEMENT — {time_str()}")
+    check_exits(client,state)
+    check_short_exits(client,state)
 
 def scan(client,state):
     _scan_signals={}
-    sec(f"SCAN — {time_str()}")
+    sec(f"4H SCAN — {time_str()}")
     fg,fgl=get_fear_greed();dominance=get_btc_dominance();funding=get_funding_rate()
     state["last_fg"]=fg;state["last_fg_label"]=fgl;state["last_dominance"]=dominance;state["last_funding"]=funding
     log(f"  Fear & Greed: {fg}/100 — {fgl} | BTC Dom: {dominance:.1f}% | Funding: {funding:.4f}%");log("")
@@ -502,7 +508,7 @@ def scan(client,state):
             in_cooldown,remaining=is_in_cooldown(pair)
             if in_cooldown: log(f"  ⏳ COOLDOWN — {coin} blocked for {remaining} more minutes");continue
             if not rsi_crossover_confirmed(pair,rv,state): log(f"  ⏳ RSI CROSSOVER PENDING");continue
-            reason=f"RSI {rv:.0f} oversold crossover — bounce confirmed. Price ${px:,.4f} above 200 EMA ${e200:,.4f}. ADX {adxv:.0f} trending. Vol ${vol24/1e6:.1f}M. SL ${ind.get('sl',0):,.6f} | TP ${ind.get('tp',0):,.6f} | BE at ${ind.get('be_trigger',0):,.6f}."
+            reason=f"RSI {rv:.0f} oversold crossover on 4H — bounce confirmed. Price ${px:,.4f} above 200 EMA ${e200:,.4f}. ADX {adxv:.0f} trending. Vol ${vol24/1e6:.1f}M. SL ${ind.get('sl',0):,.6f} | TP ${ind.get('tp',0):,.6f} | BE at ${ind.get('be_trigger',0):,.6f}."
             usd=pos_size(state,atrv,px)
             if usd>=10: place_order(client,pair,"BUY",usd,px,state,reason,atrv)
             else: log(f"  Too small ${usd:.2f}")
@@ -542,7 +548,7 @@ def scan(client,state):
         if pair in state.get("short_open_trades",{}):
             log(f"  📉 SHORT {coin}: already open — skipping")
         elif short_signal:
-            reason=f"RSI hook {last_rsi_val:.0f}→{rsi:.0f} — overbought exhausted. Price ${px:,.4f} below 200 EMA — downtrend. ADX {adx:.0f} trending. SL ${round(px+atr*2,4)} | TP ${round(px-atr*4,4)}."
+            reason=f"RSI hook {last_rsi_val:.0f}→{rsi:.0f} on 4H — overbought exhausted. Price ${px:,.4f} below 200 EMA — downtrend. ADX {adx:.0f} trending. SL ${round(px+atr*2,4)} | TP ${round(px-atr*4,4)}."
             log(f"  📉 SHORT SIGNAL — {coin} @ ${px:,.4f} | RSI {last_rsi_val:.0f}→{rsi:.0f} | ADX {adx:.0f}")
             place_short(pair,px,state,reason=reason,atr=atr)
         else:
@@ -576,7 +582,7 @@ def scan(client,state):
             be_s="✅ BE active" if pos.get("at_breakeven") else f"BE at ${pos.get('be_trigger',0):,.4f}"
             log(f"  • SHORT {p2} ${pos['usd_invested']:.2f} @ ${pos['entry_price']:,.4f} | SL ${pos.get('stop_loss',0):,.4f} | TP ${pos.get('take_profit',0):,.4f} | {be_s}")
     if not state["open_trades"] and not state.get("short_open_trades"):
-        log("  Holding cash — waiting for clean setups")
+        log("  Holding cash — waiting for clean 4H setups")
     div("═")
 
     scan_results_for_summary={}
@@ -760,9 +766,9 @@ def scan(client,state):
         lines=[f"Market sentiment: Fear & Greed {fg}/100 — {fgl}."]
         ready=[c for c in closest if c[3]]
         if ready:
-            for c in ready: lines.append(f"{c[0]} has all 3 signals firing — bot will enter on next scan if conditions hold.")
+            for c in ready: lines.append(f"{c[0]} has all 3 signals firing on 4H chart — bot will enter on next scan if conditions hold.")
         elif all_below_ema:
-            lines.append("Every coin is below its 200 EMA — entire market in downtrend. Bot correctly stays in cash.")
+            lines.append("Every coin is below its 4H 200 EMA — entire market in downtrend. Bot correctly stays in cash.")
             two_of_three=[c for c in closest if c[1]>=3]
             if two_of_three:
                 top=two_of_three[0];lines.append(f"Closest: {top[0]} — missing {top[2][0] if top[2] else 'one condition'}.")
@@ -790,7 +796,7 @@ def scan(client,state):
     except: pass
 
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
-    log(f"  ✅ Next scan at {nxt}.\n")
+    log(f"  ✅ Next 4H scan at {nxt}.\n")
     save_state(state)
 
 
@@ -858,22 +864,24 @@ def start_risk_desk(state,client):
     t.start();log("  ✅ WebSocket Risk Desk thread launched");return t
 
 def main():
-    sec("EDGE BOT v7 — LIVE PAPER SHORTS ACTIVE")
+    sec("EDGE BOT v8 — 4H SWING TRADER")
     log(f"  Mode:      {'PAPER TRADE' if CONFIG['paper_trade'] else '⚡ LIVE'}")
+    log(f"  Timeframe: 4-HOUR CANDLES — Swing Trading")
     log(f"  Entry:     RSI < {CONFIG['rsi_oversold']} (crossover from < {CONFIG['rsi_oversold_reset']}) + Price > 200 EMA + ADX > {CONFIG['adx_threshold']}")
     log(f"  Shorts:    RSI hook >70→<65 + below 200 EMA + ADX > {CONFIG['adx_threshold']} — LIVE ON PAPER")
     log(f"  Stop:      {CONFIG['atr_sl_mult']}x ATR | Target: {CONFIG['atr_tp_mult']}x ATR | Risk: {CONFIG['risk_per_trade']*100:.0f}%/trade")
+    log(f"  Scans:     Full 4H scan every 240min | Exit management every 60min")
     log(f"  Cooldown:  {CONFIG['stop_cooldown_hours']}h after any stop loss exit")
     log(f"  Crash Gate: Block entries if BTC+SOL RSI both < {CONFIG['market_crash_rsi']}")
     log(f"  Fear Gate:  Block entries if Fear & Greed < 20")
-    log(f"  Stale Monitor: Warning at 4h, Alert at 6h — observation only")
+    log(f"  Stale Monitor: Warning at 16h, Alert at 24h — observation only")
     div("═");log("")
     client=load_client();state=load_state()
     try:
         token=os.environ.get("GITHUB_TOKEN","");repo=os.environ.get("GITHUB_REPO","")
         if token and repo:
             files_to_pull=["state.json","shadow_long_state.json","shadow_longs.csv","equity_curve.csv","strategy_audit.csv","rejected_signals.csv","symbol_performance.csv","trade_explanations.json"]
-            headers={"Authorization":f"token {token}","User-Agent":"EDGE-Bot-v7"}
+            headers={"Authorization":f"token {token}","User-Agent":"EDGE-Bot-v8"}
             base_url=f"https://api.github.com/repos/{repo}/contents/"
             for filename in files_to_pull:
                 try:
@@ -886,11 +894,12 @@ def main():
     except Exception as e: log(f"  Startup restore error: {e}")
     state=load_state()
     start_risk_desk(state,client)
-    log("  ✅ Connected | Running first scan...\n")
+    log("  ✅ Connected | Running first 4H scan...\n")
     scan(client,state)
     schedule.every(CONFIG["scan_interval_minutes"]).minutes.do(scan,client,state)
+    schedule.every(60).minutes.do(hourly_management,client,state)
     nxt=(datetime.now()+timedelta(minutes=CONFIG["scan_interval_minutes"])).strftime("%I:%M %p")
-    log(f"  Live. Next scan {nxt}. Ctrl+C to stop.\n")
+    log(f"  Live. Next 4H scan {nxt}. Exit checks every 60min. Ctrl+C to stop.\n")
     while True:
         schedule.run_pending();time.sleep(30)
 
