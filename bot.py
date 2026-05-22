@@ -95,14 +95,13 @@ def set_cooldown(pair):
 
 def check_market_crash(scan_signals,state):
     btc_rsi=scan_signals.get("BTC-USD",{}).get("rsi",50)
-    sol_rsi=scan_signals.get("SOL-USD",{}).get("rsi",50)
     crash_threshold=CONFIG["market_crash_rsi"]
     fg=state.get("last_fg",50)
-    if btc_rsi<crash_threshold and sol_rsi<crash_threshold:
-        log(f"  🚨 REJECT_MARKET_CRASH — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}")
-        log(f"  🚨 Systemic crash detected — blocking all new entries this scan")
+    if btc_rsi<crash_threshold:
+        log(f"  🚨 REJECT_MARKET_CRASH — BTC RSI {btc_rsi:.0f} below {crash_threshold}")
+        log(f"  🚨 BTC crash detected — blocking all new entries this scan")
         state["market_crash_active"]=True
-        state["market_crash_detail"]=f"GLOBAL FUSE BLOWN — BTC RSI {btc_rsi:.0f} + SOL RSI {sol_rsi:.0f} both below {crash_threshold}. All entries blocked."
+        state["market_crash_detail"]=f"GLOBAL FUSE BLOWN — BTC RSI {btc_rsi:.0f} below {crash_threshold}. All entries blocked."
         return True
     elif fg<20:
         log(f"  🚨 REJECT_EXTREME_FEAR — Fear & Greed {fg}/100 — market in panic. Bot in cash until F&G recovers above 20.")
@@ -872,7 +871,7 @@ def main():
     log(f"  Stop:      {CONFIG['atr_sl_mult']}x ATR | Target: {CONFIG['atr_tp_mult']}x ATR | Risk: {CONFIG['risk_per_trade']*100:.0f}%/trade")
     log(f"  Scans:     Full 4H scan every 240min | Exit management every 60min")
     log(f"  Cooldown:  {CONFIG['stop_cooldown_hours']}h after any stop loss exit")
-    log(f"  Crash Gate: Block entries if BTC+SOL RSI both < {CONFIG['market_crash_rsi']}")
+    log(f"  Crash Gate: Block entries if BTC RSI < {CONFIG['market_crash_rsi']}")
     log(f"  Fear Gate:  Block entries if Fear & Greed < 20")
     log(f"  Stale Monitor: Warning at 16h, Alert at 24h — observation only")
     div("═");log("")
